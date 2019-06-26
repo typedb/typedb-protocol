@@ -21,8 +21,8 @@ syntax = "proto3";
 option java_package = "grakn.core.protocol";
 option java_outer_classname = "SessionProto";
 
-import "protocol/session/Concept.proto";
-import "protocol/session/Answer.proto";
+import "session/Concept.proto";
+import "session/Answer.proto";
 
 package session;
 

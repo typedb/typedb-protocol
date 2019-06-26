@@ -24,10 +24,10 @@ load("@graknlabs_build_tools//distribution/maven:rules.bzl", "assemble_maven", "
 java_grpc_compile(
     name = "protocol-java-src",
     deps = [
-        "//protocol/session:session-proto",
-        "//protocol/session:answer-proto",
-        "//protocol/session:concept-proto",
-        "//protocol/keyspace:keyspace-proto",
+        "//session:session-proto",
+        "//session:answer-proto",
+        "//session:concept-proto",
+        "//keyspace:keyspace-proto",
     ]
 )
 
