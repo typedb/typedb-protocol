@@ -18,41 +18,4 @@
 
 package(default_visibility = ["//visibility:public"])
 
-load("@stackb_rules_proto//java:java_grpc_compile.bzl", "java_grpc_compile")
-load("@graknlabs_build_tools//distribution/maven:rules.bzl", "assemble_maven", "deploy_maven")
-
-java_grpc_compile(
-    name = "protocol-java-src",
-    deps = [
-        "//session:session-proto",
-        "//session:answer-proto",
-        "//session:concept-proto",
-        "//keyspace:keyspace-proto",
-    ]
-)
-
-java_library(
-    name = "protocol-java",
-    srcs = [":protocol-java-src"],
-    deps = [
-        "//dependencies/maven/artifacts/com/google/guava:guava",
-        "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
-        "//dependencies/maven/artifacts/io/grpc:grpc-core",
-        "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
-        "//dependencies/maven/artifacts/io/grpc:grpc-stub",
-    ],
-    tags = ["maven_coordinates=io.grakn.core:protocol:{pom_version}", "checkstyle_ignore"],
-)
-
-assemble_maven(
-    name = "assemble-maven",
-    target = ":protocol-java",
-    package = "protocol",
-    version_file = "//:VERSION",
-    workspace_refs = "@graknlabs_grakn_core_workspace_refs//:refs.json"
-)
-
-deploy_maven(
-    name = "deploy-maven",
-    target = ":assemble-maven"
-)
+exports_files(["VERSION"])
