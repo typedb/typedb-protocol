@@ -37,6 +37,7 @@ graknlabs_bazel_distribution()
 load("@graknlabs_build_tools//bazel:dependencies.bzl", "bazel_common", "bazel_deps", "bazel_toolchain")
 bazel_common()
 bazel_deps()
+bazel_toolchain()
 
 
 #################################
