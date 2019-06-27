@@ -65,7 +65,8 @@ jobs:
           bazel run //ci:sync-dependencies -- \
           --source protocol@$CIRCLE_SHA1 \
           --targets \
-          grakn:master client-java:master client-python:master client-nodejs:master
+          grakn:master client-java:master
+        # TODO: Add client-python:master and client-nodejs:master
 
   release-approval:
     machine: true
@@ -138,6 +139,7 @@ workflows:
             branches:
               only: master
           requires:
+            - build
             - deploy-maven-snapshot
       - release-approval:
           filters:
