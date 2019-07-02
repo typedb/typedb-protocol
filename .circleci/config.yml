@@ -65,8 +65,8 @@ jobs:
           bazel run @graknlabs_build_tools//ci:sync-dependencies -- \
           --source protocol@$CIRCLE_SHA1 \
           --targets \
-          grakn:master client-java:master
-        # TODO: Add client-python:master and client-nodejs:master
+          grakn:master client-java:master client-python:master
+        # TODO: Add client-nodejs:master
 
   release-approval:
     machine: true

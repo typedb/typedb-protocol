@@ -20,7 +20,7 @@ package(default_visibility = ["//visibility:public"])
 
 exports_files(["VERSION"])
 load("@graknlabs_bazel_distribution//github:rules.bzl", "deploy_github")
-load("@stackb_rules_proto//python:python_grpc_library.bzl", "python_grpc_library")
+load("@stackb_rules_proto//python:python_grpc_compile.bzl", "python_grpc_compile")
 
 deploy_github(
     name = "deploy-github",
@@ -29,8 +29,8 @@ deploy_github(
     version_file = "//:VERSION"
 )
 
-python_grpc_library(
-    name = "grakn_protocol",
+python_grpc_compile(
+    name = "grakn_protocol_src",
     deps = [
         "//keyspace:keyspace-proto",
         "//session:session-proto",
@@ -38,4 +38,10 @@ python_grpc_library(
         "//session:concept-proto",
     ],
     visibility = ["//visibility:public"]
+)
+
+py_library(
+    name = "grakn_protocol",
+    srcs = ["grakn_protocol_src"],
+    imports = ["grakn_protocol_src"]
 )
