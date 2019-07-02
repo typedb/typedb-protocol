@@ -20,10 +20,22 @@ package(default_visibility = ["//visibility:public"])
 
 exports_files(["VERSION"])
 load("@graknlabs_bazel_distribution//github:rules.bzl", "deploy_github")
+load("@stackb_rules_proto//python:python_grpc_library.bzl", "python_grpc_library")
 
 deploy_github(
     name = "deploy-github",
     deployment_properties = "//:deployment.properties",
     release_description = "//:RELEASE_TEMPLATE.md",
     version_file = "//:VERSION"
+)
+
+python_grpc_library(
+    name = "grakn_protocol",
+    deps = [
+        "//keyspace:keyspace-proto",
+        "//session:session-proto",
+        "//session:answer-proto",
+        "//session:concept-proto",
+    ],
+    visibility = ["//visibility:public"]
 )
