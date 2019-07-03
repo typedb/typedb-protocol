@@ -17,13 +17,21 @@
 #
 
 package(default_visibility = ["//visibility:public"])
+load("@stackb_rules_proto//python:python_grpc_compile.bzl", "python_grpc_compile")
 
-exports_files(["VERSION"])
-load("@graknlabs_bazel_distribution//github:rules.bzl", "deploy_github")
+python_grpc_compile(
+    name = "grakn_protocol_src",
+    deps = [
+        "//keyspace:keyspace-proto",
+        "//session:session-proto",
+        "//session:answer-proto",
+        "//session:concept-proto",
+    ],
+    visibility = ["//visibility:public"]
+)
 
-deploy_github(
-    name = "deploy-github",
-    deployment_properties = "//:deployment.properties",
-    release_description = "//:RELEASE_TEMPLATE.md",
-    version_file = "//:VERSION"
+py_library(
+    name = "grakn_protocol",
+    srcs = ["grakn_protocol_src"],
+    imports = ["grakn_protocol_src"]
 )
