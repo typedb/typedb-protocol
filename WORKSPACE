@@ -85,6 +85,8 @@ com_github_grpc_grpc_deps()
 load("@stackb_rules_proto//java:deps.bzl", "java_grpc_compile")
 java_grpc_compile()
 
+load("@stackb_rules_proto//node:deps.bzl", "node_grpc_compile")
+node_grpc_compile()
 
 ##################################
 # Load Distribution dependencies #
