@@ -15,12 +15,12 @@ Available through https://repo.grakn.ai
 <dependencies>
     <dependency>
         <groupid>io.grakn.protocol</groupid>
-        <artifactid>session</artifactid>
+        <artifactid>grakn-session</artifactid>
         <version>{version}</version>
     </dependency>
     <dependency>
         <groupid>io.grakn.protocol</groupid>
-        <artifactid>keyspace</artifactid>
+        <artifactid>grakn-keyspace</artifactid>
         <version>{version}</version>
     </dependency>
 </dependencies>
