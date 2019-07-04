@@ -20,7 +20,7 @@ package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//python:python_grpc_compile.bzl", "python_grpc_compile")
 
 python_grpc_compile(
-    name = "grakn_protocol_src",
+    name = "protocol_src",
     deps = [
         "//keyspace:keyspace-proto",
         "//session:session-proto",
@@ -31,7 +31,7 @@ python_grpc_compile(
 )
 
 py_library(
-    name = "grakn_protocol",
-    srcs = ["grakn_protocol_src"],
-    imports = ["grakn_protocol_src"]
+    name = "protocol",
+    srcs = ["protocol_src"],
+    imports = ["protocol_src"]
 )

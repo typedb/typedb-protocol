@@ -18,41 +18,7 @@
 
 package(default_visibility = ["//visibility:public"])
 
-load("@stackb_rules_proto//java:java_grpc_compile.bzl", "java_grpc_compile")
-load("@graknlabs_build_tools//distribution/maven:rules.bzl", "assemble_maven", "deploy_maven")
-
 proto_library(
     name = "keyspace-proto",
     srcs = ["Keyspace.proto"],
-)
-
-java_grpc_compile(
-    name = "keyspace-src",
-    deps = [":keyspace-proto"]
-)
-
-java_library(
-    name = "keyspace",
-    srcs = [":keyspace-src"],
-    deps = [
-        "//dependencies/maven/artifacts/com/google/guava:guava",
-        "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
-        "//dependencies/maven/artifacts/io/grpc:grpc-core",
-        "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
-        "//dependencies/maven/artifacts/io/grpc:grpc-stub",
-    ],
-    tags = ["maven_coordinates=io.grakn.protocol:grakn-keyspace:{pom_version}", "checkstyle_ignore"],
-)
-
-assemble_maven(
-    name = "assemble-maven",
-    target = ":keyspace",
-    package = "keyspace",
-    version_file = "//:VERSION",
-    workspace_refs = "@graknlabs_grakn_core_workspace_refs//:refs.json"
-)
-
-deploy_maven(
-    name = "deploy-maven",
-    target = ":assemble-maven"
 )
