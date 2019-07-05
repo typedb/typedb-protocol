@@ -63,6 +63,15 @@ graknlabs_build_tools_ci_pip_install = "pip_install")
 graknlabs_build_tools_ci_pip_install()
 
 
+pip_import(
+    name = "graknlabs_bazel_distribution_pip",
+    requirements = "@graknlabs_bazel_distribution//pip:requirements.txt",
+)
+load("@graknlabs_bazel_distribution_pip//:requirements.bzl",
+graknlabs_bazel_distribution_pip_install = "pip_install")
+graknlabs_bazel_distribution_pip_install()
+
+
 #####################################
 # Load Java dependencies from Maven #
 #####################################
