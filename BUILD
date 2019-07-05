@@ -18,7 +18,7 @@
 
 package(default_visibility = ["//visibility:public"])
 
-exports_files(["VERSION"])
+exports_files(["VERSION", "python_proto.py"])
 load("@graknlabs_bazel_distribution//github:rules.bzl", "deploy_github")
 
 deploy_github(
@@ -26,4 +26,28 @@ deploy_github(
     deployment_properties = "//:deployment.properties",
     release_description = "//:RELEASE_TEMPLATE.md",
     version_file = "//:VERSION"
+)
+
+genrule(
+    name = "python-package-structure",
+    srcs = [
+        "//keyspace:Keyspace.proto",
+        "//session:Session.proto",
+        "//session:Concept.proto",
+        "//session:Answer.proto",
+    ],
+    cmd = "$(location :python_proto.py) --pkg grakn_protocol --srcs $(SRCS) --outs $(OUTS)",
+    outs = [
+        "grakn_protocol/keyspace/Keyspace.proto",
+        "grakn_protocol/session/Session.proto",
+        "grakn_protocol/session/Concept.proto",
+        "grakn_protocol/session/Answer.proto",
+    ],
+    tools = [":python_proto.py"]
+)
+
+
+proto_library(
+    name = "python-protos",
+    srcs = [":python-package-structure"],
 )

@@ -22,10 +22,7 @@ load("@stackb_rules_proto//python:python_grpc_compile.bzl", "python_grpc_compile
 python_grpc_compile(
     name = "protocol_src",
     deps = [
-        "//keyspace:keyspace-proto",
-        "//session:session-proto",
-        "//session:answer-proto",
-        "//session:concept-proto",
+        "//:python-protos",
     ],
     visibility = ["//visibility:public"]
 )
@@ -33,5 +30,5 @@ python_grpc_compile(
 py_library(
     name = "protocol",
     srcs = ["protocol_src"],
-    imports = ["protocol_src"]
+    imports = ["../../"]
 )
