@@ -18,6 +18,7 @@
 
 package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//python:python_grpc_compile.bzl", "python_grpc_compile")
+load("@graknlabs_bazel_distribution//pip:rules.bzl", "python_repackage")
 
 python_grpc_compile(
     name = "protocol_src",
@@ -30,8 +31,16 @@ python_grpc_compile(
     visibility = ["//visibility:public"]
 )
 
+
+python_repackage(
+    name = "protocol_pkg",
+    src = ":protocol_src",
+    package = "grakn_protocol"
+)
+
+
 py_library(
     name = "protocol",
-    srcs = ["protocol_src"],
-    imports = ["protocol_src"]
+    srcs = ["protocol_pkg"],
+    imports = ["../../grpc/python"]
 )
