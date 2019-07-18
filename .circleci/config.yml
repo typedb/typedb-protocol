@@ -85,7 +85,7 @@ jobs:
       - run: |
           pip install certifi
           export RELEASE_NOTES_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_build_tools//ci:release-notes -- grakn $(cat VERSION) ./RELEASE_TEMPLATE.md
+          bazel run @graknlabs_build_tools//ci:release-notes -- protocol $(cat VERSION) ./RELEASE_TEMPLATE.md
       - run: |
           export DEPLOY_GITHUB_TOKEN=$REPO_GITHUB_TOKEN
           bazel run //:deploy-github -- $CIRCLE_SHA1
