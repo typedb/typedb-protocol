@@ -68,6 +68,7 @@ jobs:
 
   release-approval:
     machine: true
+    working_directory: ~/protocol
     steps:
       - install-bazel-linux-rbe
       - checkout
@@ -78,7 +79,7 @@ jobs:
 
   deploy-github:
     machine: true
-    working_directory: ~/grakn
+    working_directory: ~/protocol
     steps:
       - install-bazel-linux-rbe
       - checkout
@@ -92,7 +93,7 @@ jobs:
 
   deploy-maven:
     machine: true
-    working_directory: ~/grakn
+    working_directory: ~/protocol
     steps:
       - install-bazel-linux-rbe
       - checkout
@@ -104,18 +105,20 @@ jobs:
 
   sync-dependencies-release:
     machine: true
+    working_directory: ~/protocol
     steps:
       - install-bazel-linux-rbe
       - checkout
       - run: |
           export SYNC_DEPENDENCIES_TOKEN=$REPO_GITHUB_TOKEN
           bazel run @graknlabs_build_tools//ci:sync-dependencies -- \
-          --source grakn@$(cat VERSION) \
+          --source protocol@$(cat VERSION) \
           --targets \
           grakn:master client-java:master client-python:master client-nodejs:master
 
   release-cleanup:
     machine: true
+    working_directory: ~/protocol
     steps:
       - checkout
       - run: git push --delete origin protocol-release-branch
