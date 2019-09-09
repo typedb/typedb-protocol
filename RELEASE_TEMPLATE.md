@@ -26,26 +26,4 @@ Available through https://repo.grakn.ai
 </dependencies>
 ```
 
-#### For Python through PyPI
-
-Available through https://pypi.org
-```
-pip install grakn-protocol
-```
-Or you can upgrade your local installation with:
-```
-pip install -U grakn-protocol
-```
-
-#### For Node.js through NPM
-
-Now officially available through https://npmjs.com
-```
-npm install grakn-protocol
-```
-Or you can upgrade your local installation with:
-```
-npm update grakn-protocol
-```
-
 { release notes }
