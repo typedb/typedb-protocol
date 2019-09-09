@@ -25,5 +25,7 @@ deploy_github(
     name = "deploy-github",
     deployment_properties = "//:deployment.properties",
     release_description = "//:RELEASE_TEMPLATE.md",
+    title = "Protocol",
+    title_append_version = True,
     version_file = "//:VERSION"
 )
