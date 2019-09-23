@@ -121,7 +121,7 @@ jobs:
     working_directory: ~/protocol
     steps:
       - checkout
-      - run: git push --delete origin protocol-release-branch
+      - run: git push --delete https://$REPO_GITHUB_TOKEN@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME $CIRCLE_BRANCH
 
 workflows:
   protocol:
