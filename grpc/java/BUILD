@@ -47,7 +47,6 @@ assemble_maven(
     name = "assemble-maven",
     target = ":protocol",
     package = "grpc",
-    version_file = "//:VERSION",
     workspace_refs = "@graknlabs_protocol_workspace_refs//:refs.json"
 )
 
