@@ -27,5 +27,4 @@ deploy_github(
     release_description = "//:RELEASE_TEMPLATE.md",
     title = "Protocol",
     title_append_version = True,
-    version_file = "//:VERSION"
 )
