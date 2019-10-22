@@ -54,3 +54,24 @@ deploy_maven(
     name = "deploy-maven",
     target = ":assemble-maven"
 )
+
+# --- KGMS console dependencies
+
+java_grpc_compile(
+    name = "kgms-console-protocol-src",
+    deps = ["//kgms:console-proto"]
+)
+
+java_library(
+    name = "kgms-console-protocol-java",
+    srcs = [":kgms-console-protocol-src"],
+    deps = [
+        "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
+        "//dependencies/maven/artifacts/io/grpc:grpc-core",
+        "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
+        "//dependencies/maven/artifacts/io/grpc:grpc-stub",
+    ],
+    visibility = ["//visibility:public"],
+    tags = ["checkstyle_ignore"]
+)
+
