@@ -33,6 +33,7 @@ message Answer {
         ConceptSet conceptSet = 4;
         ConceptSetMeasure conceptSetMeasure = 5;
         Value value = 6;
+        Void void = 7;
     }
 }
 
@@ -71,6 +72,10 @@ message ConceptSetMeasure {
 message Value {
     Number number = 1;
     Explanation explanation = 2;
+}
+
+message Void {
+    string message = 1;
 }
 
 message ConceptIds {
