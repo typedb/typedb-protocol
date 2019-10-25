@@ -41,6 +41,7 @@ jobs:
       - install-bazel-linux-rbe
       - run-bazel-rbe:
           command: bazel build //...
+      - run: bazel run @graknlabs_build_tools//unused_deps -- list
 
   deploy-maven-snapshot:
     machine: true
