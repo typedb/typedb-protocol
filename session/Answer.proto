@@ -43,7 +43,11 @@ message Cause {
 
 message Explanation {
     message Req {
-        ConceptMap answer;
+        ConceptMap answer = 1;
+    }
+    message Res {
+        int32 iter_id = 1;
+        ConceptMap conceptMap = 2;
     }
     message Iter {
         message Res {
