@@ -108,7 +108,6 @@ message Transaction {
                 Query.Iter.Res query_iter_res = 2;
                 GetAttributes.Iter.Res getAttributes_iter_res = 3;
                 Method.Iter.Res conceptMethod_iter_res = 4;
-                Explanation.Iter.Res explanation_iter_res = 5;
             }
         }
     }

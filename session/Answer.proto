@@ -37,22 +37,12 @@ message Answer {
     }
 }
 
-message Cause {
-    string pattern = 1;
-}
-
 message Explanation {
     message Req {
-        ConceptMap answer = 1;
+        ConceptMap explainable = 1;
     }
     message Res {
-        int32 iter_id = 1;
-        ConceptMap conceptMap = 2;
-    }
-    message Iter {
-        message Res {
-            ConceptMap conceptMap = 1;
-        }
+        repeated ConceptMap explanation = 1;
     }
 }
 
@@ -63,7 +53,8 @@ message AnswerGroup {
 
 message ConceptMap {
     map<string, Concept> map = 1;
-    Cause cause = 2;
+    string pattern = 2;
+    bool hasExplanation = 3;
 }
 
 message ConceptList {
