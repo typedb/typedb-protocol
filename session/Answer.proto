@@ -37,41 +37,46 @@ message Answer {
     }
 }
 
-message Explanation {
+message Cause {
     string pattern = 1;
-    repeated ConceptMap answers = 2;
+}
+
+message Explanation {
+    message Req {
+        ConceptMap answer;
+    }
+    message Iter {
+        message Res {
+            ConceptMap conceptMap = 1;
+        }
+    }
 }
 
 message AnswerGroup {
     Concept owner = 1;
     repeated Answer answers = 2;
-    Explanation explanation = 3;
 }
 
 message ConceptMap {
     map<string, Concept> map = 1;
-    Explanation explanation = 2;
+    Cause cause = 2;
 }
 
 message ConceptList {
     ConceptIds list = 1;
-    Explanation explanation = 2;
 }
 
 message ConceptSet {
     ConceptIds set = 1;
-    Explanation explanation = 2;
 }
 
 message ConceptSetMeasure {
     ConceptIds set = 1;
     Number measurement = 2;
-    Explanation explanation = 3;
 }
 
 message Value {
     Number number = 1;
-    Explanation explanation = 2;
 }
 
 message Void {
