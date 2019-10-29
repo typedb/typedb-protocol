@@ -76,6 +76,7 @@ message Transaction {
             PutRole.Req putRole_req = 11;
             PutRule.Req putRule_req = 12;
             ConceptMethod.Req conceptMethod_req = 13;
+            Explanation.Req explanation_req = 14;
         }
     }
     message Res {
@@ -93,6 +94,7 @@ message Transaction {
             PutRole.Res putRole_res = 11;
             PutRule.Res putRule_res = 12;
             ConceptMethod.Res conceptMethod_res = 13;
+            Explanation.Res explanation_res = 14;
         }
     }
 
