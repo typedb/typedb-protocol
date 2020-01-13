@@ -39,6 +39,7 @@ java_library(
         "//dependencies/maven/artifacts/io/grpc:grpc-core",
         "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
         "//dependencies/maven/artifacts/io/grpc:grpc-stub",
+        "//dependencies/maven/artifacts/io/grpc:grpc-api",
     ],
     tags = ["maven_coordinates=io.grakn.protocol:grakn-protocol:{pom_version}", "checkstyle_ignore"],
 )
@@ -70,6 +71,7 @@ java_library(
         "//dependencies/maven/artifacts/io/grpc:grpc-core",
         "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
         "//dependencies/maven/artifacts/io/grpc:grpc-stub",
+        "//dependencies/maven/artifacts/io/grpc:grpc-api",
     ],
     visibility = ["//visibility:public"],
     tags = ["checkstyle_ignore"]
