@@ -100,6 +100,7 @@ message Transaction {
     message Iter {
         message Req {
             int32 id = 1;
+            bool all = 2;
         }
         message Res {
             oneof res {
