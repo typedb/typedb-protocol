@@ -213,6 +213,16 @@ message Concept {
     string id = 1;
     BASE_TYPE baseType = 2;
 
+    bool isPrefilled = 3;
+
+    // Pre-filled responses:
+    Thing.Type.Res type_res = 5;
+    Thing.IsInferred.Res inferred_res = 6;
+    Attribute.Value.Res value_res = 7;
+    AttributeType.DataType.Res dataType_res = 8;
+    SchemaConcept.GetLabel.Res label_res = 9;
+    SchemaConcept.IsImplicit.Res isImplicit_res = 10;
+
     enum BASE_TYPE {
         META_TYPE = 0;
         ENTITY_TYPE = 1;
