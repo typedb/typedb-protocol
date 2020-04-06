@@ -107,17 +107,18 @@ message Transaction {
                 Method.Iter.Res conceptMethod_iter_res = 4;
             }
         }
-        message Batch {
-            message Options {
-                int32 batch_size = 1;
-            }
-            message Req {
-                int32 id = 1;
-                Options batch_options = 2;
-            }
-            message Res {
-                int32 id = 1;
-            }
+    }
+
+    message Batch {
+        message Options {
+            int32 batch_size = 1;
+        }
+        message Req {
+            int32 id = 1;
+            Options batch_options = 2;
+        }
+        message Res {
+            int32 id = 1;
         }
     }
 
@@ -147,7 +148,7 @@ message Transaction {
             // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
             // We use enum INFER instead, because the default value is index 0 (TRUE)
 
-            Iter.Batch.Options batch_options = 3;
+            Batch.Options batch_options = 3;
         }
         message Iter {
             message Res {
