@@ -107,24 +107,14 @@ message Method {
             SchemaConcept.SetLabel.Res schemaConcept_setLabel_res = 202;
             SchemaConcept.GetSup.Res schemaConcept_getSup_res = 203;
             SchemaConcept.SetSup.Res schemaConcept_setSup_res = 204;
-            SchemaConcept.Sups.Iter schemaConcept_sups_iter = 205;
-            SchemaConcept.Subs.Iter schemaConcept_subs_iter = 206;
 
             // Rule method responses
             Rule.When.Res rule_when_res = 300;
             Rule.Then.Res rule_then_res = 301;
 
-            // Role method responses
-            Role.Relations.Iter role_relations_iter = 401;
-            Role.Players.Iter role_players_iter = 402;
-
             // Type method responses
             Type.IsAbstract.Res type_isAbstract_res = 500;
             Type.SetAbstract.Res type_setAbstract_res = 501;
-            Type.Instances.Iter type_instances_iter = 502;
-            Type.Keys.Iter type_keys_iter = 503;
-            Type.Attributes.Iter type_attributes_iter = 504;
-            Type.Playing.Iter type_playing_iter = 505;
             Type.Has.Res type_has_res = 506;
             Type.Key.Res type_key_res = 507;
             Type.Plays.Res type_plays_res = 508;
@@ -137,7 +127,6 @@ message Method {
 
             // RelationType method responses
             RelationType.Create.Res relationType_create_res = 700;
-            RelationType.Roles.Iter relationType_roles_iter = 701;
             RelationType.Relates.Res relationType_relates_res = 702;
             RelationType.Unrelate.Res relationType_unrelate_res = 703;
 
@@ -151,22 +140,15 @@ message Method {
             // Thing method responses
             Thing.Type.Res thing_type_res = 900;
             Thing.IsInferred.Res thing_isInferred_res = 901;
-            Thing.Keys.Iter thing_keys_iter = 902;
-            Thing.Attributes.Iter thing_attributes_iter = 903;
-            Thing.Relations.Iter thing_relations_iter = 904;
-            Thing.Roles.Iter thing_roles_iter = 905;
             Thing.Relhas.Res thing_relhas_res = 906;
             Thing.Unhas.Res thing_unhas_res = 907;
 
             // Relation method responses
-            Relation.RolePlayersMap.Iter relation_rolePlayersMap_iter = 1000;
-            Relation.RolePlayers.Iter relation_rolePlayers_iter = 1001;
             Relation.Assign.Res relation_assign_res = 1002;
             Relation.Unassign.Res relation_unassign_res = 1003;
 
             // Attribute method responses
             Attribute.Value.Res attribute_value_res = 1100;
-            Attribute.Owners.Iter attribute_owners_iter = 1101;
         }
     }
 

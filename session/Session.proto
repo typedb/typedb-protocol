@@ -65,6 +65,7 @@ message Transaction {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
             Query.Req query_req = 3;
+            Batch.Req batch_req = 4;
             GetSchemaConcept.Req getSchemaConcept_req = 5;
             GetConcept.Req getConcept_req = 6;
             GetAttributes.Req getAttributes_req = 7;
@@ -81,11 +82,9 @@ message Transaction {
         oneof res {
             Open.Res open_res = 1;
             Commit.Res commit_res = 2;
-            Query.Iter query_iter = 3;
             Iter.Res iterate_res = 4;
             GetSchemaConcept.Res getSchemaConcept_res = 5;
             GetConcept.Res getConcept_res = 6;
-            GetAttributes.Iter getAttributes_iter = 7;
             PutEntityType.Res putEntityType_res = 8;
             PutAttributeType.Res putAttributeType_res = 9;
             PutRelationType.Res putRelationType_res = 10;
