@@ -65,7 +65,6 @@ message Transaction {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
             Query.Req query_req = 3;
-            Iter.Req iterate_req = 4;
             GetSchemaConcept.Req getSchemaConcept_req = 5;
             GetConcept.Req getConcept_req = 6;
             GetAttributes.Req getAttributes_req = 7;
@@ -98,19 +97,26 @@ message Transaction {
     }
 
     message Iter {
-        message Req {
-            int32 id = 1;
-            oneof mode {
-                bool all = 2;
-                int32 batch = 3;
-            }
-        }
         message Res {
             oneof res {
                 bool done = 1;
+                Batch.Res batch_res = 5;
+
                 Query.Iter.Res query_iter_res = 2;
                 GetAttributes.Iter.Res getAttributes_iter_res = 3;
                 Method.Iter.Res conceptMethod_iter_res = 4;
+            }
+        }
+        message Batch {
+            message Options {
+                int32 batch_size = 1;
+            }
+            message Req {
+                int32 id = 1;
+                Options batch_options = 2;
+            }
+            message Res {
+                int32 id = 1;
             }
         }
     }
@@ -127,7 +133,6 @@ message Transaction {
             Type type = 2;
         }
         message Res {}
-
     }
 
     message Commit {
@@ -142,7 +147,7 @@ message Transaction {
             // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
             // We use enum INFER instead, because the default value is index 0 (TRUE)
 
-            int32 iter_id = 3;
+            Iter.Batch.Options batch_options = 3;
         }
         message Iter {
             message Res {
@@ -183,8 +188,6 @@ message Transaction {
     message GetAttributes {
         message Req {
             ValueObject value = 1;
-
-            int32 iter_id = 2;
         }
         message Iter {
             message Res {
