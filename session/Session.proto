@@ -100,7 +100,10 @@ message Transaction {
     message Iter {
         message Req {
             int32 id = 1;
-            bool all = 2;
+            oneof stream_mode {
+                bool all = 2;
+                int32 batch = 3;
+            }
         }
         message Res {
             oneof res {
@@ -138,9 +141,11 @@ message Transaction {
             INFER infer = 2;
             // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
             // We use enum INFER instead, because the default value is index 0 (TRUE)
+
+            int32 id = 3;
+            // Optionally specify iterator id. If not 0, server will not respond and will use this id.
         }
         message Iter {
-            int32 id = 1;
             message Res {
                 Answer answer = 1;
             }

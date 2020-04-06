@@ -213,8 +213,6 @@ message Concept {
     string id = 1;
     BASE_TYPE baseType = 2;
 
-    bool isPrefilled = 3;
-
     // Pre-filled responses:
     Thing.Type.Res type_res = 5;
     Thing.IsInferred.Res inferred_res = 6;
