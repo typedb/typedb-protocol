@@ -111,7 +111,10 @@ message Transaction {
 
     message Batch {
         message Options {
-            int32 batch_size = 1;
+            oneof batch_size {
+                int32 number = 1;
+                bool all = 2;
+            }
         }
         message Req {
             int32 id = 1;
