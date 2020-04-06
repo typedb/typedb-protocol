@@ -593,7 +593,6 @@ message Thing {
             repeated Concept attributeTypes = 1;
         }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept attribute = 1;
             }
@@ -645,8 +644,6 @@ message Relation {
     message RolePlayersMap {
         message Req {}
         message Iter {
-            int32 id = 1;
-
             message Res {
                 Concept role = 1;
                 Concept player = 2;
