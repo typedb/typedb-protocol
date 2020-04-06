@@ -100,7 +100,7 @@ message Transaction {
     message Iter {
         message Req {
             int32 id = 1;
-            oneof stream_mode {
+            oneof mode {
                 bool all = 2;
                 int32 batch = 3;
             }
