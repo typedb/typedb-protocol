@@ -142,8 +142,7 @@ message Transaction {
             // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
             // We use enum INFER instead, because the default value is index 0 (TRUE)
 
-            int32 id = 3;
-            // Optionally specify iterator id. If not 0, server will not respond and will use this id.
+            int32 iter_id = 3;
         }
         message Iter {
             message Res {
@@ -184,9 +183,10 @@ message Transaction {
     message GetAttributes {
         message Req {
             ValueObject value = 1;
+
+            int32 iter_id = 2;
         }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept attribute = 1;
             }

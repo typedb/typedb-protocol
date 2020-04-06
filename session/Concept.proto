@@ -282,9 +282,10 @@ message SchemaConcept {
     }
     
     message Sups {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept schemaConcept = 1;
             }
@@ -292,9 +293,10 @@ message SchemaConcept {
     }
     
     message Subs {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept schemaConcept = 1;
             }
@@ -334,9 +336,10 @@ message Rule {
 message Role {
 
     message Relations {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept relationType = 1;
             }
@@ -344,9 +347,10 @@ message Role {
     }
 
     message Players {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept type = 1;
             }
@@ -374,9 +378,10 @@ message Type {
     }
 
     message Instances {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept thing = 1;
             }
@@ -384,9 +389,10 @@ message Type {
     }
 
     message Attributes {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept attributeType = 1;
             }
@@ -394,9 +400,10 @@ message Type {
     }
 
     message Keys {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept attributeType = 1;
             }
@@ -404,9 +411,10 @@ message Type {
     }
 
     message Playing {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept role = 1;
             }
@@ -482,9 +490,10 @@ message RelationType {
     }
 
     message Roles {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept role = 1;
             }
@@ -589,9 +598,9 @@ message Thing {
     message Keys {
         message Req {
             repeated Concept attributeTypes = 1;
+            int32 iter_id = 2;
         }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept attribute = 1;
             }
@@ -613,9 +622,9 @@ message Thing {
     message Relations {
         message Req {
             repeated Concept roles = 1;
+            int32 iter_id = 2;
         }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept relation = 1;
             }
@@ -623,9 +632,10 @@ message Thing {
     }
 
     message Roles {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept role = 1;
             }
@@ -658,6 +668,8 @@ message Relation {
         message Req {}
         message Iter {
             int32 id = 1;
+            int32 iter_id = 2;
+
             message Res {
                 Concept role = 1;
                 Concept player = 2;
@@ -668,9 +680,9 @@ message Relation {
     message RolePlayers {
         message Req {
             repeated Concept roles = 1;
+            int32 iter_id = 2;
         }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept thing = 1;
             }
@@ -706,9 +718,10 @@ message Attribute {
     }
 
     message Owners {
-        message Req {}
+        message Req {
+            int32 iter_id = 1;
+        }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept thing = 1;
             }
