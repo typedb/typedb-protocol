@@ -42,6 +42,7 @@ message Explanation {
     }
     message Res {
         repeated ConceptMap explanation = 1;
+        Concept rule = 2;
     }
 }
 
