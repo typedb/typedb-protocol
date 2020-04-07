@@ -65,7 +65,7 @@ message Transaction {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
             Query.Req query_req = 3;
-            Iter.Req iterate_req = 4;
+            Batch.Req batch_req = 4;
             GetSchemaConcept.Req getSchemaConcept_req = 5;
             GetConcept.Req getConcept_req = 6;
             GetAttributes.Req getAttributes_req = 7;
@@ -82,11 +82,9 @@ message Transaction {
         oneof res {
             Open.Res open_res = 1;
             Commit.Res commit_res = 2;
-            Query.Iter query_iter = 3;
             Iter.Res iterate_res = 4;
             GetSchemaConcept.Res getSchemaConcept_res = 5;
             GetConcept.Res getConcept_res = 6;
-            GetAttributes.Iter getAttributes_iter = 7;
             PutEntityType.Res putEntityType_res = 8;
             PutAttributeType.Res putAttributeType_res = 9;
             PutRelationType.Res putRelationType_res = 10;
@@ -98,17 +96,31 @@ message Transaction {
     }
 
     message Iter {
-        message Req {
-            int32 id = 1;
-            bool all = 2;
-        }
         message Res {
             oneof res {
                 bool done = 1;
+                Batch.Res batch_res = 5;
+
                 Query.Iter.Res query_iter_res = 2;
                 GetAttributes.Iter.Res getAttributes_iter_res = 3;
                 Method.Iter.Res conceptMethod_iter_res = 4;
             }
+        }
+    }
+
+    message Batch {
+        message Options {
+            oneof batch_size {
+                int32 number = 1;
+                bool all = 2;
+            }
+        }
+        message Req {
+            int32 id = 1;
+            Options batch_options = 2;
+        }
+        message Res {
+            int32 id = 1;
         }
     }
 
@@ -124,7 +136,6 @@ message Transaction {
             Type type = 2;
         }
         message Res {}
-
     }
 
     message Commit {
@@ -138,9 +149,10 @@ message Transaction {
             INFER infer = 2;
             // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
             // We use enum INFER instead, because the default value is index 0 (TRUE)
+
+            Batch.Options batch_options = 3;
         }
         message Iter {
-            int32 id = 1;
             message Res {
                 Answer answer = 1;
             }
@@ -181,7 +193,6 @@ message Transaction {
             ValueObject value = 1;
         }
         message Iter {
-            int32 id = 1;
             message Res {
                 Concept attribute = 1;
             }
