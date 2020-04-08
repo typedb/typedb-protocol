@@ -64,11 +64,8 @@ message Transaction {
         oneof req {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
-            Query.Req query_req = 3;
-            Batch.Req batch_req = 4;
             GetSchemaConcept.Req getSchemaConcept_req = 5;
             GetConcept.Req getConcept_req = 6;
-            GetAttributes.Req getAttributes_req = 7;
             PutEntityType.Req putEntityType_req = 8;
             PutAttributeType.Req putAttributeType_req = 9;
             PutRelationType.Req putRelationType_req = 10;
@@ -96,6 +93,17 @@ message Transaction {
     }
 
     message Iter {
+        message Req {
+            map<string, string> metadata = 1000;
+            Batch.Options batch_options = 1;
+            oneof req {
+                Batch.Req batch_req = 2;
+
+                Query.Iter.Req query_iter_req = 3;
+                GetAttributes.Iter.Req getAttributes_iter_req = 7;
+                ConceptMethod.Iter.Req conceptMethod_iter_req = 13;
+            }
+        }
         message Res {
             oneof res {
                 bool done = 1;
@@ -103,7 +111,7 @@ message Transaction {
 
                 Query.Iter.Res query_iter_res = 2;
                 GetAttributes.Iter.Res getAttributes_iter_res = 3;
-                Method.Iter.Res conceptMethod_iter_res = 4;
+                ConceptMethod.Iter.Res conceptMethod_iter_res = 4;
             }
         }
     }
@@ -144,15 +152,15 @@ message Transaction {
     }
 
     message Query {
-        message Req {
-            string query = 1;
-            INFER infer = 2;
-            // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
-            // We use enum INFER instead, because the default value is index 0 (TRUE)
-
-            Batch.Options batch_options = 3;
-        }
         message Iter {
+            message Req {
+                string query = 1;
+                INFER infer = 2;
+                // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
+                // We use enum INFER instead, because the default value is index 0 (TRUE)
+
+                Batch.Options batch_options = 3;
+            }
             message Res {
                 Answer answer = 1;
             }
@@ -189,10 +197,10 @@ message Transaction {
     }
 
     message GetAttributes {
-        message Req {
-            ValueObject value = 1;
-        }
         message Iter {
+            message Req {
+                ValueObject value = 1;
+            }
             message Res {
                 Concept attribute = 1;
             }
@@ -254,6 +262,15 @@ message Transaction {
         }
         message Res {
             Method.Res response = 1;
+        }
+        message Iter {
+            message Req {
+                string id = 1;
+                Method.Iter.Req method = 2;
+            }
+            message Res {
+                Method.Iter.Res response = 1;
+            }
         }
     }
 }
