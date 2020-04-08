@@ -95,40 +95,28 @@ message Transaction {
     message Iter {
         message Req {
             map<string, string> metadata = 1000;
-            Batch.Options batch_options = 1;
+            Options options = 1;
             oneof req {
-                Batch.Req batch_req = 2;
-
+                int32 iteratorId = 2;
                 Query.Iter.Req query_iter_req = 3;
-                GetAttributes.Iter.Req getAttributes_iter_req = 7;
-                ConceptMethod.Iter.Req conceptMethod_iter_req = 13;
+                GetAttributes.Iter.Req getAttributes_iter_req = 4;
+                ConceptMethod.Iter.Req conceptMethod_iter_req = 5;
+            }
+            message Options {
+                oneof batch_size {
+                    int32 number = 1;
+                    bool all = 2;
+                }
             }
         }
         message Res {
             oneof res {
                 bool done = 1;
-                Batch.Res batch_res = 5;
-
-                Query.Iter.Res query_iter_res = 2;
-                GetAttributes.Iter.Res getAttributes_iter_res = 3;
-                ConceptMethod.Iter.Res conceptMethod_iter_res = 4;
+                int32 iteratorId = 2;
+                Query.Iter.Res query_iter_res = 3;
+                GetAttributes.Iter.Res getAttributes_iter_res = 4;
+                ConceptMethod.Iter.Res conceptMethod_iter_res = 5;
             }
-        }
-    }
-
-    message Batch {
-        message Options {
-            oneof batch_size {
-                int32 number = 1;
-                bool all = 2;
-            }
-        }
-        message Req {
-            int32 id = 1;
-            Options batch_options = 2;
-        }
-        message Res {
-            int32 id = 1;
         }
     }
 
