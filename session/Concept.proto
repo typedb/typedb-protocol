@@ -136,7 +136,7 @@ message Method {
 
     message Iter {
         message Req {
-            oneof iter_req {
+            oneof req {
                 // SchemaConcept iterator requests
                 SchemaConcept.Sups.Iter.Req schemaConcept_sups_iter_req = 205;
                 SchemaConcept.Subs.Iter.Req schemaConcept_subs_iter_req = 206;
@@ -170,7 +170,7 @@ message Method {
         }
 
         message Res {
-            oneof iter_res {
+            oneof res {
                 // SchemaConcept iterator responses
                 SchemaConcept.Sups.Iter.Res schemaConcept_sups_iter_res = 205;
                 SchemaConcept.Subs.Iter.Res schemaConcept_subs_iter_res = 206;
