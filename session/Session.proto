@@ -146,8 +146,6 @@ message Transaction {
                 INFER infer = 2;
                 // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
                 // We use enum INFER instead, because the default value is index 0 (TRUE)
-
-                Batch.Options batch_options = 3;
             }
             message Res {
                 Answer answer = 1;
