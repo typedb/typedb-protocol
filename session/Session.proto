@@ -64,7 +64,7 @@ message Transaction {
         oneof req {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
-            Iter.Req iter_req = 3;
+            Iter.Req iter_req = 4;
             GetSchemaConcept.Req getSchemaConcept_req = 5;
             GetConcept.Req getConcept_req = 6;
             PutEntityType.Req putEntityType_req = 8;
@@ -80,7 +80,7 @@ message Transaction {
         oneof res {
             Open.Res open_res = 1;
             Commit.Res commit_res = 2;
-            Iter.Res iter_res = 3;
+            Iter.Res iter_res = 4;
             GetSchemaConcept.Res getSchemaConcept_res = 5;
             GetConcept.Res getConcept_res = 6;
             PutEntityType.Res putEntityType_res = 8;
