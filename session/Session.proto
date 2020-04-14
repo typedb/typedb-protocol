@@ -64,11 +64,9 @@ message Transaction {
         oneof req {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
-            Query.Req query_req = 3;
-            Iter.Req iterate_req = 4;
+            Iter.Req iter_req = 4;
             GetSchemaConcept.Req getSchemaConcept_req = 5;
             GetConcept.Req getConcept_req = 6;
-            GetAttributes.Req getAttributes_req = 7;
             PutEntityType.Req putEntityType_req = 8;
             PutAttributeType.Req putAttributeType_req = 9;
             PutRelationType.Req putRelationType_req = 10;
@@ -82,11 +80,9 @@ message Transaction {
         oneof res {
             Open.Res open_res = 1;
             Commit.Res commit_res = 2;
-            Query.Iter query_iter = 3;
-            Iter.Res iterate_res = 4;
+            Iter.Res iter_res = 4;
             GetSchemaConcept.Res getSchemaConcept_res = 5;
             GetConcept.Res getConcept_res = 6;
-            GetAttributes.Iter getAttributes_iter = 7;
             PutEntityType.Res putEntityType_res = 8;
             PutAttributeType.Res putAttributeType_res = 9;
             PutRelationType.Res putRelationType_res = 10;
@@ -99,15 +95,27 @@ message Transaction {
 
     message Iter {
         message Req {
-            int32 id = 1;
-            bool all = 2;
+            Options options = 1;
+            oneof req {
+                int32 iteratorId = 2;
+                Query.Iter.Req query_iter_req = 3;
+                GetAttributes.Iter.Req getAttributes_iter_req = 4;
+                ConceptMethod.Iter.Req conceptMethod_iter_req = 5;
+            }
+            message Options {
+                oneof batch_size {
+                    int32 number = 1;
+                    bool all = 2;
+                }
+            }
         }
         message Res {
             oneof res {
                 bool done = 1;
-                Query.Iter.Res query_iter_res = 2;
-                GetAttributes.Iter.Res getAttributes_iter_res = 3;
-                Method.Iter.Res conceptMethod_iter_res = 4;
+                int32 iteratorId = 2;
+                Query.Iter.Res query_iter_res = 3;
+                GetAttributes.Iter.Res getAttributes_iter_res = 4;
+                ConceptMethod.Iter.Res conceptMethod_iter_res = 5;
             }
         }
     }
@@ -124,7 +132,6 @@ message Transaction {
             Type type = 2;
         }
         message Res {}
-
     }
 
     message Commit {
@@ -133,14 +140,13 @@ message Transaction {
     }
 
     message Query {
-        message Req {
-            string query = 1;
-            INFER infer = 2;
-            // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
-            // We use enum INFER instead, because the default value is index 0 (TRUE)
-        }
         message Iter {
-            int32 id = 1;
+            message Req {
+                string query = 1;
+                INFER infer = 2;
+                // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
+                // We use enum INFER instead, because the default value is index 0 (TRUE)
+            }
             message Res {
                 Answer answer = 1;
             }
@@ -177,11 +183,10 @@ message Transaction {
     }
 
     message GetAttributes {
-        message Req {
-            ValueObject value = 1;
-        }
         message Iter {
-            int32 id = 1;
+            message Req {
+                ValueObject value = 1;
+            }
             message Res {
                 Concept attribute = 1;
             }
@@ -243,6 +248,15 @@ message Transaction {
         }
         message Res {
             Method.Res response = 1;
+        }
+        message Iter {
+            message Req {
+                string id = 1;
+                Method.Iter.Req method = 2;
+            }
+            message Res {
+                Method.Iter.Res response = 1;
+            }
         }
     }
 }

@@ -34,24 +34,14 @@ message Method {
             SchemaConcept.SetLabel.Req schemaConcept_setLabel_req = 202;
             SchemaConcept.GetSup.Req schemaConcept_getSup_req = 203;
             SchemaConcept.SetSup.Req schemaConcept_setSup_req = 204;
-            SchemaConcept.Sups.Req schemaConcept_sups_req = 205;
-            SchemaConcept.Subs.Req schemaConcept_subs_req = 206;
 
             // Rule method requests
             Rule.When.Req rule_when_req = 300;
             Rule.Then.Req rule_then_req = 301;
 
-            // Role method requests
-            Role.Relations.Req role_relations_req = 401;
-            Role.Players.Req role_players_req = 402;
-
             // Type method requests
             Type.IsAbstract.Req type_isAbstract_req = 500;
             Type.SetAbstract.Req type_setAbstract_req = 501;
-            Type.Instances.Req type_instances_req = 502;
-            Type.Keys.Req type_keys_req = 503;
-            Type.Attributes.Req type_attributes_req = 504;
-            Type.Playing.Req type_playing_req = 505;
             Type.Has.Req type_has_req = 506;
             Type.Key.Req type_key_req = 507;
             Type.Plays.Req type_plays_req = 508;
@@ -64,7 +54,6 @@ message Method {
 
             // RelationType method requests
             RelationType.Create.Req relationType_create_req = 700;
-            RelationType.Roles.Req relationType_roles_req = 701;
             RelationType.Relates.Req relationType_relates_req = 702;
             RelationType.Unrelate.Req relationType_unrelate_req = 703;
 
@@ -78,22 +67,15 @@ message Method {
             // Thing method requests
             Thing.Type.Req thing_type_req = 900;
             Thing.IsInferred.Req thing_isInferred_req = 901;
-            Thing.Keys.Req thing_keys_req = 902;
-            Thing.Attributes.Req thing_attributes_req = 903;
-            Thing.Relations.Req thing_relations_req = 904;
-            Thing.Roles.Req thing_roles_req = 905;
             Thing.Relhas.Req thing_relhas_req = 906;
             Thing.Unhas.Req thing_unhas_req = 907;
 
             // Relation method requests
-            Relation.RolePlayersMap.Req relation_rolePlayersMap_req = 1000;
-            Relation.RolePlayers.Req relation_rolePlayers_req = 1001;
             Relation.Assign.Req relation_assign_req = 1002;
             Relation.Unassign.Req relation_unassign_req = 1003;
 
             // Attribute method requests
             Attribute.Value.Req attribute_value_req = 1100;
-            Attribute.Owners.Req attribute_owners_req = 1101;
         }
     }
     message Res {
@@ -107,24 +89,14 @@ message Method {
             SchemaConcept.SetLabel.Res schemaConcept_setLabel_res = 202;
             SchemaConcept.GetSup.Res schemaConcept_getSup_res = 203;
             SchemaConcept.SetSup.Res schemaConcept_setSup_res = 204;
-            SchemaConcept.Sups.Iter schemaConcept_sups_iter = 205;
-            SchemaConcept.Subs.Iter schemaConcept_subs_iter = 206;
 
             // Rule method responses
             Rule.When.Res rule_when_res = 300;
             Rule.Then.Res rule_then_res = 301;
 
-            // Role method responses
-            Role.Relations.Iter role_relations_iter = 401;
-            Role.Players.Iter role_players_iter = 402;
-
             // Type method responses
             Type.IsAbstract.Res type_isAbstract_res = 500;
             Type.SetAbstract.Res type_setAbstract_res = 501;
-            Type.Instances.Iter type_instances_iter = 502;
-            Type.Keys.Iter type_keys_iter = 503;
-            Type.Attributes.Iter type_attributes_iter = 504;
-            Type.Playing.Iter type_playing_iter = 505;
             Type.Has.Res type_has_res = 506;
             Type.Key.Res type_key_res = 507;
             Type.Plays.Res type_plays_res = 508;
@@ -137,7 +109,6 @@ message Method {
 
             // RelationType method responses
             RelationType.Create.Res relationType_create_res = 700;
-            RelationType.Roles.Iter relationType_roles_iter = 701;
             RelationType.Relates.Res relationType_relates_res = 702;
             RelationType.Unrelate.Res relationType_unrelate_res = 703;
 
@@ -151,56 +122,85 @@ message Method {
             // Thing method responses
             Thing.Type.Res thing_type_res = 900;
             Thing.IsInferred.Res thing_isInferred_res = 901;
-            Thing.Keys.Iter thing_keys_iter = 902;
-            Thing.Attributes.Iter thing_attributes_iter = 903;
-            Thing.Relations.Iter thing_relations_iter = 904;
-            Thing.Roles.Iter thing_roles_iter = 905;
             Thing.Relhas.Res thing_relhas_res = 906;
             Thing.Unhas.Res thing_unhas_res = 907;
 
             // Relation method responses
-            Relation.RolePlayersMap.Iter relation_rolePlayersMap_iter = 1000;
-            Relation.RolePlayers.Iter relation_rolePlayers_iter = 1001;
             Relation.Assign.Res relation_assign_res = 1002;
             Relation.Unassign.Res relation_unassign_res = 1003;
 
             // Attribute method responses
             Attribute.Value.Res attribute_value_res = 1100;
-            Attribute.Owners.Iter attribute_owners_iter = 1101;
         }
     }
 
     message Iter {
+        message Req {
+            oneof req {
+                // SchemaConcept iterator requests
+                SchemaConcept.Sups.Iter.Req schemaConcept_sups_iter_req = 205;
+                SchemaConcept.Subs.Iter.Req schemaConcept_subs_iter_req = 206;
+
+                // Role iterator requests
+                Role.Relations.Iter.Req role_relations_iter_req = 401;
+                Role.Players.Iter.Req role_players_iter_req = 402;
+
+                // Type iterator requests
+                Type.Instances.Iter.Req type_instances_iter_req = 502;
+                Type.Keys.Iter.Req type_keys_iter_req = 503;
+                Type.Attributes.Iter.Req type_attributes_iter_req = 504;
+                Type.Playing.Iter.Req type_playing_iter_req = 505;
+
+                // RelationType iterator requests
+                RelationType.Roles.Iter.Req relationType_roles_iter_req = 701;
+
+                // Thing iterator requests
+                Thing.Keys.Iter.Req thing_keys_iter_req = 902;
+                Thing.Attributes.Iter.Req thing_attributes_iter_req = 903;
+                Thing.Relations.Iter.Req thing_relations_iter_req = 904;
+                Thing.Roles.Iter.Req thing_roles_iter_req = 905;
+
+                // Relation iterator responses
+                Relation.RolePlayersMap.Iter.Req relation_rolePlayersMap_iter_req = 1000;
+                Relation.RolePlayers.Iter.Req relation_rolePlayers_iter_req = 1001;
+
+                // Attribute iterator requests
+                Attribute.Owners.Iter.Req attribute_owners_iter_req = 1101;
+            }
+        }
+
         message Res {
-            // SchemaConcept iterator responses
-            SchemaConcept.Sups.Iter.Res schemaConcept_sups_iter_res = 205;
-            SchemaConcept.Subs.Iter.Res schemaConcept_subs_iter_res = 206;
+            oneof res {
+                // SchemaConcept iterator responses
+                SchemaConcept.Sups.Iter.Res schemaConcept_sups_iter_res = 205;
+                SchemaConcept.Subs.Iter.Res schemaConcept_subs_iter_res = 206;
 
-            // Role iterator responses
-            Role.Relations.Iter.Res role_relations_iter_res = 401;
-            Role.Players.Iter.Res role_players_iter_res = 402;
+                // Role iterator responses
+                Role.Relations.Iter.Res role_relations_iter_res = 401;
+                Role.Players.Iter.Res role_players_iter_res = 402;
 
-            // Type iterator responses
-            Type.Instances.Iter.Res type_instances_iter_res = 502;
-            Type.Keys.Iter.Res type_keys_iter_res = 503;
-            Type.Attributes.Iter.Res type_attributes_iter_res = 504;
-            Type.Playing.Iter.Res type_playing_iter_res = 505;
+                // Type iterator responses
+                Type.Instances.Iter.Res type_instances_iter_res = 502;
+                Type.Keys.Iter.Res type_keys_iter_res = 503;
+                Type.Attributes.Iter.Res type_attributes_iter_res = 504;
+                Type.Playing.Iter.Res type_playing_iter_res = 505;
 
-            // RelationType iterator responses
-            RelationType.Roles.Iter.Res relationType_roles_iter_res = 701;
+                // RelationType iterator responses
+                RelationType.Roles.Iter.Res relationType_roles_iter_res = 701;
 
-            // Thing iterator responses
-            Thing.Keys.Iter.Res thing_keys_iter_res = 902;
-            Thing.Attributes.Iter.Res thing_attributes_iter_res = 903;
-            Thing.Relations.Iter.Res thing_relations_iter_res = 904;
-            Thing.Roles.Iter.Res thing_roles_iter_res = 905;
+                // Thing iterator responses
+                Thing.Keys.Iter.Res thing_keys_iter_res = 902;
+                Thing.Attributes.Iter.Res thing_attributes_iter_res = 903;
+                Thing.Relations.Iter.Res thing_relations_iter_res = 904;
+                Thing.Roles.Iter.Res thing_roles_iter_res = 905;
 
-            // Relation iterator responses
-            Relation.RolePlayersMap.Iter.Res relation_rolePlayersMap_iter_res = 1000;
-            Relation.RolePlayers.Iter.Res relation_rolePlayers_iter_res = 1001;
+                // Relation iterator responses
+                Relation.RolePlayersMap.Iter.Res relation_rolePlayersMap_iter_res = 1000;
+                Relation.RolePlayers.Iter.Res relation_rolePlayers_iter_res = 1001;
 
-            // Attribute iterator responses
-            Attribute.Owners.Iter.Res attribute_owners_iter_res = 1101;
+                // Attribute iterator responses
+                Attribute.Owners.Iter.Res attribute_owners_iter_res = 1101;
+            }
         }
     }
 }
@@ -212,6 +212,14 @@ message Null {}
 message Concept {
     string id = 1;
     BASE_TYPE baseType = 2;
+
+    // Pre-filled responses:
+    Thing.Type.Res type_res = 5;
+    Thing.IsInferred.Res inferred_res = 6;
+    Attribute.Value.Res value_res = 7;
+    AttributeType.DataType.Res dataType_res = 8;
+    SchemaConcept.GetLabel.Res label_res = 9;
+    SchemaConcept.IsImplicit.Res isImplicit_res = 10;
 
     enum BASE_TYPE {
         META_TYPE = 0;
@@ -274,9 +282,8 @@ message SchemaConcept {
     }
     
     message Sups {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept schemaConcept = 1;
             }
@@ -284,9 +291,8 @@ message SchemaConcept {
     }
     
     message Subs {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept schemaConcept = 1;
             }
@@ -326,9 +332,8 @@ message Rule {
 message Role {
 
     message Relations {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept relationType = 1;
             }
@@ -336,9 +341,8 @@ message Role {
     }
 
     message Players {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept type = 1;
             }
@@ -366,9 +370,8 @@ message Type {
     }
 
     message Instances {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept thing = 1;
             }
@@ -376,9 +379,8 @@ message Type {
     }
 
     message Attributes {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept attributeType = 1;
             }
@@ -386,9 +388,8 @@ message Type {
     }
 
     message Keys {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept attributeType = 1;
             }
@@ -396,9 +397,8 @@ message Type {
     }
 
     message Playing {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept role = 1;
             }
@@ -474,9 +474,8 @@ message RelationType {
     }
 
     message Roles {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept role = 1;
             }
@@ -579,11 +578,10 @@ message Thing {
     }
 
     message Keys {
-        message Req {
-            repeated Concept attributeTypes = 1;
-        }
         message Iter {
-            int32 id = 1;
+            message Req {
+                repeated Concept attributeTypes = 1;
+            }
             message Res {
                 Concept attribute = 1;
             }
@@ -591,11 +589,10 @@ message Thing {
     }
 
     message Attributes {
-        message Req {
-            repeated Concept attributeTypes = 1;
-        }
         message Iter {
-            int32 id = 1;
+            message Req {
+                repeated Concept attributeTypes = 1;
+            }
             message Res {
                 Concept attribute = 1;
             }
@@ -603,11 +600,10 @@ message Thing {
     }
 
     message Relations {
-        message Req {
-            repeated Concept roles = 1;
-        }
         message Iter {
-            int32 id = 1;
+            message Req {
+                repeated Concept roles = 1;
+            }
             message Res {
                 Concept relation = 1;
             }
@@ -615,9 +611,8 @@ message Thing {
     }
 
     message Roles {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept role = 1;
             }
@@ -647,9 +642,8 @@ message Thing {
 message Relation {
 
     message RolePlayersMap {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept role = 1;
                 Concept player = 2;
@@ -658,11 +652,10 @@ message Relation {
     }
 
     message RolePlayers {
-        message Req {
-            repeated Concept roles = 1;
-        }
         message Iter {
-            int32 id = 1;
+            message Req {
+                repeated Concept roles = 1;
+            }
             message Res {
                 Concept thing = 1;
             }
@@ -698,9 +691,8 @@ message Attribute {
     }
 
     message Owners {
-        message Req {}
         message Iter {
-            int32 id = 1;
+            message Req {}
             message Res {
                 Concept thing = 1;
             }
