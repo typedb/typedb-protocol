@@ -60,7 +60,7 @@ message Method {
             // AttributeType method requests
             AttributeType.Create.Req attributeType_create_req = 800;
             AttributeType.Attribute.Req attributeType_attribute_req = 801;
-            AttributeType.DataType.Req attributeType_dataType_req = 802;
+            AttributeType.ValueType.Req attributeType_valueType_req = 802;
             AttributeType.GetRegex.Req attributeType_getRegex_req = 803;
             AttributeType.SetRegex.Req attributeType_setRegex_req = 804;
 
@@ -115,7 +115,7 @@ message Method {
             // AttributeType method responses
             AttributeType.Create.Res attributeType_create_res = 800;
             AttributeType.Attribute.Res attributeType_attribute_res = 801;
-            AttributeType.DataType.Res attributeType_dataType_res = 802;
+            AttributeType.ValueType.Res attributeType_valueType_res = 802;
             AttributeType.GetRegex.Res attributeType_getRegex_res = 803;
             AttributeType.SetRegex.Res attributeType_setRegex_res = 804;
 
@@ -217,7 +217,7 @@ message Concept {
     Thing.Type.Res type_res = 5;
     Thing.IsInferred.Res inferred_res = 6;
     Attribute.Value.Res value_res = 7;
-    AttributeType.DataType.Res dataType_res = 8;
+    AttributeType.ValueType.Res valueType_res = 8;
     SchemaConcept.GetLabel.Res label_res = 9;
     SchemaConcept.IsImplicit.Res isImplicit_res = 10;
 
@@ -502,7 +502,7 @@ message RelationType {
 
 message AttributeType {
 
-    enum DATA_TYPE {
+    enum VALUE_TYPE {
         STRING = 0;
         BOOLEAN = 1;
         INTEGER = 2;
@@ -533,11 +533,11 @@ message AttributeType {
         }
     }
 
-    message DataType {
+    message ValueType {
         message Req {}
         message Res {
             oneof res {
-                DATA_TYPE dataType = 1;
+                VALUE_TYPE valueType = 1;
                 Null null = 2;
             }
         }

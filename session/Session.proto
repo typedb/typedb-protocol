@@ -205,7 +205,7 @@ message Transaction {
     message PutAttributeType {
         message Req {
             string label = 1;
-            AttributeType.DATA_TYPE dataType = 2;
+            AttributeType.VALUE_TYPE valueType = 2;
         }
         message Res {
             Concept attributeType = 1;
