@@ -67,7 +67,7 @@ message Method {
             // Thing method requests
             Thing.Type.Req thing_type_req = 900;
             Thing.IsInferred.Req thing_isInferred_req = 901;
-            Thing.Relhas.Req thing_relhas_req = 906;
+            Thing.Has.Req thing_has_req = 906;
             Thing.Unhas.Req thing_unhas_req = 907;
 
             // Relation method requests
@@ -122,7 +122,7 @@ message Method {
             // Thing method responses
             Thing.Type.Res thing_type_res = 900;
             Thing.IsInferred.Res thing_isInferred_res = 901;
-            Thing.Relhas.Res thing_relhas_res = 906;
+            Thing.Has.Res thing_has_res = 906;
             Thing.Unhas.Res thing_unhas_res = 907;
 
             // Relation method responses
@@ -619,13 +619,11 @@ message Thing {
         }
     }
 
-    message Relhas {
+    message Has {
         message Req {
             Concept attribute = 1;
         }
-        message Res {
-            Concept relation = 1;
-        }
+        message Res {}
     }
 
     message Unhas {
