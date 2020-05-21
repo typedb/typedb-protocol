@@ -29,7 +29,6 @@ message Method {
             Concept.Delete.Req concept_delete_req = 100;
 
             // SchemaConcept method requests
-            SchemaConcept.IsImplicit.Req schemaConcept_isImplicit_req = 200;
             SchemaConcept.GetLabel.Req schemaConcept_getLabel_req = 201;
             SchemaConcept.SetLabel.Req schemaConcept_setLabel_req = 202;
             SchemaConcept.GetSup.Req schemaConcept_getSup_req = 203;
@@ -84,7 +83,6 @@ message Method {
             Concept.Delete.Res concept_delete_res = 100;
 
             // SchemaConcept method responses
-            SchemaConcept.IsImplicit.Res schemaConcept_isImplicit_res = 200;
             SchemaConcept.GetLabel.Res schemaConcept_getLabel_res = 201;
             SchemaConcept.SetLabel.Res schemaConcept_setLabel_res = 202;
             SchemaConcept.GetSup.Res schemaConcept_getSup_res = 203;
@@ -219,7 +217,6 @@ message Concept {
     Attribute.Value.Res value_res = 7;
     AttributeType.ValueType.Res valueType_res = 8;
     SchemaConcept.GetLabel.Res label_res = 9;
-    SchemaConcept.IsImplicit.Res isImplicit_res = 10;
 
     enum BASE_TYPE {
         META_TYPE = 0;
@@ -255,13 +252,6 @@ message SchemaConcept {
             string label = 1;
         }
         message Res {}
-    }
-
-    message IsImplicit {
-        message Req{}
-        message Res{
-            bool implicit = 1;
-        }
     }
 
     message GetSup {
