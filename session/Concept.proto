@@ -499,7 +499,7 @@ message AttributeType {
         LONG = 3;
         FLOAT = 4;
         DOUBLE = 5;
-        DATE = 6;
+        DATETIME = 6;
     }
 
     message Create {
@@ -698,6 +698,6 @@ message ValueObject {
         int64 long = 4;
         float float = 5;
         double double = 6;
-        int64 date = 7; // time since epoch in milliseconds
+        int64 datetime = 7; // time since epoch in milliseconds
     }
 }
