@@ -29,7 +29,6 @@ message Method {
             Concept.Delete.Req concept_delete_req = 100;
 
             // SchemaConcept method requests
-            SchemaConcept.IsImplicit.Req schemaConcept_isImplicit_req = 200;
             SchemaConcept.GetLabel.Req schemaConcept_getLabel_req = 201;
             SchemaConcept.SetLabel.Req schemaConcept_setLabel_req = 202;
             SchemaConcept.GetSup.Req schemaConcept_getSup_req = 203;
@@ -67,7 +66,7 @@ message Method {
             // Thing method requests
             Thing.Type.Req thing_type_req = 900;
             Thing.IsInferred.Req thing_isInferred_req = 901;
-            Thing.Relhas.Req thing_relhas_req = 906;
+            Thing.Has.Req thing_has_req = 906;
             Thing.Unhas.Req thing_unhas_req = 907;
 
             // Relation method requests
@@ -84,7 +83,6 @@ message Method {
             Concept.Delete.Res concept_delete_res = 100;
 
             // SchemaConcept method responses
-            SchemaConcept.IsImplicit.Res schemaConcept_isImplicit_res = 200;
             SchemaConcept.GetLabel.Res schemaConcept_getLabel_res = 201;
             SchemaConcept.SetLabel.Res schemaConcept_setLabel_res = 202;
             SchemaConcept.GetSup.Res schemaConcept_getSup_res = 203;
@@ -122,7 +120,7 @@ message Method {
             // Thing method responses
             Thing.Type.Res thing_type_res = 900;
             Thing.IsInferred.Res thing_isInferred_res = 901;
-            Thing.Relhas.Res thing_relhas_res = 906;
+            Thing.Has.Res thing_has_res = 906;
             Thing.Unhas.Res thing_unhas_res = 907;
 
             // Relation method responses
@@ -219,7 +217,6 @@ message Concept {
     Attribute.Value.Res value_res = 7;
     AttributeType.ValueType.Res valueType_res = 8;
     SchemaConcept.GetLabel.Res label_res = 9;
-    SchemaConcept.IsImplicit.Res isImplicit_res = 10;
 
     enum BASE_TYPE {
         META_TYPE = 0;
@@ -255,13 +252,6 @@ message SchemaConcept {
             string label = 1;
         }
         message Res {}
-    }
-
-    message IsImplicit {
-        message Req{}
-        message Res{
-            bool implicit = 1;
-        }
     }
 
     message GetSup {
@@ -619,13 +609,11 @@ message Thing {
         }
     }
 
-    message Relhas {
+    message Has {
         message Req {
             Concept attribute = 1;
         }
-        message Res {
-            Concept relation = 1;
-        }
+        message Res {}
     }
 
     message Unhas {
