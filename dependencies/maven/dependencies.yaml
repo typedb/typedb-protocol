@@ -46,14 +46,14 @@ dependencies:
 
   io.grpc:
     grpc-core:
-      version: "1.24.1"
+      version: "1.29.0"
       lang: java
     grpc-protobuf:
-      version: "1.24.1"
+      version: "1.29.0"
       lang: java
     grpc-stub:
-      version: "1.24.1"
+      version: "1.29.0"
       lang: java
     grpc-api:
-      version: "1.24.1"
+      version: "1.29.0"
       lang: java
