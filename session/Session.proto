@@ -146,7 +146,7 @@ message Transaction {
                 INFER infer = 2;
                 // We cannot use bool for `infer` because GRPC's default value for bool is FALSE
                 // We use enum INFER instead, because the default value is index 0 (TRUE)
-                bool explainable = 3;
+                bool explain = 3;
             }
             message Res {
                 Answer answer = 1;
