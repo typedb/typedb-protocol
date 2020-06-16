@@ -37,7 +37,8 @@ java_library(
     runtime_deps = [
         "//dependencies/maven/artifacts/com/google/android:annotations",
         "//dependencies/maven/artifacts/com/google/code/gson:gson",
-        "//dependencies/maven/artifacts/com/google/errorprone:error-prone-annotations",
+        "//dependencies/maven/artifacts/io/opencensus:opencensus-api",
+        "//dependencies/maven/artifacts/io/opencensus:opencensus-contrib-grpc-metrics",
         "//dependencies/maven/artifacts/io/perfmark:perfmark-api",
         ":grpc-api"
     ],
