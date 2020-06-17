@@ -92,15 +92,16 @@ rules_jvm_external()
 load("//dependencies/maven:dependencies.bzl", "maven_dependencies")
 maven_dependencies()
 
-load("@graknlabs_dependencies//:maven_deps.bzl", "maven_deps")
-maven_deps()
+load("@graknlabs_dependencies//maven:rules.bzl", "maven")
+load("//:dependencies/maven.bzl", "jars")
+maven(jars)
 
 #####################################
 # Load rules dependencies for Bazel #
 #####################################
 
-load("@graknlabs_dependencies//:rules_deps.bzl", "rules_deps")
-rules_deps()
+load("@graknlabs_dependencies//:rules.bzl", "rules")
+rules()
 
 #######################################
 # Load compiler dependencies for GRPC #
