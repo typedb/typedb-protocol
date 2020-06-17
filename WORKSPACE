@@ -22,6 +22,9 @@ workspace(name = "graknlabs_protocol")
 # Grakn Labs Dependencies #
 ###########################
 
+load("//dependencies/graknlabs:dependencies.bzl", "graknlabs_dependencies")
+graknlabs_dependencies()
+
 load("//dependencies/graknlabs:dependencies.bzl", "graknlabs_build_tools")
 graknlabs_build_tools()
 
@@ -75,12 +78,9 @@ load("@graknlabs_bazel_distribution_pip//:requirements.bzl",
 graknlabs_bazel_distribution_pip_install = "pip_install")
 graknlabs_bazel_distribution_pip_install()
 
-#####################################
-# Load Java dependencies from Maven #
-#####################################
-
-load("//dependencies/graknlabs:dependencies.bzl", "graknlabs_dependencies")
-graknlabs_dependencies()
+########################################
+# Load rules_jvm_external dependencies #
+########################################
 
 load("@graknlabs_dependencies//:rules_jvm_external.bzl", "rules_jvm_external")
 rules_jvm_external()
@@ -95,12 +95,16 @@ maven_dependencies()
 load("@graknlabs_dependencies//:maven_deps.bzl", "maven_deps")
 maven_deps()
 
+#####################################
+# Load rules dependencies for Bazel #
+#####################################
+
+load("@graknlabs_dependencies//:rules_deps.bzl", "rules_deps")
+rules_deps()
+
 #######################################
 # Load compiler dependencies for GRPC #
 #######################################
-
-load("@graknlabs_build_tools//grpc:dependencies.bzl", "grpc_dependencies")
-grpc_dependencies()
 
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl",
 com_github_grpc_grpc_deps = "grpc_deps")
