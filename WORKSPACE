@@ -86,8 +86,8 @@ load("@graknlabs_dependencies//:rules.bzl", "rules")
 rules()
 
 load("@graknlabs_dependencies//maven:rules.bzl", "maven")
-load("//:dependencies/maven.bzl", "jars")
-maven(jars)
+load("//dependencies/maven:artifacts.bzl", "artifacts")
+maven(artifacts)
 
 #####################################
 # Load Java dependencies from Maven #
