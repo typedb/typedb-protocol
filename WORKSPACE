@@ -75,6 +75,15 @@ load("@graknlabs_bazel_distribution_pip//:requirements.bzl",
 graknlabs_bazel_distribution_pip_install = "pip_install")
 graknlabs_bazel_distribution_pip_install()
 
+#####################################
+# Load Java dependencies from Maven #
+#####################################
+
+load("//dependencies/graknlabs:dependencies.bzl", "graknlabs_dependencies")
+graknlabs_dependencies()
+
+load("@graknlabs_dependencies//:rules_jvm_external.bzl", "rules_jvm_external")
+rules_jvm_external()
 
 #####################################
 # Load Java dependencies from Maven #
@@ -83,6 +92,8 @@ graknlabs_bazel_distribution_pip_install()
 load("//dependencies/maven:dependencies.bzl", "maven_dependencies")
 maven_dependencies()
 
+load("@graknlabs_dependencies//:maven_deps.bzl", "maven_deps")
+maven_deps()
 
 #######################################
 # Load compiler dependencies for GRPC #
