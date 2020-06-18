@@ -25,17 +25,17 @@ workspace(name = "graknlabs_protocol")
 load("//dependencies/graknlabs:dependencies.bzl", "graknlabs_build_tools")
 graknlabs_build_tools()
 
-load("@graknlabs_build_tools//distribution:dependencies.bzl", "graknlabs_bazel_distribution")
+load("@graknlabs_build_tools//distribution:deps.bzl", graknlabs_bazel_distribution = "deps")
 graknlabs_bazel_distribution()
 
-load("@graknlabs_build_tools//unused_deps:dependencies.bzl", "unused_deps_dependencies")
-unused_deps_dependencies()
+load("@graknlabs_build_tools//tools/unused_deps:deps.bzl", unused_deps_deps = "deps")
+unused_deps_deps()
 
 ###########################
 # Load Bazel dependencies #
 ###########################
 
-load("@graknlabs_build_tools//bazel:dependencies.bzl", "bazel_common", "bazel_deps", "bazel_toolchain")
+load("@graknlabs_build_tools//builder/bazel:deps.bzl", "bazel_common", "bazel_deps", "bazel_toolchain")
 bazel_common()
 bazel_deps()
 bazel_toolchain()
@@ -45,11 +45,11 @@ bazel_toolchain()
 # Load Build Tools dependencies #
 #################################
 
-load("@graknlabs_build_tools//checkstyle:dependencies.bzl", "checkstyle_dependencies")
-checkstyle_dependencies()
+load("@graknlabs_build_tools//tools/checkstyle:deps.bzl", checkstyle_deps = "deps")
+checkstyle_deps()
 
-load("@graknlabs_build_tools//bazel:dependencies.bzl", "bazel_rules_python")
-bazel_rules_python()
+load("@graknlabs_build_tools//builder/python:deps.bzl", python_deps = "deps")
+python_deps()
 
 load("@rules_python//python:repositories.bzl", "py_repositories")
 py_repositories()
@@ -59,7 +59,7 @@ pip_repositories()
 
 pip3_import(
     name = "graknlabs_build_tools_ci_pip",
-    requirements = "@graknlabs_build_tools//ci:requirements.txt",
+    requirements = "@graknlabs_build_tools//:requirements.txt",
 )
 
 load("@graknlabs_build_tools_ci_pip//:requirements.bzl",
@@ -88,8 +88,8 @@ maven_dependencies()
 # Load compiler dependencies for GRPC #
 #######################################
 
-load("@graknlabs_build_tools//grpc:dependencies.bzl", "grpc_dependencies")
-grpc_dependencies()
+load("@graknlabs_build_tools//builder/grpc:deps.bzl", grpc_deps = "deps")
+grpc_deps()
 
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl",
 com_github_grpc_grpc_deps = "grpc_deps")
