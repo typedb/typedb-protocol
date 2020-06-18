@@ -43,17 +43,3 @@ dependencies:
     protobuf-java:
       version: "3.5.1"
       lang: java
-
-  io.grpc:
-    grpc-core:
-      version: "1.24.1"
-      lang: java
-    grpc-protobuf:
-      version: "1.24.1"
-      lang: java
-    grpc-stub:
-      version: "1.24.1"
-      lang: java
-    grpc-api:
-      version: "1.24.1"
-      lang: java

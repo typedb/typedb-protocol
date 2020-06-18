@@ -35,10 +35,10 @@ java_library(
     deps = [
         "//dependencies/maven/artifacts/com/google/guava:guava",
         "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
-        "//dependencies/maven/artifacts/io/grpc:grpc-core",
-        "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
-        "//dependencies/maven/artifacts/io/grpc:grpc-stub",
-        "//dependencies/maven/artifacts/io/grpc:grpc-api",
+        "@maven//:io_grpc_grpc_core",
+        "@maven//:io_grpc_grpc_protobuf",
+        "@maven//:io_grpc_grpc_stub",
+        "@maven//:io_grpc_grpc_api",
     ],
     tags = ["maven_coordinates=io.grakn.protocol:grakn-protocol:{pom_version}", "checkstyle_ignore"],
 )
@@ -67,10 +67,10 @@ java_library(
     srcs = [":kgms-console-protocol-src"],
     deps = [
         "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
-        "//dependencies/maven/artifacts/io/grpc:grpc-core",
-        "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
-        "//dependencies/maven/artifacts/io/grpc:grpc-stub",
-        "//dependencies/maven/artifacts/io/grpc:grpc-api",
+        "@maven//:io_grpc_grpc_core",
+        "@maven//:io_grpc_grpc_protobuf",
+        "@maven//:io_grpc_grpc_stub",
+        "@maven//:io_grpc_grpc_api",
     ],
     visibility = ["//visibility:public"],
     tags = ["checkstyle_ignore"]

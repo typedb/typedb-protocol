@@ -23,3 +23,10 @@ def graknlabs_build_tools():
         remote = "https://github.com/lolski/build-tools",
         commit = "b7fd41c5fd8bcd2db3182d04a3654a2b7e5f99f2", # sync-marker: do not remove this comment, this is used for sync-dependencies by @graknlabs_build_tools
     )
+
+def graknlabs_dependencies():
+    git_repository(
+        name = "graknlabs_dependencies",
+        remote = "https://github.com/graknlabs/dependencies",
+        commit = "1764ee5b702260b238cf786876df7239da775d31", # sync-marker: do not remove this comment, this is used for sync-dependencies by @graknlabs_dependencies
+    )
