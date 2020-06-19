@@ -32,7 +32,7 @@ commands:
       command:
         type: string
     steps:
-      - run: bazel run @graknlabs_build_tools//tools/bazel_run:rbe -- << parameters.command >>
+      - run: bazel run @graknlabs_build_tools//tools/bazelrun:rbe -- << parameters.command >>
 
 jobs:
   build:
@@ -43,7 +43,7 @@ jobs:
       - bazel-install
       - bazel-run-rbe:
           command: bazel build //...
-      - run: bazel run @graknlabs_build_tools//tools/unused_deps:unused-deps -- list
+      - run: bazel run @graknlabs_build_tools//tools/unuseddeps:unused-deps -- list
 
   deploy-maven-snapshot:
     machine: true
