@@ -17,19 +17,22 @@
 
 version: 2.1
 commands:
-  install-bazel-linux-rbe:
+  bazel-install:
     steps:
-      - run: curl -OL https://raw.githubusercontent.com/graknlabs/build-tools/master/ci/install-bazel-linux.sh
-      - run: bash ./install-bazel-linux.sh && rm ./install-bazel-linux.sh
-      - run: curl -OL https://raw.githubusercontent.com/graknlabs/build-tools/master/ci/install-bazel-rbe.sh
-      - run: bash ./install-bazel-rbe.sh && rm ./install-bazel-rbe.sh
+      - run: |
+          mkdir install
+          cd install
+          curl -OL https://raw.githubusercontent.com/lolski/build-tools/refactor/tools/bazel-install/linux.sh
+          bash ./linux.sh && rm ./linux.sh
+          curl -OL https://raw.githubusercontent.com/lolski/build-tools/refactor/tools/bazel-install/rbe.sh
+          bash ./rbe.sh && rm ./rbe.sh
 
-  run-bazel-rbe:
+  bazel-run-rbe:
     parameters:
       command:
         type: string
     steps:
-      - run: bazel run @graknlabs_build_tools//ci:run-bazel-rbe -- << parameters.command >>
+      - run: bazel run @graknlabs_build_tools//tools/bazel_run:rbe -- << parameters.command >>
 
 jobs:
   build:
@@ -37,16 +40,16 @@ jobs:
     working_directory: ~/protocol
     steps:
       - checkout
-      - install-bazel-linux-rbe
-      - run-bazel-rbe:
+      - bazel-install
+      - bazel-run-rbe:
           command: bazel build //...
-      - run: bazel run @graknlabs_build_tools//unused_deps -- list
+      - run: bazel run @graknlabs_build_tools//tools/unused_deps:unused-deps -- list
 
   deploy-maven-snapshot:
     machine: true
     working_directory: ~/protocol
     steps:
-      - install-bazel-linux-rbe
+      - bazel-install
       - checkout
       - run: |
           export DEPLOY_MAVEN_USERNAME=$REPO_GRAKN_USERNAME
@@ -58,10 +61,10 @@ jobs:
     working_directory: ~/protocol
     steps:
       - checkout
-      - install-bazel-linux-rbe
+      - bazel-install
       - run: |
           export SYNC_DEPENDENCIES_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_build_tools//ci:sync-dependencies -- \
+          bazel run @graknlabs_build_tools//tools/sync:dependencies -- \
           --source protocol@$CIRCLE_SHA1 \
           --targets \
           grakn:master client-java:master client-python:master client-nodejs:master
@@ -70,23 +73,23 @@ jobs:
     machine: true
     working_directory: ~/protocol
     steps:
-      - install-bazel-linux-rbe
+      - bazel-install
       - checkout
       - run: |
           export RELEASE_APPROVAL_USERNAME=$REPO_GITHUB_USERNAME
           export RELEASE_APPROVAL_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_build_tools//ci:release-approval
+          bazel run @graknlabs_build_tools//tools/release:approval
 
   deploy-github:
     machine: true
     working_directory: ~/protocol
     steps:
-      - install-bazel-linux-rbe
+      - bazel-install
       - checkout
       - run: |
           pip install certifi
           export RELEASE_NOTES_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_build_tools//ci:release-notes -- protocol $(cat VERSION) ./RELEASE_TEMPLATE.md
+          bazel run @graknlabs_build_tools//tools/release:create-notes -- protocol $(cat VERSION) ./RELEASE_TEMPLATE.md
       - run: |
           export DEPLOY_GITHUB_TOKEN=$REPO_GITHUB_TOKEN
           bazel run --define version=$(cat VERSION) //:deploy-github -- $CIRCLE_SHA1
@@ -95,7 +98,7 @@ jobs:
     machine: true
     working_directory: ~/protocol
     steps:
-      - install-bazel-linux-rbe
+      - bazel-install
       - checkout
       - run: cat VERSION
       - run: |
@@ -107,11 +110,11 @@ jobs:
     machine: true
     working_directory: ~/protocol
     steps:
-      - install-bazel-linux-rbe
+      - bazel-install
       - checkout
       - run: |
           export SYNC_DEPENDENCIES_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_build_tools//ci:sync-dependencies -- \
+          bazel run @graknlabs_build_tools//tools/sync:dependencies -- \
           --source protocol@$(cat VERSION) \
           --targets \
           grakn:master client-java:master client-python:master client-nodejs:master

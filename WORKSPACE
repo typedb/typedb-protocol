@@ -62,7 +62,7 @@ pip_repositories()
 
 pip3_import(
     name = "graknlabs_build_tools_ci_pip",
-    requirements = "@graknlabs_build_tools//:requirements.txt",
+    requirements = "@graknlabs_build_tools//tools:requirements.txt",
 )
 
 load("@graknlabs_build_tools_ci_pip//:requirements.bzl",
