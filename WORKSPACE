@@ -28,8 +28,8 @@ graknlabs_build_tools()
 load("@graknlabs_build_tools//distribution:deps.bzl", graknlabs_bazel_distribution = "deps")
 graknlabs_bazel_distribution()
 
-load("@graknlabs_build_tools//tools/unused_deps:deps.bzl", unused_deps_deps = "deps")
-unused_deps_deps()
+load("@graknlabs_build_tools//tools/unuseddeps:deps.bzl", unuseddeps_deps = "deps")
+unuseddeps_deps()
 
 ###########################
 # Load Bazel dependencies #
