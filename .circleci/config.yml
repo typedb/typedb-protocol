@@ -20,11 +20,14 @@ commands:
   bazel-install:
     steps:
       - run: |
+          mkdir install
+          cd install
           curl -OL https://raw.githubusercontent.com/lolski/build-tools/refactor/tools/bazelinstall/linux.sh
-          bash ./linux.sh && rm ./linux.sh
+          bash ./linux.sh
           curl -OL https://raw.githubusercontent.com/lolski/build-tools/refactor/tools/bazelinstall/rbe.sh
-          bash ./rbe.sh && rm ./rbe.sh
-
+          bash ./rbe.sh
+          cd ..
+          rm -rf install
   bazel-run-rbe:
     parameters:
       command:
