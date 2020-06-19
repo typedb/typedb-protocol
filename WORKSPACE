@@ -22,9 +22,6 @@ workspace(name = "graknlabs_protocol")
 # Grakn Labs Dependencies #
 ###########################
 
-load("//dependencies/graknlabs:dependencies.bzl", "graknlabs_dependencies")
-graknlabs_dependencies()
-
 load("//dependencies/graknlabs:dependencies.bzl", "graknlabs_build_tools")
 graknlabs_build_tools()
 
@@ -50,6 +47,9 @@ bazel_toolchain()
 
 load("@graknlabs_build_tools//tools/checkstyle:deps.bzl", checkstyle_deps = "deps")
 checkstyle_deps()
+
+load("@graknlabs_build_tools//builder/java:deps.bzl", java_deps = "deps")
+java_deps()
 
 load("@graknlabs_build_tools//builder/python:deps.bzl", python_deps = "deps")
 python_deps()
@@ -78,14 +78,11 @@ load("@graknlabs_bazel_distribution_pip//:requirements.bzl",
 graknlabs_bazel_distribution_pip_install = "pip_install")
 graknlabs_bazel_distribution_pip_install()
 
-#################################################################
-# Load Java dependencies and rules from @graknlabs_dependencies #
-#################################################################
+################################################################
+# Load Java dependencies and rules from @graknlabs_build_tools #
+################################################################
 
-load("@graknlabs_dependencies//:rules.bzl", "rules")
-rules()
-
-load("@graknlabs_dependencies//maven:rules.bzl", "maven")
+load("@graknlabs_build_tools//library/maven:rules.bzl", "maven")
 load("//dependencies/maven:artifacts.bzl", "artifacts")
 maven(artifacts)
 
