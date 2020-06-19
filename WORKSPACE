@@ -28,9 +28,6 @@ graknlabs_dependencies()
 load("@graknlabs_dependencies//distribution:deps.bzl", graknlabs_bazel_distribution = "deps")
 graknlabs_bazel_distribution()
 
-load("@graknlabs_dependencies//tools/unuseddeps:deps.bzl", unuseddeps_deps = "deps")
-unuseddeps_deps()
-
 ###########################
 # Load Bazel dependencies #
 ###########################
@@ -39,7 +36,6 @@ load("@graknlabs_dependencies//builder/bazel:deps.bzl", "bazel_common", "bazel_d
 bazel_common()
 bazel_deps()
 bazel_toolchain()
-
 
 #################################
 # Load Build Tools dependencies #
@@ -78,17 +74,13 @@ load("@graknlabs_bazel_distribution_pip//:requirements.bzl",
 graknlabs_bazel_distribution_pip_install = "pip_install")
 graknlabs_bazel_distribution_pip_install()
 
-################################################################
-# Load Java dependencies and rules from @graknlabs_dependencies #
-################################################################
+##########################
+# Load Java dependencies #
+##########################
 
 load("@graknlabs_dependencies//library/maven:rules.bzl", "maven")
 load("//dependencies/maven:artifacts.bzl", "artifacts")
 maven(artifacts)
-
-#####################################
-# Load Java dependencies from Maven #
-#####################################
 
 load("//dependencies/maven:dependencies.bzl", "maven_dependencies")
 maven_dependencies()
