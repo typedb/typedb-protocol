@@ -32,9 +32,8 @@ graknlabs_bazel_distribution()
 # Load Bazel dependencies #
 ###########################
 
-load("@graknlabs_dependencies//builder/bazel:deps.bzl", "bazel_common", "bazel_deps", "bazel_toolchain")
+load("@graknlabs_dependencies//builder/bazel:deps.bzl", "bazel_common", "bazel_toolchain")
 bazel_common()
-bazel_deps()
 bazel_toolchain()
 
 #################################
@@ -81,9 +80,6 @@ graknlabs_bazel_distribution_pip_install()
 load("@graknlabs_dependencies//library/maven:rules.bzl", "maven")
 load("//dependencies/maven:artifacts.bzl", "artifacts")
 maven(artifacts)
-
-load("//dependencies/maven:dependencies.bzl", "maven_dependencies")
-maven_dependencies()
 
 #######################################
 # Load compiler dependencies for GRPC #

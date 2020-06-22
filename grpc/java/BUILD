@@ -33,8 +33,8 @@ java_library(
     name = "protocol",
     srcs = [":protocol-src"],
     deps = [
-        "//dependencies/maven/artifacts/com/google/guava:guava",
-        "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_protobuf_protobuf_java",
         "@maven//:io_grpc_grpc_core",
         "@maven//:io_grpc_grpc_protobuf",
         "@maven//:io_grpc_grpc_stub",
@@ -66,7 +66,7 @@ java_library(
     name = "kgms-console-protocol-java",
     srcs = [":kgms-console-protocol-src"],
     deps = [
-        "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
+        "@maven//:com_google_protobuf_protobuf_java",
         "@maven//:io_grpc_grpc_core",
         "@maven//:io_grpc_grpc_protobuf",
         "@maven//:io_grpc_grpc_stub",
