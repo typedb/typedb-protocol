@@ -37,7 +37,8 @@ commands:
 
 jobs:
   build:
-    machine: true
+    machine: 
+      image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
       - checkout
@@ -47,7 +48,8 @@ jobs:
       - run: bazel run @graknlabs_dependencies//tools/unuseddeps:unused-deps -- list
 
   deploy-maven-snapshot:
-    machine: true
+    machine: 
+      image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
       - bazel-install
@@ -58,7 +60,8 @@ jobs:
           bazel run --define version=$(git rev-parse HEAD) //grpc/java:deploy-maven -- snapshot
 
   sync-dependencies-snapshot:
-    machine: true
+    machine: 
+      image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
       - checkout
@@ -71,7 +74,8 @@ jobs:
           grakn:master client-java:master client-python:master client-nodejs:master
 
   release-approval:
-    machine: true
+    machine: 
+      image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
       - bazel-install
@@ -82,7 +86,8 @@ jobs:
           bazel run @graknlabs_dependencies//tools/release:approval
 
   deploy-github:
-    machine: true
+    machine: 
+      image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
       - bazel-install
@@ -96,7 +101,8 @@ jobs:
           bazel run --define version=$(cat VERSION) //:deploy-github -- $CIRCLE_SHA1
 
   deploy-maven:
-    machine: true
+    machine: 
+      image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
       - bazel-install
@@ -108,7 +114,8 @@ jobs:
           bazel run --define version=$(cat VERSION) //grpc/java:deploy-maven -- release
 
   sync-dependencies-release:
-    machine: true
+    machine: 
+      image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
       - bazel-install
@@ -121,7 +128,8 @@ jobs:
           grakn:master client-java:master client-python:master client-nodejs:master
 
   release-cleanup:
-    machine: true
+    machine: 
+      image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
       - checkout
