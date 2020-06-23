@@ -17,7 +17,7 @@
 
 version: 2.1
 commands:
-  bazel-install:
+  install-bazel:
     steps:
       - run: |
           mkdir install
@@ -28,12 +28,12 @@ commands:
           bash ./rbe.sh
           cd ..
           rm -rf install
-  bazel-run-rbe:
+  run-bazel:
     parameters:
       command:
         type: string
     steps:
-      - run: bazel run @graknlabs_dependencies//tools/bazelrun:rbe -- << parameters.command >>
+      - run: bazel run @graknlabs_dependencies//tool/bazelrun:rbe -- << parameters.command >>
 
 jobs:
   build:
@@ -42,17 +42,17 @@ jobs:
     working_directory: ~/protocol
     steps:
       - checkout
-      - bazel-install
-      - bazel-run-rbe:
+      - install-bazel
+      - run-bazel:
           command: bazel build //...
-      - run: bazel run @graknlabs_dependencies//tools/unuseddeps:unused-deps -- list
+      - run: bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
 
   deploy-maven-snapshot:
     machine: 
       image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
-      - bazel-install
+      - install-bazel
       - checkout
       - run: |
           export DEPLOY_MAVEN_USERNAME=$REPO_GRAKN_USERNAME
@@ -65,10 +65,10 @@ jobs:
     working_directory: ~/protocol
     steps:
       - checkout
-      - bazel-install
+      - install-bazel
       - run: |
           export SYNC_DEPENDENCIES_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_dependencies//tools/sync:dependencies -- \
+          bazel run @graknlabs_dependencies//tool/sync:dependencies -- \
           --source protocol@$CIRCLE_SHA1 \
           --targets \
           grakn:master client-java:master client-python:master client-nodejs:master
@@ -78,24 +78,24 @@ jobs:
       image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
-      - bazel-install
+      - install-bazel
       - checkout
       - run: |
           export RELEASE_APPROVAL_USERNAME=$REPO_GITHUB_USERNAME
           export RELEASE_APPROVAL_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_dependencies//tools/release:approval
+          bazel run @graknlabs_dependencies//tool/release:approval
 
   deploy-github:
     machine: 
       image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
-      - bazel-install
+      - install-bazel
       - checkout
       - run: |
           pip install certifi
           export RELEASE_NOTES_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_dependencies//tools/release:create-notes -- protocol $(cat VERSION) ./RELEASE_TEMPLATE.md
+          bazel run @graknlabs_dependencies//tool/release:create-notes -- protocol $(cat VERSION) ./RELEASE_TEMPLATE.md
       - run: |
           export DEPLOY_GITHUB_TOKEN=$REPO_GITHUB_TOKEN
           bazel run --define version=$(cat VERSION) //:deploy-github -- $CIRCLE_SHA1
@@ -105,7 +105,7 @@ jobs:
       image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
-      - bazel-install
+      - install-bazel
       - checkout
       - run: cat VERSION
       - run: |
@@ -118,11 +118,11 @@ jobs:
       image: ubuntu-1604:201903-01
     working_directory: ~/protocol
     steps:
-      - bazel-install
+      - install-bazel
       - checkout
       - run: |
           export SYNC_DEPENDENCIES_TOKEN=$REPO_GITHUB_TOKEN
-          bazel run @graknlabs_dependencies//tools/sync:dependencies -- \
+          bazel run @graknlabs_dependencies//tool/sync:dependencies -- \
           --source protocol@$(cat VERSION) \
           --targets \
           grakn:master client-java:master client-python:master client-nodejs:master
