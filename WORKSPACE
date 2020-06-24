@@ -134,9 +134,9 @@ rules_pkg_dependencies()
 load("//dependencies/maven:artifacts.bzl", "artifacts")
 maven(artifacts)
 
-#########################
-# Create Workspace Refs #
-#########################
+#############################################
+# Create @graknlabs_protocol_workspace_refs #
+#############################################
 load("@graknlabs_bazel_distribution//common:rules.bzl", "workspace_refs")
 workspace_refs(
     name = "graknlabs_protocol_workspace_refs"
