@@ -17,7 +17,7 @@
 
 package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//java:java_grpc_compile.bzl", "java_grpc_compile")
-load("@graknlabs_build_tools//distribution/maven:rules.bzl", "assemble_maven", "deploy_maven")
+load("@graknlabs_dependencies//distribution/maven:rules.bzl", "assemble_maven", "deploy_maven")
 
 java_grpc_compile(
     name = "protocol-src",
@@ -33,12 +33,12 @@ java_library(
     name = "protocol",
     srcs = [":protocol-src"],
     deps = [
-        "//dependencies/maven/artifacts/com/google/guava:guava",
-        "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
-        "//dependencies/maven/artifacts/io/grpc:grpc-core",
-        "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
-        "//dependencies/maven/artifacts/io/grpc:grpc-stub",
-        "//dependencies/maven/artifacts/io/grpc:grpc-api",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_protobuf_protobuf_java",
+        "@maven//:io_grpc_grpc_core",
+        "@maven//:io_grpc_grpc_protobuf",
+        "@maven//:io_grpc_grpc_stub",
+        "@maven//:io_grpc_grpc_api",
     ],
     tags = ["maven_coordinates=io.grakn.protocol:grakn-protocol:{pom_version}", "checkstyle_ignore"],
 )
@@ -66,11 +66,11 @@ java_library(
     name = "kgms-console-protocol-java",
     srcs = [":kgms-console-protocol-src"],
     deps = [
-        "//dependencies/maven/artifacts/com/google/protobuf:protobuf-java",
-        "//dependencies/maven/artifacts/io/grpc:grpc-core",
-        "//dependencies/maven/artifacts/io/grpc:grpc-protobuf",
-        "//dependencies/maven/artifacts/io/grpc:grpc-stub",
-        "//dependencies/maven/artifacts/io/grpc:grpc-api",
+        "@maven//:com_google_protobuf_protobuf_java",
+        "@maven//:io_grpc_grpc_core",
+        "@maven//:io_grpc_grpc_protobuf",
+        "@maven//:io_grpc_grpc_stub",
+        "@maven//:io_grpc_grpc_api",
     ],
     visibility = ["//visibility:public"],
     tags = ["checkstyle_ignore"]
