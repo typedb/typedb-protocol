@@ -17,12 +17,12 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.session";
+option java_package = "grakn.protocol";
 option java_outer_classname = "AnswerProto";
 
-import "session/Concept.proto";
+import "protobuf/concept.proto";
 
-package session;
+package grakn.protocol;
 
 message Answer {
     oneof answer {

@@ -17,10 +17,10 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.session";
+option java_package = "grakn.protocol";
 option java_outer_classname = "ConceptProto";
 
-package session;
+package grakn.protocol;
 
 message Method {
     message Req {

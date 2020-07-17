@@ -17,23 +17,33 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.keyspace";
-option java_outer_classname = "KeyspaceProto";
+option java_package = "grakn.protocol";
+option java_outer_classname = "DatabaseProto";
 
-package keyspace;
+package grakn.protocol;
 
-service KeyspaceService {
-    rpc retrieve (Keyspace.Retrieve.Req) returns (Keyspace.Retrieve.Res);
-    rpc delete (Keyspace.Delete.Req) returns (Keyspace.Delete.Res);
-}
+message Database {
 
-message Keyspace {
-    message Retrieve {
+    message Contains {
         message Req {
-            /* Fields ignored in the open-source version. */
-            string username = 1;
-            string password = 2;
+            string name = 1;
         }
+        message Res {
+            bool contains = 1;
+        }
+    }
+
+    message Create {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string name = 1;
+        }
+    }
+
+    message All {
+        message Req {}
         message Res {
             repeated string names = 1;
         }
@@ -42,9 +52,6 @@ message Keyspace {
     message Delete {
         message Req {
             string name = 1;
-            /* Fields ignored in the open-source version. */
-            string username = 2;
-            string password = 3;
         }
         message Res {}
     }

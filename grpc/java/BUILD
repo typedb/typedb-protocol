@@ -22,10 +22,12 @@ load("@graknlabs_dependencies//distribution/maven:rules.bzl", "assemble_maven", 
 java_grpc_compile(
     name = "protocol-src",
     deps = [
-        "//keyspace:keyspace-proto",
-        "//session:session-proto",
-        "//session:answer-proto",
-        "//session:concept-proto",
+        "//protobuf:grakn-proto",
+        "//protobuf:database-proto",
+        "//protobuf:session-proto",
+        "//protobuf:transaction-proto",
+        "//protobuf:concept-proto",
+        "//protobuf:answer-proto",
     ]
 )
 
@@ -54,25 +56,3 @@ deploy_maven(
     name = "deploy-maven",
     target = ":assemble-maven"
 )
-
-# --- KGMS console dependencies
-
-java_grpc_compile(
-    name = "kgms-console-protocol-src",
-    deps = ["//kgms:console-proto"]
-)
-
-java_library(
-    name = "kgms-console-protocol-java",
-    srcs = [":kgms-console-protocol-src"],
-    deps = [
-        "@maven//:com_google_protobuf_protobuf_java",
-        "@maven//:io_grpc_grpc_core",
-        "@maven//:io_grpc_grpc_protobuf",
-        "@maven//:io_grpc_grpc_stub",
-        "@maven//:io_grpc_grpc_api",
-    ],
-    visibility = ["//visibility:public"],
-    tags = ["checkstyle_ignore"]
-)
-

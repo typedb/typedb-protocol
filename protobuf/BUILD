@@ -18,6 +18,34 @@
 package(default_visibility = ["//visibility:public"])
 
 proto_library(
-    name = "keyspace-proto",
-    srcs = ["Keyspace.proto"],
+    name = "grakn-proto",
+    srcs = ["grakn.proto"],
+    deps = [":database-proto", ":session-proto", ":transaction-proto"],
+)
+
+proto_library(
+    name = "database-proto",
+    srcs = ["database.proto"],
+)
+
+proto_library(
+    name = "session-proto",
+    srcs = ["session.proto"],
+)
+
+proto_library(
+    name = "transaction-proto",
+    srcs = ["transaction.proto"],
+    deps = [":concept-proto", ":answer-proto"]
+)
+
+proto_library(
+    name = "concept-proto",
+    srcs = ["concept.proto"],
+)
+
+proto_library(
+    name = "answer-proto",
+    srcs = ["answer.proto"],
+    deps = [":concept-proto"],
 )
