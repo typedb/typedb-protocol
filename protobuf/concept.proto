@@ -493,13 +493,11 @@ message RelationType {
 message AttributeType {
 
     enum VALUE_TYPE {
-        STRING = 0;
-        BOOLEAN = 1;
-        INTEGER = 2;
-        LONG = 3;
-        FLOAT = 4;
-        DOUBLE = 5;
-        DATETIME = 6;
+        BOOLEAN = 0;
+        LONG = 1;
+        DOUBLE = 2;
+        STRING = 3;
+        DATETIME = 4;
     }
 
     message Create {
