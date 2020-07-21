@@ -203,6 +203,7 @@ message Method {
     }
 }
 
+// TODO: remove Null and replace all of its usage with NOT_SET
 message Null {}
 
 // Concept methods
@@ -259,7 +260,7 @@ message SchemaConcept {
         message Res {
             oneof res {
                 Concept schemaConcept = 1;
-                Null null = 2;
+                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -300,7 +301,7 @@ message Rule {
         message Res {
             oneof res {
                 string pattern = 1;
-                Null null = 2;
+                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -310,7 +311,7 @@ message Rule {
         message Res {
             oneof res {
                 string pattern = 1;
-                Null null = 2;
+                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -516,7 +517,7 @@ message AttributeType {
         message Res {
             oneof res {
                 Concept attribute = 1;
-                Null null = 2;
+                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -526,7 +527,7 @@ message AttributeType {
         message Res {
             oneof res {
                 VALUE_TYPE valueType = 1;
-                Null null = 2;
+                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }

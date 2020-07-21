@@ -77,10 +77,6 @@ load("@graknlabs_dependencies_ci_pip//:requirements.bzl",
 graknlabs_dependencies_ci_pip_install = "pip_install")
 graknlabs_dependencies_ci_pip_install()
 
-# Load Docker
-load("@graknlabs_dependencies//distribution/docker:deps.bzl", docker_deps = "deps")
-docker_deps()
-
 # Load Checkstyle
 load("@graknlabs_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
 checkstyle_deps()

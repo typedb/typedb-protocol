@@ -23,9 +23,16 @@ option java_outer_classname = "SessionProto";
 package grakn.protocol;
 
 message Session {
+
+    enum Type {
+        DATA = 0;
+        SCHEMA = 1;
+    }
+
     message Open {
         message Req {
             string database = 1;
+            Type type = 2;
         }
         message Res {
             bytes sessionID = 1;

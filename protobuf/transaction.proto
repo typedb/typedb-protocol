@@ -133,7 +133,7 @@ message Transaction {
         message Res {
             oneof res {
                 Concept schemaConcept = 1;
-                Null null = 2;
+                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -145,7 +145,7 @@ message Transaction {
         message Res {
             oneof res {
                 Concept concept = 1;
-                Null null = 2;
+                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
