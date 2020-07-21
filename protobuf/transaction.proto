@@ -20,8 +20,9 @@ syntax = "proto3";
 option java_package = "grakn.protocol";
 option java_outer_classname = "TransactionProto";
 
-import "protobuf/concept.proto";
 import "protobuf/answer.proto";
+import "protobuf/concept.proto";
+import "protobuf/options.proto";
 
 package grakn.protocol;
 
@@ -96,6 +97,7 @@ message Transaction {
         message Req {
             bytes sessionID = 1;
             Type type = 2;
+            Options options = 3;
         }
         message Res {}
     }
@@ -109,19 +111,10 @@ message Transaction {
         message Iter {
             message Req {
                 string query = 1;
-                Transaction.Query.Options options = 2;
+                Options options = 2;
             }
             message Res {
                 Answer answer = 1;
-            }
-        }
-
-        message Options {
-            oneof infer {
-                bool inferFlag = 1;
-            }
-            oneof explain {
-                bool explainFlag = 2;
             }
         }
     }

@@ -18,35 +18,21 @@
 syntax = "proto3";
 
 option java_package = "grakn.protocol";
-option java_outer_classname = "SessionProto";
-
-import "protobuf/options.proto";
+option java_outer_classname = "OptionsProto";
 
 package grakn.protocol;
 
-message Session {
+// TODO: Replace 'oneof' with 'optional' when upgraded to Protobuf 3.13 everywhere
+// https://github.com/protocolbuffers/protobuf/issues/1606#issuecomment-618687169
 
-    enum Type {
-        DATA = 0;
-        SCHEMA = 1;
+message Options {
+    oneof inferOpt {
+        bool infer = 1;
     }
-
-    message Open {
-        message Req {
-            string database = 1;
-            Type type = 2;
-            Options options = 3;
-        }
-        message Res {
-            bytes sessionID = 1;
-        }
+    oneof explainOpt {
+        bool explain = 2;
     }
-
-    message Close {
-        message Req {
-            bytes sessionID = 1;
-        }
-        message Res {
-        }
+    oneof batchSizeOpt {
+        int32 batchSize = 3;
     }
 }

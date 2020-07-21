@@ -26,8 +26,9 @@ java_grpc_compile(
         "//protobuf:database-proto",
         "//protobuf:session-proto",
         "//protobuf:transaction-proto",
-        "//protobuf:concept-proto",
         "//protobuf:answer-proto",
+        "//protobuf:concept-proto",
+        "//protobuf:options-proto",
     ]
 )
 
