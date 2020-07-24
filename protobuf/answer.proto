@@ -79,7 +79,7 @@ message Void {
 }
 
 message ConceptIds {
-    repeated string ids = 1;
+    repeated bytes ids = 1;
 }
 
 message Number {

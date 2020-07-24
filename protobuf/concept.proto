@@ -209,7 +209,7 @@ message Null {}
 // Concept methods
 
 message Concept {
-    string id = 1;
+    bytes id = 1;
     BASE_TYPE baseType = 2;
 
     // Pre-filled responses:
