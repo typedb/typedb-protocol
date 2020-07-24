@@ -29,24 +29,24 @@ message Method {
             Concept.Delete.Req concept_delete_req = 100;
 
             // SchemaConcept method requests
-            SchemaConcept.GetLabel.Req schemaConcept_getLabel_req = 201;
-            SchemaConcept.SetLabel.Req schemaConcept_setLabel_req = 202;
-            SchemaConcept.GetSup.Req schemaConcept_getSup_req = 203;
-            SchemaConcept.SetSup.Req schemaConcept_setSup_req = 204;
+            Type.GetLabel.Req type_getLabel_req = 201;
+            Type.SetLabel.Req type_setLabel_req = 202;
+            Type.GetSup.Req type_getSup_req = 203;
+            Type.SetSup.Req type_setSup_req = 204;
 
             // Rule method requests
             Rule.When.Req rule_when_req = 300;
             Rule.Then.Req rule_then_req = 301;
 
             // Type method requests
-            Type.IsAbstract.Req type_isAbstract_req = 500;
-            Type.SetAbstract.Req type_setAbstract_req = 501;
-            Type.Has.Req type_has_req = 506;
-            Type.Key.Req type_key_req = 507;
-            Type.Plays.Req type_plays_req = 508;
-            Type.Unhas.Req type_unhas_req = 509;
-            Type.Unkey.Req type_unkey_req = 510;
-            Type.Unplay.Req type_unplay_req = 511;
+            ThingType.IsAbstract.Req thingType_isAbstract_req = 500;
+            ThingType.SetAbstract.Req thingType_setAbstract_req = 501;
+            ThingType.Has.Req thingType_has_req = 506;
+            ThingType.Key.Req thingType_key_req = 507;
+            ThingType.Plays.Req thingType_plays_req = 508;
+            ThingType.Unhas.Req thingType_unhas_req = 509;
+            ThingType.Unkey.Req thingType_unkey_req = 510;
+            ThingType.Unplay.Req thingType_unplay_req = 511;
 
             // EntityType method requests
             EntityType.Create.Req entityType_create_req = 600;
@@ -83,24 +83,24 @@ message Method {
             Concept.Delete.Res concept_delete_res = 100;
 
             // SchemaConcept method responses
-            SchemaConcept.GetLabel.Res schemaConcept_getLabel_res = 201;
-            SchemaConcept.SetLabel.Res schemaConcept_setLabel_res = 202;
-            SchemaConcept.GetSup.Res schemaConcept_getSup_res = 203;
-            SchemaConcept.SetSup.Res schemaConcept_setSup_res = 204;
+            Type.GetLabel.Res type_getLabel_res = 201;
+            Type.SetLabel.Res type_setLabel_res = 202;
+            Type.GetSup.Res type_getSup_res = 203;
+            Type.SetSup.Res type_setSup_res = 204;
 
             // Rule method responses
             Rule.When.Res rule_when_res = 300;
             Rule.Then.Res rule_then_res = 301;
 
             // Type method responses
-            Type.IsAbstract.Res type_isAbstract_res = 500;
-            Type.SetAbstract.Res type_setAbstract_res = 501;
-            Type.Has.Res type_has_res = 506;
-            Type.Key.Res type_key_res = 507;
-            Type.Plays.Res type_plays_res = 508;
-            Type.Unhas.Res type_unhas_res = 509;
-            Type.Unkey.Res type_unkey_res = 510;
-            Type.Unplay.Res type_unplay_res = 511;
+            ThingType.IsAbstract.Res thingType_isAbstract_res = 500;
+            ThingType.SetAbstract.Res thingType_setAbstract_res = 501;
+            ThingType.Has.Res thingType_has_res = 506;
+            ThingType.Key.Res thingType_key_res = 507;
+            ThingType.Plays.Res thingType_plays_res = 508;
+            ThingType.Unhas.Res thingType_unhas_res = 509;
+            ThingType.Unkey.Res thingType_unkey_res = 510;
+            ThingType.Unplay.Res thingType_unplay_res = 511;
 
             // EntityType method responses
             EntityType.Create.Res entityType_create_res = 600;
@@ -136,18 +136,18 @@ message Method {
         message Req {
             oneof req {
                 // SchemaConcept iterator requests
-                SchemaConcept.Sups.Iter.Req schemaConcept_sups_iter_req = 205;
-                SchemaConcept.Subs.Iter.Req schemaConcept_subs_iter_req = 206;
+                Type.Sups.Iter.Req type_sups_iter_req = 205;
+                Type.Subs.Iter.Req type_subs_iter_req = 206;
 
                 // Role iterator requests
                 Role.Relations.Iter.Req role_relations_iter_req = 401;
                 Role.Players.Iter.Req role_players_iter_req = 402;
 
                 // Type iterator requests
-                Type.Instances.Iter.Req type_instances_iter_req = 502;
-                Type.Keys.Iter.Req type_keys_iter_req = 503;
-                Type.Attributes.Iter.Req type_attributes_iter_req = 504;
-                Type.Playing.Iter.Req type_playing_iter_req = 505;
+                ThingType.Instances.Iter.Req thingType_instances_iter_req = 502;
+                ThingType.Keys.Iter.Req thingType_keys_iter_req = 503;
+                ThingType.Attributes.Iter.Req thingType_attributes_iter_req = 504;
+                ThingType.Playing.Iter.Req thingType_playing_iter_req = 505;
 
                 // RelationType iterator requests
                 RelationType.Roles.Iter.Req relationType_roles_iter_req = 701;
@@ -170,18 +170,18 @@ message Method {
         message Res {
             oneof res {
                 // SchemaConcept iterator responses
-                SchemaConcept.Sups.Iter.Res schemaConcept_sups_iter_res = 205;
-                SchemaConcept.Subs.Iter.Res schemaConcept_subs_iter_res = 206;
+                Type.Sups.Iter.Res type_sups_iter_res = 205;
+                Type.Subs.Iter.Res type_subs_iter_res = 206;
 
                 // Role iterator responses
                 Role.Relations.Iter.Res role_relations_iter_res = 401;
                 Role.Players.Iter.Res role_players_iter_res = 402;
 
                 // Type iterator responses
-                Type.Instances.Iter.Res type_instances_iter_res = 502;
-                Type.Keys.Iter.Res type_keys_iter_res = 503;
-                Type.Attributes.Iter.Res type_attributes_iter_res = 504;
-                Type.Playing.Iter.Res type_playing_iter_res = 505;
+                ThingType.Instances.Iter.Res thingType_instances_iter_res = 502;
+                ThingType.Keys.Iter.Res thingType_keys_iter_res = 503;
+                ThingType.Attributes.Iter.Res thingType_attributes_iter_res = 504;
+                ThingType.Playing.Iter.Res thingType_playing_iter_res = 505;
 
                 // RelationType iterator responses
                 RelationType.Roles.Iter.Res relationType_roles_iter_res = 701;
@@ -217,7 +217,7 @@ message Concept {
     Thing.IsInferred.Res inferred_res = 6;
     Attribute.Value.Res value_res = 7;
     AttributeType.ValueType.Res valueType_res = 8;
-    SchemaConcept.GetLabel.Res label_res = 9;
+    Type.GetLabel.Res label_res = 9;
 
     enum BASE_TYPE {
         META_TYPE = 0;
@@ -239,7 +239,7 @@ message Concept {
 
 // SchemaConcept methods
 
-message SchemaConcept {
+message Type {
 
     message GetLabel {
         message Req {}
@@ -259,7 +259,7 @@ message SchemaConcept {
         message Req {}
         message Res {
             oneof res {
-                Concept schemaConcept = 1;
+                Concept type = 1;
                 Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
@@ -267,7 +267,7 @@ message SchemaConcept {
 
     message SetSup {
         message Req {
-            Concept schemaConcept = 1;
+            Concept type = 1;
         }
         message Res {}
     }
@@ -276,7 +276,7 @@ message SchemaConcept {
         message Iter {
             message Req {}
             message Res {
-                Concept schemaConcept = 1;
+                Concept type = 1;
             }
         }
     }
@@ -285,7 +285,7 @@ message SchemaConcept {
         message Iter {
             message Req {}
             message Res {
-                Concept schemaConcept = 1;
+                Concept type = 1;
             }
         }
     }
@@ -335,7 +335,7 @@ message Role {
         message Iter {
             message Req {}
             message Res {
-                Concept type = 1;
+                Concept thingType = 1;
             }
         }
     }
@@ -344,7 +344,7 @@ message Role {
 
 // Type methods
 
-message Type {
+message ThingType {
 
     message IsAbstract {
         message Req {}
@@ -562,7 +562,7 @@ message Thing {
     message Type {
         message Req {}
         message Res {
-            Concept type = 1;
+            Concept thingType = 1;
         }
     }
 
