@@ -141,7 +141,6 @@ message Method {
 
                 // Type iterator requests
                 ThingType.Instances.Iter.Req thingType_instances_iter_req = 502;
-                ThingType.Keys.Iter.Req thingType_keys_iter_req = 503;
                 ThingType.Attributes.Iter.Req thingType_attributes_iter_req = 504;
                 ThingType.Playing.Iter.Req thingType_playing_iter_req = 505;
 
@@ -174,7 +173,6 @@ message Method {
 
                 // Type iterator responses
                 ThingType.Instances.Iter.Res thingType_instances_iter_res = 502;
-                ThingType.Keys.Iter.Res thingType_keys_iter_res = 503;
                 ThingType.Attributes.Iter.Res thingType_attributes_iter_res = 504;
                 ThingType.Playing.Iter.Res thingType_playing_iter_res = 505;
 
@@ -365,16 +363,13 @@ message ThingType {
 
     message Attributes {
         message Iter {
-            message Req {}
-            message Res {
-                Concept attributeType = 1;
+            message Req {
+                oneof filter {
+                    Concept attributeType = 1;
+                    Null NULL = 2; // TODO: remove Null and replace all of its usage with NOT_SET
+                }
+                bool onlyKey = 3;
             }
-        }
-    }
-
-    message Keys {
-        message Iter {
-            message Req {}
             message Res {
                 Concept attributeType = 1;
             }
@@ -390,16 +385,14 @@ message ThingType {
         }
     }
 
-    message Key {
-        message Req {
-            Concept attributeType = 1;
-        }
-        message Res {}
-    }
-
     message Has {
         message Req {
             Concept attributeType = 1;
+            oneof overridden {
+                Concept overriddenType = 2;
+                Null NULL = 3; // TODO: remove Null and replace all of its usage with NOT_SET
+            }
+            bool isKey = 4;
         }
         message Res {}
     }
@@ -407,13 +400,6 @@ message ThingType {
     message Plays {
         message Req {
             Concept role = 1;
-        }
-        message Res {}
-    }
-
-    message Unkey {
-        message Req {
-            Concept attributeType = 1;
         }
         message Res {}
     }
