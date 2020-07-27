@@ -368,7 +368,7 @@ message ThingType {
                     Concept attributeType = 1;
                     Null NULL = 2; // TODO: remove Null and replace all of its usage with NOT_SET
                 }
-                bool onlyKey = 3;
+                bool keysOnly = 3;
             }
             message Res {
                 Concept attributeType = 1;
@@ -546,21 +546,11 @@ message Thing {
         }
     }
 
-    message Keys {
-        message Iter {
-            message Req {
-                repeated Concept attributeTypes = 1;
-            }
-            message Res {
-                Concept attribute = 1;
-            }
-        }
-    }
-
     message Attributes {
         message Iter {
             message Req {
                 repeated Concept attributeTypes = 1;
+                bool keysOnly = 2;
             }
             message Res {
                 Concept attribute = 1;
@@ -673,9 +663,7 @@ message ValueObject {
     oneof value {
         string string = 1;
         bool boolean = 2;
-        int32 integer = 3;
         int64 long = 4;
-        float float = 5;
         double double = 6;
         int64 datetime = 7; // time since epoch in milliseconds
     }
