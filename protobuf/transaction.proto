@@ -38,7 +38,6 @@ message Transaction {
             PutEntityType.Req putEntityType_req = 8;
             PutAttributeType.Req putAttributeType_req = 9;
             PutRelationType.Req putRelationType_req = 10;
-            PutRole.Req putRole_req = 11;
             PutRule.Req putRule_req = 12;
             ConceptMethod.Req conceptMethod_req = 13;
             Explanation.Req explanation_req = 14;
@@ -54,7 +53,6 @@ message Transaction {
             PutEntityType.Res putEntityType_res = 8;
             PutAttributeType.Res putAttributeType_res = 9;
             PutRelationType.Res putRelationType_res = 10;
-            PutRole.Res putRole_res = 11;
             PutRule.Res putRule_res = 12;
             ConceptMethod.Res conceptMethod_res = 13;
             Explanation.Res explanation_res = 14;
@@ -67,7 +65,6 @@ message Transaction {
             oneof req {
                 int32 iteratorId = 2;
                 Query.Iter.Req query_iter_req = 3;
-                GetAttributes.Iter.Req getAttributes_iter_req = 4;
                 ConceptMethod.Iter.Req conceptMethod_iter_req = 5;
             }
             message Options {
@@ -82,7 +79,6 @@ message Transaction {
                 bool done = 1;
                 int32 iteratorId = 2;
                 Query.Iter.Res query_iter_res = 3;
-                GetAttributes.Iter.Res getAttributes_iter_res = 4;
                 ConceptMethod.Iter.Res conceptMethod_iter_res = 5;
             }
         }
@@ -143,17 +139,6 @@ message Transaction {
         }
     }
 
-    message GetAttributes {
-        message Iter {
-            message Req {
-                ValueObject value = 1;
-            }
-            message Res {
-                Concept attribute = 1;
-            }
-        }
-    }
-
     message PutEntityType {
         message Req {
             string label = 1;
@@ -179,15 +164,6 @@ message Transaction {
         }
         message Res {
             Concept relationType = 1;
-        }
-    }
-
-    message PutRole {
-        message Req {
-            string label = 1;
-        }
-        message Res {
-            Concept role = 1;
         }
     }
 
