@@ -202,7 +202,7 @@ message Null {}
 
 message Concept {
     bytes iid = 1;
-    BASE_TYPE baseType = 2;
+    SCHEMA baseType = 2;
 
     // Pre-filled responses:
     Thing.Type.Res type_res = 5;
@@ -211,7 +211,7 @@ message Concept {
     AttributeType.ValueType.Res valueType_res = 8;
     Type.GetLabel.Res label_res = 9;
 
-    enum BASE_TYPE {
+    enum SCHEMA {
         META_TYPE = 0;
         ENTITY_TYPE = 1;
         RELATION_TYPE = 2;
