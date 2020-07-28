@@ -153,7 +153,7 @@ message Method {
                 Thing.Roles.Iter.Req thing_roles_iter_req = 905;
 
                 // Relation iterator responses
-                Relation.RolePlayersMap.Iter.Req relation_rolePlayersMap_iter_req = 1000;
+                Relation.PlayersMap.Iter.Req relation_playersMap_iter_req = 1000;
                 Relation.Players.Iter.Req relation_players_iter_req = 1001;
 
                 // Attribute iterator requests
@@ -185,7 +185,7 @@ message Method {
                 Thing.Roles.Iter.Res thing_roles_iter_res = 905;
 
                 // Relation iterator responses
-                Relation.RolePlayersMap.Iter.Res relation_rolePlayersMap_iter_res = 1000;
+                Relation.PlayersMap.Iter.Res relation_playersMap_iter_res = 1000;
                 Relation.Players.Iter.Res relation_players_iter_res = 1001;
 
                 // Attribute iterator responses
@@ -602,7 +602,7 @@ message Thing {
 
 message Relation {
 
-    message RolePlayersMap {
+    message PlayersMap {
         message Iter {
             message Req {}
             message Res {
