@@ -33,12 +33,11 @@ message Transaction {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
             Iter.Req iter_req = 4;
-            GetSchemaConcept.Req getSchemaConcept_req = 5;
+            GetType.Req getType_req = 5;
             GetConcept.Req getConcept_req = 6;
             PutEntityType.Req putEntityType_req = 8;
             PutAttributeType.Req putAttributeType_req = 9;
             PutRelationType.Req putRelationType_req = 10;
-            PutRole.Req putRole_req = 11;
             PutRule.Req putRule_req = 12;
             ConceptMethod.Req conceptMethod_req = 13;
             Explanation.Req explanation_req = 14;
@@ -49,12 +48,11 @@ message Transaction {
             Open.Res open_res = 1;
             Commit.Res commit_res = 2;
             Iter.Res iter_res = 4;
-            GetSchemaConcept.Res getSchemaConcept_res = 5;
+            GetType.Res getType_res = 5;
             GetConcept.Res getConcept_res = 6;
             PutEntityType.Res putEntityType_res = 8;
             PutAttributeType.Res putAttributeType_res = 9;
             PutRelationType.Res putRelationType_res = 10;
-            PutRole.Res putRole_res = 11;
             PutRule.Res putRule_res = 12;
             ConceptMethod.Res conceptMethod_res = 13;
             Explanation.Res explanation_res = 14;
@@ -67,7 +65,6 @@ message Transaction {
             oneof req {
                 int32 iteratorId = 2;
                 Query.Iter.Req query_iter_req = 3;
-                GetAttributes.Iter.Req getAttributes_iter_req = 4;
                 ConceptMethod.Iter.Req conceptMethod_iter_req = 5;
             }
             message Options {
@@ -82,7 +79,6 @@ message Transaction {
                 bool done = 1;
                 int32 iteratorId = 2;
                 Query.Iter.Res query_iter_res = 3;
-                GetAttributes.Iter.Res getAttributes_iter_res = 4;
                 ConceptMethod.Iter.Res conceptMethod_iter_res = 5;
             }
         }
@@ -95,7 +91,7 @@ message Transaction {
 
     message Open {
         message Req {
-            bytes sessionID = 1;
+            bytes sessionId = 1;
             Type type = 2;
             Options options = 3;
         }
@@ -119,13 +115,13 @@ message Transaction {
         }
     }
 
-    message GetSchemaConcept {
+    message GetType {
         message Req {
             string label = 1;
         }
         message Res {
             oneof res {
-                Concept schemaConcept = 1;
+                Concept type = 1;
                 Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
@@ -133,23 +129,12 @@ message Transaction {
 
     message GetConcept {
         message Req {
-            string id = 1;
+            bytes id = 1;
         }
         message Res {
             oneof res {
                 Concept concept = 1;
                 Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
-            }
-        }
-    }
-
-    message GetAttributes {
-        message Iter {
-            message Req {
-                ValueObject value = 1;
-            }
-            message Res {
-                Concept attribute = 1;
             }
         }
     }
@@ -182,15 +167,6 @@ message Transaction {
         }
     }
 
-    message PutRole {
-        message Req {
-            string label = 1;
-        }
-        message Res {
-            Concept role = 1;
-        }
-    }
-
     message PutRule {
         message Req {
             string label = 1;
@@ -204,7 +180,7 @@ message Transaction {
 
     message ConceptMethod {
         message Req {
-            string id = 1;
+            bytes iid = 1;
             Method.Req method = 2;
         }
         message Res {
@@ -212,7 +188,7 @@ message Transaction {
         }
         message Iter {
             message Req {
-                string id = 1;
+                bytes iid = 1;
                 Method.Iter.Req method = 2;
             }
             message Res {

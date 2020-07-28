@@ -38,13 +38,13 @@ message Session {
             Options options = 3;
         }
         message Res {
-            bytes sessionID = 1;
+            bytes sessionId = 1;
         }
     }
 
     message Close {
         message Req {
-            bytes sessionID = 1;
+            bytes sessionId = 1;
         }
         message Res {
         }
