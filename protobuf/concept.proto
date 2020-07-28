@@ -51,8 +51,8 @@ message Method {
 
             // RelationType method requests
             RelationType.Create.Req relationType_create_req = 700;
+            RelationType.Role.Req relationType_role_req = 701;
             RelationType.Relates.Req relationType_relates_req = 702;
-            RelationType.Unrelate.Req relationType_unrelate_req = 703;
 
             // AttributeType method requests
             AttributeType.Create.Req attributeType_put_req = 800;
@@ -103,8 +103,8 @@ message Method {
 
             // RelationType method responses
             RelationType.Create.Res relationType_create_res = 700;
+            RelationType.Role.Res relationType_role_res = 701;
             RelationType.Relates.Res relationType_relates_res = 702;
-            RelationType.Unrelate.Res relationType_unrelate_res = 703;
 
             // AttributeType method responses
             AttributeType.Create.Res attributeType_put_res = 800;
@@ -365,7 +365,7 @@ message ThingType {
         message Iter {
             message Req {
                 oneof filter {
-                    Concept attributeType = 1;
+                    AttributeType.VALUE_TYPE valueType = 1;
                     Null NULL = 2; // TODO: remove Null and replace all of its usage with NOT_SET
                 }
                 bool keysOnly = 3;
@@ -444,6 +444,15 @@ message RelationType {
         }
     }
 
+    message Role {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            Concept role = 1;
+        }
+    }
+
     message Roles {
         message Iter {
             message Req {}
@@ -455,16 +464,11 @@ message RelationType {
 
     message Relates {
         message Req {
+            string label = 1;
+        }
+        message Res {
             Concept role = 1;
         }
-        message Res {}
-    }
-
-    message Unrelate {
-        message Req {
-            Concept role = 1;
-        }
-        message Res {}
     }
 }
 
