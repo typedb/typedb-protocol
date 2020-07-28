@@ -63,7 +63,7 @@ message Transaction {
         message Req {
             Options options = 1;
             oneof req {
-                int32 iteratorId = 2;
+                int32 iteratorID = 2;
                 Query.Iter.Req query_iter_req = 3;
                 ConceptMethod.Iter.Req conceptMethod_iter_req = 5;
             }
@@ -77,7 +77,7 @@ message Transaction {
         message Res {
             oneof res {
                 bool done = 1;
-                int32 iteratorId = 2;
+                int32 iteratorID = 2;
                 Query.Iter.Res query_iter_res = 3;
                 ConceptMethod.Iter.Res conceptMethod_iter_res = 5;
             }
@@ -91,7 +91,7 @@ message Transaction {
 
     message Open {
         message Req {
-            bytes sessionId = 1;
+            bytes sessionID = 1;
             Type type = 2;
             Options options = 3;
         }

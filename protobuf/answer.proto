@@ -58,15 +58,15 @@ message ConceptMap {
 }
 
 message ConceptList {
-    ConceptIds list = 1;
+    repeated bytes iids = 1;
 }
 
 message ConceptSet {
-    ConceptIds set = 1;
+    repeated bytes iids = 1;
 }
 
 message ConceptSetMeasure {
-    ConceptIds set = 1;
+    repeated bytes iids = 1;
     Number measurement = 2;
 }
 
@@ -76,10 +76,6 @@ message Value {
 
 message Void {
     string message = 1;
-}
-
-message ConceptIds {
-    repeated bytes iids = 1;
 }
 
 message Number {
