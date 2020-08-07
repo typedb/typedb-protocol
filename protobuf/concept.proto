@@ -154,7 +154,8 @@ message Method {
 
                 // Relation iterator responses
                 Relation.PlayersMap.Iter.Req relation_playersMap_iter_req = 1000;
-                Relation.Players.Iter.Req relation_players_iter_req = 1001;
+                Relation.Players.Iter.Req.All relation_players_iter_req_all = 1001;
+                Relation.Players.Iter.Req.ForRoles relation_players_iter_req_forRoles = 1002;
 
                 // Attribute iterator requests
                 Attribute.Owners.Iter.Req attribute_owners_iter_req = 1101;
@@ -615,7 +616,10 @@ message Relation {
     message Players {
         message Iter {
             message Req {
-                repeated Concept roles = 1;
+                message All {}
+                message ForRoles {
+                    repeated Concept roles = 1;
+                }
             }
             message Res {
                 Concept thing = 1;
