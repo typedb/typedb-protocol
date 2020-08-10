@@ -154,7 +154,8 @@ message Method {
 
                 // Relation iterator responses
                 Relation.PlayersMap.Iter.Req relation_playersMap_iter_req = 1000;
-                Relation.Players.Iter.Req relation_players_iter_req = 1001;
+                Relation.AllPlayers.Iter.Req relation_allPlayers_iter_req = 1001;
+                Relation.PlayersForRoles.Iter.Req relation_playersForRoles_iter_req = 1002;
 
                 // Attribute iterator requests
                 Attribute.Owners.Iter.Req attribute_owners_iter_req = 1101;
@@ -186,7 +187,8 @@ message Method {
 
                 // Relation iterator responses
                 Relation.PlayersMap.Iter.Res relation_playersMap_iter_res = 1000;
-                Relation.Players.Iter.Res relation_players_iter_res = 1001;
+                Relation.AllPlayers.Iter.Res relation_allPlayers_iter_res = 1001;
+                Relation.PlayersForRoles.Iter.Res relation_playersForRoles_iter_res = 1002;
 
                 // Attribute iterator responses
                 Attribute.Owners.Iter.Res attribute_owners_iter_res = 1101;
@@ -612,7 +614,16 @@ message Relation {
         }
     }
 
-    message Players {
+    message AllPlayers {
+        message Iter {
+            message Req {}
+            message Res {
+                Concept thing = 1;
+            }
+        }
+    }
+
+    message PlayersForRoles {
         message Iter {
             message Req {
                 repeated Concept roles = 1;
