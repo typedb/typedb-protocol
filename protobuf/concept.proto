@@ -613,13 +613,19 @@ message Relation {
         }
     }
 
-    message Players {
+    message AllPlayers {
+        message Iter {
+            message Req {}
+            message Res {
+                Concept thing = 1;
+            }
+        }
+    }
+
+    message PlayersForRoles {
         message Iter {
             message Req {
-                message All {}
-                message ForRoles {
-                    repeated Concept roles = 1;
-                }
+                repeated Concept roles = 1;
             }
             message Res {
                 Concept thing = 1;
