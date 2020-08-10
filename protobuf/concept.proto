@@ -155,7 +155,7 @@ message Method {
                 // Relation iterator responses
                 Relation.PlayersMap.Iter.Req relation_playersMap_iter_req = 1000;
                 Relation.AllPlayers.Iter.Req relation_allPlayers_iter_req = 1001;
-                Relation.PlayersForRoles.Iter.Req relation_playersForRoles_iter_req_ = 1002;
+                Relation.PlayersForRoles.Iter.Req relation_playersForRoles_iter_req = 1002;
 
                 // Attribute iterator requests
                 Attribute.Owners.Iter.Req attribute_owners_iter_req = 1101;
