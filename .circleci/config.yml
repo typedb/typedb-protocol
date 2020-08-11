@@ -146,12 +146,13 @@ workflows:
           filters:
             branches:
               only: master
+          requires:
+            - build
       - release-approval:
           filters:
             branches:
               only: master
           requires:
-            - build
             - deploy-maven-snapshot
 
 
