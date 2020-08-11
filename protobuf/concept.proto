@@ -153,9 +153,9 @@ message Method {
                 Thing.Roles.Iter.Req thing_roles_iter_req = 905;
 
                 // Relation iterator responses
-                Relation.PlayersMap.Iter.Req relation_playersMap_iter_req = 1000;
-                Relation.AllPlayers.Iter.Req relation_allPlayers_iter_req = 1001;
-                Relation.PlayersForRoles.Iter.Req relation_playersForRoles_iter_req = 1002;
+                Relation.Players.Iter.Req relation_players_iter_req = 1000;
+                Relation.PlayersForRoles.Iter.Req relation_playersForRoles_iter_req = 1001;
+                Relation.PlayersByRole.Iter.Req relation_playersByRole_iter_req = 1002;
 
                 // Attribute iterator requests
                 Attribute.Owners.Iter.Req attribute_owners_iter_req = 1101;
@@ -186,9 +186,9 @@ message Method {
                 Thing.Roles.Iter.Res thing_roles_iter_res = 905;
 
                 // Relation iterator responses
-                Relation.PlayersMap.Iter.Res relation_playersMap_iter_res = 1000;
-                Relation.AllPlayers.Iter.Res relation_allPlayers_iter_res = 1001;
-                Relation.PlayersForRoles.Iter.Res relation_playersForRoles_iter_res = 1002;
+                Relation.Players.Iter.Res relation_players_iter_res = 1000;
+                Relation.PlayersForRoles.Iter.Res relation_playersForRoles_iter_res = 1001;
+                Relation.PlayersByRole.Iter.Res relation_playersByRole_iter_res = 1002;
 
                 // Attribute iterator responses
                 Attribute.Owners.Iter.Res attribute_owners_iter_res = 1101;
@@ -604,17 +604,7 @@ message Thing {
 
 message Relation {
 
-    message PlayersMap {
-        message Iter {
-            message Req {}
-            message Res {
-                Concept role = 1;
-                Concept player = 2;
-            }
-        }
-    }
-
-    message AllPlayers {
+    message Players {
         message Iter {
             message Req {}
             message Res {
@@ -630,6 +620,16 @@ message Relation {
             }
             message Res {
                 Concept thing = 1;
+            }
+        }
+    }
+
+    message PlayersByRole {
+        message Iter {
+            message Req {}
+            message Res {
+                Concept role = 1;
+                Concept player = 2;
             }
         }
     }
