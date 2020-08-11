@@ -146,20 +146,13 @@ workflows:
           filters:
             branches:
               only: master
-#      - sync-dependencies-snapshot:
-#          filters:
-#            branches:
-#              only: master
-#          requires:
-#            - build
-#            - deploy-maven-snapshot
+          requires:
+            - build
       - release-approval:
           filters:
             branches:
               only: master
           requires:
-#            - sync-dependencies-snapshot
-            - build
             - deploy-maven-snapshot
 
 
@@ -182,16 +175,9 @@ workflows:
               only: protocol-release-branch
           requires:
             - deploy-approval
-#      - sync-dependencies-release:
-#          filters:
-#            branches:
-#              only: protocol-release-branch
-#          requires:
-#            - deploy-maven
       - release-cleanup:
           filters:
             branches:
               only: protocol-release-branch
           requires:
-#            - sync-dependencies-release
             - deploy-maven
