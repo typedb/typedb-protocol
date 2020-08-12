@@ -567,7 +567,7 @@ message Thing {
     message GetRelations {
         message Iter {
             message Req {
-                repeated Concept roles = 1;
+                repeated Concept roleTypes = 1;
             }
             message Res {
                 Concept relation = 1;
@@ -579,7 +579,7 @@ message Thing {
         message Iter {
             message Req {}
             message Res {
-                Concept role = 1;
+                Concept roleType = 1;
             }
         }
     }
@@ -616,7 +616,7 @@ message Relation {
     message GetPlayersForRoleTypes {
         message Iter {
             message Req {
-                repeated Concept roles = 1;
+                repeated Concept roleTypes = 1;
             }
             message Res {
                 Concept thing = 1;
@@ -628,7 +628,7 @@ message Relation {
         message Iter {
             message Req {}
             message Res {
-                Concept role = 1;
+                Concept roleType = 1;
                 Concept player = 2;
             }
         }
@@ -636,7 +636,7 @@ message Relation {
 
     message AddPlayer {
         message Req {
-            Concept role = 1;
+            Concept roleType = 1;
             Concept player = 2;
         }
         message Res {}
@@ -644,7 +644,7 @@ message Relation {
 
     message RemovePlayer {
         message Req {
-            Concept role = 1;
+            Concept roleType = 1;
             Concept player = 2;
         }
         message Res {}
