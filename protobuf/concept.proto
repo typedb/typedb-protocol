@@ -31,8 +31,8 @@ message Method {
             // SchemaConcept method requests
             Type.GetLabel.Req type_getLabel_req = 201;
             Type.SetLabel.Req type_setLabel_req = 202;
-            Type.GetSup.Req type_getSup_req = 203;
-            Type.SetSup.Req type_setSup_req = 204;
+            Type.GetSupertype.Req type_getSupertype_req = 203;
+            Type.SetSupertype.Req type_setSupertype_req = 204;
 
             // Rule method requests
             Rule.When.Req rule_when_req = 300;
@@ -83,8 +83,8 @@ message Method {
             // SchemaConcept method responses
             Type.GetLabel.Res type_getLabel_res = 201;
             Type.SetLabel.Res type_setLabel_res = 202;
-            Type.GetSup.Res type_getSup_res = 203;
-            Type.SetSup.Res type_setSup_res = 204;
+            Type.GetSupertype.Res type_getSupertype_res = 203;
+            Type.SetSupertype.Res type_setSupertype_res = 204;
 
             // Rule method responses
             Rule.When.Res rule_when_res = 300;
@@ -132,8 +132,8 @@ message Method {
         message Req {
             oneof req {
                 // SchemaConcept iterator requests
-                Type.GetSups.Iter.Req type_getSups_iter_req = 205;
-                Type.GetSubs.Iter.Req type_getSubs_iter_req = 206;
+                Type.GetSupertypes.Iter.Req type_getSupertypes_iter_req = 205;
+                Type.GetSubtypes.Iter.Req type_getSubtypes_iter_req = 206;
 
                 // Role iterator requests
                 RoleType.GetRelations.Iter.Req roleType_getRelations_iter_req = 401;
@@ -150,7 +150,7 @@ message Method {
                 // Thing iterator requests
                 Thing.GetHas.Iter.Req thing_getHas_iter_req = 903;
                 Thing.GetRelations.Iter.Req thing_getRelations_iter_req = 904;
-                Thing.GetRoleTypes.Iter.Req thing_getRoleTypes_iter_req = 905;
+                Thing.GetPlays.Iter.Req thing_getPlays_iter_req = 905;
 
                 // Relation iterator responses
                 Relation.GetPlayers.Iter.Req relation_getPlayers_iter_req = 1000;
@@ -165,8 +165,8 @@ message Method {
         message Res {
             oneof res {
                 // SchemaConcept iterator responses
-                Type.GetSups.Iter.Res type_getSups_iter_res = 205;
-                Type.GetSubs.Iter.Res type_getSubs_iter_res = 206;
+                Type.GetSupertypes.Iter.Res type_getSupertypes_iter_res = 205;
+                Type.GetSubtypes.Iter.Res type_getSubtypes_iter_res = 206;
 
                 // Role iterator responses
                 RoleType.GetRelations.Iter.Res roleType_getRelations_iter_res = 401;
@@ -183,7 +183,7 @@ message Method {
                 // Thing iterator responses
                 Thing.GetHas.Iter.Res thing_getHas_iter_res = 903;
                 Thing.GetRelations.Iter.Res thing_getRelations_iter_res = 904;
-                Thing.GetRoleTypes.Iter.Res thing_getRoleTypes_iter_res = 905;
+                Thing.GetPlays.Iter.Res thing_getPlays_iter_res = 905;
 
                 // Relation iterator responses
                 Relation.GetPlayers.Iter.Res relation_getPlayers_iter_res = 1000;
@@ -249,7 +249,7 @@ message Type {
         message Res {}
     }
 
-    message GetSup {
+    message GetSupertype {
         message Req {}
         message Res {
             oneof res {
@@ -259,14 +259,14 @@ message Type {
         }
     }
 
-    message SetSup {
+    message SetSupertype {
         message Req {
             Concept type = 1;
         }
         message Res {}
     }
-    
-    message GetSups {
+
+    message GetSupertypes {
         message Iter {
             message Req {}
             message Res {
@@ -274,8 +274,8 @@ message Type {
             }
         }
     }
-    
-    message GetSubs {
+
+    message GetSubtypes {
         message Iter {
             message Req {}
             message Res {
@@ -552,6 +552,20 @@ message Thing {
         }
     }
 
+    message SetHas {
+        message Req {
+            Concept attribute = 1;
+        }
+        message Res {}
+    }
+
+    message UnsetHas {
+        message Req {
+            Concept attribute = 1;
+        }
+        message Res {}
+    }
+
     message GetHas {
         message Iter {
             message Req {
@@ -560,6 +574,15 @@ message Thing {
             }
             message Res {
                 Concept attribute = 1;
+            }
+        }
+    }
+
+    message GetPlays {
+        message Iter {
+            message Req {}
+            message Res {
+                Concept roleType = 1;
             }
         }
     }
@@ -573,29 +596,6 @@ message Thing {
                 Concept relation = 1;
             }
         }
-    }
-
-    message GetRoleTypes {
-        message Iter {
-            message Req {}
-            message Res {
-                Concept roleType = 1;
-            }
-        }
-    }
-
-    message SetHas {
-        message Req {
-            Concept attribute = 1;
-        }
-        message Res {}
-    }
-
-    message UnsetHas {
-        message Req {
-            Concept attribute = 1;
-        }
-        message Res {}
     }
 }
 
