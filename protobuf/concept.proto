@@ -41,6 +41,7 @@ message Method {
             // Type method requests
             ThingType.IsAbstract.Req thingType_isAbstract_req = 500;
             ThingType.SetAbstract.Req thingType_setAbstract_req = 501;
+            ThingType.UnsetAbstract.Req thingType_unsetAbstract_req = 502;
             ThingType.SetOwns.Req thingType_setOwns_req = 506;
             ThingType.SetPlays.Req thingType_setPlays_req = 508;
             ThingType.UnsetOwns.Req thingType_unsetOwns_req = 509;
@@ -93,6 +94,7 @@ message Method {
             // Type method responses
             ThingType.IsAbstract.Res thingType_isAbstract_res = 500;
             ThingType.SetAbstract.Res thingType_setAbstract_res = 501;
+            ThingType.UnsetAbstract.Res thingType_unsetAbstract_res = 502;
             ThingType.SetOwns.Res thingType_setOwns_res = 506;
             ThingType.SetPlays.Res thingType_setPlays_res = 508;
             ThingType.UnsetOwns.Res thingType_unsetOwns_res = 509;
@@ -346,9 +348,12 @@ message ThingType {
     }
 
     message SetAbstract {
-        message Req {
-            bool abstract = 1;
-        }
+        message Req {}
+        message Res {}
+    }
+
+    message UnsetAbstract {
+        message Req {}
         message Res {}
     }
 
