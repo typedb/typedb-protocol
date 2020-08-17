@@ -195,7 +195,7 @@ message Transaction {
                     bytes iid = 1;
                     string label = 2;
                 }
-                Method.Req method = 3;
+                Method.Iter.Req method = 3;
             }
             message Res {
                 Method.Iter.Res response = 1;
