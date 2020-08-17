@@ -191,8 +191,11 @@ message Transaction {
         }
         message Iter {
             message Req {
-                bytes iid = 1;
-                Method.Iter.Req method = 2;
+                oneof identifier {
+                    bytes iid = 1;
+                    string label = 2;
+                }
+                Method.Req method = 3;
             }
             message Res {
                 Method.Iter.Res response = 1;
