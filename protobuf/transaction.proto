@@ -180,8 +180,11 @@ message Transaction {
 
     message ConceptMethod {
         message Req {
-            bytes iid = 1;
-            Method.Req method = 2;
+            oneof identifier {
+                bytes iid = 1;
+                string label = 2;
+            }
+            Method.Req method = 3;
         }
         message Res {
             Method.Res response = 1;
