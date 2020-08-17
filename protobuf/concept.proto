@@ -653,7 +653,12 @@ message Attribute {
 
     message GetOwners {
         message Iter {
-            message Req {}
+            message Req {
+                oneof filter {
+                    Concept thingType = 1;
+                    Null null = 2;
+                }
+            }
             message Res {
                 Concept thing = 1;
             }
