@@ -28,11 +28,12 @@ message Method {
             // Concept method requests
             Concept.Delete.Req concept_delete_req = 100;
 
-            // SchemaConcept method requests
+            // Type method requests
             Type.GetLabel.Req type_getLabel_req = 201;
             Type.SetLabel.Req type_setLabel_req = 202;
             Type.GetSupertype.Req type_getSupertype_req = 203;
             Type.SetSupertype.Req type_setSupertype_req = 204;
+            Type.IsRoot.Req type_isRoot_req = 205;
 
             // Rule method requests
             Rule.When.Req rule_when_req = 300;
@@ -84,11 +85,12 @@ message Method {
             // Concept method responses
             Concept.Delete.Res concept_delete_res = 100;
 
-            // SchemaConcept method responses
+            // Type method responses
             Type.GetLabel.Res type_getLabel_res = 201;
             Type.SetLabel.Res type_setLabel_res = 202;
             Type.GetSupertype.Res type_getSupertype_res = 203;
             Type.SetSupertype.Res type_setSupertype_res = 204;
+            Type.IsRoot.Res type_isRoot_res = 205;
 
             // Rule method responses
             Rule.When.Res rule_when_res = 300;
@@ -97,7 +99,7 @@ message Method {
             // RoleType method responses
             RoleType.GetRelation.Res roleType_getRelation_res = 400;
 
-            // Type method responses
+            // ThingType method responses
             ThingType.IsAbstract.Res thingType_isAbstract_res = 500;
             ThingType.SetAbstract.Res thingType_setAbstract_res = 501;
             ThingType.UnsetAbstract.Res thingType_unsetAbstract_res = 502;
@@ -139,7 +141,7 @@ message Method {
     message Iter {
         message Req {
             oneof req {
-                // SchemaConcept iterator requests
+                // Type iterator requests
                 Type.GetSupertypes.Iter.Req type_getSupertypes_iter_req = 205;
                 Type.GetSubtypes.Iter.Req type_getSubtypes_iter_req = 206;
 
@@ -147,7 +149,7 @@ message Method {
                 RoleType.GetRelations.Iter.Req roleType_getRelations_iter_req = 401;
                 RoleType.GetPlayers.Iter.Req roleType_getPlayers_iter_req = 402;
 
-                // Type iterator requests
+                // ThingType iterator requests
                 ThingType.GetInstances.Iter.Req thingType_getInstances_iter_req = 502;
                 ThingType.GetOwns.Iter.Req thingType_getOwns_iter_req = 504;
                 ThingType.GetPlays.Iter.Req thingType_getPlays_iter_req = 505;
@@ -287,6 +289,13 @@ message Type {
             message Res {
                 Concept type = 1;
             }
+        }
+    }
+
+    message IsRoot {
+        message Req {}
+        message Res {
+            bool root = 1;
         }
     }
 }
