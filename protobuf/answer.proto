@@ -21,6 +21,7 @@ option java_package = "grakn.protocol";
 option java_outer_classname = "AnswerProto";
 
 import "protobuf/concept.proto";
+import "protobuf/type.proto";
 
 package grakn.protocol;
 
@@ -42,7 +43,7 @@ message Explanation {
     }
     message Res {
         repeated ConceptMap explanation = 1;
-        Concept rule = 2;
+        Type rule = 2;
     }
 }
 
