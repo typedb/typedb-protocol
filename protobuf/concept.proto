@@ -38,6 +38,9 @@ message Method {
             Rule.When.Req rule_when_req = 300;
             Rule.Then.Req rule_then_req = 301;
 
+            // RoleType method requests
+            RoleType.GetRelation.Req roleType_getRelation_req = 400;
+
             // Type method requests
             ThingType.IsAbstract.Req thingType_isAbstract_req = 500;
             ThingType.SetAbstract.Req thingType_setAbstract_req = 501;
@@ -90,6 +93,9 @@ message Method {
             // Rule method responses
             Rule.When.Res rule_when_res = 300;
             Rule.Then.Res rule_then_res = 301;
+
+            // RoleType method responses
+            RoleType.GetRelation.Res roleType_getRelation_res = 400;
 
             // Type method responses
             ThingType.IsAbstract.Res thingType_isAbstract_res = 500;
@@ -315,6 +321,13 @@ message Rule {
 // Role methods
 
 message RoleType {
+
+    message GetRelation {
+        message Req {}
+        message Res {
+            Concept relationType = 1;
+        }
+    }
 
     message GetRelations {
         message Iter {
