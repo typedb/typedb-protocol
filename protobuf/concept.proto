@@ -222,14 +222,15 @@ message Concept {
     Type.GetLabel.Res label_res = 9;
 
     enum SCHEMA {
-        ENTITY_TYPE = 0;
-        RELATION_TYPE = 1;
-        ATTRIBUTE_TYPE = 2;
-        ROLE_TYPE = 3;
-        RULE = 4;
-        ENTITY = 5;
-        RELATION = 6;
-        ATTRIBUTE = 7;
+        THING_TYPE = 0;
+        ENTITY_TYPE = 1;
+        RELATION_TYPE = 2;
+        ATTRIBUTE_TYPE = 3;
+        ROLE_TYPE = 4;
+        RULE = 5;
+        ENTITY = 6;
+        RELATION = 7;
+        ATTRIBUTE = 8;
     }
 
     message Delete {
