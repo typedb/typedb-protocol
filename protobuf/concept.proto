@@ -41,6 +41,7 @@ message Method {
             // Type method requests
             ThingType.IsAbstract.Req thingType_isAbstract_req = 500;
             ThingType.SetAbstract.Req thingType_setAbstract_req = 501;
+            ThingType.UnsetAbstract.Req thingType_unsetAbstract_req = 502;
             ThingType.SetOwns.Req thingType_setOwns_req = 506;
             ThingType.SetPlays.Req thingType_setPlays_req = 508;
             ThingType.UnsetOwns.Req thingType_unsetOwns_req = 509;
@@ -93,6 +94,7 @@ message Method {
             // Type method responses
             ThingType.IsAbstract.Res thingType_isAbstract_res = 500;
             ThingType.SetAbstract.Res thingType_setAbstract_res = 501;
+            ThingType.UnsetAbstract.Res thingType_unsetAbstract_res = 502;
             ThingType.SetOwns.Res thingType_setOwns_res = 506;
             ThingType.SetPlays.Res thingType_setPlays_res = 508;
             ThingType.UnsetOwns.Res thingType_unsetOwns_res = 509;
@@ -154,8 +156,7 @@ message Method {
 
                 // Relation iterator responses
                 Relation.GetPlayers.Iter.Req relation_getPlayers_iter_req = 1000;
-                Relation.GetPlayersForRoleTypes.Iter.Req relation_getPlayersForRoleTypes_iter_req = 1001;
-                Relation.GetPlayersByRoleType.Iter.Req relation_getPlayersByRoleType_iter_req = 1002;
+                Relation.GetPlayersByRoleType.Iter.Req relation_getPlayersByRoleType_iter_req = 1001;
 
                 // Attribute iterator requests
                 Attribute.GetOwners.Iter.Req attribute_getOwners_iter_req = 1101;
@@ -187,8 +188,7 @@ message Method {
 
                 // Relation iterator responses
                 Relation.GetPlayers.Iter.Res relation_getPlayers_iter_res = 1000;
-                Relation.GetPlayersForRoleTypes.Iter.Res relation_getPlayersForRoleTypes_iter_res = 1001;
-                Relation.GetPlayersByRoleType.Iter.Res relation_getPlayersByRoleType_iter_res = 1002;
+                Relation.GetPlayersByRoleType.Iter.Res relation_getPlayersByRoleType_iter_res = 1001;
 
                 // Attribute iterator responses
                 Attribute.GetOwners.Iter.Res attribute_getOwners_iter_res = 1101;
@@ -348,9 +348,12 @@ message ThingType {
     }
 
     message SetAbstract {
-        message Req {
-            bool abstract = 1;
-        }
+        message Req {}
+        message Res {}
+    }
+
+    message UnsetAbstract {
+        message Req {}
         message Res {}
     }
 
@@ -606,15 +609,6 @@ message Relation {
 
     message GetPlayers {
         message Iter {
-            message Req {}
-            message Res {
-                Concept thing = 1;
-            }
-        }
-    }
-
-    message GetPlayersForRoleTypes {
-        message Iter {
             message Req {
                 repeated Concept roleTypes = 1;
             }
@@ -664,7 +658,12 @@ message Attribute {
 
     message GetOwners {
         message Iter {
-            message Req {}
+            message Req {
+                oneof filter {
+                    Concept thingType = 1;
+                    Null null = 2;
+                }
+            }
             message Res {
                 Concept thing = 1;
             }
