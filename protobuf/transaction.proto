@@ -88,7 +88,7 @@ message Transaction {
         }
     }
 
-    enum Type {
+    enum TransactionType {
         READ = 0;
         WRITE = 1;
     }
@@ -96,7 +96,7 @@ message Transaction {
     message Open {
         message Req {
             bytes sessionID = 1;
-            Type type = 2;
+            TransactionType type = 2;
             Options options = 3;
         }
         message Res {}
