@@ -112,12 +112,12 @@ message ThingMethod {
 message Thing {
     bytes iid = 1;
     SCHEMA schema = 2;
+    Type type = 3;
+    AttributeType.VALUE_TYPE valueType = 4;
 
     // Pre-filled responses:
-    Thing.GetType.Res type_res = 3;
-    Thing.IsInferred.Res inferred_res = 4;
-    Attribute.GetValue.Res value_res = 5;
-    AttributeType.GetValueType.Res valueType_res = 6;
+    Thing.IsInferred.Res inferred_res = 5;
+    Attribute.GetValue.Res value_res = 6;
 
     enum SCHEMA {
         ENTITY = 0;
@@ -300,9 +300,8 @@ message TypeMethod {
             // AttributeType method requests
             AttributeType.Put.Req attributeType_put_req = 800;
             AttributeType.Get.Req attributeType_get_req = 801;
-            AttributeType.GetValueType.Req attributeType_getValueType_req = 802;
-            AttributeType.GetRegex.Req attributeType_getRegex_req = 803;
-            AttributeType.SetRegex.Req attributeType_setRegex_req = 804;
+            AttributeType.GetRegex.Req attributeType_getRegex_req = 802;
+            AttributeType.SetRegex.Req attributeType_setRegex_req = 803;
         }
     }
     message Res {
@@ -340,9 +339,8 @@ message TypeMethod {
             // AttributeType method responses
             AttributeType.Put.Res attributeType_put_res = 800;
             AttributeType.Get.Res attributeType_get_res = 801;
-            AttributeType.GetValueType.Res attributeType_getValueType_res = 802;
-            AttributeType.GetRegex.Res attributeType_getRegex_res = 803;
-            AttributeType.SetRegex.Res attributeType_setRegex_res = 804;
+            AttributeType.GetRegex.Res attributeType_getRegex_res = 802;
+            AttributeType.SetRegex.Res attributeType_setRegex_res = 803;
         }
     }
 
@@ -393,10 +391,8 @@ message TypeMethod {
 message Type {
     string label = 1;
     SCHEMA schema = 2;
-    bool root = 3;
-
-    // Pre-filled responses:
-    AttributeType.GetValueType.Res valueType_res = 4;
+    AttributeType.VALUE_TYPE valueType = 3;
+    bool root = 4;
 
     enum SCHEMA {
         THING_TYPE = 0;
@@ -683,16 +679,6 @@ message AttributeType {
         message Res {
             oneof res {
                 Thing attribute = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
-            }
-        }
-    }
-
-    message GetValueType {
-        message Req {}
-        message Res {
-            oneof res {
-                VALUE_TYPE valueType = 1;
                 Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
