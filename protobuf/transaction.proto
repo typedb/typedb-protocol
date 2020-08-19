@@ -23,8 +23,6 @@ option java_outer_classname = "TransactionProto";
 import "protobuf/answer.proto";
 import "protobuf/concept.proto";
 import "protobuf/options.proto";
-import "protobuf/thing.proto";
-import "protobuf/type.proto";
 
 package grakn.protocol;
 

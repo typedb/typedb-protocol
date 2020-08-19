@@ -21,7 +21,6 @@ option java_package = "grakn.protocol";
 option java_outer_classname = "AnswerProto";
 
 import "protobuf/concept.proto";
-import "protobuf/type.proto";
 
 package grakn.protocol;
 
