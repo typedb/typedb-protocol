@@ -79,9 +79,9 @@ graknlabs_dependencies_ci_pip_install()
 load("@graknlabs_dependencies//tool/unuseddeps:deps.bzl", unuseddeps_deps = "deps")
 unuseddeps_deps()
 
-######################################
-# Load @graknlabs_bazel_distribution #
-######################################
+#####################################################################
+# Load @graknlabs_bazel_distribution (from @graknlabs_dependencies) #
+#####################################################################
 
 load("@graknlabs_dependencies//dependencies/graknlabs:repositories.bzl", "graknlabs_bazel_distribution")
 graknlabs_bazel_distribution()

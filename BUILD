@@ -23,8 +23,8 @@ load("//:deployment.bzl", "deployment")
 
 deploy_github(
     name = "deploy-github",
-    organisation = deployment["organisation"],
-    repository = deployment["repository"],
+    organisation = deployment["github.organisation"],
+    repository = deployment["github.repository"],
     release_description = "//:RELEASE_TEMPLATE.md",
     title = "Protocol",
     title_append_version = True,
