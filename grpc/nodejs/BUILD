@@ -21,9 +21,11 @@ load("@stackb_rules_proto//node:node_grpc_compile.bzl", "node_grpc_compile")
 node_grpc_compile(
     name = "protocol",
     deps = [
-        "//session:session-proto",
-        "//session:answer-proto",
-        "//session:concept-proto",
-        "//keyspace:keyspace-proto",
+        "//protobuf:grakn-proto",
+        "//protobuf:database-proto",
+        "//protobuf:session-proto",
+        "//protobuf:transaction-proto",
+        "//protobuf:concept-proto",
+        "//protobuf:answer-proto",
     ]
 )

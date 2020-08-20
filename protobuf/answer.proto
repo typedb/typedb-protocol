@@ -17,12 +17,12 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.session";
+option java_package = "grakn.protocol";
 option java_outer_classname = "AnswerProto";
 
-import "session/Concept.proto";
+import "protobuf/concept.proto";
 
-package session;
+package grakn.protocol;
 
 message Answer {
     oneof answer {
@@ -42,7 +42,7 @@ message Explanation {
     }
     message Res {
         repeated ConceptMap explanation = 1;
-        Concept rule = 2;
+        Type rule = 2;
     }
 }
 
@@ -58,15 +58,15 @@ message ConceptMap {
 }
 
 message ConceptList {
-    ConceptIds list = 1;
+    repeated bytes iids = 1;
 }
 
 message ConceptSet {
-    ConceptIds set = 1;
+    repeated bytes iids = 1;
 }
 
 message ConceptSetMeasure {
-    ConceptIds set = 1;
+    repeated bytes iids = 1;
     Number measurement = 2;
 }
 
@@ -76,10 +76,6 @@ message Value {
 
 message Void {
     string message = 1;
-}
-
-message ConceptIds {
-    repeated string ids = 1;
 }
 
 message Number {

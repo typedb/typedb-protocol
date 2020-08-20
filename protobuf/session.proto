@@ -17,35 +17,36 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.keyspace";
-option java_outer_classname = "KeyspaceProto";
+option java_package = "grakn.protocol";
+option java_outer_classname = "SessionProto";
 
-package keyspace;
+import "protobuf/options.proto";
 
-service KeyspaceService {
-    rpc retrieve (Keyspace.Retrieve.Req) returns (Keyspace.Retrieve.Res);
-    rpc delete (Keyspace.Delete.Req) returns (Keyspace.Delete.Res);
-}
+package grakn.protocol;
 
-message Keyspace {
-    message Retrieve {
+message Session {
+
+    enum Type {
+        DATA = 0;
+        SCHEMA = 1;
+    }
+
+    message Open {
         message Req {
-            /* Fields ignored in the open-source version. */
-            string username = 1;
-            string password = 2;
+            string database = 1;
+            Type type = 2;
+            Options options = 3;
         }
         message Res {
-            repeated string names = 1;
+            bytes sessionID = 1;
         }
     }
 
-    message Delete {
+    message Close {
         message Req {
-            string name = 1;
-            /* Fields ignored in the open-source version. */
-            string username = 2;
-            string password = 3;
+            bytes sessionID = 1;
         }
-        message Res {}
+        message Res {
+        }
     }
 }

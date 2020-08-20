@@ -1,0 +1,700 @@
+//
+// Copyright (C) 2020 Grakn Labs
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+syntax = "proto3";
+
+option java_package = "grakn.protocol";
+option java_outer_classname = "ConceptProto";
+
+package grakn.protocol;
+
+
+// Concept
+
+message Concept {
+    oneof concept {
+        Thing thing = 1;
+        Type type = 2;
+    }
+}
+
+
+// Thing
+
+message ThingMethod {
+    message Req {
+        oneof req {
+            // Thing method requests
+            Thing.Delete.Req thing_delete_req = 900;
+            Thing.GetType.Req thing_getType_req = 901;
+            Thing.IsInferred.Req thing_isInferred_req = 902;
+            Thing.SetHas.Req thing_setHas_req = 906;
+            Thing.UnsetHas.Req thing_unsetHas_req = 907;
+
+            // Relation method requests
+            Relation.AddPlayer.Req relation_addPlayer_req = 1002;
+            Relation.RemovePlayer.Req relation_removePlayer_req = 1003;
+
+            // Attribute method requests
+            Attribute.GetValue.Req attribute_getValue_req = 1100;
+        }
+    }
+    message Res {
+        oneof res {
+            // Thing method responses
+            Thing.Delete.Res thing_delete_res = 900;
+            Thing.GetType.Res thing_getType_res = 901;
+            Thing.IsInferred.Res thing_isInferred_res = 902;
+            Thing.SetHas.Res thing_setHas_res = 906;
+            Thing.UnsetHas.Res thing_unsetHas_res = 907;
+
+            // Relation method responses
+            Relation.AddPlayer.Res relation_addPlayer_res = 1002;
+            Relation.RemovePlayer.Res relation_removePlayer_res = 1003;
+
+            // Attribute method responses
+            Attribute.GetValue.Res attribute_getValue_res = 1100;
+        }
+    }
+
+    message Iter {
+        message Req {
+            oneof req {
+                // Thing iterator requests
+                Thing.GetHas.Iter.Req thing_getHas_iter_req = 903;
+                Thing.GetRelations.Iter.Req thing_getRelations_iter_req = 904;
+                Thing.GetPlays.Iter.Req thing_getPlays_iter_req = 905;
+
+                // Relation iterator responses
+                Relation.GetPlayers.Iter.Req relation_getPlayers_iter_req = 1000;
+                Relation.GetPlayersByRoleType.Iter.Req relation_getPlayersByRoleType_iter_req = 1001;
+
+                // Attribute iterator requests
+                Attribute.GetOwners.Iter.Req attribute_getOwners_iter_req = 1101;
+            }
+        }
+
+        message Res {
+            oneof res {
+                // Thing iterator responses
+                Thing.GetHas.Iter.Res thing_getHas_iter_res = 903;
+                Thing.GetRelations.Iter.Res thing_getRelations_iter_res = 904;
+                Thing.GetPlays.Iter.Res thing_getPlays_iter_res = 905;
+
+                // Relation iterator responses
+                Relation.GetPlayers.Iter.Res relation_getPlayers_iter_res = 1000;
+                Relation.GetPlayersByRoleType.Iter.Res relation_getPlayersByRoleType_iter_res = 1001;
+
+                // Attribute iterator responses
+                Attribute.GetOwners.Iter.Res attribute_getOwners_iter_res = 1101;
+            }
+        }
+    }
+}
+
+
+// Thing methods
+
+message Thing {
+    bytes iid = 1;
+    SCHEMA schema = 2;
+    AttributeType.VALUE_TYPE valueType = 3;
+    Attribute.Value value = 4;
+
+    enum SCHEMA {
+        ENTITY = 0;
+        RELATION = 1;
+        ATTRIBUTE = 2;
+    }
+
+    message Delete {
+        message Req {}
+        message Res {}
+    }
+
+    message IsInferred {
+        message Req {}
+        message Res {
+            bool inferred = 1;
+        }
+    }
+
+    message GetType {
+        message Req {}
+        message Res {
+            Type thingType = 1;
+        }
+    }
+
+    message SetHas {
+        message Req {
+            Thing attribute = 1;
+        }
+        message Res {}
+    }
+
+    message UnsetHas {
+        message Req {
+            Thing attribute = 1;
+        }
+        message Res {}
+    }
+
+    message GetHas {
+        message Iter {
+            message Req {
+                repeated Type attributeTypes = 1;
+                bool keysOnly = 2;
+            }
+            message Res {
+                Thing attribute = 1;
+            }
+        }
+    }
+
+    message GetPlays {
+        message Iter {
+            message Req {}
+            message Res {
+                Type roleType = 1;
+            }
+        }
+    }
+
+    message GetRelations {
+        message Iter {
+            message Req {
+                repeated Type roleTypes = 1;
+            }
+            message Res {
+                Thing relation = 1;
+            }
+        }
+    }
+}
+
+
+// Relation methods
+
+message Relation {
+
+    message GetPlayers {
+        message Iter {
+            message Req {
+                repeated Type roleTypes = 1;
+            }
+            message Res {
+                Thing thing = 1;
+            }
+        }
+    }
+
+    message GetPlayersByRoleType {
+        message Iter {
+            message Req {}
+            message Res {
+                Type roleType = 1;
+                Thing player = 2;
+            }
+        }
+    }
+
+    message AddPlayer {
+        message Req {
+            Type roleType = 1;
+            Thing player = 2;
+        }
+        message Res {}
+    }
+
+    message RemovePlayer {
+        message Req {
+            Type roleType = 1;
+            Thing player = 2;
+        }
+        message Res {}
+    }
+}
+
+
+// Attribute methods
+
+message Attribute {
+
+    message GetValue {
+        message Req {}
+        message Res {
+            Value value = 1;
+        }
+    }
+
+    message GetOwners {
+        message Iter {
+            message Req {
+                oneof filter {
+                    Type thingType = 1;
+                }
+            }
+            message Res {
+                Thing thing = 1;
+            }
+        }
+    }
+
+    message Value {
+        oneof value {
+            string string = 1;
+            bool boolean = 2;
+            int64 long = 4;
+            double double = 6;
+            int64 datetime = 7; // time since epoch in milliseconds
+        }
+    }
+}
+
+
+// Type
+
+message TypeMethod {
+    message Req {
+        oneof req {
+            // Type method requests
+            Type.Delete.Req type_delete_req = 200;
+            Type.SetLabel.Req type_setLabel_req = 201;
+            Type.GetSupertype.Req type_getSupertype_req = 202;
+            Type.SetSupertype.Req type_setSupertype_req = 203;
+
+            // Rule method requests
+            Rule.When.Req rule_when_req = 300;
+            Rule.Then.Req rule_then_req = 301;
+
+            // RoleType method requests
+            RoleType.GetRelation.Req roleType_getRelation_req = 400;
+
+            // ThingType method requests
+            ThingType.IsAbstract.Req thingType_isAbstract_req = 500;
+            ThingType.SetAbstract.Req thingType_setAbstract_req = 501;
+            ThingType.UnsetAbstract.Req thingType_unsetAbstract_req = 502;
+            ThingType.SetOwns.Req thingType_setOwns_req = 506;
+            ThingType.SetPlays.Req thingType_setPlays_req = 508;
+            ThingType.UnsetOwns.Req thingType_unsetOwns_req = 509;
+            ThingType.UnsetPlays.Req thingType_unsetPlays_req = 511;
+
+            // EntityType method requests
+            EntityType.Create.Req entityType_create_req = 600;
+
+            // RelationType method requests
+            RelationType.Create.Req relationType_create_req = 700;
+            RelationType.GetRelatesForRoleLabel.Req relationType_getRelatesForRoleLabel_req = 701;
+            RelationType.SetRelates.Req relationType_setRelates_req = 702;
+
+            // AttributeType method requests
+            AttributeType.Put.Req attributeType_put_req = 800;
+            AttributeType.Get.Req attributeType_get_req = 801;
+            AttributeType.GetRegex.Req attributeType_getRegex_req = 802;
+            AttributeType.SetRegex.Req attributeType_setRegex_req = 803;
+        }
+    }
+    message Res {
+        oneof res {
+            // Type method responses
+            Type.Delete.Res type_delete_res = 200;
+            Type.SetLabel.Res type_setLabel_res = 201;
+            Type.GetSupertype.Res type_getSupertype_res = 202;
+            Type.SetSupertype.Res type_setSupertype_res = 203;
+
+            // Rule method responses
+            Rule.When.Res rule_when_res = 300;
+            Rule.Then.Res rule_then_res = 301;
+
+            // RoleType method responses
+            RoleType.GetRelation.Res roleType_getRelation_res = 400;
+
+            // ThingType method responses
+            ThingType.IsAbstract.Res thingType_isAbstract_res = 500;
+            ThingType.SetAbstract.Res thingType_setAbstract_res = 501;
+            ThingType.UnsetAbstract.Res thingType_unsetAbstract_res = 502;
+            ThingType.SetOwns.Res thingType_setOwns_res = 506;
+            ThingType.SetPlays.Res thingType_setPlays_res = 508;
+            ThingType.UnsetOwns.Res thingType_unsetOwns_res = 509;
+            ThingType.UnsetPlays.Res thingType_unsetPlays_res = 511;
+
+            // EntityType method responses
+            EntityType.Create.Res entityType_create_res = 600;
+
+            // RelationType method responses
+            RelationType.Create.Res relationType_create_res = 700;
+            RelationType.GetRelatesForRoleLabel.Res relationType_getRelatesForRoleLabel_res = 701;
+            RelationType.SetRelates.Res relationType_setRelates_res = 702;
+
+            // AttributeType method responses
+            AttributeType.Put.Res attributeType_put_res = 800;
+            AttributeType.Get.Res attributeType_get_res = 801;
+            AttributeType.GetRegex.Res attributeType_getRegex_res = 802;
+            AttributeType.SetRegex.Res attributeType_setRegex_res = 803;
+        }
+    }
+
+    message Iter {
+        message Req {
+            oneof req {
+                // Type iterator requests
+                Type.GetSupertypes.Iter.Req type_getSupertypes_iter_req = 205;
+                Type.GetSubtypes.Iter.Req type_getSubtypes_iter_req = 206;
+
+                // Role iterator requests
+                RoleType.GetRelations.Iter.Req roleType_getRelations_iter_req = 401;
+                RoleType.GetPlayers.Iter.Req roleType_getPlayers_iter_req = 402;
+
+                // ThingType iterator requests
+                ThingType.GetInstances.Iter.Req thingType_getInstances_iter_req = 502;
+                ThingType.GetOwns.Iter.Req thingType_getOwns_iter_req = 504;
+                ThingType.GetPlays.Iter.Req thingType_getPlays_iter_req = 505;
+
+                // RelationType iterator requests
+                RelationType.GetRelates.Iter.Req relationType_getRelates_iter_req = 701;
+            }
+        }
+
+        message Res {
+            oneof res {
+                // Type iterator responses
+                Type.GetSupertypes.Iter.Res type_getSupertypes_iter_res = 205;
+                Type.GetSubtypes.Iter.Res type_getSubtypes_iter_res = 206;
+
+                // RoleType iterator responses
+                RoleType.GetRelations.Iter.Res roleType_getRelations_iter_res = 401;
+                RoleType.GetPlayers.Iter.Res roleType_getPlayers_iter_res = 402;
+
+                // Type iterator responses
+                ThingType.GetInstances.Iter.Res thingType_getInstances_iter_res = 502;
+                ThingType.GetOwns.Iter.Res thingType_getOwns_iter_res = 504;
+                ThingType.GetPlays.Iter.Res thingType_getPlays_iter_res = 505;
+
+                // RelationType iterator responses
+                RelationType.GetRelates.Iter.Res relationType_getRelates_iter_res = 701;
+            }
+        }
+    }
+}
+
+// Type methods
+message Type {
+    string label = 1;
+    SCHEMA schema = 2;
+    AttributeType.VALUE_TYPE valueType = 3;
+    bool root = 4;
+    string scopedLabel = 5;
+
+    enum SCHEMA {
+        THING_TYPE = 0;
+        ENTITY_TYPE = 1;
+        RELATION_TYPE = 2;
+        ATTRIBUTE_TYPE = 3;
+        ROLE_TYPE = 4;
+        RULE = 5;
+    }
+
+    message Delete {
+        message Req {}
+        message Res {}
+    }
+
+    message SetLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {}
+    }
+
+    message GetSupertype {
+        message Req {}
+        message Res {
+            oneof res {
+                Type type = 1;
+            }
+        }
+    }
+
+    message SetSupertype {
+        message Req {
+            Type type = 1;
+        }
+        message Res {}
+    }
+
+    message GetSupertypes {
+        message Iter {
+            message Req {}
+            message Res {
+                Type type = 1;
+            }
+        }
+    }
+
+    message GetSubtypes {
+        message Iter {
+            message Req {}
+            message Res {
+                Type type = 1;
+            }
+        }
+    }
+}
+
+
+// Rule methods
+
+message Rule {
+
+    message When {
+        message Req {}
+        message Res {
+            oneof res {
+                string pattern = 1;
+            }
+        }
+    }
+
+    message Then {
+        message Req {}
+        message Res {
+            oneof res {
+                string pattern = 1;
+            }
+        }
+    }
+}
+
+
+// RoleType methods
+
+message RoleType {
+
+    message GetRelation {
+        message Req {}
+        message Res {
+            Type relationType = 1;
+        }
+    }
+
+    message GetRelations {
+        message Iter {
+            message Req {}
+            message Res {
+                Type relationType = 1;
+            }
+        }
+    }
+
+    message GetPlayers {
+        message Iter {
+            message Req {}
+            message Res {
+                Type thingType = 1;
+            }
+        }
+    }
+}
+
+
+// ThingType methods
+
+message ThingType {
+
+    message IsAbstract {
+        message Req {}
+        message Res {
+            bool abstract = 1;
+        }
+    }
+
+    message SetAbstract {
+        message Req {}
+        message Res {}
+    }
+
+    message UnsetAbstract {
+        message Req {}
+        message Res {}
+    }
+
+    message GetInstances {
+        message Iter {
+            message Req {}
+            message Res {
+                Thing thing = 1;
+            }
+        }
+    }
+
+    message GetOwns {
+        message Iter {
+            message Req {
+                oneof filter {
+                    AttributeType.VALUE_TYPE valueType = 1;
+                }
+                bool keysOnly = 3;
+            }
+            message Res {
+                Type attributeType = 1;
+            }
+        }
+    }
+
+    message GetPlays {
+        message Iter {
+            message Req {}
+            message Res {
+                Type role = 1;
+            }
+        }
+    }
+
+    message SetOwns {
+        message Req {
+            Type attributeType = 1;
+            oneof overridden {
+                Type overriddenType = 2;
+            }
+            bool isKey = 4;
+        }
+        message Res {}
+    }
+
+    message SetPlays {
+        message Req {
+            Type role = 1;
+        }
+        message Res {}
+    }
+
+    message UnsetOwns {
+        message Req {
+            Type attributeType = 1;
+        }
+        message Res {}
+    }
+
+    message UnsetPlays {
+        message Req {
+            Type role = 1;
+        }
+        message Res {}
+    }
+}
+
+
+// EntityType methods
+
+message EntityType {
+
+    message Create {
+        message Req {}
+        message Res {
+            Thing entity = 1;
+        }
+    }
+}
+
+
+// RelationType methods
+
+message RelationType {
+
+    message Create {
+        message Req {}
+        message Res {
+            Thing relation = 1;
+        }
+    }
+
+    message GetRelates {
+        message Iter {
+            message Req {}
+            message Res {
+                Type role = 1;
+            }
+        }
+    }
+
+    message GetRelatesForRoleLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            Type role = 1;
+        }
+    }
+
+    message SetRelates {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            Type role = 1;
+        }
+    }
+}
+
+
+// AttributeType methods
+
+message AttributeType {
+
+    enum VALUE_TYPE {
+        BOOLEAN = 0;
+        LONG = 1;
+        DOUBLE = 2;
+        STRING = 3;
+        DATETIME = 4;
+    }
+
+    message Put {
+        message Req {
+            Attribute.Value value = 1;
+        }
+        message Res {
+            Thing attribute = 1;
+        }
+    }
+
+    message Get {
+        message Req {
+            Attribute.Value value = 1;
+        }
+        message Res {
+            oneof res {
+                Thing attribute = 1;
+            }
+        }
+    }
+
+    message GetRegex {
+        message Req {}
+        message Res {
+            string regex = 1;
+        }
+    }
+
+    message SetRegex {
+        message Req {
+            string regex = 1;
+        }
+        message Res {}
+    }
+}

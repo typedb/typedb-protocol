@@ -18,18 +18,48 @@
 package(default_visibility = ["//visibility:public"])
 
 proto_library(
-    name = "concept-proto",
-    srcs = ["Concept.proto"],
+    name = "grakn-proto",
+    srcs = ["grakn.proto"],
+    deps = [
+        ":database-proto",
+        ":session-proto",
+        ":transaction-proto"
+    ],
 )
 
 proto_library(
-    name = "answer-proto",
-    srcs = ["Answer.proto"],
-    deps = [":concept-proto"],
+    name = "database-proto",
+    srcs = ["database.proto"],
 )
 
 proto_library(
     name = "session-proto",
-    srcs = ["Session.proto"],
-    deps = [":concept-proto", ":answer-proto"],
+    srcs = ["session.proto"],
+    deps = [":options-proto"],
+)
+
+proto_library(
+    name = "transaction-proto",
+    srcs = ["transaction.proto"],
+    deps = [
+        ":answer-proto",
+        ":concept-proto",
+        ":options-proto"
+    ]
+)
+
+proto_library(
+    name = "answer-proto",
+    srcs = ["answer.proto"],
+    deps = [":concept-proto"],
+)
+
+proto_library(
+    name = "concept-proto",
+    srcs = ["concept.proto"],
+)
+
+proto_library(
+    name = "options-proto",
+    srcs = ["options.proto"],
 )
