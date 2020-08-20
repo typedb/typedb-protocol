@@ -111,11 +111,15 @@ message ThingMethod {
 
 message Thing {
     bytes iid = 1;
-    Type type = 2;
+    SCHEMA schema = 2;
+    AttributeType.VALUE_TYPE valueType = 3;
+    Attribute.Value value = 4;
 
-    // Pre-filled responses:
-    Thing.IsInferred.Res inferred_res = 3;
-    Attribute.GetValue.Res value_res = 4;
+    enum SCHEMA {
+        ENTITY = 0;
+        RELATION = 1;
+        ATTRIBUTE = 2;
+    }
 
     message Delete {
         message Req {}
@@ -234,7 +238,7 @@ message Attribute {
     message GetValue {
         message Req {}
         message Res {
-            ValueObject value = 1;
+            Value value = 1;
         }
     }
 
@@ -249,6 +253,16 @@ message Attribute {
             message Res {
                 Thing thing = 1;
             }
+        }
+    }
+
+    message Value {
+        oneof value {
+            string string = 1;
+            bool boolean = 2;
+            int64 long = 4;
+            double double = 6;
+            int64 datetime = 7; // time since epoch in milliseconds
         }
     }
 }
@@ -657,7 +671,7 @@ message AttributeType {
 
     message Put {
         message Req {
-            ValueObject value = 1;
+            Attribute.Value value = 1;
         }
         message Res {
             Thing attribute = 1;
@@ -666,7 +680,7 @@ message AttributeType {
 
     message Get {
         message Req {
-            ValueObject value = 1;
+            Attribute.Value value = 1;
         }
         message Res {
             oneof res {
@@ -694,16 +708,3 @@ message AttributeType {
 
 // TODO: remove Null and replace all of its usage with NOT_SET
 message Null {}
-
-
-// Attribute Value object
-
-message ValueObject {
-    oneof value {
-        string string = 1;
-        bool boolean = 2;
-        int64 long = 4;
-        double double = 6;
-        int64 datetime = 7; // time since epoch in milliseconds
-    }
-}
