@@ -247,7 +247,6 @@ message Attribute {
             message Req {
                 oneof filter {
                     Type thingType = 1;
-                    Null null = 2;
                 }
             }
             message Res {
@@ -427,7 +426,6 @@ message Type {
         message Res {
             oneof res {
                 Type type = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -468,7 +466,6 @@ message Rule {
         message Res {
             oneof res {
                 string pattern = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -478,7 +475,6 @@ message Rule {
         message Res {
             oneof res {
                 string pattern = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -551,7 +547,6 @@ message ThingType {
             message Req {
                 oneof filter {
                     AttributeType.VALUE_TYPE valueType = 1;
-                    Null NULL = 2; // TODO: remove Null and replace all of its usage with NOT_SET
                 }
                 bool keysOnly = 3;
             }
@@ -575,7 +570,6 @@ message ThingType {
             Type attributeType = 1;
             oneof overridden {
                 Type overriddenType = 2;
-                Null NULL = 3; // TODO: remove Null and replace all of its usage with NOT_SET
             }
             bool isKey = 4;
         }
@@ -686,7 +680,6 @@ message AttributeType {
         message Res {
             oneof res {
                 Thing attribute = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -705,7 +698,3 @@ message AttributeType {
         message Res {}
     }
 }
-
-
-// TODO: remove Null and replace all of its usage with NOT_SET
-message Null {}
