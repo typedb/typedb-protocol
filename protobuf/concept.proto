@@ -399,6 +399,7 @@ message Type {
     SCHEMA schema = 2;
     AttributeType.VALUE_TYPE valueType = 3;
     bool root = 4;
+    string scopedLabel = 5;
 
     enum SCHEMA {
         THING_TYPE = 0;
