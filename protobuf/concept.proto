@@ -111,19 +111,11 @@ message ThingMethod {
 
 message Thing {
     bytes iid = 1;
-    SCHEMA schema = 2;
-    Type type = 3;
-    AttributeType.VALUE_TYPE valueType = 4;
+    Type type = 2;
 
     // Pre-filled responses:
-    Thing.IsInferred.Res inferred_res = 5;
-    Attribute.GetValue.Res value_res = 6;
-
-    enum SCHEMA {
-        ENTITY = 0;
-        RELATION = 1;
-        ATTRIBUTE = 2;
-    }
+    Thing.IsInferred.Res inferred_res = 3;
+    Attribute.GetValue.Res value_res = 4;
 
     message Delete {
         message Req {}
