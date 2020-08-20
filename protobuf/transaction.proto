@@ -126,19 +126,17 @@ message Transaction {
         message Res {
             oneof res {
                 grakn.protocol.Type type = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
 
     message GetThing {
         message Req {
-            bytes id = 1;
+            bytes iid = 1;
         }
         message Res {
             oneof res {
                 Thing thing = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }

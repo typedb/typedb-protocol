@@ -112,12 +112,8 @@ message ThingMethod {
 message Thing {
     bytes iid = 1;
     SCHEMA schema = 2;
-    Type type = 3;
-    AttributeType.VALUE_TYPE valueType = 4;
-
-    // Pre-filled responses:
-    Thing.IsInferred.Res inferred_res = 5;
-    Attribute.GetValue.Res value_res = 6;
+    AttributeType.VALUE_TYPE valueType = 3;
+    Attribute.Value value = 4;
 
     enum SCHEMA {
         ENTITY = 0;
@@ -242,7 +238,7 @@ message Attribute {
     message GetValue {
         message Req {}
         message Res {
-            ValueObject value = 1;
+            Value value = 1;
         }
     }
 
@@ -251,12 +247,21 @@ message Attribute {
             message Req {
                 oneof filter {
                     Type thingType = 1;
-                    Null null = 2;
                 }
             }
             message Res {
                 Thing thing = 1;
             }
+        }
+    }
+
+    message Value {
+        oneof value {
+            string string = 1;
+            bool boolean = 2;
+            int64 long = 4;
+            double double = 6;
+            int64 datetime = 7; // time since epoch in milliseconds
         }
     }
 }
@@ -393,6 +398,7 @@ message Type {
     SCHEMA schema = 2;
     AttributeType.VALUE_TYPE valueType = 3;
     bool root = 4;
+    string scopedLabel = 5;
 
     enum SCHEMA {
         THING_TYPE = 0;
@@ -420,7 +426,6 @@ message Type {
         message Res {
             oneof res {
                 Type type = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -461,7 +466,6 @@ message Rule {
         message Res {
             oneof res {
                 string pattern = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -471,7 +475,6 @@ message Rule {
         message Res {
             oneof res {
                 string pattern = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -544,7 +547,6 @@ message ThingType {
             message Req {
                 oneof filter {
                     AttributeType.VALUE_TYPE valueType = 1;
-                    Null NULL = 2; // TODO: remove Null and replace all of its usage with NOT_SET
                 }
                 bool keysOnly = 3;
             }
@@ -568,7 +570,6 @@ message ThingType {
             Type attributeType = 1;
             oneof overridden {
                 Type overriddenType = 2;
-                Null NULL = 3; // TODO: remove Null and replace all of its usage with NOT_SET
             }
             bool isKey = 4;
         }
@@ -665,7 +666,7 @@ message AttributeType {
 
     message Put {
         message Req {
-            ValueObject value = 1;
+            Attribute.Value value = 1;
         }
         message Res {
             Thing attribute = 1;
@@ -674,12 +675,11 @@ message AttributeType {
 
     message Get {
         message Req {
-            ValueObject value = 1;
+            Attribute.Value value = 1;
         }
         message Res {
             oneof res {
                 Thing attribute = 1;
-                Null null = 2; // TODO: remove Null and replace all of its usage with NOT_SET
             }
         }
     }
@@ -696,22 +696,5 @@ message AttributeType {
             string regex = 1;
         }
         message Res {}
-    }
-}
-
-
-// TODO: remove Null and replace all of its usage with NOT_SET
-message Null {}
-
-
-// Attribute Value object
-
-message ValueObject {
-    oneof value {
-        string string = 1;
-        bool boolean = 2;
-        int64 long = 4;
-        double double = 6;
-        int64 datetime = 7; // time since epoch in milliseconds
     }
 }
