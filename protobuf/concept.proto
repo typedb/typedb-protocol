@@ -651,9 +651,7 @@ message RelationType {
                 string overriddenLabel = 2;
             }
         }
-        message Res {
-            Type role = 1;
-        }
+        message Res {}
     }
 }
 
