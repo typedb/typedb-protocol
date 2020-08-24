@@ -657,11 +657,12 @@ message RelationType {
 message AttributeType {
 
     enum VALUE_TYPE {
-        BOOLEAN = 0;
-        LONG = 1;
-        DOUBLE = 2;
-        STRING = 3;
-        DATETIME = 4;
+        OBJECT = 0;
+        BOOLEAN = 1;
+        LONG = 2;
+        DOUBLE = 3;
+        STRING = 4;
+        DATETIME = 5;
     }
 
     message Put {
