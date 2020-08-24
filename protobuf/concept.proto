@@ -275,8 +275,9 @@ message TypeMethod {
             // Type method requests
             Type.Delete.Req type_delete_req = 200;
             Type.SetLabel.Req type_setLabel_req = 201;
-            Type.GetSupertype.Req type_getSupertype_req = 202;
-            Type.SetSupertype.Req type_setSupertype_req = 203;
+            Type.IsAbstract.Req type_isAbstract_req = 202;
+            Type.GetSupertype.Req type_getSupertype_req = 203;
+            Type.SetSupertype.Req type_setSupertype_req = 204;
 
             // Rule method requests
             Rule.When.Req rule_when_req = 300;
@@ -286,7 +287,6 @@ message TypeMethod {
             RoleType.GetRelation.Req roleType_getRelation_req = 400;
 
             // ThingType method requests
-            ThingType.IsAbstract.Req thingType_isAbstract_req = 500;
             ThingType.SetAbstract.Req thingType_setAbstract_req = 501;
             ThingType.UnsetAbstract.Req thingType_unsetAbstract_req = 502;
             ThingType.SetOwns.Req thingType_setOwns_req = 506;
@@ -314,8 +314,9 @@ message TypeMethod {
             // Type method responses
             Type.Delete.Res type_delete_res = 200;
             Type.SetLabel.Res type_setLabel_res = 201;
-            Type.GetSupertype.Res type_getSupertype_res = 202;
-            Type.SetSupertype.Res type_setSupertype_res = 203;
+            Type.IsAbstract.Res type_isAbstract_res = 202;
+            Type.GetSupertype.Res type_getSupertype_res = 203;
+            Type.SetSupertype.Res type_setSupertype_res = 204;
 
             // Rule method responses
             Rule.When.Res rule_when_res = 300;
@@ -325,7 +326,6 @@ message TypeMethod {
             RoleType.GetRelation.Res roleType_getRelation_res = 400;
 
             // ThingType method responses
-            ThingType.IsAbstract.Res thingType_isAbstract_res = 500;
             ThingType.SetAbstract.Res thingType_setAbstract_res = 501;
             ThingType.UnsetAbstract.Res thingType_unsetAbstract_res = 502;
             ThingType.SetOwns.Res thingType_setOwns_res = 506;
@@ -420,7 +420,7 @@ message Type {
         }
         message Res {}
     }
-    
+
     message IsAbstract {
         message Req {}
         message Res {
