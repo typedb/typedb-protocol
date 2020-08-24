@@ -647,6 +647,9 @@ message RelationType {
     message SetRelates {
         message Req {
             string label = 1;
+            oneof overridden {
+                string overriddenLabel = 2;
+            }
         }
         message Res {
             Type role = 1;
