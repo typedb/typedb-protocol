@@ -640,7 +640,9 @@ message RelationType {
             string label = 1;
         }
         message Res {
-            Type role = 1;
+            oneof role {
+                Type roleType = 1;
+            }
         }
     }
 
