@@ -420,6 +420,13 @@ message Type {
         }
         message Res {}
     }
+    
+    message IsAbstract {
+        message Req {}
+        message Res {
+            bool abstract = 1;
+        }
+    }
 
     message GetSupertype {
         message Req {}
@@ -515,13 +522,6 @@ message RoleType {
 // ThingType methods
 
 message ThingType {
-
-    message IsAbstract {
-        message Req {}
-        message Res {
-            bool abstract = 1;
-        }
-    }
 
     message SetAbstract {
         message Req {}
