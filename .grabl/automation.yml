@@ -1,0 +1,44 @@
+#
+# Copyright (C) 2020 Grakn Labs
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+build:
+  correctness:
+    jobs:
+      build:
+        machine: graknlabs-ubuntu-20.04
+        script: |
+          bazel build //...
+      build-dependency:
+        machine: graknlabs-ubuntu-20.04
+        script: |
+          dependencies/maven/update.sh
+          git diff --exit-code dependencies/maven/artifacts.snapshot
+          bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
+      deploy-maven-snapshot:
+        filter:
+          owner: graknlabs
+          branch: master
+        machine: graknlabs-ubuntu-20.04
+        script: |
+          export DEPLOY_MAVEN_USERNAME=$REPO_GRAKN_USERNAME
+          export DEPLOY_MAVEN_PASSWORD=$REPO_GRAKN_PASSWORD
+          bazel run --define version=$(git rev-parse HEAD) //grpc/java:deploy-maven -- snapshot
+    execution:
+      - build
+      - build-dependency
+      - deploy-maven-snapshot:
+          depends: [build, build-dependency]

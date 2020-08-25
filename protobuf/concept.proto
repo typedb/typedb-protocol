@@ -275,8 +275,9 @@ message TypeMethod {
             // Type method requests
             Type.Delete.Req type_delete_req = 200;
             Type.SetLabel.Req type_setLabel_req = 201;
-            Type.GetSupertype.Req type_getSupertype_req = 202;
-            Type.SetSupertype.Req type_setSupertype_req = 203;
+            Type.IsAbstract.Req type_isAbstract_req = 202;
+            Type.GetSupertype.Req type_getSupertype_req = 203;
+            Type.SetSupertype.Req type_setSupertype_req = 204;
 
             // Rule method requests
             Rule.When.Req rule_when_req = 300;
@@ -286,7 +287,6 @@ message TypeMethod {
             RoleType.GetRelation.Req roleType_getRelation_req = 400;
 
             // ThingType method requests
-            ThingType.IsAbstract.Req thingType_isAbstract_req = 500;
             ThingType.SetAbstract.Req thingType_setAbstract_req = 501;
             ThingType.UnsetAbstract.Req thingType_unsetAbstract_req = 502;
             ThingType.SetOwns.Req thingType_setOwns_req = 506;
@@ -301,6 +301,7 @@ message TypeMethod {
             RelationType.Create.Req relationType_create_req = 700;
             RelationType.GetRelatesForRoleLabel.Req relationType_getRelatesForRoleLabel_req = 701;
             RelationType.SetRelates.Req relationType_setRelates_req = 702;
+            RelationType.UnsetRelates.Req relationType_unsetRelates_req = 703;
 
             // AttributeType method requests
             AttributeType.Put.Req attributeType_put_req = 800;
@@ -314,8 +315,9 @@ message TypeMethod {
             // Type method responses
             Type.Delete.Res type_delete_res = 200;
             Type.SetLabel.Res type_setLabel_res = 201;
-            Type.GetSupertype.Res type_getSupertype_res = 202;
-            Type.SetSupertype.Res type_setSupertype_res = 203;
+            Type.IsAbstract.Res type_isAbstract_res = 202;
+            Type.GetSupertype.Res type_getSupertype_res = 203;
+            Type.SetSupertype.Res type_setSupertype_res = 204;
 
             // Rule method responses
             Rule.When.Res rule_when_res = 300;
@@ -325,7 +327,6 @@ message TypeMethod {
             RoleType.GetRelation.Res roleType_getRelation_res = 400;
 
             // ThingType method responses
-            ThingType.IsAbstract.Res thingType_isAbstract_res = 500;
             ThingType.SetAbstract.Res thingType_setAbstract_res = 501;
             ThingType.UnsetAbstract.Res thingType_unsetAbstract_res = 502;
             ThingType.SetOwns.Res thingType_setOwns_res = 506;
@@ -340,6 +341,7 @@ message TypeMethod {
             RelationType.Create.Res relationType_create_res = 700;
             RelationType.GetRelatesForRoleLabel.Res relationType_getRelatesForRoleLabel_res = 701;
             RelationType.SetRelates.Res relationType_setRelates_res = 702;
+            RelationType.UnsetRelates.Res relationType_unsetRelates_res = 703;
 
             // AttributeType method responses
             AttributeType.Put.Res attributeType_put_res = 800;
@@ -367,6 +369,9 @@ message TypeMethod {
 
                 // RelationType iterator requests
                 RelationType.GetRelates.Iter.Req relationType_getRelates_iter_req = 701;
+
+                // AttributeType iterator requests
+                AttributeType.GetOwners.Iter.Req attributeType_getOwners_iter_req = 800;
             }
         }
 
@@ -387,6 +392,9 @@ message TypeMethod {
 
                 // RelationType iterator responses
                 RelationType.GetRelates.Iter.Res relationType_getRelates_iter_res = 701;
+
+                // AttributeType iterator responses
+                AttributeType.GetOwners.Iter.Res attributeType_getOwners_iter_res = 800;
             }
         }
     }
@@ -419,6 +427,13 @@ message Type {
             string label = 1;
         }
         message Res {}
+    }
+
+    message IsAbstract {
+        message Req {}
+        message Res {
+            bool abstract = 1;
+        }
     }
 
     message GetSupertype {
@@ -516,13 +531,6 @@ message RoleType {
 
 message ThingType {
 
-    message IsAbstract {
-        message Req {}
-        message Res {
-            bool abstract = 1;
-        }
-    }
-
     message SetAbstract {
         message Req {}
         message Res {}
@@ -579,6 +587,9 @@ message ThingType {
     message SetPlays {
         message Req {
             Type role = 1;
+            oneof overridden {
+                Type overriddenRole = 2;
+            }
         }
         message Res {}
     }
@@ -637,17 +648,27 @@ message RelationType {
             string label = 1;
         }
         message Res {
-            Type role = 1;
+            oneof role {
+                Type roleType = 1;
+            }
         }
     }
 
     message SetRelates {
         message Req {
             string label = 1;
+            oneof overridden {
+                string overriddenLabel = 2;
+            }
         }
-        message Res {
-            Type role = 1;
+        message Res {}
+    }
+
+    message UnsetRelates {
+        message Req {
+            string label = 1;
         }
+        message Res {}
     }
 }
 
@@ -657,11 +678,12 @@ message RelationType {
 message AttributeType {
 
     enum VALUE_TYPE {
-        BOOLEAN = 0;
-        LONG = 1;
-        DOUBLE = 2;
-        STRING = 3;
-        DATETIME = 4;
+        OBJECT = 0;
+        BOOLEAN = 1;
+        LONG = 2;
+        DOUBLE = 3;
+        STRING = 4;
+        DATETIME = 5;
     }
 
     message Put {
@@ -680,6 +702,17 @@ message AttributeType {
         message Res {
             oneof res {
                 Thing attribute = 1;
+            }
+        }
+    }
+
+    message GetOwners {
+        message Iter {
+            message Req {
+                bool onlyKey = 1;
+            }
+            message Res {
+                Type owner = 1;
             }
         }
     }
