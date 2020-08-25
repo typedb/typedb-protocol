@@ -301,6 +301,7 @@ message TypeMethod {
             RelationType.Create.Req relationType_create_req = 700;
             RelationType.GetRelatesForRoleLabel.Req relationType_getRelatesForRoleLabel_req = 701;
             RelationType.SetRelates.Req relationType_setRelates_req = 702;
+            RelationType.UnsetRelates.Req relationType_unsetRelates_req = 703;
 
             // AttributeType method requests
             AttributeType.Put.Req attributeType_put_req = 800;
@@ -340,6 +341,7 @@ message TypeMethod {
             RelationType.Create.Res relationType_create_res = 700;
             RelationType.GetRelatesForRoleLabel.Res relationType_getRelatesForRoleLabel_res = 701;
             RelationType.SetRelates.Res relationType_setRelates_res = 702;
+            RelationType.UnsetRelates.Res relationType_unsetRelates_res = 703;
 
             // AttributeType method responses
             AttributeType.Put.Res attributeType_put_res = 800;
@@ -367,6 +369,9 @@ message TypeMethod {
 
                 // RelationType iterator requests
                 RelationType.GetRelates.Iter.Req relationType_getRelates_iter_req = 701;
+
+                // AttributeType iterator requests
+                AttributeType.GetOwners.Iter.Req attributeType_getOwners_iter_req = 800;
             }
         }
 
@@ -387,6 +392,9 @@ message TypeMethod {
 
                 // RelationType iterator responses
                 RelationType.GetRelates.Iter.Res relationType_getRelates_iter_res = 701;
+
+                // AttributeType iterator responses
+                AttributeType.GetOwners.Iter.Res attributeType_getOwners_iter_res = 800;
             }
         }
     }
@@ -655,6 +663,13 @@ message RelationType {
         }
         message Res {}
     }
+
+    message UnsetRelates {
+        message Req {
+            string label = 1;
+        }
+        message Res {}
+    }
 }
 
 
@@ -687,6 +702,17 @@ message AttributeType {
         message Res {
             oneof res {
                 Thing attribute = 1;
+            }
+        }
+    }
+
+    message GetOwners {
+        message Iter {
+            message Req {
+                bool onlyKey = 1;
+            }
+            message Res {
+                Type owner = 1;
             }
         }
     }
