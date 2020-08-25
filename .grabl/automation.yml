@@ -22,6 +22,9 @@ build:
         machine: graknlabs-ubuntu-20.04
         script: |
           bazel build //...
+      build-dependency:
+        machine: graknlabs-ubuntu-20.04
+        script: |
           dependencies/maven/update.sh
           git diff --exit-code dependencies/maven/artifacts.snapshot
           bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
@@ -36,5 +39,6 @@ build:
           bazel run --define version=$(git rev-parse HEAD) //grpc/java:deploy-maven -- snapshot
     execution:
       - build
+      - build-dependency
       - deploy-maven-snapshot:
-          depends: [build]
+          depends: [build, build-dependency]
