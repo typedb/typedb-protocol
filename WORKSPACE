@@ -49,8 +49,8 @@ pip_repositories()
 load("@graknlabs_dependencies//tool/common:deps.bzl", "graknlabs_dependencies_ci_pip",
 graknlabs_dependencies_tool_maven_artifacts = "maven_artifacts")
 graknlabs_dependencies_ci_pip()
-load("@graknlabs_dependencies_ci_pip//:requirements.bzl", "pip_install")
-pip_install()
+load("@graknlabs_dependencies_ci_pip//:requirements.bzl", graknlabs_dependencies_pip_install = "pip_install")
+graknlabs_dependencies_pip_install()
 
 # Load //builder/grpc
 load("@graknlabs_dependencies//builder/grpc:deps.bzl", grpc_deps = "deps")
@@ -87,6 +87,8 @@ rules_pkg_dependencies()
 # Load //pip
 load("@graknlabs_bazel_distribution//pip:deps.bzl", pip_deps = "deps")
 pip_deps()
+load("@graknlabs_bazel_distribution_pip//:requirements.bzl", graknlabs_bazel_distribution_pip_install = "pip_install")
+graknlabs_bazel_distribution_pip_install()
 
 # Load //github
 load("@graknlabs_bazel_distribution//github:deps.bzl", github_deps = "deps")
