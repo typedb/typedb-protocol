@@ -18,7 +18,8 @@
 package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//java:java_grpc_compile.bzl", "java_grpc_compile")
 load("@graknlabs_bazel_distribution//maven:rules.bzl", "assemble_maven", "deploy_maven")
-load("@graknlabs_dependencies//library/maven:artifacts.bzl", "maven_overrides", maven_overrides_org = "artifacts")
+load("@graknlabs_dependencies//distribution/maven:version.bzl", "version")
+load("@graknlabs_dependencies//library/maven:artifacts.bzl", "artifacts")
 load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
 
 java_grpc_compile(
@@ -52,7 +53,7 @@ assemble_maven(
     name = "assemble-maven",
     target = ":protocol",
     package = "grpc",
-    version_overrides = maven_overrides(maven_overrides_org),
+    version_overrides = version(artifacts_org = artifacts),
     workspace_refs = "@graknlabs_protocol_workspace_refs//:refs.json"
 )
 
