@@ -63,18 +63,11 @@ message Transaction {
 
     message Iter {
         message Req {
-            Options options = 1;
             oneof req {
                 int32 iteratorID = 2;
                 Query.Iter.Req query_iter_req = 3;
                 ConceptMethod.Thing.Iter.Req conceptMethod_thing_iter_req = 4;
                 ConceptMethod.Type.Iter.Req conceptMethod_type_iter_req = 5;
-            }
-            message Options {
-                oneof batch_size {
-                    int32 number = 1;
-                    bool all = 2;
-                }
             }
         }
         message Res {
