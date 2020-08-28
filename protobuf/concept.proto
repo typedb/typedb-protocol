@@ -730,4 +730,30 @@ message AttributeType {
         }
         message Res {}
     }
+
+    message GetSubtypes {
+        message Iter {
+            message Req {
+                oneof req {
+                    VALUE_TYPE valueType = 1;
+                }
+            }
+            message Res {
+                Type type = 1;
+            }
+        }
+    }
+
+    message GetInstances {
+        message Iter {
+            message Req {
+                oneof req {
+                    VALUE_TYPE valueType = 1;
+                }
+            }
+            message Res {
+                Thing thing = 1;
+            }
+        }
+    }
 }
