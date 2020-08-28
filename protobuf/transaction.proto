@@ -71,7 +71,9 @@ message Transaction {
                 ConceptMethod.Type.Iter.Req conceptMethod_type_iter_req = 5;
             }
             message Options {
-                int32 batch_size = 1;
+                oneof options {
+                    int32 batch_size = 1;
+                }
             }
         }
         message Res {
