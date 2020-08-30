@@ -403,10 +403,10 @@ message TypeMethod {
 // Type methods
 message Type {
     string label = 1;
-    SCHEMA schema = 2;
-    AttributeType.VALUE_TYPE valueType = 3;
-    bool root = 4;
-    string scopedLabel = 5;
+    string scope = 2;
+    SCHEMA schema = 3;
+    AttributeType.VALUE_TYPE valueType = 4;
+    bool root = 5;
 
     enum SCHEMA {
         THING_TYPE = 0;
