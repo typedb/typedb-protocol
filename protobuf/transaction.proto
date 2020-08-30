@@ -211,7 +211,8 @@ message Transaction {
             message Iter {
                 message Req {
                     string label = 1;
-                    TypeMethod.Iter.Req method = 2;
+                    string scope = 2;
+                    TypeMethod.Iter.Req method = 3;
                 }
                 message Res {
                     TypeMethod.Iter.Res response = 1;
