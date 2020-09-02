@@ -48,9 +48,6 @@ message ThingMethod {
             // Relation method requests
             Relation.AddPlayer.Req relation_addPlayer_req = 1002;
             Relation.RemovePlayer.Req relation_removePlayer_req = 1003;
-
-            // Attribute method requests
-            Attribute.GetValue.Req attribute_getValue_req = 1100;
         }
     }
     message Res {
@@ -65,9 +62,6 @@ message ThingMethod {
             // Relation method responses
             Relation.AddPlayer.Res relation_addPlayer_res = 1002;
             Relation.RemovePlayer.Res relation_removePlayer_res = 1003;
-
-            // Attribute method responses
-            Attribute.GetValue.Res attribute_getValue_res = 1100;
         }
     }
 
@@ -234,13 +228,6 @@ message Relation {
 // Attribute methods
 
 message Attribute {
-
-    message GetValue {
-        message Req {}
-        message Res {
-            Value value = 1;
-        }
-    }
 
     message GetOwners {
         message Iter {
