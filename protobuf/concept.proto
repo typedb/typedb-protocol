@@ -391,7 +391,7 @@ message TypeMethod {
 message Type {
     string label = 1;
     string scope = 2;
-    ENCODING ENCODING = 3;
+    ENCODING encoding = 3;
     AttributeType.VALUE_TYPE valueType = 4;
     bool root = 5;
 
