@@ -105,11 +105,11 @@ message ThingMethod {
 
 message Thing {
     bytes iid = 1;
-    SCHEMA schema = 2;
+    ENCODING encoding = 2;
     AttributeType.VALUE_TYPE valueType = 3;
     Attribute.Value value = 4;
 
-    enum SCHEMA {
+    enum ENCODING {
         ENTITY = 0;
         RELATION = 1;
         ATTRIBUTE = 2;
@@ -391,11 +391,11 @@ message TypeMethod {
 message Type {
     string label = 1;
     string scope = 2;
-    SCHEMA schema = 3;
+    ENCODING ENCODING = 3;
     AttributeType.VALUE_TYPE valueType = 4;
     bool root = 5;
 
-    enum SCHEMA {
+    enum ENCODING {
         THING_TYPE = 0;
         ENTITY_TYPE = 1;
         RELATION_TYPE = 2;
