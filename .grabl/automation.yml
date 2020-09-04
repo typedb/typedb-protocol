@@ -21,7 +21,7 @@ build:
       build:
         machine: graknlabs-ubuntu-20.04
         script: |
-          bazel build //...
+          bazel build --config=rbe //... --test_output=errors
       build-dependency:
         machine: graknlabs-ubuntu-20.04
         script: |
