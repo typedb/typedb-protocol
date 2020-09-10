@@ -484,15 +484,15 @@ message RuleMethod {
     message Req {
         oneof req {
             // Rule method requests
-            Rule.When.Req rule_when_req = 100;
-            Rule.Then.Req rule_then_req = 101;
+            Rule.When.Req rule_getwhen_req = 100;
+            Rule.Then.Req rule_getthen_req = 101;
         }
     }
     message Res {
         oneof res {
             // Rule method responses
-            Rule.When.Res rule_when_res = 100;
-            Rule.Then.Res rule_then_res = 101;
+            Rule.When.Res rule_getwhen_res = 100;
+            Rule.Then.Res rule_getthen_res = 101;
         }
     }
 }
