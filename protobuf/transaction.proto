@@ -174,7 +174,7 @@ message Transaction {
             string then = 3;
         }
         message Res {
-            grakn.protocol.Type rule = 1;
+            grakn.protocol.Rule rule = 1;
         }
     }
 
@@ -217,6 +217,16 @@ message Transaction {
                 message Res {
                     TypeMethod.Iter.Res response = 1;
                 }
+            }
+        }
+
+        message Rule {
+            message Req {
+                string label = 1;
+                RuleMethod.Req method = 2;
+            }
+            message Res {
+                RuleMethod.Res response = 1;
             }
         }
     }
