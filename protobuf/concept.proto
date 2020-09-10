@@ -110,7 +110,14 @@ message Rule {
     string when = 2;
     string then = 3;
 
-    message When {
+    message SetWhen {
+        message Req {
+            string pattern = 1;
+        }
+        message Res {}
+    }
+
+    message GetWhen {
         message Req {}
         message Res {
             oneof res {
@@ -119,7 +126,17 @@ message Rule {
         }
     }
 
-    message Then {
+    message SetThen {
+        message Req {
+            string pattern = 1;
+        }
+        message Res {
+            oneof res {
+            }
+        }
+    }
+
+    message GetThen {
         message Req {}
         message Res {
             oneof res {
@@ -276,8 +293,6 @@ message ThingMethod {
         }
     }
 }
-
-
 
 
 // Relation methods
@@ -496,6 +511,7 @@ message RuleMethod {
         }
     }
 }
+
 
 // RoleType methods
 

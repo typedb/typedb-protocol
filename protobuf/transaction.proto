@@ -42,7 +42,7 @@ message Transaction {
             PutRule.Req putRule_req = 12;
             ConceptMethod.Thing.Req conceptMethod_thing_req = 13;
             ConceptMethod.Type.Req conceptMethod_type_req = 14;
-            RuleMethod.Req ruleMethod_req = 15;
+            ConceptMethod.Rule.Req ruleMethod_req = 15;
             Explanation.Req explanation_req = 16;
         }
     }
@@ -60,7 +60,7 @@ message Transaction {
             PutRule.Res putRule_res = 12;
             ConceptMethod.Thing.Res conceptMethod_thing_res = 13;
             ConceptMethod.Type.Res conceptMethod_type_res = 14;
-            RuleMethod.Req ruleMethod_res = 15;
+            ConceptMethod.Rule.Res ruleMethod_res = 15;
             Explanation.Res explanation_res = 16;
         }
     }
