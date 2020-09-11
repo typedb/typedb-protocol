@@ -17,28 +17,23 @@
 
 build:
   correctness:
-    jobs:
-      build:
-        machine: graknlabs-ubuntu-20.04
-        script: |
-          bazel build --config=rbe //... --test_output=errors
-      build-dependency:
-        machine: graknlabs-ubuntu-20.04
-        script: |
-          dependencies/maven/update.sh
-          git diff --exit-code dependencies/maven/artifacts.snapshot
-          bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
-      deploy-maven-snapshot:
-        filter:
-          owner: graknlabs
-          branch: master
-        machine: graknlabs-ubuntu-20.04
-        script: |
-          export DEPLOY_MAVEN_USERNAME=$REPO_GRAKN_USERNAME
-          export DEPLOY_MAVEN_PASSWORD=$REPO_GRAKN_PASSWORD
-          bazel run --define version=$(git rev-parse HEAD) //grpc/java:deploy-maven -- snapshot
-    execution:
-      - build
-      - build-dependency
-      - deploy-maven-snapshot:
-          depends: [build, build-dependency]
+    build:
+      machine: graknlabs-ubuntu-20.04
+      script: |
+        bazel build --config=rbe //... --test_output=errors
+    build-dependency:
+      machine: graknlabs-ubuntu-20.04
+      script: |
+        dependencies/maven/update.sh
+        git diff --exit-code dependencies/maven/artifacts.snapshot
+        bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
+    deploy-maven-snapshot:
+      filter:
+        owner: graknlabs
+        branch: master
+      machine: graknlabs-ubuntu-20.04
+      dependencies: [build, build-dependency]
+      script: |
+        export DEPLOY_MAVEN_USERNAME=$REPO_GRAKN_USERNAME
+        export DEPLOY_MAVEN_PASSWORD=$REPO_GRAKN_PASSWORD
+        bazel run --define version=$(git rev-parse HEAD) //grpc/java:deploy-maven -- snapshot
