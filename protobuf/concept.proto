@@ -22,210 +22,6 @@ option java_outer_classname = "ConceptProto";
 
 package grakn.protocol;
 
-
-// Concept
-
-message Concept {
-    oneof concept {
-        Thing thing = 1;
-        Type type = 2;
-    }
-}
-
-// Type
-
-message Type {
-    string label = 1;
-    string scope = 2;
-    ENCODING encoding = 3;
-    AttributeType.VALUE_TYPE valueType = 4;
-    bool root = 5;
-
-    enum ENCODING {
-        THING_TYPE = 0;
-        ENTITY_TYPE = 1;
-        RELATION_TYPE = 2;
-        ATTRIBUTE_TYPE = 3;
-        ROLE_TYPE = 4;
-    }
-
-    message Delete {
-        message Req {}
-        message Res {}
-    }
-
-    message SetLabel {
-        message Req {
-            string label = 1;
-        }
-        message Res {}
-    }
-
-    message IsAbstract {
-        message Req {}
-        message Res {
-            bool abstract = 1;
-        }
-    }
-
-    message GetSupertype {
-        message Req {}
-        message Res {
-            oneof res {
-                Type type = 1;
-            }
-        }
-    }
-
-    message SetSupertype {
-        message Req {
-            Type type = 1;
-        }
-        message Res {}
-    }
-
-    message GetSupertypes {
-        message Iter {
-            message Req {}
-            message Res {
-                Type type = 1;
-            }
-        }
-    }
-
-    message GetSubtypes {
-        message Iter {
-            message Req {}
-            message Res {
-                Type type = 1;
-            }
-        }
-    }
-}
-
-// Rule
-
-message Rule {
-    string label = 1;
-    string when = 2;
-    string then = 3;
-
-    message SetWhen {
-        message Req {
-            string pattern = 1;
-        }
-        message Res {}
-    }
-
-    message GetWhen {
-        message Req {}
-        message Res {
-            oneof res {
-                string pattern = 1;
-            }
-        }
-    }
-
-    message SetThen {
-        message Req {
-            string pattern = 1;
-        }
-        message Res {}
-    }
-
-    message GetThen {
-        message Req {}
-        message Res {
-            oneof res {
-                string pattern = 1;
-            }
-        }
-    }
-}
-
-
-// Thing
-
-message Thing {
-    bytes iid = 1;
-    ENCODING encoding = 2;
-    AttributeType.VALUE_TYPE valueType = 3;
-    Attribute.Value value = 4;
-
-    enum ENCODING {
-        ENTITY = 0;
-        RELATION = 1;
-        ATTRIBUTE = 2;
-    }
-
-    message Delete {
-        message Req {}
-        message Res {}
-    }
-
-    message IsInferred {
-        message Req {}
-        message Res {
-            bool inferred = 1;
-        }
-    }
-
-    message GetType {
-        message Req {}
-        message Res {
-            Type thingType = 1;
-        }
-    }
-
-    message SetHas {
-        message Req {
-            Thing attribute = 1;
-        }
-        message Res {}
-    }
-
-    message UnsetHas {
-        message Req {
-            Thing attribute = 1;
-        }
-        message Res {}
-    }
-
-    message GetHas {
-        message Iter {
-            message Req {
-                repeated Type attributeTypes = 1;
-                bool keysOnly = 2;
-            }
-            message Res {
-                Thing attribute = 1;
-            }
-        }
-    }
-
-    message GetPlays {
-        message Iter {
-            message Req {}
-            message Res {
-                Type roleType = 1;
-            }
-        }
-    }
-
-    message GetRelations {
-        message Iter {
-            message Req {
-                repeated Type roleTypes = 1;
-            }
-            message Res {
-                Thing relation = 1;
-            }
-        }
-    }
-}
-
-// Thing methods
-
 message ThingMethod {
     message Req {
         oneof req {
@@ -255,7 +51,6 @@ message ThingMethod {
             Relation.RemovePlayer.Res relation_removePlayer_res = 201;
         }
     }
-
     message Iter {
         message Req {
             oneof req {
@@ -272,7 +67,6 @@ message ThingMethod {
                 Attribute.GetOwners.Iter.Req attribute_getOwners_iter_req = 302;
             }
         }
-
         message Res {
             oneof res {
                 // Thing iterator responses
@@ -290,81 +84,6 @@ message ThingMethod {
         }
     }
 }
-
-
-// Relation methods
-
-message Relation {
-
-    message GetPlayers {
-        message Iter {
-            message Req {
-                repeated Type roleTypes = 1;
-            }
-            message Res {
-                Thing thing = 1;
-            }
-        }
-    }
-
-    message GetPlayersByRoleType {
-        message Iter {
-            message Req {}
-            message Res {
-                Type roleType = 1;
-                Thing player = 2;
-            }
-        }
-    }
-
-    message AddPlayer {
-        message Req {
-            Type roleType = 1;
-            Thing player = 2;
-        }
-        message Res {}
-    }
-
-    message RemovePlayer {
-        message Req {
-            Type roleType = 1;
-            Thing player = 2;
-        }
-        message Res {}
-    }
-}
-
-
-// Attribute methods
-
-message Attribute {
-
-    message GetOwners {
-        message Iter {
-            message Req {
-                oneof filter {
-                    Type thingType = 1;
-                }
-            }
-            message Res {
-                Thing thing = 1;
-            }
-        }
-    }
-
-    message Value {
-        oneof value {
-            string string = 1;
-            bool boolean = 2;
-            int64 long = 4;
-            double double = 6;
-            int64 datetime = 7; // time since epoch in milliseconds
-        }
-    }
-}
-
-
-// Type methods
 
 message TypeMethod {
     message Req {
@@ -439,7 +158,6 @@ message TypeMethod {
             AttributeType.SetRegex.Res attributeType_setRegex_res = 603;
         }
     }
-
     message Iter {
         message Req {
             oneof req {
@@ -463,7 +181,6 @@ message TypeMethod {
                 AttributeType.GetOwners.Iter.Req attributeType_getOwners_iter_req = 600;
             }
         }
-
         message Res {
             oneof res {
                 // Type iterator responses
@@ -489,9 +206,6 @@ message TypeMethod {
     }
 }
 
-
-// Rule methods
-
 message RuleMethod {
     message Req {
         oneof req {
@@ -513,13 +227,252 @@ message RuleMethod {
     }
 }
 
+message Concept {
+    oneof concept {
+        Thing thing = 1;
+        Type type = 2;
+    }
+}
+
+message Thing {
+
+    bytes iid = 1;
+    ENCODING encoding = 2;
+    AttributeType.VALUE_TYPE valueType = 3;
+    Attribute.Value value = 4;
+
+    enum ENCODING {
+        ENTITY = 0;
+        RELATION = 1;
+        ATTRIBUTE = 2;
+    }
+
+    message Delete {
+        message Req {
+        }
+        message Res {
+        }
+    }
+
+    message IsInferred {
+        message Req {
+        }
+        message Res {
+            bool inferred = 1;
+        }
+    }
+
+    message GetType {
+        message Req {
+        }
+        message Res {
+            Type thingType = 1;
+        }
+    }
+
+    message SetHas {
+        message Req {
+            Thing attribute = 1;
+        }
+        message Res {
+        }
+    }
+
+    message UnsetHas {
+        message Req {
+            Thing attribute = 1;
+        }
+        message Res {
+        }
+    }
+
+    message GetHas {
+        message Iter {
+            message Req {
+                repeated Type attributeTypes = 1;
+                bool keysOnly = 2;
+            }
+            message Res {
+                Thing attribute = 1;
+            }
+        }
+    }
+
+    message GetPlays {
+        message Iter {
+            message Req {
+            }
+            message Res {
+                Type roleType = 1;
+            }
+        }
+    }
+
+    message GetRelations {
+        message Iter {
+            message Req {
+                repeated Type roleTypes = 1;
+            }
+            message Res {
+                Thing relation = 1;
+            }
+        }
+    }
+}
+
+message Relation {
+
+    message GetPlayers {
+        message Iter {
+            message Req {
+                repeated Type roleTypes = 1;
+            }
+            message Res {
+                Thing thing = 1;
+            }
+        }
+    }
+
+    message GetPlayersByRoleType {
+        message Iter {
+            message Req {
+            }
+            message Res {
+                Type roleType = 1;
+                Thing player = 2;
+            }
+        }
+    }
+
+    message AddPlayer {
+        message Req {
+            Type roleType = 1;
+            Thing player = 2;
+        }
+        message Res {
+        }
+    }
+
+    message RemovePlayer {
+        message Req {
+            Type roleType = 1;
+            Thing player = 2;
+        }
+        message Res {
+        }
+    }
+}
+
+message Attribute {
+
+    message GetOwners {
+        message Iter {
+            message Req {
+                oneof filter {
+                    Type thingType = 1;
+                }
+            }
+            message Res {
+                Thing thing = 1;
+            }
+        }
+    }
+
+    message Value {
+        oneof value {
+            string string = 1;
+            bool boolean = 2;
+            int64 long = 4;
+            double double = 6;
+            int64 datetime = 7; // time since epoch in milliseconds
+        }
+    }
+}
+
+message Type {
+    string label = 1;
+    string scope = 2;
+    ENCODING encoding = 3;
+    AttributeType.VALUE_TYPE valueType = 4;
+    bool root = 5;
+
+    enum ENCODING {
+        THING_TYPE = 0;
+        ENTITY_TYPE = 1;
+        RELATION_TYPE = 2;
+        ATTRIBUTE_TYPE = 3;
+        ROLE_TYPE = 4;
+    }
+
+    message Delete {
+        message Req {
+        }
+        message Res {
+        }
+    }
+
+    message SetLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+        }
+    }
+
+    message IsAbstract {
+        message Req {
+        }
+        message Res {
+            bool abstract = 1;
+        }
+    }
+
+    message GetSupertype {
+        message Req {
+        }
+        message Res {
+            oneof res {
+                Type type = 1;
+            }
+        }
+    }
+
+    message SetSupertype {
+        message Req {
+            Type type = 1;
+        }
+        message Res {
+        }
+    }
+
+    message GetSupertypes {
+        message Iter {
+            message Req {
+            }
+            message Res {
+                Type type = 1;
+            }
+        }
+    }
+
+    message GetSubtypes {
+        message Iter {
+            message Req {
+            }
+            message Res {
+                Type type = 1;
+            }
+        }
+    }
+}
 
 // RoleType methods
 
 message RoleType {
 
     message GetRelation {
-        message Req {}
+        message Req {
+        }
         message Res {
             Type relationType = 1;
         }
@@ -527,7 +480,8 @@ message RoleType {
 
     message GetRelations {
         message Iter {
-            message Req {}
+            message Req {
+            }
             message Res {
                 Type relationType = 1;
             }
@@ -536,7 +490,8 @@ message RoleType {
 
     message GetPlayers {
         message Iter {
-            message Req {}
+            message Req {
+            }
             message Res {
                 Type thingType = 1;
             }
@@ -544,24 +499,28 @@ message RoleType {
     }
 }
 
-
 // ThingType methods
 
 message ThingType {
 
     message SetAbstract {
-        message Req {}
-        message Res {}
+        message Req {
+        }
+        message Res {
+        }
     }
 
     message UnsetAbstract {
-        message Req {}
-        message Res {}
+        message Req {
+        }
+        message Res {
+        }
     }
 
     message GetInstances {
         message Iter {
-            message Req {}
+            message Req {
+            }
             message Res {
                 Thing thing = 1;
             }
@@ -584,7 +543,8 @@ message ThingType {
 
     message GetPlays {
         message Iter {
-            message Req {}
+            message Req {
+            }
             message Res {
                 Type role = 1;
             }
@@ -599,7 +559,8 @@ message ThingType {
             }
             bool isKey = 4;
         }
-        message Res {}
+        message Res {
+        }
     }
 
     message SetPlays {
@@ -609,44 +570,47 @@ message ThingType {
                 Type overriddenRole = 2;
             }
         }
-        message Res {}
+        message Res {
+        }
     }
 
     message UnsetOwns {
         message Req {
             Type attributeType = 1;
         }
-        message Res {}
+        message Res {
+        }
     }
 
     message UnsetPlays {
         message Req {
             Type role = 1;
         }
-        message Res {}
+        message Res {
+        }
     }
 }
-
 
 // EntityType methods
 
 message EntityType {
 
     message Create {
-        message Req {}
+        message Req {
+        }
         message Res {
             Thing entity = 1;
         }
     }
 }
 
-
 // RelationType methods
 
 message RelationType {
 
     message Create {
-        message Req {}
+        message Req {
+        }
         message Res {
             Thing relation = 1;
         }
@@ -654,7 +618,8 @@ message RelationType {
 
     message GetRelates {
         message Iter {
-            message Req {}
+            message Req {
+            }
             message Res {
                 Type role = 1;
             }
@@ -679,17 +644,18 @@ message RelationType {
                 string overriddenLabel = 2;
             }
         }
-        message Res {}
+        message Res {
+        }
     }
 
     message UnsetRelates {
         message Req {
             string label = 1;
         }
-        message Res {}
+        message Res {
+        }
     }
 }
-
 
 // AttributeType methods
 
@@ -736,7 +702,8 @@ message AttributeType {
     }
 
     message GetRegex {
-        message Req {}
+        message Req {
+        }
         message Res {
             string regex = 1;
         }
@@ -746,7 +713,8 @@ message AttributeType {
         message Req {
             string regex = 1;
         }
-        message Res {}
+        message Res {
+        }
     }
 
     message GetSubtypes {
@@ -771,6 +739,48 @@ message AttributeType {
             }
             message Res {
                 Thing thing = 1;
+            }
+        }
+    }
+}
+
+message Rule {
+    string label = 1;
+    string when = 2;
+    string then = 3;
+
+    message SetWhen {
+        message Req {
+            string pattern = 1;
+        }
+        message Res {
+        }
+    }
+
+    message GetWhen {
+        message Req {
+        }
+        message Res {
+            oneof res {
+                string pattern = 1;
+            }
+        }
+    }
+
+    message SetThen {
+        message Req {
+            string pattern = 1;
+        }
+        message Res {
+        }
+    }
+
+    message GetThen {
+        message Req {
+        }
+        message Res {
+            oneof res {
+                string pattern = 1;
             }
         }
     }
