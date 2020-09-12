@@ -42,7 +42,8 @@ message Transaction {
             PutRule.Req putRule_req = 12;
             ConceptMethod.Thing.Req conceptMethod_thing_req = 13;
             ConceptMethod.Type.Req conceptMethod_type_req = 14;
-            Explanation.Req explanation_req = 15;
+            ConceptMethod.Rule.Req ruleMethod_req = 15;
+            Explanation.Req explanation_req = 16;
         }
     }
 
@@ -59,7 +60,8 @@ message Transaction {
             PutRule.Res putRule_res = 12;
             ConceptMethod.Thing.Res conceptMethod_thing_res = 13;
             ConceptMethod.Type.Res conceptMethod_type_res = 14;
-            Explanation.Res explanation_res = 15;
+            ConceptMethod.Rule.Res ruleMethod_res = 15;
+            Explanation.Res explanation_res = 16;
         }
     }
 
@@ -174,7 +176,7 @@ message Transaction {
             string then = 3;
         }
         message Res {
-            grakn.protocol.Type rule = 1;
+            grakn.protocol.Rule rule = 1;
         }
     }
 
@@ -217,6 +219,16 @@ message Transaction {
                 message Res {
                     TypeMethod.Iter.Res response = 1;
                 }
+            }
+        }
+
+        message Rule {
+            message Req {
+                string label = 1;
+                RuleMethod.Req method = 2;
+            }
+            message Res {
+                RuleMethod.Res response = 1;
             }
         }
     }
