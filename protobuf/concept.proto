@@ -130,10 +130,7 @@ message Rule {
         message Req {
             string pattern = 1;
         }
-        message Res {
-            oneof res {
-            }
-        }
+        message Res {}
     }
 
     message GetThen {
@@ -236,8 +233,8 @@ message ThingMethod {
             Thing.Delete.Req thing_delete_req = 100;
             Thing.GetType.Req thing_getType_req = 101;
             Thing.IsInferred.Req thing_isInferred_req = 102;
-            Thing.SetHas.Req thing_setHas_req = 106;
-            Thing.UnsetHas.Req thing_unsetHas_req = 107;
+            Thing.SetHas.Req thing_setHas_req = 103;
+            Thing.UnsetHas.Req thing_unsetHas_req = 104;
 
             // Relation method requests
             Relation.AddPlayer.Req relation_addPlayer_req = 200;
@@ -499,15 +496,19 @@ message RuleMethod {
     message Req {
         oneof req {
             // Rule method requests
-            Rule.When.Req rule_getwhen_req = 100;
-            Rule.Then.Req rule_getthen_req = 101;
+            Rule.GetWhen.Req rule_getWhen_req = 100;
+            Rule.GetThen.Req rule_getThen_req = 101;
+            Rule.SetWhen.Req rule_setWhen_req = 102;
+            Rule.SetThen.Req rule_setThen_req = 103;
         }
     }
     message Res {
         oneof res {
             // Rule method responses
-            Rule.When.Res rule_getwhen_res = 100;
-            Rule.Then.Res rule_getthen_res = 101;
+            Rule.GetWhen.Res rule_getWhen_res = 100;
+            Rule.GetThen.Res rule_getThen_res = 101;
+            Rule.SetWhen.Res rule_setWhen_res = 102;
+            Rule.SetThen.Res rule_setThen_res = 103;
         }
     }
 }
