@@ -24,6 +24,7 @@ package grakn.protocol;
 
 message ThingMethod {
     message Req {
+        bytes iid = 1;
         oneof req {
             // Thing method requests
             Thing.Delete.Req thing_delete_req = 100;
@@ -53,6 +54,7 @@ message ThingMethod {
     }
     message Iter {
         message Req {
+            bytes iid = 1;
             oneof req {
                 // Thing iterator requests
                 Thing.GetHas.Iter.Req thing_getHas_iter_req = 100;
@@ -87,6 +89,8 @@ message ThingMethod {
 
 message TypeMethod {
     message Req {
+        string label = 1;
+        string scope = 2;
         oneof req {
             // Type method requests
             Type.Delete.Req type_delete_req = 100;
@@ -160,6 +164,8 @@ message TypeMethod {
     }
     message Iter {
         message Req {
+            string label = 1;
+            string scope = 2;
             oneof req {
                 // Type iterator requests
                 Type.GetSupertypes.Iter.Req type_getSupertypes_iter_req = 100;
@@ -208,21 +214,24 @@ message TypeMethod {
 
 message RuleMethod {
     message Req {
+        string label = 1;
         oneof req {
-            // Rule method requests
-            Rule.GetWhen.Req rule_getWhen_req = 100;
-            Rule.GetThen.Req rule_getThen_req = 101;
-            Rule.SetWhen.Req rule_setWhen_req = 102;
-            Rule.SetThen.Req rule_setThen_req = 103;
+            Rule.Delete.Req rule_delete_req = 100;
+            Rule.SetLabel.Req rule_setLabel_req = 101;
+            Rule.GetWhen.Req rule_getWhen_req = 102;
+            Rule.GetThen.Req rule_getThen_req = 103;
+            Rule.SetWhen.Req rule_setWhen_req = 104;
+            Rule.SetThen.Req rule_setThen_req = 105;
         }
     }
     message Res {
         oneof res {
-            // Rule method responses
-            Rule.GetWhen.Res rule_getWhen_res = 100;
-            Rule.GetThen.Res rule_getThen_res = 101;
-            Rule.SetWhen.Res rule_setWhen_res = 102;
-            Rule.SetThen.Res rule_setThen_res = 103;
+            Rule.Delete.Res rule_delete_res = 100;
+            Rule.SetLabel.Res rule_setLabel_res = 101;
+            Rule.GetWhen.Res rule_getWhen_res = 102;
+            Rule.GetThen.Res rule_getThen_res = 103;
+            Rule.SetWhen.Res rule_setWhen_res = 104;
+            Rule.SetThen.Res rule_setThen_res = 105;
         }
     }
 }
@@ -248,23 +257,19 @@ message Thing {
     }
 
     message Delete {
-        message Req {
-        }
-        message Res {
-        }
+        message Req {}
+        message Res {}
     }
 
     message IsInferred {
-        message Req {
-        }
+        message Req {}
         message Res {
             bool inferred = 1;
         }
     }
 
     message GetType {
-        message Req {
-        }
+        message Req {}
         message Res {
             Type thingType = 1;
         }
@@ -274,16 +279,14 @@ message Thing {
         message Req {
             Thing attribute = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message UnsetHas {
         message Req {
             Thing attribute = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message GetHas {
@@ -300,8 +303,7 @@ message Thing {
 
     message GetPlays {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Type roleType = 1;
             }
@@ -335,8 +337,7 @@ message Relation {
 
     message GetPlayersByRoleType {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Type roleType = 1;
                 Thing player = 2;
@@ -349,8 +350,7 @@ message Relation {
             Type roleType = 1;
             Thing player = 2;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message RemovePlayer {
@@ -358,8 +358,7 @@ message Relation {
             Type roleType = 1;
             Thing player = 2;
         }
-        message Res {
-        }
+        message Res {}
     }
 }
 
@@ -405,31 +404,26 @@ message Type {
     }
 
     message Delete {
-        message Req {
-        }
-        message Res {
-        }
+        message Req {}
+        message Res {}
     }
 
     message SetLabel {
         message Req {
             string label = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message IsAbstract {
-        message Req {
-        }
+        message Req {}
         message Res {
             bool abstract = 1;
         }
     }
 
     message GetSupertype {
-        message Req {
-        }
+        message Req {}
         message Res {
             oneof res {
                 Type type = 1;
@@ -441,14 +435,12 @@ message Type {
         message Req {
             Type type = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message GetSupertypes {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Type type = 1;
             }
@@ -457,8 +449,7 @@ message Type {
 
     message GetSubtypes {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Type type = 1;
             }
@@ -471,8 +462,7 @@ message Type {
 message RoleType {
 
     message GetRelation {
-        message Req {
-        }
+        message Req {}
         message Res {
             Type relationType = 1;
         }
@@ -480,8 +470,7 @@ message RoleType {
 
     message GetRelations {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Type relationType = 1;
             }
@@ -490,8 +479,7 @@ message RoleType {
 
     message GetPlayers {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Type thingType = 1;
             }
@@ -504,23 +492,18 @@ message RoleType {
 message ThingType {
 
     message SetAbstract {
-        message Req {
-        }
-        message Res {
-        }
+        message Req {}
+        message Res {}
     }
 
     message UnsetAbstract {
-        message Req {
-        }
-        message Res {
-        }
+        message Req {}
+        message Res {}
     }
 
     message GetInstances {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Thing thing = 1;
             }
@@ -543,8 +526,7 @@ message ThingType {
 
     message GetPlays {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Type role = 1;
             }
@@ -559,8 +541,7 @@ message ThingType {
             }
             bool isKey = 4;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message SetPlays {
@@ -570,24 +551,21 @@ message ThingType {
                 Type overriddenRole = 2;
             }
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message UnsetOwns {
         message Req {
             Type attributeType = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message UnsetPlays {
         message Req {
             Type role = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 }
 
@@ -596,8 +574,7 @@ message ThingType {
 message EntityType {
 
     message Create {
-        message Req {
-        }
+        message Req {}
         message Res {
             Thing entity = 1;
         }
@@ -609,8 +586,7 @@ message EntityType {
 message RelationType {
 
     message Create {
-        message Req {
-        }
+        message Req {}
         message Res {
             Thing relation = 1;
         }
@@ -618,8 +594,7 @@ message RelationType {
 
     message GetRelates {
         message Iter {
-            message Req {
-            }
+            message Req {}
             message Res {
                 Type role = 1;
             }
@@ -644,16 +619,14 @@ message RelationType {
                 string overriddenLabel = 2;
             }
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message UnsetRelates {
         message Req {
             string label = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 }
 
@@ -702,8 +675,7 @@ message AttributeType {
     }
 
     message GetRegex {
-        message Req {
-        }
+        message Req {}
         message Res {
             string regex = 1;
         }
@@ -713,8 +685,7 @@ message AttributeType {
         message Req {
             string regex = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message GetSubtypes {
@@ -749,17 +720,27 @@ message Rule {
     string when = 2;
     string then = 3;
 
+    message Delete {
+        message Req {}
+        message Res {}
+    }
+
+    message SetLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {}
+    }
+
     message SetWhen {
         message Req {
             string pattern = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message GetWhen {
-        message Req {
-        }
+        message Req {}
         message Res {
             oneof res {
                 string pattern = 1;
@@ -771,13 +752,11 @@ message Rule {
         message Req {
             string pattern = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 
     message GetThen {
-        message Req {
-        }
+        message Req {}
         message Res {
             oneof res {
                 string pattern = 1;

@@ -46,7 +46,6 @@ message Session {
         message Req {
             bytes sessionID = 1;
         }
-        message Res {
-        }
+        message Res {}
     }
 }
