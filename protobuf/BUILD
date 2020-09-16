@@ -44,8 +44,19 @@ proto_library(
     deps = [
         ":answer-proto",
         ":concept-proto",
-        ":options-proto"
+        ":options-proto",
+        ":query-proto",
     ]
+)
+
+proto_library(
+    name = "query-proto",
+    srcs = ["query.proto"],
+    deps = [
+        ":answer-proto",
+        ":concept-proto",
+        ":options-proto",
+    ],
 )
 
 proto_library(

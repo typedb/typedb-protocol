@@ -20,9 +20,9 @@ syntax = "proto3";
 option java_package = "grakn.protocol";
 option java_outer_classname = "TransactionProto";
 
-import "protobuf/answer.proto";
 import "protobuf/concept.proto";
 import "protobuf/options.proto";
+import "protobuf/query.proto";
 
 package grakn.protocol;
 
@@ -33,7 +33,8 @@ message Transaction {
         oneof req {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
-            Iter.Req iter_req = 4;
+            Iter.Req iter_req = 3;
+            Query.Req query_req = 4;
             GetType.Req getType_req = 5;
             GetThing.Req getThing_req = 6;
             GetRule.Req getRule_req = 7;
@@ -44,7 +45,7 @@ message Transaction {
             ThingMethod.Req thingMethod_req = 13;
             TypeMethod.Req typeMethod_req = 14;
             RuleMethod.Req ruleMethod_req = 15;
-            Explanation.Req explanation_req = 16;
+            //Explanation.Req explanation_req = 16;
         }
     }
 
@@ -52,7 +53,8 @@ message Transaction {
         oneof res {
             Open.Res open_res = 1;
             Commit.Res commit_res = 2;
-            Iter.Res iter_res = 4;
+            Iter.Res iter_res = 3;
+            Query.Res query_res = 4;
             GetType.Res getType_res = 5;
             GetThing.Res getThing_res = 6;
             GetRule.Res getRule_res = 7;
@@ -63,7 +65,7 @@ message Transaction {
             ThingMethod.Res thingMethod_res = 13;
             TypeMethod.Res typeMethod_res = 14;
             RuleMethod.Res ruleMethod_res = 15;
-            Explanation.Res explanation_res = 16;
+            //Explanation.Res explanation_res = 16;
         }
     }
 
@@ -104,18 +106,6 @@ message Transaction {
     message Commit {
         message Req {}
         message Res {}
-    }
-
-    message Query {
-        message Iter {
-            message Req {
-                string query = 1;
-                Options options = 2;
-            }
-            message Res {
-                Answer answer = 1;
-            }
-        }
     }
 
     message GetType {
