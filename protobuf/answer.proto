@@ -40,7 +40,6 @@ message AnswerGroup {
 message ConceptMap {
     map<string, Concept> map = 1;
     string pattern = 2;
-    bool hasExplanation = 3;
 }
 
 message Number {
