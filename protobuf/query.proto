@@ -29,6 +29,7 @@ package grakn.protocol;
 message Query {
 
     message Req {
+        Options options = 1;
         oneof req {
             Graql.Delete.Req delete_req = 100;
             Graql.Define.Req define_req = 101;
@@ -46,6 +47,7 @@ message Query {
 
     message Iter {
         message Req {
+            Options options = 1;
             oneof req {
                 Graql.Match.Iter.Req match_iter_req = 100;
                 Graql.Insert.Iter.Req insert_iter_req = 101;
@@ -66,7 +68,6 @@ message Graql {
         message Iter {
             message Req {
                 string query = 1;
-                Options options = 2;
             }
             message Res {
                 ConceptMap answer = 1;
@@ -78,7 +79,6 @@ message Graql {
         message Iter {
             message Req {
                 string query = 1;
-                Options options = 2;
             }
             message Res {
                 ConceptMap answer = 1;
@@ -89,7 +89,6 @@ message Graql {
     message Delete {
         message Req {
             string query = 1;
-            Options options = 2;
         }
         message Res {}
     }
@@ -97,7 +96,6 @@ message Graql {
     message Define {
         message Req {
             string query = 1;
-            Options options = 2;
         }
         message Res {
             repeated Type thingType = 1;
@@ -107,7 +105,6 @@ message Graql {
     message Undefine {
         message Req {
             string query = 1;
-            Options options = 2;
         }
         message Res {}
     }
