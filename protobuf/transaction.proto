@@ -20,9 +20,9 @@ syntax = "proto3";
 option java_package = "grakn.protocol";
 option java_outer_classname = "TransactionProto";
 
-import "protobuf/answer.proto";
 import "protobuf/concept.proto";
 import "protobuf/options.proto";
+import "protobuf/query.proto";
 
 package grakn.protocol;
 
@@ -33,18 +33,20 @@ message Transaction {
         oneof req {
             Open.Req open_req = 1;
             Commit.Req commit_req = 2;
+            Rollback.Req rollback_req = 3;
             Iter.Req iter_req = 4;
-            GetType.Req getType_req = 5;
-            GetThing.Req getThing_req = 6;
-            GetRule.Req getRule_req = 7;
-            PutEntityType.Req putEntityType_req = 8;
-            PutAttributeType.Req putAttributeType_req = 9;
-            PutRelationType.Req putRelationType_req = 10;
+            Query.Req query_req = 5;
+            GetType.Req getType_req = 6;
+            GetThing.Req getThing_req = 7;
+            GetRule.Req getRule_req = 8;
+            PutEntityType.Req putEntityType_req = 9;
+            PutAttributeType.Req putAttributeType_req = 10;
+            PutRelationType.Req putRelationType_req = 11;
             PutRule.Req putRule_req = 12;
             ThingMethod.Req thingMethod_req = 13;
             TypeMethod.Req typeMethod_req = 14;
             RuleMethod.Req ruleMethod_req = 15;
-            Explanation.Req explanation_req = 16;
+            //Explanation.Req explanation_req = 16;
         }
     }
 
@@ -52,18 +54,20 @@ message Transaction {
         oneof res {
             Open.Res open_res = 1;
             Commit.Res commit_res = 2;
+            Rollback.Res rollback_res = 3;
             Iter.Res iter_res = 4;
-            GetType.Res getType_res = 5;
-            GetThing.Res getThing_res = 6;
-            GetRule.Res getRule_res = 7;
-            PutEntityType.Res putEntityType_res = 8;
-            PutAttributeType.Res putAttributeType_res = 9;
-            PutRelationType.Res putRelationType_res = 10;
+            Query.Res query_res = 5;
+            GetType.Res getType_res = 6;
+            GetThing.Res getThing_res = 7;
+            GetRule.Res getRule_res = 8;
+            PutEntityType.Res putEntityType_res = 9;
+            PutAttributeType.Res putAttributeType_res = 10;
+            PutRelationType.Res putRelationType_res = 11;
             PutRule.Res putRule_res = 12;
             ThingMethod.Res thingMethod_res = 13;
             TypeMethod.Res typeMethod_res = 14;
             RuleMethod.Res ruleMethod_res = 15;
-            Explanation.Res explanation_res = 16;
+            //Explanation.Res explanation_res = 16;
         }
     }
 
@@ -106,16 +110,9 @@ message Transaction {
         message Res {}
     }
 
-    message Query {
-        message Iter {
-            message Req {
-                string query = 1;
-                Options options = 2;
-            }
-            message Res {
-                Answer answer = 1;
-            }
-        }
+    message Rollback {
+        message Req {}
+        message Res {}
     }
 
     message GetType {

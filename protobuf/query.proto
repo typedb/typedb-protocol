@@ -1,0 +1,111 @@
+//
+// Copyright (C) 2020 Grakn Labs
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+syntax = "proto3";
+
+option java_package = "grakn.protocol";
+option java_outer_classname = "QueryProto";
+
+import "protobuf/answer.proto";
+import "protobuf/concept.proto";
+import "protobuf/options.proto";
+
+package grakn.protocol;
+
+message Query {
+
+    message Req {
+        Options options = 1;
+        oneof req {
+            Graql.Delete.Req delete_req = 100;
+            Graql.Define.Req define_req = 101;
+            Graql.Undefine.Req undefine_req = 102;
+        }
+    }
+
+    message Res {
+        oneof res {
+            Graql.Delete.Res delete_res = 100;
+            Graql.Define.Res define_res = 101;
+            Graql.Undefine.Res undefine_res = 102;
+        }
+    }
+
+    message Iter {
+        message Req {
+            Options options = 1;
+            oneof req {
+                Graql.Match.Iter.Req match_iter_req = 100;
+                Graql.Insert.Iter.Req insert_iter_req = 101;
+            }
+        }
+        message Res {
+            oneof res {
+                Graql.Match.Iter.Res match_iter_res = 100;
+                Graql.Insert.Iter.Res insert_iter_res = 101;
+            }
+        }
+    }
+}
+
+message Graql {
+
+    message Match {
+        message Iter {
+            message Req {
+                string query = 1;
+            }
+            message Res {
+                ConceptMap answer = 1;
+            }
+        }
+    }
+
+    message Insert {
+        message Iter {
+            message Req {
+                string query = 1;
+            }
+            message Res {
+                ConceptMap answer = 1;
+            }
+        }
+    }
+
+    message Delete {
+        message Req {
+            string query = 1;
+        }
+        message Res {}
+    }
+
+    message Define {
+        message Req {
+            string query = 1;
+        }
+        message Res {
+            repeated Type thingType = 1;
+        }
+    }
+
+    message Undefine {
+        message Req {
+            string query = 1;
+        }
+        message Res {}
+    }
+}

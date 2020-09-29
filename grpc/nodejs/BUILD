@@ -25,6 +25,7 @@ node_grpc_compile(
         "//protobuf:database-proto",
         "//protobuf:session-proto",
         "//protobuf:transaction-proto",
+        "//protobuf:query-proto",
         "//protobuf:concept-proto",
         "//protobuf:answer-proto",
     ]

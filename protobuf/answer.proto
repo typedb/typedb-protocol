@@ -28,21 +28,7 @@ message Answer {
     oneof answer {
         AnswerGroup answerGroup = 1;
         ConceptMap conceptMap = 2;
-        ConceptList conceptList = 3;
-        ConceptSet conceptSet = 4;
-        ConceptSetMeasure conceptSetMeasure = 5;
-        Value value = 6;
-        Void void = 7;
-    }
-}
-
-message Explanation {
-    message Req {
-        ConceptMap explainable = 1;
-    }
-    message Res {
-        repeated ConceptMap explanation = 1;
-        Type rule = 2;
+        Number number = 3;
     }
 }
 
@@ -54,28 +40,6 @@ message AnswerGroup {
 message ConceptMap {
     map<string, Concept> map = 1;
     string pattern = 2;
-    bool hasExplanation = 3;
-}
-
-message ConceptList {
-    repeated bytes iids = 1;
-}
-
-message ConceptSet {
-    repeated bytes iids = 1;
-}
-
-message ConceptSetMeasure {
-    repeated bytes iids = 1;
-    Number measurement = 2;
-}
-
-message Value {
-    Number number = 1;
-}
-
-message Void {
-    string message = 1;
 }
 
 message Number {

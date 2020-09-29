@@ -30,6 +30,7 @@ java_grpc_compile(
         "//protobuf:session-proto",
         "//protobuf:transaction-proto",
         "//protobuf:answer-proto",
+        "//protobuf:query-proto",
         "//protobuf:concept-proto",
         "//protobuf:options-proto",
     ]
