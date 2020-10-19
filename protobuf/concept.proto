@@ -218,16 +218,12 @@ message RuleMethod {
         oneof req {
             Rule.Delete.Req rule_delete_req = 100;
             Rule.SetLabel.Req rule_setLabel_req = 101;
-            Rule.SetWhen.Req rule_setWhen_req = 102;
-            Rule.SetThen.Req rule_setThen_req = 103;
         }
     }
     message Res {
         oneof res {
             Rule.Delete.Res rule_delete_res = 100;
             Rule.SetLabel.Res rule_setLabel_res = 101;
-            Rule.SetWhen.Res rule_setWhen_res = 102;
-            Rule.SetThen.Res rule_setThen_res = 103;
         }
     }
 }
