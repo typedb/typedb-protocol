@@ -97,9 +97,7 @@ message Graql {
         message Req {
             string query = 1;
         }
-        message Res {
-            repeated Type thingType = 1;
-        }
+        message Res {}
     }
 
     message Undefine {
