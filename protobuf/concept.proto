@@ -332,8 +332,8 @@ message Type {
             Type.GetSubtypes.Req type_get_subtypes_req = 106;
 
             // RoleType method requests
-            RoleType.GetRelation.Req role_type_get_relation_req = 200;
-            RoleType.GetRelations.Req role_type_get_relations_req = 201;
+            RoleType.GetRelationType.Req role_type_get_relation_type_req = 200;
+            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 201;
             RoleType.GetPlayers.Req role_type_get_players_req = 202;
 
             // ThingType method requests
@@ -377,8 +377,8 @@ message Type {
             Type.GetSubtypes.Res type_get_subtypes_res = 106;
 
             // RoleType method responses
-            RoleType.GetRelation.Res role_type_get_relation_res = 200;
-            RoleType.GetRelations.Res role_type_get_relations_res = 201;
+            RoleType.GetRelationType.Res role_type_get_relation_type_res = 200;
+            RoleType.GetRelationTypes.Res role_type_get_relation_types_res = 201;
             RoleType.GetPlayers.Res role_type_get_players_res = 202;
 
             // ThingType method responses
@@ -475,14 +475,14 @@ message Type {
 
 message RoleType {
 
-    message GetRelation {
+    message GetRelationType {
         message Req {}
         message Res {
             Type relationType = 1;
         }
     }
 
-    message GetRelations {
+    message GetRelationTypes {
         message Req {}
         // @Iterable
         message Res {
