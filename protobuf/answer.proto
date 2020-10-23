@@ -26,8 +26,8 @@ package grakn.protocol;
 
 message Answer {
     oneof answer {
-        AnswerGroup answerGroup = 1;
-        ConceptMap conceptMap = 2;
+        AnswerGroup answer_group = 1;
+        ConceptMap concept_map = 2;
         Number number = 3;
     }
 }

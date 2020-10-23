@@ -18,16 +18,6 @@
 package(default_visibility = ["//visibility:public"])
 
 proto_library(
-    name = "grakn-proto",
-    srcs = ["grakn.proto"],
-    deps = [
-        ":database-proto",
-        ":session-proto",
-        ":transaction-proto"
-    ],
-)
-
-proto_library(
     name = "database-proto",
     srcs = ["database.proto"],
 )

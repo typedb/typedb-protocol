@@ -22,6 +22,15 @@ option java_outer_classname = "DatabaseProto";
 
 package grakn.protocol;
 
+service DatabaseService {
+
+    rpc contains (Database.Contains.Req) returns (Database.Contains.Res);
+    rpc create (Database.Create.Req) returns (Database.Create.Res);
+    rpc all (Database.All.Req) returns (Database.All.Res);
+    rpc delete (Database.Delete.Req) returns (Database.Delete.Res);
+
+}
+
 message Database {
 
     message Contains {

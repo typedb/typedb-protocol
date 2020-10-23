@@ -25,7 +25,6 @@ load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
 java_grpc_compile(
     name = "protocol-src",
     deps = [
-        "//protobuf:grakn-proto",
         "//protobuf:database-proto",
         "//protobuf:session-proto",
         "//protobuf:transaction-proto",

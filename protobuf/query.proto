@@ -34,6 +34,8 @@ message Query {
             Graql.Delete.Req delete_req = 100;
             Graql.Define.Req define_req = 101;
             Graql.Undefine.Req undefine_req = 102;
+            Graql.Match.Req match_req = 103;
+            Graql.Insert.Req insert_req = 104;
         }
     }
 
@@ -42,22 +44,8 @@ message Query {
             Graql.Delete.Res delete_res = 100;
             Graql.Define.Res define_res = 101;
             Graql.Undefine.Res undefine_res = 102;
-        }
-    }
-
-    message Iter {
-        message Req {
-            Options options = 1;
-            oneof req {
-                Graql.Match.Iter.Req match_iter_req = 100;
-                Graql.Insert.Iter.Req insert_iter_req = 101;
-            }
-        }
-        message Res {
-            oneof res {
-                Graql.Match.Iter.Res match_iter_res = 100;
-                Graql.Insert.Iter.Res insert_iter_res = 101;
-            }
+            Graql.Match.Res match_res = 103;
+            Graql.Insert.Res insert_res = 104;
         }
     }
 }
@@ -65,24 +53,22 @@ message Query {
 message Graql {
 
     message Match {
-        message Iter {
-            message Req {
-                string query = 1;
-            }
-            message Res {
-                ConceptMap answer = 1;
-            }
+        message Req {
+            string query = 1;
+        }
+        // @Iterable
+        message Res {
+            ConceptMap answer = 1;
         }
     }
 
     message Insert {
-        message Iter {
-            message Req {
-                string query = 1;
-            }
-            message Res {
-                ConceptMap answer = 1;
-            }
+        message Req {
+            string query = 1;
+        }
+        // @Iterable
+        message Res {
+            ConceptMap answer = 1;
         }
     }
 
