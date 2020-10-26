@@ -5,4 +5,5 @@ artifacts = [
     "io.grpc:grpc-core",
     "io.grpc:grpc-protobuf",
     "io.grpc:grpc-stub",
+    "javax.annotation:javax.annotation-api",
 ]
