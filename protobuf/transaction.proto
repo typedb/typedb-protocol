@@ -40,14 +40,15 @@ message Transaction {
         string id = 1;
         map<string, string> metadata = 2;
         oneof req {
-            Open.Req open_req = 3;
-            Commit.Req commit_req = 4;
-            Rollback.Req rollback_req = 5;
-            Query.Req query_req = 6;
-            ConceptManager.Req concept_manager_req = 7;
-            Thing.Req thing_req = 8;
-            grakn.protocol.Type.Req type_req = 9;
-            Rule.Req rule_req = 10;
+            Fetch.Req fetch_req = 3;
+            Open.Req open_req = 4;
+            Commit.Req commit_req = 5;
+            Rollback.Req rollback_req = 6;
+            Query.Req query_req = 7;
+            ConceptManager.Req concept_manager_req = 8;
+            Thing.Req thing_req = 9;
+            grakn.protocol.Type.Req type_req = 10;
+            Rule.Req rule_req = 11;
         }
     }
 
@@ -55,14 +56,15 @@ message Transaction {
         string id = 1;
         oneof res {
             bool done = 2;
-            Open.Res open_res = 3;
-            Commit.Res commit_res = 4;
-            Rollback.Res rollback_res = 5;
-            Query.Res query_res = 6;
-            ConceptManager.Res concept_manager_res = 7;
-            Thing.Res thing_res = 8;
-            grakn.protocol.Type.Res type_res = 9;
-            Rule.Res rule_res = 10;
+            Continue.Res continue_res = 3;
+            Open.Res open_res = 4;
+            Commit.Res commit_res = 5;
+            Rollback.Res rollback_res = 6;
+            Query.Res query_res = 7;
+            ConceptManager.Res concept_manager_res = 8;
+            Thing.Res thing_res = 9;
+            grakn.protocol.Type.Res type_res = 10;
+            Rule.Res rule_res = 11;
         }
     }
 
@@ -89,4 +91,12 @@ message Transaction {
         message Req {}
         message Res {}
     }
+}
+
+message Fetch {
+    message Req {}
+}
+
+message Continue {
+    message Res {}
 }
