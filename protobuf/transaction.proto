@@ -39,16 +39,17 @@ message Transaction {
     message Req {
         string id = 1;
         map<string, string> metadata = 2;
+        int32 latencyMillis = 3;
         oneof req {
-            Fetch.Req fetch_req = 3;
-            Open.Req open_req = 4;
-            Commit.Req commit_req = 5;
-            Rollback.Req rollback_req = 6;
-            Query.Req query_req = 7;
-            ConceptManager.Req concept_manager_req = 8;
-            Thing.Req thing_req = 9;
-            grakn.protocol.Type.Req type_req = 10;
-            Rule.Req rule_req = 11;
+            Fetch.Req fetch_req = 4;
+            Open.Req open_req = 5;
+            Commit.Req commit_req = 6;
+            Rollback.Req rollback_req = 7;
+            Query.Req query_req = 8;
+            ConceptManager.Req concept_manager_req = 9;
+            Thing.Req thing_req = 10;
+            grakn.protocol.Type.Req type_req = 11;
+            Rule.Req rule_req = 12;
         }
     }
 
@@ -79,7 +80,9 @@ message Transaction {
             Type type = 2;
             Options options = 3;
         }
-        message Res {}
+        message Res {
+            int32 processingTimeMillis = 1;
+        }
     }
 
     message Commit {
