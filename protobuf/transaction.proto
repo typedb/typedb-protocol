@@ -57,7 +57,7 @@ message Transaction {
         string id = 1;
         oneof res {
             bool done = 2;
-            Continue.Res continue_res = 3;
+            bool continue = 3;
             Open.Res open_res = 5;
             Commit.Res commit_res = 6;
             Rollback.Res rollback_res = 7;
@@ -98,8 +98,4 @@ message Transaction {
 
 message Fetch {
     message Req {}
-}
-
-message Continue {
-    message Res {}
 }
