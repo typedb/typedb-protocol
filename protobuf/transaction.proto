@@ -58,14 +58,14 @@ message Transaction {
         oneof res {
             bool done = 2;
             Continue.Res continue_res = 3;
-            Open.Res open_res = 4;
-            Commit.Res commit_res = 5;
-            Rollback.Res rollback_res = 6;
-            Query.Res query_res = 7;
-            ConceptManager.Res concept_manager_res = 8;
-            Thing.Res thing_res = 9;
-            grakn.protocol.Type.Res type_res = 10;
-            Rule.Res rule_res = 11;
+            Open.Res open_res = 5;
+            Commit.Res commit_res = 6;
+            Rollback.Res rollback_res = 7;
+            Query.Res query_res = 8;
+            ConceptManager.Res concept_manager_res = 9;
+            Thing.Res thing_res = 10;
+            grakn.protocol.Type.Res type_res = 11;
+            Rule.Res rule_res = 12;
         }
     }
 
