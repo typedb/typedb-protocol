@@ -17,6 +17,8 @@
 
 package(default_visibility = ["//visibility:public"])
 
+load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+
 proto_library(
     name = "database-proto",
     srcs = ["database.proto"],
@@ -44,7 +46,6 @@ proto_library(
     srcs = ["query.proto"],
     deps = [
         ":answer-proto",
-        ":concept-proto",
         ":options-proto",
     ],
 )
@@ -63,4 +64,11 @@ proto_library(
 proto_library(
     name = "options-proto",
     srcs = ["options.proto"],
+)
+
+checkstyle_test(
+    name = "checkstyle",
+    include = glob(["*"]),
+    license_type = "agpl",
+    size = "small",
 )

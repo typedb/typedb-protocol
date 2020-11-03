@@ -18,8 +18,19 @@
 package(default_visibility = ["//visibility:public"])
 
 exports_files(["VERSION"])
+load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@graknlabs_bazel_distribution//github:rules.bzl", "deploy_github")
 load("//:deployment.bzl", "deployment")
+
+checkstyle_test(
+    name = "checkstyle",
+    include = glob([
+        "*",
+        ".grabl/automation.yml",
+    ]),
+    license_type = "agpl",
+    size = "small",
+)
 
 deploy_github(
     name = "deploy-github",
@@ -29,7 +40,6 @@ deploy_github(
     title = "Protocol",
     title_append_version = True,
 )
-
 
 # CI targets that are not declared in any BUILD file, but are called externally
 filegroup(
