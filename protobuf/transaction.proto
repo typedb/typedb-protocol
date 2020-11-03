@@ -39,9 +39,9 @@ message Transaction {
     message Req {
         string id = 1;
         map<string, string> metadata = 2;
-        int32 latencyMillis = 3;
+        int32 latency_millis = 3;
         oneof req {
-            Fetch.Req fetch_req = 4;
+            bool continue = 4;
             Open.Req open_req = 5;
             Commit.Req commit_req = 6;
             Rollback.Req rollback_req = 7;
@@ -57,7 +57,7 @@ message Transaction {
         string id = 1;
         oneof res {
             bool done = 2;
-            bool continue = 3;
+            bool continue = 4;
             Open.Res open_res = 5;
             Commit.Res commit_res = 6;
             Rollback.Res rollback_res = 7;
@@ -76,12 +76,12 @@ message Transaction {
 
     message Open {
         message Req {
-            bytes sessionID = 1;
+            bytes session_id = 1;
             Type type = 2;
             Options options = 3;
         }
         message Res {
-            int32 processingTimeMillis = 1;
+            int32 processing_time_millis = 1;
         }
     }
 
@@ -94,8 +94,4 @@ message Transaction {
         message Req {}
         message Res {}
     }
-}
-
-message Fetch {
-    message Req {}
 }
