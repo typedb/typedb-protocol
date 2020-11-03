@@ -26,68 +26,46 @@ import "protobuf/query.proto";
 
 package grakn.protocol;
 
+service TransactionService {
+
+    // Opens a bi-directional stream representing a stateful transaction, streaming
+    // requests and responses back-and-forth. The first request message must
+    // be {Transaction.Open.Req}. Closing the stream closes the transaction.
+    rpc stream (stream Transaction.Req) returns (stream Transaction.Res);
+}
+
 message Transaction {
 
     message Req {
-        map<string, string> metadata = 1000;
+        string id = 1;
+        map<string, string> metadata = 2;
+        int32 latency_millis = 3;
         oneof req {
-            Open.Req open_req = 1;
-            Commit.Req commit_req = 2;
-            Rollback.Req rollback_req = 3;
-            Iter.Req iter_req = 4;
-            Query.Req query_req = 5;
-            GetType.Req getType_req = 6;
-            GetThing.Req getThing_req = 7;
-            GetRule.Req getRule_req = 8;
-            PutEntityType.Req putEntityType_req = 9;
-            PutAttributeType.Req putAttributeType_req = 10;
-            PutRelationType.Req putRelationType_req = 11;
-            PutRule.Req putRule_req = 12;
-            ThingMethod.Req thingMethod_req = 13;
-            TypeMethod.Req typeMethod_req = 14;
-            RuleMethod.Req ruleMethod_req = 15;
-            //Explanation.Req explanation_req = 16;
+            bool continue = 4;
+            Open.Req open_req = 5;
+            Commit.Req commit_req = 6;
+            Rollback.Req rollback_req = 7;
+            Query.Req query_req = 8;
+            ConceptManager.Req concept_manager_req = 9;
+            Thing.Req thing_req = 10;
+            grakn.protocol.Type.Req type_req = 11;
+            Rule.Req rule_req = 12;
         }
     }
 
     message Res {
+        string id = 1;
         oneof res {
-            Open.Res open_res = 1;
-            Commit.Res commit_res = 2;
-            Rollback.Res rollback_res = 3;
-            Iter.Res iter_res = 4;
-            Query.Res query_res = 5;
-            GetType.Res getType_res = 6;
-            GetThing.Res getThing_res = 7;
-            GetRule.Res getRule_res = 8;
-            PutEntityType.Res putEntityType_res = 9;
-            PutAttributeType.Res putAttributeType_res = 10;
-            PutRelationType.Res putRelationType_res = 11;
-            PutRule.Res putRule_res = 12;
-            ThingMethod.Res thingMethod_res = 13;
-            TypeMethod.Res typeMethod_res = 14;
-            RuleMethod.Res ruleMethod_res = 15;
-            //Explanation.Res explanation_res = 16;
-        }
-    }
-
-    message Iter {
-        message Req {
-            oneof req {
-                int32 iteratorID = 2;
-                Query.Iter.Req query_iter_req = 3;
-                ThingMethod.Iter.Req thingMethod_iter_req = 4;
-                TypeMethod.Iter.Req typeMethod_iter_req = 5;
-            }
-        }
-        message Res {
-            oneof res {
-                bool done = 1;
-                int32 iteratorID = 2;
-                Query.Iter.Res query_iter_res = 3;
-                ThingMethod.Iter.Res conceptMethod_thing_iter_res = 4;
-                TypeMethod.Iter.Res conceptMethod_type_iter_res = 5;
-            }
+            bool done = 2;
+            bool continue = 4;
+            Open.Res open_res = 5;
+            Commit.Res commit_res = 6;
+            Rollback.Res rollback_res = 7;
+            Query.Res query_res = 8;
+            ConceptManager.Res concept_manager_res = 9;
+            Thing.Res thing_res = 10;
+            grakn.protocol.Type.Res type_res = 11;
+            Rule.Res rule_res = 12;
         }
     }
 
@@ -98,11 +76,13 @@ message Transaction {
 
     message Open {
         message Req {
-            bytes sessionID = 1;
+            bytes session_id = 1;
             Type type = 2;
             Options options = 3;
         }
-        message Res {}
+        message Res {
+            int32 processing_time_millis = 1;
+        }
     }
 
     message Commit {
@@ -113,77 +93,5 @@ message Transaction {
     message Rollback {
         message Req {}
         message Res {}
-    }
-
-    message GetType {
-        message Req {
-            string label = 1;
-        }
-        message Res {
-            oneof res {
-                grakn.protocol.Type type = 1;
-            }
-        }
-    }
-
-    message GetThing {
-        message Req {
-            bytes iid = 1;
-        }
-        message Res {
-            oneof res {
-                Thing thing = 1;
-            }
-        }
-    }
-
-    message GetRule {
-        message Req {
-            string label = 1;
-        }
-        message Res {
-            oneof res {
-                Rule rule = 1;
-            }
-        }
-    }
-
-    message PutEntityType {
-        message Req {
-            string label = 1;
-        }
-        message Res {
-            grakn.protocol.Type entityType = 1;
-        }
-    }
-
-    message PutAttributeType {
-        message Req {
-            string label = 1;
-            AttributeType.VALUE_TYPE valueType = 2;
-        }
-        message Res {
-            grakn.protocol.Type attributeType = 1;
-        }
-    }
-
-    message PutRelationType {
-        message Req {
-            string label = 1;
-        }
-        message Res {
-            grakn.protocol.Type relationType = 1;
-        }
-    }
-
-    message PutRule {
-        message Req {
-            string label = 1;
-            string when = 2;
-            string then = 3;
-        }
-        message Res {
-            Rule rule = 1;
-        }
     }
 }

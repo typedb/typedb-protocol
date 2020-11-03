@@ -22,13 +22,13 @@ load("@graknlabs_bazel_distribution//pip:rules.bzl", "python_repackage")
 python_grpc_compile(
     name = "protocol_src",
     deps = [
-        "//protobuf:grakn-proto",
         "//protobuf:database-proto",
         "//protobuf:session-proto",
         "//protobuf:transaction-proto",
+        "//protobuf:answer-proto",
         "//protobuf:query-proto",
         "//protobuf:concept-proto",
-        "//protobuf:answer-proto",
+        "//protobuf:options-proto",
     ],
     visibility = ["//visibility:public"]
 )

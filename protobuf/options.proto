@@ -26,13 +26,13 @@ package grakn.protocol;
 // https://github.com/protocolbuffers/protobuf/issues/1606#issuecomment-618687169
 
 message Options {
-    oneof inferOpt {
+    oneof infer_opt {
         bool infer = 1;
     }
-    oneof explainOpt {
+    oneof explain_opt {
         bool explain = 2;
     }
-    oneof batchSizeOpt {
-        int32 batchSize = 3;
+    oneof batch_size_opt {
+        int32 batch_size = 3;
     }
 }
