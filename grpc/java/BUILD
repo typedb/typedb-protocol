@@ -18,6 +18,7 @@
 package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//java:java_grpc_compile.bzl", "java_grpc_compile")
 load("@graknlabs_bazel_distribution//maven:rules.bzl", "assemble_maven", "deploy_maven")
+load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@graknlabs_dependencies//distribution/maven:version.bzl", "version")
 load("@graknlabs_dependencies//library/maven:artifacts.bzl", "artifacts")
 load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
@@ -48,6 +49,13 @@ java_library(
         "@maven//:javax_annotation_javax_annotation_api", # gRPC needs this in order to compile in Java 11 and Java 14
     ],
     tags = ["maven_coordinates=io.grakn.protocol:grakn-protocol:{pom_version}", "checkstyle_ignore"],
+)
+
+checkstyle_test(
+    name = "checkstyle",
+    include = glob(["*"]),
+    license_type = "agpl",
+    size = "small",
 )
 
 assemble_maven(

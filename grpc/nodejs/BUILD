@@ -17,6 +17,7 @@
 
 package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//node:node_grpc_compile.bzl", "node_grpc_compile")
+load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 node_grpc_compile(
     name = "protocol",
@@ -29,4 +30,11 @@ node_grpc_compile(
         "//protobuf:concept-proto",
         "//protobuf:options-proto",
     ]
+)
+
+checkstyle_test(
+    name = "checkstyle",
+    include = glob(["*"]),
+    license_type = "agpl",
+    size = "small",
 )
