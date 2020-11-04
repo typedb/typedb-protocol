@@ -20,8 +20,43 @@ package(default_visibility = ["//visibility:public"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
+    name = "answer-proto",
+    srcs = ["answer.proto"],
+    deps = [":concept-proto"],
+)
+
+proto_library(
+    name = "concept-proto",
+    srcs = ["concept.proto"],
+)
+
+proto_library(
     name = "database-proto",
     srcs = ["database.proto"],
+)
+
+proto_library(
+    name = "grakn-proto",
+    srcs = ["grakn.proto"],
+    deps = [
+        ":database-proto",
+        ":session-proto",
+        ":transaction-proto",
+    ],
+)
+
+proto_library(
+    name = "options-proto",
+    srcs = ["options.proto"],
+)
+
+proto_library(
+    name = "query-proto",
+    srcs = ["query.proto"],
+    deps = [
+        ":answer-proto",
+        ":options-proto",
+    ],
 )
 
 proto_library(
@@ -39,31 +74,6 @@ proto_library(
         ":options-proto",
         ":query-proto",
     ]
-)
-
-proto_library(
-    name = "query-proto",
-    srcs = ["query.proto"],
-    deps = [
-        ":answer-proto",
-        ":options-proto",
-    ],
-)
-
-proto_library(
-    name = "answer-proto",
-    srcs = ["answer.proto"],
-    deps = [":concept-proto"],
-)
-
-proto_library(
-    name = "concept-proto",
-    srcs = ["concept.proto"],
-)
-
-proto_library(
-    name = "options-proto",
-    srcs = ["options.proto"],
 )
 
 checkstyle_test(

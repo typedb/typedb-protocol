@@ -24,13 +24,6 @@ import "protobuf/options.proto";
 
 package grakn.protocol;
 
-service SessionService {
-
-    rpc open (Session.Open.Req) returns (Session.Open.Res);
-    rpc close (Session.Close.Req) returns (Session.Close.Res);
-
-}
-
 message Session {
 
     enum Type {

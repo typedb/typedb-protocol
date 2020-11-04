@@ -23,13 +23,14 @@ load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 python_grpc_compile(
     name = "protocol_src",
     deps = [
+        "//protobuf:answer-proto",
+        "//protobuf:concept-proto",
         "//protobuf:database-proto",
+        "//protobuf:grakn-proto",
+        "//protobuf:options-proto",
+        "//protobuf:query-proto",
         "//protobuf:session-proto",
         "//protobuf:transaction-proto",
-        "//protobuf:answer-proto",
-        "//protobuf:query-proto",
-        "//protobuf:concept-proto",
-        "//protobuf:options-proto",
     ],
     visibility = ["//visibility:public"]
 )
