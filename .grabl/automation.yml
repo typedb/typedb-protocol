@@ -47,10 +47,6 @@ release:
   filter:
     owner: graknlabs
     branch: master
-  validation:
-    validate-hello-world:
-      machine: graknlabs-ubuntu-20.04
-      script: echo 'Hello World'
   deployment:
     deploy-github:
       machine: graknlabs-ubuntu-20.04
