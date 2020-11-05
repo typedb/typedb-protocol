@@ -26,14 +26,6 @@ import "protobuf/query.proto";
 
 package grakn.protocol;
 
-service TransactionService {
-
-    // Opens a bi-directional stream representing a stateful transaction, streaming
-    // requests and responses back-and-forth. The first request message must
-    // be {Transaction.Open.Req}. Closing the stream closes the transaction.
-    rpc stream (stream Transaction.Req) returns (stream Transaction.Res);
-}
-
 message Transaction {
 
     message Req {
