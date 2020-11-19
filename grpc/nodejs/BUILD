@@ -16,22 +16,42 @@
 #
 
 package(default_visibility = ["//visibility:public"])
-load("@stackb_rules_proto//node:node_grpc_compile.bzl", "node_grpc_compile")
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
-node_grpc_compile(
+load(":ts_grpc_compile.bzl", "ts_grpc_compile")
+
+ts_grpc_compile(
     name = "protocol",
-    deps = [
-        "//protobuf:answer-proto",
-        "//protobuf:concept-proto",
-        "//protobuf:database-proto",
-        "//protobuf:grakn-proto",
-        "//protobuf:options-proto",
-        "//protobuf:query-proto",
-        "//protobuf:session-proto",
-        "//protobuf:transaction-proto",
-    ]
+    srcs = ["//protobuf:answer-proto"],
 )
+
+#genrule(
+#    name = "protocol",
+#    outs = [
+#        "answer_pb.d.ts",
+#        "answer_pb.js",
+#        "concept_pb.d.ts",
+#        "concept_pb.js",
+#        "database_pb.d.ts",
+#        "database_pb.js",
+#        "grakn_pb.d.ts",
+#        "grakn_pb.js",
+#        "options_pb.d.ts",
+#        "options_pb.js",
+#        "query_pb.d.ts",
+#        "query_pb.js",
+#        "session_pb.d.ts",
+#        "session_pb.js",
+#        "transaction_pb.d.ts",
+#        "transaction_pb.js",
+#    ],
+#    cmd = "cat $(location //protobuf:answer-proto); \
+#    $(location @npm//grpc-tools/bin:grpc_tools_node_protoc) \
+#        --plugin='protoc-gen-ts=$(location @npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts)' \
+#        --js_out='import_style=es6,binary:$(@D)/' \
+#        --ts_out='binary:$(@D)/' --proto_path . $(location //protobuf:answer-proto)",
+#    tools = ["@npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts", "@npm//grpc-tools/bin:grpc_tools_node_protoc"],
+#)
 
 checkstyle_test(
     name = "checkstyle",

@@ -15,7 +15,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-workspace(name = "graknlabs_protocol")
+workspace(
+    name = "graknlabs_protocol",
+    managed_directories = {"@npm": ["node_modules"]},
+)
 
 ################################
 # Load @graknlabs_dependencies #
@@ -60,8 +63,6 @@ com_github_grpc_grpc_deps = "grpc_deps")
 com_github_grpc_grpc_deps()
 load("@stackb_rules_proto//java:deps.bzl", "java_grpc_compile")
 java_grpc_compile()
-load("@stackb_rules_proto//node:deps.bzl", "node_grpc_compile")
-node_grpc_compile()
 
 # Load //tool/checkstyle
 load("@graknlabs_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
@@ -109,4 +110,23 @@ maven(artifacts)
 load("@graknlabs_bazel_distribution//common:rules.bzl", "workspace_refs")
 workspace_refs(
     name = "graknlabs_protocol_workspace_refs"
+)
+
+#########################
+# Load NPM dependencies #
+#########################
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "f2194102720e662dbf193546585d705e645314319554c6ce7e47d8b59f459e9c",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/2.2.2/rules_nodejs-2.2.2.tar.gz"],
+)
+
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "npm_install")
+node_repositories()
+npm_install(
+  name = "npm",
+  package_json = "//:package.json",
+  package_lock_json = "//:package-lock.json",
 )
