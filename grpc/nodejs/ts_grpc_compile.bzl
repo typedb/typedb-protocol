@@ -29,6 +29,7 @@ def _ts_grpc_compile_impl(ctx):
         arguments = [ "-al > file.txt" ],
     )
     print(ctx.bin_dir.path)
+    return [DefaultInfo(files = depset([output_directory]))]
 
 ts_grpc_compile = rule(
     implementation = _ts_grpc_compile_impl,
