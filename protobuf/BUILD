@@ -65,6 +65,20 @@ proto_library(
     deps = [":options-proto"],
 )
 
+filegroup(
+    name = "proto-raw-buffers",
+    srcs = [
+        "answer.proto",
+        "concept.proto",
+        "database.proto",
+        "grakn.proto",
+        "options.proto",
+        "query.proto",
+        "session.proto",
+        "transaction.proto",
+    ]
+)
+
 proto_library(
     name = "transaction-proto",
     srcs = ["transaction.proto"],

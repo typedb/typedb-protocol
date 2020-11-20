@@ -18,40 +18,57 @@
 package(default_visibility = ["//visibility:public"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
-load(":ts_grpc_compile.bzl", "ts_grpc_compile")
+#load(":ts_grpc_compile.bzl", "ts_grpc_compile")
 
-ts_grpc_compile(
-    name = "protocol",
-    srcs = ["//protobuf:answer-proto"],
-)
-
-#genrule(
+#ts_grpc_compile(
 #    name = "protocol",
-#    outs = [
-#        "answer_pb.d.ts",
-#        "answer_pb.js",
-#        "concept_pb.d.ts",
-#        "concept_pb.js",
-#        "database_pb.d.ts",
-#        "database_pb.js",
-#        "grakn_pb.d.ts",
-#        "grakn_pb.js",
-#        "options_pb.d.ts",
-#        "options_pb.js",
-#        "query_pb.d.ts",
-#        "query_pb.js",
-#        "session_pb.d.ts",
-#        "session_pb.js",
-#        "transaction_pb.d.ts",
-#        "transaction_pb.js",
+#    srcs = [
+#        "//protobuf:raw-proto",
 #    ],
-#    cmd = "cat $(location //protobuf:answer-proto); \
-#    $(location @npm//grpc-tools/bin:grpc_tools_node_protoc) \
-#        --plugin='protoc-gen-ts=$(location @npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts)' \
-#        --js_out='import_style=es6,binary:$(@D)/' \
-#        --ts_out='binary:$(@D)/' --proto_path . $(location //protobuf:answer-proto)",
-#    tools = ["@npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts", "@npm//grpc-tools/bin:grpc_tools_node_protoc"],
 #)
+
+#ts_grpc_compile(
+#    name = "protocol",
+#    srcs = [
+#        "//protobuf:answer-proto",
+#        "//protobuf:concept-proto",
+#        "//protobuf:database-proto",
+#        "//protobuf:grakn-proto",
+#        "//protobuf:options-proto",
+#        "//protobuf:query-proto",
+#        "//protobuf:session-proto",
+#        "//protobuf:transaction-proto",
+#    ],
+#)
+
+genrule(
+    name = "protocol",
+    outs = [
+        "$(@D)/answer_pb.d.ts",
+        "$(@D)/answer_pb.js",
+        "$(@D)/concept_pb.d.ts",
+        "$(@D)/concept_pb.js",
+        "$(@D)/database_pb.d.ts",
+        "$(@D)/database_pb.js",
+        "$(@D)/grakn_pb.d.ts",
+        "$(@D)/grakn_pb.js",
+        "$(@D)/options_pb.d.ts",
+        "$(@D)/options_pb.js",
+        "$(@D)/query_pb.d.ts",
+        "$(@D)/query_pb.js",
+        "$(@D)/session_pb.d.ts",
+        "$(@D)/session_pb.js",
+        "$(@D)/transaction_pb.d.ts",
+        "$(@D)/transaction_pb.js",
+    ],
+    cmd = "$(location @npm//grpc-tools/bin:grpc_tools_node_protoc) \
+        --plugin=\'protoc-gen-ts=$(location @npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts)\' \
+        --js_out=\'import_style=es6,binary:$(@D)/\' \
+        --ts_out=\'binary:$(@D)/\' \
+        --proto_path=. \
+        $(locations //protobuf:proto-raw-buffers)",
+    tools = ["@npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts", "@npm//grpc-tools/bin:grpc_tools_node_protoc", "//protobuf:proto-raw-buffers"],
+)
 
 checkstyle_test(
     name = "checkstyle",
