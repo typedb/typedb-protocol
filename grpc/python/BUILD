@@ -21,7 +21,7 @@ load("@graknlabs_bazel_distribution//pip:rules.bzl", "python_repackage")
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 python_grpc_compile(
-    name = "protocol_src",
+    name = "protocol-src",
     deps = [
         "//protobuf:answer-proto",
         "//protobuf:concept-proto",
@@ -36,14 +36,14 @@ python_grpc_compile(
 )
 
 python_repackage(
-    name = "protocol_pkg",
-    src = ":protocol_src",
+    name = "protocol-pkg",
+    src = ":protocol-src",
     package = "grakn_protocol"
 )
 
 py_library(
     name = "protocol",
-    srcs = ["protocol_pkg"],
+    srcs = ["protocol-pkg"],
     imports = ["../../grpc/python"]
 )
 

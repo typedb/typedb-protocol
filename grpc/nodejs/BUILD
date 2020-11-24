@@ -18,10 +18,11 @@
 package(default_visibility = ["//visibility:public"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@stackb_rules_proto//node:node_grpc_compile.bzl", "node_grpc_compile")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
 
 
 genrule(
-    name = "protocol",
+    name = "protocol-src",
     outs = [
         "protobuf/answer_pb.d.ts",
         "protobuf/answer_pb.js",
@@ -53,6 +54,11 @@ genrule(
             "@npm//grpc_tools_node_protoc_ts",
             "//protobuf:proto-raw-buffers"
         ],
+)
+
+ts_project(
+    name = "protocol",
+    srcs = [":protocol-src"],
 )
 
 checkstyle_test(
