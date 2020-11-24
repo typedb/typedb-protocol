@@ -226,17 +226,15 @@ message Thing {
             repeated Type attribute_types = 1;
             bool keys_only = 2;
         }
-        // @Iterable
         message Res {
-            Thing attribute = 1;
+            repeated Thing attribute = 1;
         }
     }
 
     message GetPlays {
         message Req {}
-        // @Iterable
         message Res {
-            Type role_type = 1;
+            repeated Type role_type = 1;
         }
     }
 
@@ -244,9 +242,8 @@ message Thing {
         message Req {
             repeated Type role_types = 1;
         }
-        // @Iterable
         message Res {
-            Thing relation = 1;
+            repeated Thing relation = 1;
         }
     }
 }
@@ -257,18 +254,19 @@ message Relation {
         message Req {
             repeated Type role_types = 1;
         }
-        // @Iterable
         message Res {
-            Thing thing = 1;
+            repeated Thing thing = 1;
         }
     }
 
     message GetPlayersByRoleType {
-        message Req {}
-        // @Iterable
-        message Res {
+        message RoleTypeWithPlayer {
             Type role_type = 1;
             Thing player = 2;
+        }
+        message Req {}
+        message Res {
+            repeated RoleTypeWithPlayer role_type_with_player = 1;
         }
     }
 
@@ -297,9 +295,8 @@ message Attribute {
                 Type thing_type = 1;
             }
         }
-        // @Iterable
         message Res {
-            Thing thing = 1;
+            repeated Thing thing = 1;
         }
     }
 
@@ -460,17 +457,15 @@ message Type {
 
     message GetSupertypes {
         message Req {}
-        // @Iterable
         message Res {
-            Type type = 1;
+            repeated Type type = 1;
         }
     }
 
     message GetSubtypes {
         message Req {}
-        // @Iterable
         message Res {
-            Type type = 1;
+            repeated Type type = 1;
         }
     }
 }
@@ -488,17 +483,15 @@ message RoleType {
 
     message GetRelationTypes {
         message Req {}
-        // @Iterable
         message Res {
-            Type relationType = 1;
+            repeated Type relationType = 1;
         }
     }
 
     message GetPlayers {
         message Req {}
-        // @Iterable
         message Res {
-            Type thingType = 1;
+            repeated Type thingType = 1;
         }
     }
 }
@@ -519,9 +512,8 @@ message ThingType {
 
     message GetInstances {
         message Req {}
-        // @Iterable
         message Res {
-            Thing thing = 1;
+            repeated Thing thing = 1;
         }
     }
 
@@ -532,17 +524,15 @@ message ThingType {
             }
             bool keys_only = 3;
         }
-        // @Iterable
         message Res {
-            Type attribute_type = 1;
+            repeated Type attribute_type = 1;
         }
     }
 
     message GetPlays {
         message Req {}
-        // @Iterable
         message Res {
-            Type role = 1;
+            repeated Type role = 1;
         }
     }
 
@@ -607,9 +597,8 @@ message RelationType {
 
     message GetRelates {
         message Req {}
-        // @Iterable
         message Res {
-            Type role = 1;
+            repeated Type role = 1;
         }
     }
 
@@ -679,9 +668,8 @@ message AttributeType {
         message Req {
             bool onlyKey = 1;
         }
-        // @Iterable
         message Res {
-            Type owner = 1;
+            repeated Type owner = 1;
         }
     }
 
@@ -705,9 +693,8 @@ message AttributeType {
                 VALUE_TYPE value_type = 1;
             }
         }
-        // @Iterable
         message Res {
-            Type type = 1;
+            repeated Type type = 1;
         }
     }
 
@@ -717,9 +704,8 @@ message AttributeType {
                 VALUE_TYPE value_type = 1;
             }
         }
-        // @Iterable
         message Res {
-            Thing thing = 1;
+            repeated Thing thing = 1;
         }
     }
 }
