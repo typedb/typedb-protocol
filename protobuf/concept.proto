@@ -521,7 +521,7 @@ message ThingType {
         message Req {}
         // @Iterable
         message Res {
-            Thing thing = 1;
+            repeated Thing thing = 1;
         }
     }
 
