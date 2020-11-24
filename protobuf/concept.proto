@@ -228,7 +228,7 @@ message Thing {
         }
         // @Iterable
         message Res {
-            Thing attribute = 1;
+            repeated Thing attribute = 1;
         }
     }
 
@@ -236,7 +236,7 @@ message Thing {
         message Req {}
         // @Iterable
         message Res {
-            Type role_type = 1;
+            repeated Type role_type = 1;
         }
     }
 
@@ -246,7 +246,7 @@ message Thing {
         }
         // @Iterable
         message Res {
-            Thing relation = 1;
+            repeated Thing relation = 1;
         }
     }
 }
@@ -259,16 +259,19 @@ message Relation {
         }
         // @Iterable
         message Res {
-            Thing thing = 1;
+            repeated Thing thing = 1;
         }
     }
 
     message GetPlayersByRoleType {
+        message RoleTypeWithPlayer {
+            Type role_type = 1;
+            Thing player = 2;
+        }
         message Req {}
         // @Iterable
         message Res {
-            Type role_type = 1;
-            Thing player = 2;
+            repeated RoleTypeWithPlayer role_type_with_player = 1;
         }
     }
 
@@ -299,7 +302,7 @@ message Attribute {
         }
         // @Iterable
         message Res {
-            Thing thing = 1;
+            repeated Thing thing = 1;
         }
     }
 
@@ -462,7 +465,7 @@ message Type {
         message Req {}
         // @Iterable
         message Res {
-            Type type = 1;
+            repeated Type type = 1;
         }
     }
 
@@ -470,7 +473,7 @@ message Type {
         message Req {}
         // @Iterable
         message Res {
-            Type type = 1;
+            repeated Type type = 1;
         }
     }
 }
@@ -490,7 +493,7 @@ message RoleType {
         message Req {}
         // @Iterable
         message Res {
-            Type relationType = 1;
+            repeated Type relationType = 1;
         }
     }
 
@@ -498,7 +501,7 @@ message RoleType {
         message Req {}
         // @Iterable
         message Res {
-            Type thingType = 1;
+            repeated Type thingType = 1;
         }
     }
 }
@@ -534,7 +537,7 @@ message ThingType {
         }
         // @Iterable
         message Res {
-            Type attribute_type = 1;
+            repeated Type attribute_type = 1;
         }
     }
 
@@ -542,7 +545,7 @@ message ThingType {
         message Req {}
         // @Iterable
         message Res {
-            Type role = 1;
+            repeated Type role = 1;
         }
     }
 
@@ -609,7 +612,7 @@ message RelationType {
         message Req {}
         // @Iterable
         message Res {
-            Type role = 1;
+            repeated Type role = 1;
         }
     }
 
@@ -681,7 +684,7 @@ message AttributeType {
         }
         // @Iterable
         message Res {
-            Type owner = 1;
+            repeated Type owner = 1;
         }
     }
 
@@ -707,7 +710,7 @@ message AttributeType {
         }
         // @Iterable
         message Res {
-            Type type = 1;
+            repeated Type type = 1;
         }
     }
 
@@ -719,7 +722,7 @@ message AttributeType {
         }
         // @Iterable
         message Res {
-            Thing thing = 1;
+            repeated Thing thing = 1;
         }
     }
 }

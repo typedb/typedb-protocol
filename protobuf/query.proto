@@ -57,7 +57,7 @@ message Graql {
         }
         // @Iterable
         message Res {
-            ConceptMap answer = 1;
+            repeated ConceptMap answer = 1;
         }
     }
 
@@ -67,7 +67,7 @@ message Graql {
         }
         // @Iterable
         message Res {
-            ConceptMap answer = 1;
+            repeated ConceptMap answer = 1;
         }
     }
 
