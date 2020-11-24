@@ -55,7 +55,6 @@ message Graql {
         message Req {
             string query = 1;
         }
-        // @Iterable
         message Res {
             repeated ConceptMap answer = 1;
         }
@@ -65,7 +64,6 @@ message Graql {
         message Req {
             string query = 1;
         }
-        // @Iterable
         message Res {
             repeated ConceptMap answer = 1;
         }
