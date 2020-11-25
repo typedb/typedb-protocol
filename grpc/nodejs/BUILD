@@ -44,21 +44,23 @@ genrule(
     cmd = "ln -s $(execpath @npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts).runfiles/npm/node_modules ./node_modules ;\
         $(execpath @npm//grpc-tools/bin:grpc_tools_node_protoc) \
             --plugin='protoc-gen-ts=$(rootpath @npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts)' \
-            --grpc_out='./$(@D)/' \
             --js_out='import_style=es6,binary:./$(@D)/' \
-            --ts_out='./$(@D)/' --proto_path=. $(locations //protobuf:proto-raw-buffers);",
+            --ts_out='./$(@D)/' --proto_path=`dirname $(execpath //:WORKSPACE)` $(execpaths //protobuf:proto-raw-buffers);",
         tools = [
             "@npm//grpc-tools/bin:grpc_tools_node_protoc",
             "@npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts",
             "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
             "@npm//grpc_tools_node_protoc_ts",
-            "//protobuf:proto-raw-buffers"
+            "@npm//google-protobuf",
+            "//protobuf:proto-raw-buffers",
+            "//:WORKSPACE"
         ],
 )
 
 ts_project(
     name = "protocol",
     srcs = [":protocol-src"],
+    declaration = True,
 )
 
 checkstyle_test(
