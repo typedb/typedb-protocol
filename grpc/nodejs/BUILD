@@ -22,7 +22,7 @@ load("@npm//@bazel/typescript:index.bzl", "ts_project")
 
 
 genrule(
-    name = "protocol-src",
+    name = "protocol",
     outs = [
         "protobuf/answer_pb.d.ts",
         "protobuf/answer_pb.js",
@@ -55,12 +55,6 @@ genrule(
             "//protobuf:proto-raw-buffers",
             "//:WORKSPACE"
         ],
-)
-
-ts_project(
-    name = "protocol",
-    srcs = [":protocol-src"],
-    declaration = True,
 )
 
 checkstyle_test(
