@@ -32,6 +32,8 @@ genrule(
         "protobuf/database_pb.js",
         "protobuf/grakn_pb.d.ts",
         "protobuf/grakn_pb.js",
+        "protobuf/grakn_grpc_pb.js",
+        "protobuf/grakn_grpc_pb.d.ts",
         "protobuf/options_pb.d.ts",
         "protobuf/options_pb.js",
         "protobuf/query_pb.d.ts",
@@ -45,7 +47,10 @@ genrule(
         $(execpath @npm//grpc-tools/bin:grpc_tools_node_protoc) \
             --plugin='protoc-gen-ts=$(rootpath @npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts)' \
             --js_out='import_style=es6,binary:./$(@D)/' \
-            --ts_out='./$(@D)/' --proto_path=`dirname $(execpath //:WORKSPACE)` $(execpaths //protobuf:proto-raw-buffers);",
+            --grpc_out='./$(@D)/' \
+            --ts_out='./$(@D)/' \
+            --proto_path=`dirname $(execpath //:WORKSPACE)` \
+            $(execpaths //protobuf:proto-raw-buffers);",
         tools = [
             "@npm//grpc-tools/bin:grpc_tools_node_protoc",
             "@npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts",
