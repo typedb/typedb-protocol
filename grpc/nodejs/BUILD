@@ -18,8 +18,6 @@
 package(default_visibility = ["//visibility:public"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@stackb_rules_proto//node:node_grpc_compile.bzl", "node_grpc_compile")
-load("@npm//@bazel/typescript:index.bzl", "ts_project")
-
 
 genrule(
     name = "protocol",
