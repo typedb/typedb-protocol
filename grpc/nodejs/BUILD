@@ -44,9 +44,9 @@ genrule(
     cmd = "ln -s $(execpath @npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts).runfiles/npm/node_modules ./node_modules ;\
         $(execpath @npm//grpc-tools/bin:grpc_tools_node_protoc) \
             --plugin='protoc-gen-ts=$(rootpath @npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts)' \
-            --js_out='import_style=es6,binary:./$(@D)/' \
-            --grpc_out='./$(@D)/' \
-            --ts_out='./$(@D)/' \
+            --js_out='import_style=commonjs,binary:./$(@D)/' \
+            --grpc_out='grpc_js:./$(@D)/' \
+            --ts_out='grpc_js:./$(@D)/' \
             --proto_path=`dirname $(execpath //:WORKSPACE)` \
             $(execpaths //protobuf:proto-raw-buffers);",
         tools = [
