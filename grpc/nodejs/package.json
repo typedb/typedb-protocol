@@ -1,6 +1,6 @@
 {
   "name": "graknlabs-grpc-protocol",
-  "version": "0.0.0-development",
+  "version": "0.0.0",
   "type": "module",
   "description": "GRPC Protocol for Grakn Client",
   "main": "graknlabs-grpc-protocol.js",

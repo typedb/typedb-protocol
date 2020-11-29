@@ -18,6 +18,7 @@
 package(default_visibility = ["//visibility:public"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@build_bazel_rules_nodejs//:index.bzl", "pkg_npm")
+load("@graknlabs_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
 
 genrule(
     name = "protocol",
@@ -68,6 +69,19 @@ pkg_npm(
         "graknlabs-grpc-protocol.js",
     ]),
     deps = [":protocol"],
+    #substitutions = {"VERSION_PLACEHOLDER": "$version"}
+)
+
+assemble_npm(
+    name = "assemble-npm",
+    target = ":protocol-package",
+)
+
+deploy_npm(
+    name = "deploy-npm",
+    target = ":assemble-npm",
+    snapshot = "https://repo.grakn.ai/repository/npm-snapshot/",
+    release = "do not deploy",
 )
 
 checkstyle_test(
