@@ -4,6 +4,7 @@
   "type": "module",
   "description": "GRPC Protocol for Grakn Client",
   "main": "graknlabs-grpc-protocol.js",
+  "types": "graknlabs-grpc-protocol.d.ts",
   "author": "Grakn Labs",
   "license": "Apache-2.0",
   "homepage": "https://grakn.ai",
