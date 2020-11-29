@@ -68,8 +68,6 @@ pkg_npm(
     package_name = "graknlabs_protocol",
     srcs = glob([
         "package.json",
-        "graknlabs-grpc-protocol.js",
-        "graknlabs-grpc-protocol.d.ts",
     ]),
     deps = [":protocol"],
 )
