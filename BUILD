@@ -39,6 +39,7 @@ deploy_github(
     release_description = "//:RELEASE_TEMPLATE.md",
     title = "Protocol",
     title_append_version = True,
+    draft = False,
 )
 
 # CI targets that are not declared in any BUILD file, but are called externally
