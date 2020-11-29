@@ -1,0 +1,20 @@
+{
+  "name": "graknlabs-grpc-protocol",
+  "version": "0.0.0-development",
+  "type": "module",
+  "description": "GRPC Protocol for Grakn Client",
+  "main": "graknlabs-grpc-protocol.js",
+  "author": "Grakn Labs",
+  "license": "Apache-2.0",
+  "homepage": "https://grakn.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/graknlabs/protocol"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "1.2.1"
+  },
+  "devDependencies": {
+    "typescript": "3.9.7"
+  }
+}

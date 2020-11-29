@@ -17,7 +17,7 @@
 
 package(default_visibility = ["//visibility:public"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-load("@stackb_rules_proto//node:node_grpc_compile.bzl", "node_grpc_compile")
+load("@build_bazel_rules_nodejs//:index.bzl", "pkg_npm")
 
 genrule(
     name = "protocol",
@@ -58,6 +58,16 @@ genrule(
             "//protobuf:proto-raw-buffers",
             "//:WORKSPACE"
         ],
+)
+
+pkg_npm(
+    name = "protocol-package",
+    package_name = "graknlabs_protocol",
+    srcs = glob([
+        "package.json",
+        "graknlabs-grpc-protocol.js",
+    ]),
+    deps = [":protocol"],
 )
 
 checkstyle_test(
