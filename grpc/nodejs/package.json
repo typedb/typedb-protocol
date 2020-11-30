@@ -1,7 +1,6 @@
 {
   "name": "graknlabs-grpc-protocol",
   "version": "0.0.0",
-  "type": "module",
   "description": "GRPC Protocol for Grakn Client",
   "author": "Grakn Labs",
   "license": "Apache-2.0",
