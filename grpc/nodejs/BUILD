@@ -53,7 +53,9 @@ genrule(
     #    Output typescript to (you guessed it) the genrule output directory
     #    Set the .proto file relative path to the WORKSPACE this command is being run from
     #    Use the .proto files found in the :proto-raw-buffers filegroup as inputs.
-    cmd = "ln -s $(execpath @npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts).runfiles/npm/node_modules ./node_modules ;\
+    cmd = "echo 11111111111111111111111111111; \
+        ln -s $(execpath @npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts).runfiles/npm/node_modules ./node_modules ;\
+        echo 22222222222222222222222222222222; \
         $(execpath @npm//grpc-tools/bin:grpc_tools_node_protoc) \
             --plugin='protoc-gen-ts=$(rootpath @npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts)' \
             --js_out='import_style=commonjs,binary:./$(@D)/' \
