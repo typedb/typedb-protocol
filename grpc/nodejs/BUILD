@@ -80,6 +80,7 @@ genrule(
     # Dependencies for the above command. the //:WORKSPACE label is required to locate the relative path for the .proto files so they can import each other.
     tools = [
         "//grpc/nodejs:grpc_tools_node_protoc",
+        "@npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts",
         "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
         "@npm//grpc_tools_node_protoc_ts",
         "@npm//google-protobuf",
