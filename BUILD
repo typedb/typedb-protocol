@@ -29,7 +29,7 @@ checkstyle_test(
         ".grabl/automation.yml",
     ]),
     exclude = glob([
-        "node_modules/**/*.*"
+        "node_modules/**/*"
     ]),
     license_type = "agpl",
     size = "small",
