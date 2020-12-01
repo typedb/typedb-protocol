@@ -28,10 +28,10 @@ checkstyle_test(
         "*",
         ".grabl/automation.yml",
     ]),
-    exclude = glob([
-        "node_modules/**/*",
-        ".idea/**/*",
-    ]),
+    exclude = [
+        "package-lock.json",
+        "package.json",
+    ],
     license_type = "agpl",
     size = "small",
 )
