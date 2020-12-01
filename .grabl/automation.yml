@@ -47,17 +47,17 @@ build:
       filter:
         owner: graknlabs
         branch: master
-        machine: graknlabs-ubuntu-20.04
-        script: |
-          curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo apt update -y
-          sudo apt install -y expect
-          export DEPLOY_NPM_USERNAME=$REPO_GRAKN_USERNAME
-          export DEPLOY_NPM_PASSWORD=$REPO_GRAKN_PASSWORD
-          export DEPLOY_NPM_EMAIL=$REPO_GRAKN_EMAIL
-          bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
-        dependencies: [build, build-dependency]
+      machine: graknlabs-ubuntu-20.04
+      script: |
+        curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
+        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo apt update -y
+        sudo apt install -y expect
+        export DEPLOY_NPM_USERNAME=$REPO_GRAKN_USERNAME
+        export DEPLOY_NPM_PASSWORD=$REPO_GRAKN_PASSWORD
+        export DEPLOY_NPM_EMAIL=$REPO_GRAKN_EMAIL
+        bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
+      dependencies: [build, build-dependency]
 
 release:
   filter:
