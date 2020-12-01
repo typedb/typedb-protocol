@@ -76,6 +76,9 @@ proto_library(
     ]
 )
 
+# TODO: THIS SHOULD BE MADE TO STOP EXISTING
+# This exists to support the nodejs build- when it becomes a real rule, we should extract the .src_files
+# from the above proto_library rules, but for now this is required to get the source files.
 filegroup(
     name = "proto-raw-buffers",
     srcs = [

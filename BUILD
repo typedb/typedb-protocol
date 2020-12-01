@@ -17,7 +17,7 @@
 
 package(default_visibility = ["//visibility:public"])
 
-exports_files(["VERSION"])
+exports_files(["VERSION", "package.json"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@graknlabs_bazel_distribution//github:rules.bzl", "deploy_github")
 load("//:deployment.bzl", "deployment")
