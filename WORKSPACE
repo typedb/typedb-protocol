@@ -15,7 +15,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-workspace(name = "graknlabs_protocol")
+workspace(
+    name = "graknlabs_protocol",
+    managed_directories = {"@npm": ["node_modules"]},
+)
 
 ################################
 # Load @graknlabs_dependencies #
@@ -109,4 +112,21 @@ maven(artifacts)
 load("@graknlabs_bazel_distribution//common:rules.bzl", "workspace_refs")
 workspace_refs(
     name = "graknlabs_protocol_workspace_refs"
+)
+
+#########################
+# Load NPM dependencies #
+#########################
+
+load("@graknlabs_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
+nodejs_deps(["@graknlabs_dependencies//builder/nodejs:remove-node-patches.patch"])
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "npm_install")
+
+node_repositories(
+    preserve_symlinks = False,
+)
+npm_install(
+  name = "npm",
+  package_json = "//:package.json",
+  package_lock_json = "//:package-lock.json",
 )

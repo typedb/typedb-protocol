@@ -21,5 +21,5 @@ def graknlabs_dependencies():
     git_repository(
         name = "graknlabs_dependencies",
         remote = "https://github.com/graknlabs/dependencies",
-        commit = "f647768040014285e75849feed37d67a2b29260e", # sync-marker: do not remove this comment, this is used for sync-dependencies by @graknlabs_dependencies
+        commit = "fb1457c0d7db3a3b2e342e358cc612681410045a", # sync-marker: do not remove this comment, this is used for sync-dependencies by @graknlabs_dependencies
     )

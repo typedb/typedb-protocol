@@ -66,3 +66,6 @@ logs/
 
 # Python cache #
 __pycache__
+
+# Node Modules #
+node_modules
