@@ -119,11 +119,11 @@ workspace_refs(
 #########################
 
 load("@graknlabs_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
-nodejs_deps()
+nodejs_deps(["@graknlabs_dependencies//builder/nodejs:remove-node-patches.patch"])
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "npm_install")
 
 node_repositories(
-#    preserve_symlinks = False,
+    preserve_symlinks = False,
 )
 npm_install(
   name = "npm",
