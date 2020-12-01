@@ -27,14 +27,14 @@ nodejs_binary(
   name = "grpc_tools_node_protoc",
   data = ["@npm//grpc-tools:grpc-tools"],
   entry_point = "@npm//:node_modules/grpc-tools/bin/protoc.js",
-  templated_args = ["--nobazel_patch_module_resolver", "--nobazel_node_patches"],
+  templated_args = ["--nobazel_node_patches"],
 )
 
 nodejs_binary(
   name = "protoc-gen-ts",
   data = ["@npm//grpc_tools_node_protoc_ts:grpc_tools_node_protoc_ts"],
   entry_point = "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
-  templated_args = ["--nobazel_patch_module_resolver", "--nobazel_node_patches"],
+  templated_args = ["--nobazel_node_patches"],
 )
 
 
@@ -97,7 +97,6 @@ pkg_npm(
     ]),
     deps = [
         ":protocol",
-        "//:package.json"
     ],
 )
 
