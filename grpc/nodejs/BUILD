@@ -30,12 +30,12 @@ nodejs_binary(
   templated_args = ["--nobazel_patch_module_resolver", "--nobazel_node_patches"],
 )
 
-#nodejs_binary(
-#  name = "protoc-gen-ts",
-#  data = ["@npm//grpc_tools_node_protoc_ts:grpc_tools_node_protoc_ts"],
-#  entry_point = "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
-#  templated_args = ["--nobazel_patch_module_resolver", "--nobazel_node_patches"],
-#)
+nodejs_binary(
+  name = "protoc-gen-ts",
+  data = ["@npm//grpc_tools_node_protoc_ts:grpc_tools_node_protoc_ts"],
+  entry_point = "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
+  templated_args = ["--nobazel_patch_module_resolver", "--nobazel_node_patches"],
+)
 
 
 genrule(
@@ -69,7 +69,7 @@ genrule(
     #    Output typescript to (you guessed it) the genrule output directory
     #    Set the .proto file relative path to the WORKSPACE this command is being run from
     #    Use the .proto files found in the :proto-raw-buffers filegroup as inputs.
-    cmd = "ln -s $(execpath @npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts).runfiles/npm/node_modules ./node_modules ;\
+    cmd = "ln -s $(execpath //grpc/nodejs:protoc-gen-ts).runfiles/npm/node_modules ./node_modules ;\
         $(execpath //grpc/nodejs:grpc_tools_node_protoc) \
             --plugin='protoc-gen-ts=$(rootpath @npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts)' \
             --js_out='import_style=commonjs,binary:./$(@D)/' \
@@ -80,7 +80,7 @@ genrule(
     # Dependencies for the above command. the //:WORKSPACE label is required to locate the relative path for the .proto files so they can import each other.
     tools = [
         "//grpc/nodejs:grpc_tools_node_protoc",
-        "@npm//grpc_tools_node_protoc_ts/bin:protoc-gen-ts",
+        "//grpc/nodejs:protoc-gen-ts",
         "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
         "@npm//grpc_tools_node_protoc_ts",
         "@npm//google-protobuf",
