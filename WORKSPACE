@@ -123,7 +123,7 @@ nodejs_deps()
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "npm_install")
 
 node_repositories(
-    preserve_symlinks = False,
+#    preserve_symlinks = False,
 )
 npm_install(
   name = "npm",
