@@ -477,21 +477,21 @@ message RoleType {
     message GetRelationType {
         message Req {}
         message Res {
-            Type relationType = 1;
+            Type relation_type = 1;
         }
     }
 
     message GetRelationTypes {
         message Req {}
         message Res {
-            repeated Type relationType = 1;
+            repeated Type relation_type = 1;
         }
     }
 
     message GetPlayers {
         message Req {}
         message Res {
-            repeated Type thingType = 1;
+            repeated Type thing_type = 1;
         }
     }
 }
@@ -559,7 +559,7 @@ message ThingType {
 
     message UnsetOwns {
         message Req {
-            Type attributeType = 1;
+            Type attribute_type = 1;
         }
         message Res {}
     }
@@ -666,7 +666,7 @@ message AttributeType {
 
     message GetOwners {
         message Req {
-            bool onlyKey = 1;
+            bool only_key = 1;
         }
         message Res {
             repeated Type owner = 1;
