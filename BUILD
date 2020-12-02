@@ -28,6 +28,10 @@ checkstyle_test(
         "*",
         ".grabl/automation.yml",
     ]),
+    exclude = [
+        "package-lock.json",
+        "package.json",
+    ],
     license_type = "agpl",
     size = "small",
 )
