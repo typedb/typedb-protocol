@@ -103,7 +103,7 @@ github_deps()
 
 load("@graknlabs_dependencies//library/maven:rules.bzl", "maven")
 load("//dependencies/maven:artifacts.bzl", "artifacts")
-maven(artifacts)
+maven(artifacts + graknlabs_dependencies_tool_maven_artifacts)
 
 #############################################
 # Create @graknlabs_protocol_workspace_refs #
