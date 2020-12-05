@@ -35,10 +35,10 @@ message Options {
     oneof batch_size_opt {
         int32 batch_size = 3;
     }
-    oneof idle_timeout_opt {
-        int32 idle_timeout_millis = 4;
+    oneof session_idle_timeout_opt {
+        int32 session_idle_timeout_millis = 4;
     }
-    oneof acquire_schema_lock_timeout_opt {
-        int32 acquire_schema_lock_timeout_millis = 5;
+    oneof schema_lock_acquire_timeout_opt {
+        int32 schema_lock_acquire_timeout_millis = 5;
     }
 }
