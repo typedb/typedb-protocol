@@ -48,4 +48,13 @@ message Session {
         }
         message Res {}
     }
+
+    message Pulse {
+        message Req {
+            bytes session_id = 1;
+        }
+        message Res {
+            bool alive = 1;
+        }
+    }
 }
