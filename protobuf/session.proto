@@ -48,4 +48,11 @@ message Session {
         }
         message Res {}
     }
+
+    message KeepAlive {
+        message Req {
+            bytes session_id = 1;
+        }
+        message Res {}
+    }
 }
