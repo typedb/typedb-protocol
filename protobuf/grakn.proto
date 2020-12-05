@@ -35,7 +35,9 @@ service Grakn {
 
     rpc session_open (Session.Open.Req) returns (Session.Open.Res);
     rpc session_close (Session.Close.Req) returns (Session.Close.Res);
-    rpc session_keep_alive (Session.KeepAlive.Req) returns (Session.KeepAlive.Res);
+
+    // Checks with the server that the session is still alive, and informs it that it should be kept alive.
+    rpc session_pulse (Session.Pulse.Req) returns (Session.Pulse.Res);
 
     // Opens a bi-directional stream representing a stateful transaction, streaming
     // requests and responses back-and-forth. The first request message must
