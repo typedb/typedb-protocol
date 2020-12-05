@@ -53,6 +53,8 @@ message Session {
         message Req {
             bytes session_id = 1;
         }
-        message Res {}
+        message Res {
+            bool alive = 1;
+        }
     }
 }
