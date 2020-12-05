@@ -38,7 +38,7 @@ message Options {
     oneof idle_timeout_opt {
         int32 idle_timeout_millis = 4;
     }
-    oneof acquire_lock_timeout_opt {
-        int32 acquire_lock_timeout_millis = 5;
+    oneof acquire_schema_lock_timeout_opt {
+        int32 acquire_schema_lock_timeout_millis = 5;
     }
 }
