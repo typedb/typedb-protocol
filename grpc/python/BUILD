@@ -44,7 +44,9 @@ python_repackage(
 
 py_library(
     name = "protocol",
-    srcs = ["protocol_pkg"],
+    srcs = [
+        "protocol_pkg"
+    ],
     imports = ["../../grpc/python"]
 )
 
