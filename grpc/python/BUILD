@@ -17,7 +17,8 @@
 
 package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//python:python_grpc_compile.bzl", "python_grpc_compile")
-load("@graknlabs_bazel_distribution//pip:rules.bzl", "python_repackage")
+load("@graknlabs_bazel_distribution//pip:rules.bzl", "assemble_pip", "deploy_pip", "python_repackage")
+load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 python_grpc_compile(
@@ -52,4 +53,39 @@ checkstyle_test(
     include = glob(["*"]),
     license_type = "agpl",
     size = "small",
+)
+
+assemble_pip(
+    name = "assemble-pip",
+    target = ":protocol",
+    package_name = "grakn-protocol",
+    classifiers = [
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+        "Operating System :: OS Independent",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "Environment :: Console",
+        "Topic :: Database :: Front-Ends"
+    ],
+    url = "https://github.com/graknlabs/protocol/",
+    author = "Grakn Labs",
+    author_email = "grabl@grakn.ai",
+    license = "AGPLv3+",
+    install_requires = [],
+    keywords = ["grakn", "database", "graph", "knowledgebase", "knowledge-engineering"],
+    description = "Grakn gRPC Protocol",
+    long_description_file = "//:README.md",
+)
+
+deploy_pip(
+    name = "deploy-pip",
+    target = ":assemble-pip",
+    snapshot = deployment["pypi.snapshot"],
+    release = deployment["pypi.release"],
 )
