@@ -51,6 +51,8 @@ genrule(
         "protobuf/grakn_pb.js",
         "protobuf/grakn_grpc_pb.js",
         "protobuf/grakn_grpc_pb.d.ts",
+        "protobuf/logic_pb.d.ts",
+        "protobuf/logic_pb.js",
         "protobuf/options_pb.d.ts",
         "protobuf/options_pb.js",
         "protobuf/query_pb.d.ts",
