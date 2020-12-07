@@ -39,7 +39,7 @@ python_grpc_compile(
 python_repackage(
     name = "protocol_pkg",
     src = ":protocol_src",
-    package = "grakn_protocol"
+    package = "graknprotocol"
 )
 
 py_library(
@@ -58,7 +58,7 @@ checkstyle_test(
 assemble_pip(
     name = "assemble-pip",
     target = ":protocol",
-    package_name = "grakn_protocol",
+    package_name = "graknprotocol",
     classifiers = [
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
