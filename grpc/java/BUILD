@@ -30,6 +30,7 @@ java_grpc_compile(
         "//protobuf:concept-proto",
         "//protobuf:database-proto",
         "//protobuf:grakn-proto",
+        "//protobuf:logic-proto",
         "//protobuf:options-proto",
         "//protobuf:query-proto",
         "//protobuf:session-proto",
