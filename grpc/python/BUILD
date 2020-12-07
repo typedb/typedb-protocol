@@ -47,7 +47,7 @@ py_library(
     srcs = [
         "protocol_pkg"
     ],
-    imports = ["../../grpc/python"]
+    imports = ["../../../grpc/python"]
 )
 
 checkstyle_test(
