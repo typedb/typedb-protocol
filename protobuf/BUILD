@@ -96,6 +96,7 @@ filegroup(
         "query.proto",
         "session.proto",
         "transaction.proto",
+        "logic.proto",
     ]
 )
 
