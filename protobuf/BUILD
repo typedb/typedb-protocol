@@ -46,6 +46,11 @@ proto_library(
 )
 
 proto_library(
+    name = "logic-proto",
+    srcs = ["logic.proto"]
+)
+
+proto_library(
     name = "options-proto",
     srcs = ["options.proto"],
 )
@@ -71,6 +76,7 @@ proto_library(
     deps = [
         ":answer-proto",
         ":concept-proto",
+        ":logic-proto",
         ":options-proto",
         ":query-proto",
     ]
@@ -90,6 +96,7 @@ filegroup(
         "query.proto",
         "session.proto",
         "transaction.proto",
+        "logic.proto",
     ]
 )
 
