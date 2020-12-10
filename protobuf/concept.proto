@@ -78,7 +78,7 @@ message ConceptManager {
     message PutAttributeType {
         message Req {
             string label = 1;
-            AttributeType.VALUE_TYPE value_type = 2;
+            AttributeType.ValueType value_type = 2;
         }
         message Res {
             Type attribute_type = 1;
@@ -105,8 +105,8 @@ message Concept {
 message Thing {
 
     bytes iid = 1;
-    ENCODING encoding = 2;
-    AttributeType.VALUE_TYPE value_type = 3;
+    Encoding encoding = 2;
+    AttributeType.ValueType value_type = 3;
     Attribute.Value value = 4;
 
     message Req {
@@ -156,7 +156,7 @@ message Thing {
         }
     }
 
-    enum ENCODING {
+    enum Encoding {
         ENTITY = 0;
         RELATION = 1;
         ATTRIBUTE = 2;
@@ -289,8 +289,8 @@ message Attribute {
 message Type {
     string label = 1;
     string scope = 2;
-    ENCODING encoding = 3;
-    AttributeType.VALUE_TYPE value_type = 4;
+    Encoding encoding = 3;
+    AttributeType.ValueType value_type = 4;
     bool root = 5;
 
     message Req {
@@ -386,7 +386,7 @@ message Type {
         }
     }
 
-    enum ENCODING {
+    enum Encoding {
         THING_TYPE = 0;
         ENTITY_TYPE = 1;
         RELATION_TYPE = 2;
@@ -494,7 +494,7 @@ message ThingType {
     message GetOwns {
         message Req {
             oneof filter {
-                AttributeType.VALUE_TYPE value_type = 1;
+                AttributeType.ValueType value_type = 1;
             }
             bool keys_only = 3;
         }
@@ -609,7 +609,7 @@ message RelationType {
 
 message AttributeType {
 
-    enum VALUE_TYPE {
+    enum ValueType {
         OBJECT = 0;
         BOOLEAN = 1;
         LONG = 2;
@@ -664,7 +664,7 @@ message AttributeType {
     message GetSubtypes {
         message Req {
             oneof req {
-                VALUE_TYPE value_type = 1;
+                ValueType value_type = 1;
             }
         }
         message Res {
@@ -675,7 +675,7 @@ message AttributeType {
     message GetInstances {
         message Req {
             oneof req {
-                VALUE_TYPE value_type = 1;
+                ValueType value_type = 1;
             }
         }
         message Res {
