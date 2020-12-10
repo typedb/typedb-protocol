@@ -68,6 +68,20 @@ build:
         export DEPLOY_NPM_EMAIL=$REPO_GRAKN_EMAIL
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
       dependencies: [build, build-dependency]
+    deploy-pip-snapshot:
+      filter:
+        owner: graknlabs
+        branch: master
+      machine: graknlabs-ubuntu-20.04
+      type: foreground
+      script: |
+        pyenv global 3.6.10
+        sudo unlink /usr/bin/python3
+        sudo ln -s $(which python3) /usr/bin/python3
+        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.6.10/lib/python3.6/site-packages/lsb_release.py
+        export DEPLOY_PIP_USERNAME=$REPO_GRAKN_USERNAME
+        export DEPLOY_PIP_PASSWORD=$REPO_GRAKN_PASSWORD
+        bazel run --define version=$(git rev-parse HEAD) //grpc/python:deploy-pip -- snapshot
 
 release:
   filter:
@@ -100,4 +114,15 @@ release:
         export DEPLOY_NPM_PASSWORD=$REPO_NPM_PASSWORD
         export DEPLOY_NPM_EMAIL=$REPO_GRAKN_EMAIL
         bazel run --define version=$(cat VERSION) //grpc/nodejs:deploy-npm -- release
+      dependencies: [deploy-github]
+    deploy-pip-release:
+      machine: graknlabs-ubuntu-20.04
+      script: |
+        pyenv global 3.6.10
+        sudo unlink /usr/bin/python3
+        sudo ln -s $(which python3) /usr/bin/python3
+        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.6.10/lib/python3.6/site-packages/lsb_release.py
+        export DEPLOY_PIP_USERNAME=$REPO_PYPI_USERNAME
+        export DEPLOY_PIP_PASSWORD=$REPO_PYPI_PASSWORD
+        bazel run --define version=$(cat VERSION) //grpc/python:deploy-pip -- release
       dependencies: [deploy-github]
