@@ -197,18 +197,19 @@ message Thing {
 
     message GetHas {
         message Req {
+            // Only one filter can be set at a time (attribute_types or keys_only). repeated can't be used in a oneof
             repeated Type attribute_types = 1;
             bool keys_only = 2;
         }
         message Res {
-            repeated Thing attribute = 1;
+            repeated Thing attributes = 1;
         }
     }
 
     message GetPlays {
         message Req {}
         message Res {
-            repeated Type role_type = 1;
+            repeated Type role_types = 1;
         }
     }
 
@@ -217,7 +218,7 @@ message Thing {
             repeated Type role_types = 1;
         }
         message Res {
-            repeated Thing relation = 1;
+            repeated Thing relations = 1;
         }
     }
 }
@@ -229,7 +230,7 @@ message Relation {
             repeated Type role_types = 1;
         }
         message Res {
-            repeated Thing thing = 1;
+            repeated Thing things = 1;
         }
     }
 
@@ -240,7 +241,7 @@ message Relation {
         }
         message Req {}
         message Res {
-            repeated RoleTypeWithPlayer role_type_with_player = 1;
+            repeated RoleTypeWithPlayer role_types_with_players = 1;
         }
     }
 
@@ -270,7 +271,7 @@ message Attribute {
             }
         }
         message Res {
-            repeated Thing thing = 1;
+            repeated Thing things = 1;
         }
     }
 
@@ -432,14 +433,14 @@ message Type {
     message GetSupertypes {
         message Req {}
         message Res {
-            repeated Type type = 1;
+             Type type = 1;
         }
     }
 
     message GetSubtypes {
         message Req {}
         message Res {
-            repeated Type type = 1;
+            repeated Type types = 1;
         }
     }
 }
@@ -458,14 +459,14 @@ message RoleType {
     message GetRelationTypes {
         message Req {}
         message Res {
-            repeated Type relation_type = 1;
+            repeated Type relation_types = 1;
         }
     }
 
     message GetPlayers {
         message Req {}
         message Res {
-            repeated Type thing_type = 1;
+            repeated Type thing_types = 1;
         }
     }
 }
@@ -487,7 +488,7 @@ message ThingType {
     message GetInstances {
         message Req {}
         message Res {
-            repeated Thing thing = 1;
+            repeated Thing things = 1;
         }
     }
 
@@ -499,14 +500,14 @@ message ThingType {
             bool keys_only = 3;
         }
         message Res {
-            repeated Type attribute_type = 1;
+            repeated Type attribute_types = 1;
         }
     }
 
     message GetPlays {
         message Req {}
         message Res {
-            repeated Type role = 1;
+            repeated Type roles = 1;
         }
     }
 
@@ -572,7 +573,7 @@ message RelationType {
     message GetRelates {
         message Req {}
         message Res {
-            repeated Type role = 1;
+            repeated Type roles = 1;
         }
     }
 
@@ -643,7 +644,7 @@ message AttributeType {
             bool only_key = 1;
         }
         message Res {
-            repeated Type owner = 1;
+            repeated Type owners = 1;
         }
     }
 
@@ -668,7 +669,7 @@ message AttributeType {
             }
         }
         message Res {
-            repeated Type type = 1;
+            repeated Type types = 1;
         }
     }
 
@@ -679,7 +680,7 @@ message AttributeType {
             }
         }
         message Res {
-            repeated Thing thing = 1;
+            repeated Thing things = 1;
         }
     }
 }
