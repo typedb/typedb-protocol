@@ -433,7 +433,7 @@ message Type {
     message GetSupertypes {
         message Req {}
         message Res {
-             Type type = 1;
+             repeated Type types = 1;
         }
     }
 
