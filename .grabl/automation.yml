@@ -36,7 +36,7 @@ build:
       script: |
         bazel build //...
         bazel run @graknlabs_dependencies//tool/checkstyle:test-coverage
-        bazel test --config=rbe $(bazel query 'kind(checkstyle_test, //...)')
+        bazel test $(bazel query 'kind(checkstyle_test, //...)')
     build-dependency:
       machine: graknlabs-ubuntu-20.04
       script: |
