@@ -63,13 +63,12 @@ genrule(
         "protobuf/transaction_pb.js",
     ],
     # The below command performs a protoc compilation of our proto files into typescript and javascript. Line by line:
-    # Symlink the node modules required by the typescript plugin into the directory the command will be run from
     # Run the node.js protoc (protocol compiler) with the following flags:
     #    Use the gen-ts plugin to generate typescript declaration files in addition to javascript
     #    Output javascript with commonjs style exports, to the genrule output directory.
     #    Output services to the genrule output directory (without this line, grakn_grpc_pb is omitted)
     #    Output typescript to (you guessed it) the genrule output directory
-    #    Set the .proto file relative path to the WORKSPACE this command is being run from
+    #    Set the .proto file relative path to root folder (same as where WORKSPACE resides)
     #    Use the .proto files found in the :proto-raw-buffers filegroup as inputs.
     cmd = "$(execpath //grpc/nodejs:grpc_tools_node_protoc) \
             --plugin='protoc-gen-ts=$(rootpath @npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts)' \
@@ -77,7 +76,7 @@ genrule(
             --grpc_out='grpc_js:./$(@D)/' \
             --ts_out='grpc_js:./$(@D)/' \
             --proto_path=. \
-            $(locations //protobuf:proto-raw-buffers);",
+            $(execpaths //protobuf:proto-raw-buffers);",
     tools = [
         "//grpc/nodejs:grpc_tools_node_protoc",
         "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
