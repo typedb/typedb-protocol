@@ -21,6 +21,7 @@ load("@build_bazel_rules_nodejs//:index.bzl", "pkg_npm", "nodejs_binary")
 load("@graknlabs_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
 load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
 load("//:deployment.bzl", github_deployment = "deployment")
+load("//grpc/nodejs:rules.bzl", "ts_grpc_compile")
 
 
 nodejs_binary(
@@ -37,54 +38,26 @@ nodejs_binary(
   templated_args = ["--nobazel_node_patches"],
 )
 
+py_binary(
+    name = "unpack_proto_archive",
+    srcs = ["unpack_proto_archive.py"],
+)
 
-genrule(
+ts_grpc_compile(
     name = "protocol",
-    outs = [
-        "protobuf/answer_pb.d.ts",
-        "protobuf/answer_pb.js",
-        "protobuf/concept_pb.d.ts",
-        "protobuf/concept_pb.js",
-        "protobuf/database_pb.d.ts",
-        "protobuf/database_pb.js",
-        "protobuf/grakn_pb.d.ts",
-        "protobuf/grakn_pb.js",
-        "protobuf/grakn_grpc_pb.d.ts",
-        "protobuf/grakn_grpc_pb.js",
-        "protobuf/logic_pb.d.ts",
-        "protobuf/logic_pb.js",
-        "protobuf/options_pb.d.ts",
-        "protobuf/options_pb.js",
-        "protobuf/query_pb.d.ts",
-        "protobuf/query_pb.js",
-        "protobuf/session_pb.d.ts",
-        "protobuf/session_pb.js",
-        "protobuf/transaction_pb.d.ts",
-        "protobuf/transaction_pb.js",
+    deps = [
+        "//protobuf:answer-proto",
+        "//protobuf:concept-proto",
+        "//protobuf:database-proto",
+        "//protobuf:grakn-proto",
+        "//protobuf:logic-proto",
+        "//protobuf:options-proto",
+        "//protobuf:query-proto",
+        "//protobuf:session-proto",
+        "//protobuf:transaction-proto",
     ],
-    # The below command performs a protoc compilation of our proto files into typescript and javascript. Line by line:
-    # Run the node.js protoc (protocol compiler) with the following flags:
-    #    Use the gen-ts plugin to generate typescript declaration files in addition to javascript
-    #    Output javascript with commonjs style exports, to the genrule output directory.
-    #    Output services to the genrule output directory (without this line, grakn_grpc_pb is omitted)
-    #    Output typescript to (you guessed it) the genrule output directory
-    #    Set the .proto file relative path to root folder (same as where WORKSPACE resides)
-    #    Use the .proto files found in the :proto-raw-buffers filegroup as inputs.
-    cmd = "$(execpath //grpc/nodejs:grpc_tools_node_protoc) \
-            --plugin='protoc-gen-ts=$(rootpath @npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts)' \
-            --js_out='import_style=commonjs,binary:./$(@D)/' \
-            --grpc_out='grpc_js:./$(@D)/' \
-            --ts_out='grpc_js:./$(@D)/' \
-            --proto_path=. \
-            $(execpaths //protobuf:proto-raw-buffers);",
-    tools = [
-        "//grpc/nodejs:grpc_tools_node_protoc",
-        "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
-        "@npm//grpc_tools_node_protoc_ts",
-        "@npm//google-protobuf",
-    ],
-    srcs = [
-        "//protobuf:proto-raw-buffers",
+    grpc_deps = [
+        "//protobuf:grakn-proto",
     ]
 )
 
