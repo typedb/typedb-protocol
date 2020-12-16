@@ -46,11 +46,14 @@ def _unpack_proto_archive(ctx):
                     src.path.replace('.proto', '_grpc_pb.d.ts')
                 ),
             ])
-    ctx.actions.run(
+    ctx.actions.run_shell(
         inputs = [ctx.file.archive],
         outputs = outputs,
-        executable = ctx.executable._unpack_proto_archive,
-        arguments = [ctx.file.archive.path] + [x.path for x in outputs]
+        mnemonic='x',
+        command = "mkdir -p {} && tar -xvf {} -C {}/{}".format(
+            ctx.label.package, ctx.file.archive.path,
+            ctx.var["BINDIR"], ctx.label.package
+        )
     )
     return DefaultInfo(files = depset(outputs))
 
@@ -75,11 +78,6 @@ unpack_proto_archive = rule(
         "archive": attr.label(
             allow_single_file = True
         ),
-        "_unpack_proto_archive": attr.label(
-            executable = True,
-            cfg = "host",
-            default = "//grpc/nodejs:unpack_proto_archive",
-        )
     },
     implementation = _unpack_proto_archive
 )

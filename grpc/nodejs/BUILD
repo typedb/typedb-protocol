@@ -38,11 +38,6 @@ nodejs_binary(
   templated_args = ["--nobazel_node_patches"],
 )
 
-py_binary(
-    name = "unpack_proto_archive",
-    srcs = ["unpack_proto_archive.py"],
-)
-
 ts_grpc_compile(
     name = "protocol",
     deps = [
