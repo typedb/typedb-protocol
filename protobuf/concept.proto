@@ -50,7 +50,7 @@ message ConceptManager {
         }
         message Res {
             oneof res {
-                ThingType thingType = 1;
+                Type thing_type = 1;
             }
         }
     }
