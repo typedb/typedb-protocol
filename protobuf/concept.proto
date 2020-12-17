@@ -26,7 +26,7 @@ message ConceptManager {
 
     message Req {
         oneof req {
-            GetType.Req get_type_req = 1;
+            GetThingType.Req get_thing_type_req = 1;
             GetThing.Req get_thing_req = 2;
             PutEntityType.Req put_entity_type_req = 3;
             PutAttributeType.Req put_attribute_type_req = 4;
@@ -36,7 +36,7 @@ message ConceptManager {
 
     message Res {
         oneof res {
-            GetType.Res get_type_res = 1;
+            GetThingType.Res get_thing_type_res = 1;
             GetThing.Res get_thing_res = 2;
             PutEntityType.Res put_entity_type_res = 3;
             PutAttributeType.Res put_attribute_type_res = 4;
@@ -44,13 +44,13 @@ message ConceptManager {
         }
     }
 
-    message GetType {
+    message GetThingType {
         message Req {
             string label = 1;
         }
         message Res {
             oneof res {
-                Type type = 1;
+                ThingType thingType = 1;
             }
         }
     }
