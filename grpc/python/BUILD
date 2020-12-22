@@ -21,6 +21,8 @@ load("@graknlabs_bazel_distribution//pip:rules.bzl", "assemble_pip", "deploy_pip
 load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
+exports_files(["requirements.txt"])
+
 python_grpc_compile(
     name = "protocol_src",
     deps = [
