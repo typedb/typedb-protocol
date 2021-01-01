@@ -26,7 +26,7 @@ build:
       owner: graknlabs
       branch: master
     dependency-analysis:
-      image: graknlabs-ubuntu-20.04-java11
+      image: graknlabs-ubuntu-20.04
       script: |
         bazel run @graknlabs_dependencies//grabl/analysis:dependency-analysis
   correctness:
