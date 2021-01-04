@@ -31,7 +31,7 @@ message ConceptMap {
 
 message ConceptMapGroup {
     Concept owner = 1;
-    repeated ConceptMap concept_map = 2;
+    repeated ConceptMap concept_maps = 2;
 }
 
 message Number {
@@ -41,5 +41,5 @@ message Number {
 
 message NumberGroup {
     Concept owner = 1;
-    repeated Number number = 2;
+    repeated Number numbers = 2;
 }
