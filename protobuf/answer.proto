@@ -24,25 +24,22 @@ import "protobuf/concept.proto";
 
 package grakn.protocol;
 
-message Answer {
-    oneof answer {
-        AnswerGroup answer_group = 1;
-        ConceptMap concept_map = 2;
-        Number number = 3;
-    }
-}
-
-message AnswerGroup {
-    Concept owner = 1;
-    repeated Answer answers = 2;
-}
-
 message ConceptMap {
     map<string, Concept> map = 1;
     string pattern = 2;
 }
 
+message ConceptMapGroup {
+    Concept owner = 1;
+    repeated ConceptMap concept_maps = 2;
+}
+
 message Number {
     string value = 1;
     // We use a string to contain the full representation of a number
+}
+
+message NumberGroup {
+    Concept owner = 1;
+    repeated Number numbers = 2;
 }

@@ -30,26 +30,29 @@ message Query {
     message Req {
         Options options = 1;
         oneof req {
-            Graql.Delete.Req delete_req = 100;
-            Graql.Define.Req define_req = 101;
-            Graql.Undefine.Req undefine_req = 102;
-            Graql.Match.Req match_req = 103;
-            Graql.Insert.Req insert_req = 104;
+            Delete.Req delete_req = 100;
+            Define.Req define_req = 101;
+            Undefine.Req undefine_req = 102;
+            Match.Req match_req = 103;
+            MatchAggregate.Req match_aggregate_req = 104;
+            MatchGroup.Req match_group_req = 105;
+            MatchGroupAggregate.Req match_group_aggregate_req = 106;
+            Insert.Req insert_req = 107;
         }
     }
 
     message Res {
         oneof res {
-            Graql.Delete.Res delete_res = 100;
-            Graql.Define.Res define_res = 101;
-            Graql.Undefine.Res undefine_res = 102;
-            Graql.Match.Res match_res = 103;
-            Graql.Insert.Res insert_res = 104;
+            Delete.Res delete_res = 100;
+            Define.Res define_res = 101;
+            Undefine.Res undefine_res = 102;
+            Match.Res match_res = 103;
+            MatchAggregate.Res match_aggregate_res = 104;
+            MatchGroup.Res match_group_res = 105;
+            MatchGroupAggregate.Res match_group_aggregate_res = 106;
+            Insert.Res insert_res = 107;
         }
     }
-}
-
-message Graql {
 
     message Match {
         message Req {
@@ -57,6 +60,36 @@ message Graql {
         }
         message Res {
             repeated ConceptMap answers = 1;
+        }
+    }
+
+    message MatchAggregate {
+        message Req {
+            string query = 1;
+        }
+
+        message Res {
+            Number answer = 1;
+        }
+    }
+
+    message MatchGroup {
+        message Req {
+            string query = 1;
+        }
+
+        message Res {
+            repeated ConceptMapGroup answers = 1;
+        }
+    }
+
+    message MatchGroupAggregate {
+        message Req {
+            string query = 1;
+        }
+
+        message Res {
+            repeated NumberGroup answers = 1;
         }
     }
 
