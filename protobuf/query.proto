@@ -55,35 +55,35 @@ message Query {
         message Res {
             repeated ConceptMap answers = 1;
         }
+    }
 
-        message Aggregate {
-            message Req {
-                string query = 1;
-            }
-
-            message Res {
-                Number answer = 1;
-            }
+    message MatchAggregate {
+        message Req {
+            string query = 1;
         }
 
-        message Group {
-            message Req {
-                string query = 1;
-            }
+        message Res {
+            Number answer = 1;
+        }
+    }
 
-            message Res {
-                repeated ConceptMapGroup answers = 1;
-            }
+    message MatchGroup {
+        message Req {
+            string query = 1;
+        }
 
-            message Aggregate {
-                message Req {
-                    string query = 1;
-                }
+        message Res {
+            repeated ConceptMapGroup answers = 1;
+        }
+    }
 
-                message Res {
-                    repeated NumberGroup answers = 1;
-                }
-            }
+    message MatchGroupAggregate {
+        message Req {
+            string query = 1;
+        }
+
+        message Res {
+            repeated NumberGroup answers = 1;
         }
     }
 
