@@ -27,19 +27,19 @@ build:
       branch: master
     dependency-analysis:
       image: graknlabs-ubuntu-20.04
-      script: |
+      command: |
         bazel run @graknlabs_dependencies//grabl/analysis:dependency-analysis
   correctness:
     build:
       image: graknlabs-ubuntu-20.04
       #NPM packages can't be built under RBE
-      script: |
+      command: |
         bazel build //...
         bazel run @graknlabs_dependencies//tool/checkstyle:test-coverage
         bazel test $(bazel query 'kind(checkstyle_test, //...)')
     build-dependency:
       image: graknlabs-ubuntu-20.04
-      script: |
+      command: |
         dependencies/maven/update.sh
         git diff --exit-code dependencies/maven/artifacts.snapshot
         bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
@@ -49,7 +49,7 @@ build:
         branch: master
       image: graknlabs-ubuntu-20.04
       dependencies: [build, build-dependency]
-      script: |
+      command: |
         export DEPLOY_MAVEN_USERNAME=$REPO_GRAKN_USERNAME
         export DEPLOY_MAVEN_PASSWORD=$REPO_GRAKN_PASSWORD
         bazel run --define version=$(git rev-parse HEAD) //grpc/java:deploy-maven -- snapshot
@@ -58,7 +58,7 @@ build:
         owner: graknlabs
         branch: master
       image: graknlabs-ubuntu-20.04
-      script: |
+      command: |
         curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
         wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         sudo apt update -y
@@ -74,7 +74,7 @@ build:
         branch: master
       image: graknlabs-ubuntu-20.04
       type: foreground
-      script: |
+      command: |
         pyenv global 3.6.10
         sudo unlink /usr/bin/python3
         sudo ln -s $(which python3) /usr/bin/python3
@@ -90,7 +90,7 @@ release:
   deployment:
     deploy-github:
       image: graknlabs-ubuntu-20.04
-      script: |
+      command: |
         pip install certifi
         export RELEASE_NOTES_TOKEN=$REPO_GITHUB_TOKEN
         bazel run @graknlabs_dependencies//tool/release:create-notes -- protocol $(cat VERSION) ./RELEASE_TEMPLATE.md
@@ -98,14 +98,14 @@ release:
         bazel run --define version=$(cat VERSION) //:deploy-github -- $GRABL_COMMIT
     deploy-maven-release:
       image: graknlabs-ubuntu-20.04
-      script: |
+      command: |
         export DEPLOY_MAVEN_USERNAME=$REPO_GRAKN_USERNAME
         export DEPLOY_MAVEN_PASSWORD=$REPO_GRAKN_PASSWORD
         bazel run --define version=$(cat VERSION) //grpc/java:deploy-maven -- release
       dependencies: [deploy-github]
     deploy-npm-release:
       image: graknlabs-ubuntu-20.04
-      script: |
+      command: |
         curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
         wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         sudo apt update -y
@@ -117,7 +117,7 @@ release:
       dependencies: [deploy-github]
     deploy-pip-release:
       image: graknlabs-ubuntu-20.04
-      script: |
+      command: |
         pyenv global 3.6.10
         sudo unlink /usr/bin/python3
         sudo ln -s $(which python3) /usr/bin/python3
