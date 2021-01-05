@@ -38,7 +38,7 @@ message Numeric {
     oneof value {
         int64 long_value = 1;
         double double_value = 2;
-        NaN nan_value = 3;
+        bool nan = 3;
     }
 }
 
@@ -46,5 +46,3 @@ message NumericGroup {
     Concept owner = 1;
     Numeric number = 2;
 }
-
-message NaN {}
