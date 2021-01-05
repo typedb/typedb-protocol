@@ -69,7 +69,7 @@ message Query {
         }
 
         message Res {
-            Number answer = 1;
+            Numeric answer = 1;
         }
     }
 
@@ -89,7 +89,7 @@ message Query {
         }
 
         message Res {
-            repeated NumberGroup answers = 1;
+            repeated NumericGroup answers = 1;
         }
     }
 

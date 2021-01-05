@@ -34,12 +34,15 @@ message ConceptMapGroup {
     repeated ConceptMap concept_maps = 2;
 }
 
-message Number {
-    string value = 1;
-    // We use a string to contain the full representation of a number
+message Numeric {
+    oneof value {
+        int64 long_value = 1;
+        double double_value = 2;
+        bool nan = 3;
+    }
 }
 
-message NumberGroup {
+message NumericGroup {
     Concept owner = 1;
-    repeated Number numbers = 2;
+    Numeric number = 2;
 }
