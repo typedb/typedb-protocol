@@ -78,7 +78,7 @@ assemble_pip(
     author = "Grakn Labs",
     author_email = "grabl@grakn.ai",
     license = "AGPLv3+",
-    install_requires = [],
+    requirements_file = ":requirements.txt",
     keywords = ["grakn", "database", "graph", "knowledgebase", "knowledge-engineering"],
     description = "Grakn gRPC Protocol",
     long_description_file = "//:README.md",
