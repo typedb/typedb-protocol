@@ -59,7 +59,7 @@ checkstyle_test(
 assemble_pip(
     name = "assemble-pip",
     target = ":protocol",
-    package_name = "graknprotocol",
+    package_name = "grakn-protocol",
     classifiers = [
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
