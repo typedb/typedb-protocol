@@ -23,7 +23,7 @@ option java_outer_classname = "SessionProto";
 package grakn.protocol;
 
 message Session {
-    message Replica {
+    message DatabaseReplica {
         message Req {
             string database = 1;
         }
@@ -34,14 +34,8 @@ message Session {
             message Info {
                 string address = 1;
                 string database = 2;
-                Role role = 3;
+                bool is_leader = 3;
                 int64 term = 4;
-            }
-
-            enum Role {
-                LEADER = 0;
-                CANDIDATE = 1;
-                FOLLOWER = 2;
             }
         }
     }
