@@ -23,15 +23,15 @@ option java_outer_classname = "SessionProto";
 package grakn.protocol;
 
 message Session {
-    message DatabaseReplica {
+    message DatabaseReplicas {
         message Req {
             string database = 1;
         }
 
         message Res {
-            repeated Info infos = 1;
+            repeated DatabaseReplica replicas = 1;
 
-            message Info {
+            message DatabaseReplica {
                 string address = 1;
                 string database = 2;
                 bool is_leader = 3;

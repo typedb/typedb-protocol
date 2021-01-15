@@ -25,5 +25,5 @@ import "protobuf/cluster/session.proto";
 package grakn.protocol;
 
 service Cluster {
-    rpc database_replica_info (Session.DatabaseReplica.Req) returns (Session.DatabaseReplica.Res);
+    rpc database_replicas (Session.DatabaseReplicas.Req) returns (Session.DatabaseReplicas.Res);
 }
