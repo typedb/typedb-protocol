@@ -18,11 +18,18 @@
 syntax = "proto3";
 
 option java_package = "grakn.protocol.cluster";
-option java_outer_classname = "SessionProto";
+option java_outer_classname = "DiscoveryProto";
 
 package grakn.protocol;
 
-message Session {
+message Discovery {
+    message Cluster {
+        message Req {}
+        message Res {
+            repeated string servers = 1;
+        }
+    }
+
     message DatabaseReplicas {
         message Req {
             string database = 1;
@@ -37,13 +44,6 @@ message Session {
                 bool is_leader = 3;
                 int64 term = 4;
             }
-        }
-    }
-
-    message Servers {
-        message Req {}
-        message Res {
-            repeated string servers = 1;
         }
     }
 }

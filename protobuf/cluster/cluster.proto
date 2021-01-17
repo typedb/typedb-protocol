@@ -20,11 +20,11 @@ syntax = "proto3";
 option java_package = "grakn.protocol.cluster";
 option java_outer_classname = "ClusterProto";
 
-import "protobuf/cluster/session.proto";
+import "protobuf/cluster/discovery.proto";
 
 package grakn.protocol;
 
 service Cluster {
-    rpc servers (Session.Servers.Req) returns (Session.Servers.Res);
-    rpc database_replicas (Session.DatabaseReplicas.Req) returns (Session.DatabaseReplicas.Res);
+    rpc cluster_discovery (Discovery.Cluster.Req) returns (Discovery.Cluster.Res);
+    rpc database_replicas_discovery (Discovery.DatabaseReplicas.Req) returns (Discovery.DatabaseReplicas.Res);
 }
