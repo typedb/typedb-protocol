@@ -39,4 +39,11 @@ message Session {
             }
         }
     }
+
+    message Servers {
+        message Req {}
+        message Res {
+            repeated string servers = 1;
+        }
+    }
 }
