@@ -22,12 +22,12 @@ load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 proto_library(
     name = "cluster-proto",
     srcs = ["cluster.proto"],
-    deps = [":session-proto"],
+    deps = [":discovery-proto"],
 )
 
 proto_library(
-    name = "session-proto",
-    srcs = [":session.proto"],
+    name = "discovery-proto",
+    srcs = [":discovery.proto"],
 )
 
 checkstyle_test(

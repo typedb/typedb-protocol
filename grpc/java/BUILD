@@ -42,7 +42,7 @@ java_grpc_compile(
     name = "protocol-cluster-src",
     deps = [
         "//protobuf/cluster:cluster-proto",
-        "//protobuf/cluster:session-proto"
+        "//protobuf/cluster:discovery-proto"
     ]
 )
 
