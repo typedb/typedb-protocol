@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2020 Grakn Labs
+# Copyright (C) 2021 Grakn Labs
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -36,7 +36,7 @@ build:
       command: |
         bazel build //...
         bazel run @graknlabs_dependencies//tool/checkstyle:test-coverage
-        bazel test $(bazel query 'kind(checkstyle_test, //...)')
+        bazel test $(bazel query 'kind(checkstyle_test, //...)') --test_output=errors
     build-dependency:
       image: graknlabs-ubuntu-20.04
       command: |
