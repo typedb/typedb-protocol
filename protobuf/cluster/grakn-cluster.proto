@@ -18,15 +18,14 @@
 syntax = "proto3";
 
 option java_package = "grakn.protocol.cluster";
-option java_outer_classname = "ClusterProto";
+option java_outer_classname = "GraknClusterProto";
+
+import "protobuf/cluster/cluster.proto";
+import "protobuf/cluster/database.proto";
 
 package grakn.protocol.cluster;
 
-message Cluster {
-    message Discover {
-        message Req {}
-        message Res {
-            repeated string servers = 1;
-        }
-    }
+service GraknCluster {
+    rpc cluster_discover (Cluster.Discover.Req) returns (Cluster.Discover.Res);
+    rpc database_discover (Database.Discover.Req) returns (Database.Discover.Res);
 }

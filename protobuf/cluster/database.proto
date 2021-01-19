@@ -18,27 +18,20 @@
 syntax = "proto3";
 
 option java_package = "grakn.protocol.cluster";
-option java_outer_classname = "DiscoveryProto";
+option java_outer_classname = "DatabaseProto";
 
-package grakn.protocol;
+package grakn.protocol.cluster;
 
-message Discovery {
-    message Cluster {
-        message Req {}
-        message Res {
-            repeated string servers = 1;
-        }
-    }
-
-    message DatabaseReplicas {
+message Database {
+    message Discover {
         message Req {
             string database = 1;
         }
 
         message Res {
-            repeated DatabaseReplica replicas = 1;
+            repeated Replica replicas = 1;
 
-            message DatabaseReplica {
+            message Replica {
                 string address = 1;
                 string database = 2;
                 bool is_leader = 3;
