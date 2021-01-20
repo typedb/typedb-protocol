@@ -49,7 +49,7 @@ java_grpc_compile(
 
 java_library(
     name = "protocol",
-    srcs = [":protocol-src"],
+    srcs = [":protocol-src", ":protocol-grakn-cluster-src"],
     deps = [
         "@maven//:com_google_guava_guava",
         "@maven//:com_google_protobuf_protobuf_java",
@@ -60,21 +60,6 @@ java_library(
         "@maven//:javax_annotation_javax_annotation_api", # gRPC needs this in order to compile in Java 11 and Java 14
     ],
     tags = ["maven_coordinates=io.grakn.protocol:grakn-protocol:{pom_version}", "checkstyle_ignore"],
-)
-
-java_library(
-    name = "protocol-cluster",
-    srcs = [":protocol-grakn-cluster-src"],
-    deps = [
-        "@maven//:com_google_guava_guava",
-        "@maven//:com_google_protobuf_protobuf_java",
-        "@maven//:io_grpc_grpc_core",
-        "@maven//:io_grpc_grpc_protobuf",
-        "@maven//:io_grpc_grpc_stub",
-        "@maven//:io_grpc_grpc_api",
-        "@maven//:javax_annotation_javax_annotation_api", # gRPC needs this in order to compile in Java 11 and Java 14
-    ],
-    tags = ["maven_coordinates=io.grakn.protocol:grakn-cluster-protocol:{pom_version}", "checkstyle_ignore"],
 )
 
 checkstyle_test(
