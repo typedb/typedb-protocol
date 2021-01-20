@@ -14,3 +14,30 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
+
+package(default_visibility = ["//visibility:public"])
+
+load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+
+proto_library(
+    name = "grakn-cluster-proto",
+    srcs = ["grakn-cluster.proto"],
+    deps = [":cluster-proto", ":database-proto"],
+)
+
+proto_library(
+    name = "cluster-proto",
+    srcs = [":cluster.proto"],
+)
+
+proto_library(
+    name = "database-proto",
+    srcs = [":database.proto"],
+)
+
+checkstyle_test(
+    name = "checkstyle",
+    include = glob(["*"]),
+    license_type = "agpl",
+    size = "small",
+)
