@@ -67,6 +67,7 @@ message Transaction {
     enum Type {
         READ = 0;
         WRITE = 1;
+        READ_SECONDARY = 2;
     }
 
     message Open {
