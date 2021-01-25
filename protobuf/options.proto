@@ -45,6 +45,6 @@ message Options {
         int32 schema_lock_acquire_timeout_millis = 6;
     }
     oneof primary_replica_opt {
-        bool primary_replica = 6;
+        bool primary_replica = 7;
     }
 }
