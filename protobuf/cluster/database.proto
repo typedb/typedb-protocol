@@ -34,7 +34,7 @@ message Database {
             message Replica {
                 string address = 1;
                 string database = 2;
-                bool is_leader = 3;
+                bool is_primary = 3;
                 int64 term = 4;
             }
         }
