@@ -40,7 +40,7 @@ python_grpc_compile(
 python_repackage(
     name = "protocol_pkg",
     src = ":protocol_src",
-    package = "graknprotocol"
+    package = "grakn_protocol"
 )
 
 py_library(
