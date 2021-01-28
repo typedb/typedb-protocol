@@ -39,7 +39,7 @@ java_grpc_compile(
 )
 
 java_grpc_compile(
-    name = "protocol-grakn-cluster-src",
+    name = "protocol-cluster-src",
     deps = [
         "//protobuf/cluster:grakn-cluster-proto",
         "//protobuf/cluster:cluster-proto",
@@ -49,7 +49,7 @@ java_grpc_compile(
 
 java_library(
     name = "protocol",
-    srcs = [":protocol-src", ":protocol-grakn-cluster-src"],
+    srcs = [":protocol-src", ":protocol-cluster-src"],
     deps = [
         "@maven//:com_google_guava_guava",
         "@maven//:com_google_protobuf_protobuf_java",

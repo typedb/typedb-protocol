@@ -21,7 +21,7 @@ load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
     name = "grakn-cluster-proto",
-    srcs = ["grakn-cluster.proto"],
+    srcs = [":grakn_cluster.proto"],
     deps = [":cluster-proto", ":database-proto"],
 )
 
