@@ -22,7 +22,7 @@ load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 python_grpc_compile(
-    name = "protocol_src",
+    name = "protocol-src",
     deps = [
         "//protobuf:answer-proto",
         "//protobuf:concept-proto",
@@ -37,15 +37,34 @@ python_grpc_compile(
     visibility = ["//visibility:public"]
 )
 
+python_grpc_compile(
+    name = "protocol-cluster-src",
+    deps = [
+        "//protobuf/cluster:cluster-proto",
+        "//protobuf/cluster:database-proto",
+        "//protobuf/cluster:grakn-cluster-proto",
+    ],
+    visibility = ["//visibility:public"]
+)
+
 python_repackage(
-    name = "protocol_pkg",
-    src = ":protocol_src",
+    name = "protocol-pkg",
+    src = ":protocol-src",
+    package = "grakn_protocol"
+)
+
+python_repackage(
+    name = "protocol-cluster-pkg",
+    src = ":protocol-cluster-src",
     package = "grakn_protocol"
 )
 
 py_library(
     name = "protocol",
-    srcs = ["protocol_pkg"],
+    srcs = [
+        "protocol-pkg",
+        "protocol-cluster-pkg",
+    ],
     imports = ["../../../grpc/python"]
 )
 
@@ -63,10 +82,10 @@ assemble_pip(
     classifiers = [
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
         "Operating System :: OS Independent",
         "Intended Audience :: Developers",

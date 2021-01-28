@@ -56,6 +56,18 @@ ts_grpc_compile(
     ]
 )
 
+ts_grpc_compile(
+    name = "protocol-cluster",
+    deps = [
+        "//protobuf/cluster:cluster-proto",
+        "//protobuf/cluster:database-proto",
+        "//protobuf/cluster:grakn-cluster-proto",
+    ],
+    grpc_deps = [
+        "//protobuf/cluster:grakn-cluster-proto",
+    ]
+)
+
 pkg_npm(
     name = "protocol-package",
     package_name = "graknlabs_protocol",
@@ -64,6 +76,7 @@ pkg_npm(
     ]),
     deps = [
         ":protocol",
+        ":protocol-cluster",
     ],
 )
 
