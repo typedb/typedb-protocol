@@ -50,13 +50,15 @@ python_grpc_compile(
 python_repackage(
     name = "protocol-pkg",
     src = ":protocol-src",
-    package = "grakn_protocol"
+    src_package = "protobuf",
+    py_package_add_prefix = "grakn_protocol",
 )
 
 python_repackage(
     name = "protocol-cluster-pkg",
     src = ":protocol-cluster-src",
-    package = "grakn_protocol"
+    src_package = "protobuf.cluster",
+    py_package_add_prefix = "grakn_protocol",
 )
 
 py_library(
