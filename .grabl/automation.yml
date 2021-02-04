@@ -91,7 +91,7 @@ release:
     deploy-github:
       image: graknlabs-ubuntu-20.04
       command: |
-        pip install certifi
+        pip3 install certifi
         export RELEASE_NOTES_TOKEN=$REPO_GITHUB_TOKEN
         bazel run @graknlabs_dependencies//tool/release:create-notes -- protocol $(cat VERSION) ./RELEASE_TEMPLATE.md
         export DEPLOY_GITHUB_TOKEN=$REPO_GITHUB_TOKEN
