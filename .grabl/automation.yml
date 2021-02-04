@@ -91,6 +91,8 @@ release:
     deploy-github:
       image: graknlabs-ubuntu-20.04
       command: |
+        pyenv install -s 3.6.10
+        pyenv global 3.6.10 system
         pip3 install certifi
         export RELEASE_NOTES_TOKEN=$REPO_GITHUB_TOKEN
         bazel run @graknlabs_dependencies//tool/release:create-notes -- protocol $(cat VERSION) ./RELEASE_TEMPLATE.md
