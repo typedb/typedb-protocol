@@ -23,7 +23,7 @@ option java_outer_classname = "ClusterProto";
 package grakn.protocol.cluster;
 
 message Cluster {
-    message Discover {
+    message Servers {
         message Req {}
         message Res {
             repeated string servers = 1;
