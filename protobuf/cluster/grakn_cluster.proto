@@ -26,6 +26,6 @@ import "protobuf/cluster/database.proto";
 package grakn.protocol.cluster;
 
 service GraknCluster {
-    rpc cluster_discover (Cluster.Discover.Req) returns (Cluster.Discover.Res);
-    rpc database_discover (Database.Discover.Req) returns (Database.Discover.Res);
+    rpc cluster_servers (Cluster.Servers.Req) returns (Cluster.Servers.Res);
+    rpc database_replicas (Database.Replicas.Req) returns (Database.Replicas.Res);
 }
