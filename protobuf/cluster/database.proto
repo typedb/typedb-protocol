@@ -23,22 +23,31 @@ option java_outer_classname = "DatabaseProto";
 package grakn.protocol.cluster;
 
 message Database {
+    string name = 1;
+    repeated Replica replicas = 2;
 
     message Replica {
         string address = 1;
-        string database = 2;
-        bool primary = 3;
-        bool preferred_secondary = 4;
-        int64 term = 5;
+        bool primary = 2;
+        bool preferred_secondary = 3;
+        int64 term = 4;
     }
 
-    message Replicas {
+    message Get {
         message Req {
-            string database = 1;
+            string name = 1;
         }
 
         message Res {
-            repeated Replica replicas = 1;
+            Database database = 1;
+        }
+    }
+
+    message All {
+        message Req {}
+
+        message Res {
+            repeated Database databases = 1;
         }
     }
 }
