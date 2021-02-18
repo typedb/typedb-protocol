@@ -26,11 +26,11 @@ package grakn.protocol;
 // https://github.com/protocolbuffers/protobuf/issues/1606#issuecomment-618687169
 
 message Options {
-    oneof inference_opt {
-        bool inference = 1;
+    oneof infer_opt {
+        bool infer = 1;
     }
-    oneof inference_logging_opt {
-        bool inference_logging = 2;
+    oneof infer_log_opt {
+        bool infer_log = 2;
     }
     oneof explain_opt {
         bool explain = 3;
