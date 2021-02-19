@@ -29,8 +29,8 @@ message Options {
     oneof infer_opt {
         bool infer = 1;
     }
-    oneof infer_log_opt {
-        bool infer_log = 2;
+    oneof trace_inference_opt {
+        bool trace_inference = 2;
     }
     oneof explain_opt {
         bool explain = 3;
