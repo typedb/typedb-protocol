@@ -29,22 +29,25 @@ message Options {
     oneof infer_opt {
         bool infer = 1;
     }
+    oneof trace_inference_opt {
+        bool trace_inference = 2;
+    }
     oneof explain_opt {
-        bool explain = 2;
+        bool explain = 3;
     }
     oneof batch_size_opt {
-        int32 batch_size = 3;
+        int32 batch_size = 4;
     }
     oneof prefetch_opt {
-        bool prefetch = 4;
+        bool prefetch = 5;
     }
     oneof session_idle_timeout_opt {
-        int32 session_idle_timeout_millis = 5;
+        int32 session_idle_timeout_millis = 6;
     }
     oneof schema_lock_acquire_timeout_opt {
-        int32 schema_lock_acquire_timeout_millis = 6;
+        int32 schema_lock_acquire_timeout_millis = 7;
     }
     oneof read_any_replica_opt {
-        bool read_any_replica = 7;
+        bool read_any_replica = 8;
     }
 }
