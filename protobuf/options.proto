@@ -41,13 +41,16 @@ message Options {
     oneof prefetch_opt {
         bool prefetch = 5;
     }
+    oneof parallel_opt {
+      bool parallel = 6;
+    }
     oneof session_idle_timeout_opt {
-        int32 session_idle_timeout_millis = 6;
+        int32 session_idle_timeout_millis = 7;
     }
     oneof schema_lock_acquire_timeout_opt {
-        int32 schema_lock_acquire_timeout_millis = 7;
+        int32 schema_lock_acquire_timeout_millis = 8;
     }
     oneof read_any_replica_opt {
-        bool read_any_replica = 8;
+        bool read_any_replica = 9;
     }
 }
