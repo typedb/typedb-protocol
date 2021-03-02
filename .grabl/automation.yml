@@ -54,9 +54,9 @@ build:
         export DEPLOY_MAVEN_PASSWORD=$REPO_GRAKN_PASSWORD
         bazel run --define version=$(git rev-parse HEAD) //grpc/java:deploy-maven -- snapshot
     deploy-npm-snapshot:
-      filter:
-        owner: graknlabs
-        branch: master
+#      filter:
+#        owner: graknlabs
+#        branch: master
       image: graknlabs-ubuntu-20.04
       command: |
         curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
@@ -69,9 +69,9 @@ build:
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
       dependencies: [build, build-dependency]
     deploy-pip-snapshot:
-      filter:
-        owner: graknlabs
-        branch: master
+#      filter:
+#        owner: graknlabs
+#        branch: master
       image: graknlabs-ubuntu-20.04
       type: foreground
       command: |
