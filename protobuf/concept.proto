@@ -155,12 +155,6 @@ message Thing {
         }
     }
 
-    enum Encoding {
-        ENTITY = 0;
-        RELATION = 1;
-        ATTRIBUTE = 2;
-    }
-
     message Delete {
         message Req {}
         message Res {}
