@@ -105,9 +105,8 @@ message Concept {
 message Thing {
 
     bytes iid = 1;
-    Encoding encoding = 2;
-    AttributeType.ValueType value_type = 3;
-    Attribute.Value value = 4;
+    Type type = 2;
+    Attribute.Value value = 3;
 
     message Req {
         bytes iid = 1;
