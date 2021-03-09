@@ -29,38 +29,40 @@ package grakn.protocol;
 
 message Transaction {
 
+    message Reqs {
+        repeated Transaction.Req transaction_reqs = 1;
+    }
+
     message Req {
         string id = 1;
         map<string, string> metadata = 2;
-        int32 latency_millis = 3;
         oneof req {
-            bool continue = 4;
-            Open.Req open_req = 5;
-            Commit.Req commit_req = 6;
-            Rollback.Req rollback_req = 7;
-            Query.Req query_req = 8;
-            ConceptManager.Req concept_manager_req = 9;
-            Thing.Req thing_req = 10;
-            grakn.protocol.Type.Req type_req = 11;
-            LogicManager.Req logic_manager_req = 12;
-            Rule.Req rule_req = 13;
+            Open.Req open_req = 3;
+            Iterate.Req iterate_req = 4;
+            Commit.Req commit_req = 5;
+            Rollback.Req rollback_req = 6;
+            Query.Req query_req = 7;
+            ConceptManager.Req concept_manager_req = 8;
+            Thing.Req thing_req = 9;
+            grakn.protocol.Type.Req type_req = 10;
+            LogicManager.Req logic_manager_req = 11;
+            Rule.Req rule_req = 12;
         }
     }
 
     message Res {
         string id = 1;
         oneof res {
-            bool done = 2;
-            bool continue = 4;
-            Open.Res open_res = 5;
-            Commit.Res commit_res = 6;
-            Rollback.Res rollback_res = 7;
-            Query.Res query_res = 8;
-            ConceptManager.Res concept_manager_res = 9;
-            Thing.Res thing_res = 10;
-            grakn.protocol.Type.Res type_res = 11;
-            LogicManager.Res logic_manager_res = 12;
-            Rule.Res rule_res = 13;
+            Open.Res open_res = 2;
+            Iterate.Res iterate_res = 3;
+            Commit.Res commit_res = 4;
+            Rollback.Res rollback_res = 5;
+            Query.Res query_res = 6;
+            ConceptManager.Res concept_manager_res = 7;
+            Thing.Res thing_res = 8;
+            grakn.protocol.Type.Res type_res = 9;
+            LogicManager.Res logic_manager_res = 10;
+            Rule.Res rule_res = 11;
         }
     }
 
@@ -74,9 +76,15 @@ message Transaction {
             bytes session_id = 1;
             Type type = 2;
             Options options = 3;
+            int32 latency_millis = 4;
         }
+        message Res {}
+    }
+
+    message Iterate {
+        message Req {}
         message Res {
-            int32 processing_time_millis = 1;
+            bool has_next = 1;
         }
     }
 
