@@ -39,6 +39,7 @@ message Session {
         }
         message Res {
             bytes session_id = 1;
+            int32 processing_time_millis = 2;
         }
     }
 
