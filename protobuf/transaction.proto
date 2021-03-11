@@ -38,7 +38,7 @@ message Transaction {
         map<string, string> metadata = 2;
         oneof req {
             Open.Req open_req = 3;
-            Iterate.Req iterate_req = 4;
+            Stream.Req stream_req = 4;
             Commit.Req commit_req = 5;
             Rollback.Req rollback_req = 6;
             Query.Req query_req = 7;
@@ -54,7 +54,7 @@ message Transaction {
         string id = 1;
         oneof res {
             Open.Res open_res = 2;
-            Iterate.Res iterate_res = 3;
+            Stream.Res stream_res = 3;
             Commit.Res commit_res = 4;
             Rollback.Res rollback_res = 5;
             Query.Res query_res = 6;
@@ -81,10 +81,10 @@ message Transaction {
         message Res {}
     }
 
-    message Iterate {
+    message Stream {
         message Req {}
         message Res {
-            bool has_next = 1;
+            bool is_done = 1;
         }
     }
 
