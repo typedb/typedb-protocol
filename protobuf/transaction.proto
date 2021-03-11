@@ -76,7 +76,7 @@ message Transaction {
             bytes session_id = 1;
             Type type = 2;
             Options options = 3;
-            int32 latency_millis = 4;
+            int32 network_latency_millis = 4;
         }
         message Res {}
     }
