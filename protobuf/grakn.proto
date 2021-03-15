@@ -40,8 +40,8 @@ service Grakn {
     rpc session_pulse (Session.Pulse.Req) returns (Session.Pulse.Res);
 
     // Opens a bi-directional stream representing a stateful transaction, streaming
-    // requests and responses back-and-forth. The first transaction request must
+    // requests and responses back-and-forth. The first transaction client message must
     // be {Transaction.Open.Req}. Closing the stream closes the transaction.
-    rpc transaction (stream Transaction.Reqs) returns (stream Transaction.Res);
+    rpc transaction (stream Transaction.Client) returns (stream Transaction.Server);
 
 }
