@@ -99,9 +99,13 @@ message Transaction {
     }
 
     message Stream {
+        enum State {
+            CONTINUE = 0;
+            DONE = 1;
+        }
         message Req {}
         message ResPart {
-            bool is_done = 1;
+            State state = 1;
         }
     }
 
