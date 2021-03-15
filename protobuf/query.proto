@@ -25,7 +25,7 @@ import "protobuf/options.proto";
 
 package grakn.protocol;
 
-message Query {
+message QueryManager {
 
     message Req {
         Options options = 1;
@@ -46,13 +46,18 @@ message Query {
         oneof res {
             Define.Res define_res = 100;
             Undefine.Res undefine_res = 101;
-            Match.Res match_res = 102;
-            MatchAggregate.Res match_aggregate_res = 103;
-            MatchGroup.Res match_group_res = 104;
-            MatchGroupAggregate.Res match_group_aggregate_res = 105;
-            Insert.Res insert_res = 106;
-            Delete.Res delete_res = 107;
-            Update.Res update_res = 108;
+            MatchAggregate.Res match_aggregate_res = 102;
+            Delete.Res delete_res = 104;
+        }
+    }
+
+    message ResPart {
+        oneof res {
+            Match.ResPart match_res_part = 100;
+            MatchGroup.ResPart match_group_res_part = 101;
+            MatchGroupAggregate.ResPart match_group_aggregate_res_part = 102;
+            Insert.ResPart insert_res_part = 103;
+            Update.ResPart update_res_part = 104;
         }
     }
 
@@ -60,7 +65,7 @@ message Query {
         message Req {
             string query = 1;
         }
-        message Res {
+        message ResPart {
             repeated ConceptMap answers = 1;
         }
     }
@@ -80,7 +85,7 @@ message Query {
             string query = 1;
         }
 
-        message Res {
+        message ResPart {
             repeated ConceptMapGroup answers = 1;
         }
     }
@@ -90,7 +95,7 @@ message Query {
             string query = 1;
         }
 
-        message Res {
+        message ResPart {
             repeated NumericGroup answers = 1;
         }
     }
@@ -99,7 +104,7 @@ message Query {
         message Req {
             string query = 1;
         }
-        message Res {
+        message ResPart {
             repeated ConceptMap answers = 1;
         }
     }
@@ -115,7 +120,7 @@ message Query {
         message Req {
             string query = 1;
         }
-        message Res {
+        message ResPart {
             repeated ConceptMap answers = 1;
         }
     }

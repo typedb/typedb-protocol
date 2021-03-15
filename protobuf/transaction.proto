@@ -29,40 +29,57 @@ package grakn.protocol;
 
 message Transaction {
 
-    message Reqs {
-        repeated Transaction.Req transaction_reqs = 1;
+    message Client {
+        repeated Req reqs = 1;
+    }
+
+    message Server {
+        oneof server {
+            Res res = 2;
+            ResPart res_part = 3;
+        }
     }
 
     message Req {
-        string id = 1;
+        string req_id = 1;
         map<string, string> metadata = 2;
         oneof req {
             Open.Req open_req = 3;
             Stream.Req stream_req = 4;
             Commit.Req commit_req = 5;
             Rollback.Req rollback_req = 6;
-            Query.Req query_req = 7;
+            QueryManager.Req query_manager_req = 7;
             ConceptManager.Req concept_manager_req = 8;
-            Thing.Req thing_req = 9;
-            grakn.protocol.Type.Req type_req = 10;
-            LogicManager.Req logic_manager_req = 11;
-            Rule.Req rule_req = 12;
+            LogicManager.Req logic_manager_req = 9;
+            Rule.Req rule_req = 10;
+            grakn.protocol.Type.Req type_req = 11;
+            Thing.Req thing_req = 12;
         }
     }
 
     message Res {
-        string id = 1;
+        string req_id = 1;
         oneof res {
             Open.Res open_res = 2;
-            Stream.Res stream_res = 3;
-            Commit.Res commit_res = 4;
-            Rollback.Res rollback_res = 5;
-            Query.Res query_res = 6;
-            ConceptManager.Res concept_manager_res = 7;
-            Thing.Res thing_res = 8;
+            Commit.Res commit_res = 3;
+            Rollback.Res rollback_res = 4;
+            QueryManager.Res query_manager_res = 5;
+            ConceptManager.Res concept_manager_res = 6;
+            LogicManager.Res logic_manager_res = 7;
+            Rule.Res rule_res = 8;
             grakn.protocol.Type.Res type_res = 9;
-            LogicManager.Res logic_manager_res = 10;
-            Rule.Res rule_res = 11;
+            Thing.Res thing_res = 10;
+        }
+    }
+
+    message ResPart {
+        string req_id = 1;
+        oneof res {
+            Stream.ResPart stream_res_part = 2;
+            QueryManager.ResPart query_manager_res_part = 3;
+            LogicManager.ResPart logic_manager_res_part = 4;
+            grakn.protocol.Type.ResPart type_res_part = 5;
+            Thing.ResPart thing_res_part = 6;
         }
     }
 
@@ -83,7 +100,7 @@ message Transaction {
 
     message Stream {
         message Req {}
-        message Res {
+        message ResPart {
             bool is_done = 1;
         }
     }
