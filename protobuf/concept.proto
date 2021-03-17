@@ -464,13 +464,6 @@ message Type {
 
 message RoleType {
 
-    message GetRelationType {
-        message Req {}
-        message Res {
-            Type relation_type = 1;
-        }
-    }
-
     message GetRelationTypes {
         message Req {}
         message ResPart {
