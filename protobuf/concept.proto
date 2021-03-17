@@ -309,9 +309,8 @@ message Type {
             Type.GetSubtypes.Req type_get_subtypes_req = 106;
 
             // RoleType method requests
-            RoleType.GetRelationType.Req role_type_get_relation_type_req = 200;
-            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 201;
-            RoleType.GetPlayers.Req role_type_get_players_req = 202;
+            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 200;
+            RoleType.GetPlayers.Req role_type_get_players_req = 201;
 
             // ThingType method requests
             ThingType.SetAbstract.Req thing_type_set_abstract_req = 300;
@@ -350,9 +349,6 @@ message Type {
             Type.IsAbstract.Res type_is_abstract_res = 102;
             Type.GetSupertype.Res type_get_supertype_res = 103;
             Type.SetSupertype.Res type_set_supertype_res = 104;
-
-            // RoleType method responses
-            RoleType.GetRelationType.Res role_type_get_relation_type_res = 200;
 
             // ThingType method responses
             ThingType.SetAbstract.Res thing_type_set_abstract_res = 300;
