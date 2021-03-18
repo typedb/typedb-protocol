@@ -22,8 +22,8 @@ option java_outer_classname = "DatabaseProto";
 
 package grakn.protocol;
 
-message Database {
-
+message DatabaseManager {
+    §
     message Contains {
         message Req {
             string name = 1;
@@ -46,6 +46,9 @@ message Database {
             repeated string names = 1;
         }
     }
+}
+
+message Database {
 
     message Schema {
         message Req {
