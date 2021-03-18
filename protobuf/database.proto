@@ -23,7 +23,7 @@ option java_outer_classname = "DatabaseProto";
 package grakn.protocol;
 
 message DatabaseManager {
-    §
+    
     message Contains {
         message Req {
             string name = 1;
