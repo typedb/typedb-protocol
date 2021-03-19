@@ -22,7 +22,7 @@ option java_outer_classname = "CoreDatabaseProto";
 
 package grakn.protocol;
 
-message DatabaseManager {
+message CoreDatabaseManager {
 
     message Contains {
         message Req {
@@ -48,7 +48,7 @@ message DatabaseManager {
     }
 }
 
-message Database {
+message CoreDatabase {
 
     message Schema {
         message Req {
