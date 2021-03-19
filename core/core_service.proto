@@ -18,24 +18,24 @@
 syntax = "proto3";
 
 option java_package = "grakn.protocol";
-option java_outer_classname = "GraknProto";
+option java_outer_classname = "CoreServiceProto";
 
-import "protobuf/database.proto";
-import "protobuf/session.proto";
-import "protobuf/transaction.proto";
+import "core/core_database.proto";
+import "common/session.proto";
+import "common/transaction.proto";
 
 package grakn.protocol;
 
-service Grakn {
+service GraknCore {
 
     // Database Manager API
-    rpc databases_contains (DatabaseManager.Contains.Req) returns (DatabaseManager.Contains.Res);
-    rpc databases_create (DatabaseManager.Create.Req) returns (DatabaseManager.Create.Res);
-    rpc databases_all (DatabaseManager.All.Req) returns (DatabaseManager.All.Res);
+    rpc databases_contains (CoreDatabaseManager.Contains.Req) returns (CoreDatabaseManager.Contains.Res);
+    rpc databases_create (CoreDatabaseManager.Create.Req) returns (CoreDatabaseManager.Create.Res);
+    rpc databases_all (CoreDatabaseManager.All.Req) returns (CoreDatabaseManager.All.Res);
 
     // Database API
-    rpc database_schema (Database.Schema.Req) returns (Database.Schema.Res);
-    rpc database_delete (Database.Delete.Req) returns (Database.Delete.Res);
+    rpc database_schema (CoreDatabase.Schema.Req) returns (CoreDatabase.Schema.Res);
+    rpc database_delete (CoreDatabase.Delete.Req) returns (CoreDatabase.Delete.Res);
 
     // Session API
     rpc session_open (Session.Open.Req) returns (Session.Open.Res);

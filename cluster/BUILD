@@ -15,11 +15,32 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+package(default_visibility = ["//visibility:public"])
 
-def graknlabs_dependencies():
-    git_repository(
-        name = "graknlabs_dependencies",
-        remote = "https://github.com/graknlabs/dependencies",
-        commit = "d49062d3cfe3f2ee1d9b33fa181ce9e9792d9f15", # sync-marker: do not remove this comment, this is used for sync-dependencies by @graknlabs_dependencies
-    )
+load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+
+proto_library(
+    name = "service-proto",
+    srcs = [":cluster_service.proto"],
+    deps = [
+        ":server-proto",
+        ":database-proto"
+    ],
+)
+
+proto_library(
+    name = "server-proto",
+    srcs = [":cluster_server.proto"],
+)
+
+proto_library(
+    name = "database-proto",
+    srcs = [":cluster_database.proto"],
+)
+
+checkstyle_test(
+    name = "checkstyle",
+    include = glob(["*"]),
+    license_type = "agpl",
+    size = "small",
+)

@@ -20,19 +20,30 @@ package(default_visibility = ["//visibility:public"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
-    name = "grakn-cluster-proto",
-    srcs = [":grakn_cluster.proto"],
-    deps = [":cluster-proto", ":database-proto"],
-)
-
-proto_library(
-    name = "cluster-proto",
-    srcs = [":cluster.proto"],
-)
-
-proto_library(
     name = "database-proto",
-    srcs = [":database.proto"],
+    srcs = ["core_database.proto"],
+)
+
+proto_library(
+    name = "service-proto",
+    srcs = ["core_service.proto"],
+    deps = [
+        "//core:database-proto",
+        "//common:session-proto",
+        "//common:transaction-proto",
+    ],
+)
+
+# TODO: This should eventually be removed
+# At the moment, this exists to support Node.js libraries.
+# When it becomes a real rule, we should extract the .src_files from the above proto_library rules.
+# For now, this is required to get the source files.
+filegroup(
+    name = "proto-raw-buffers",
+    srcs = [
+        "core_database.proto",
+        "core_service.proto",
+    ]
 )
 
 checkstyle_test(

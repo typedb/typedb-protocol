@@ -31,21 +31,6 @@ proto_library(
 )
 
 proto_library(
-    name = "database-proto",
-    srcs = ["database.proto"],
-)
-
-proto_library(
-    name = "grakn-proto",
-    srcs = ["grakn.proto"],
-    deps = [
-        ":database-proto",
-        ":session-proto",
-        ":transaction-proto",
-    ],
-)
-
-proto_library(
     name = "logic-proto",
     srcs = ["logic.proto"]
 )
@@ -90,8 +75,6 @@ filegroup(
     srcs = [
         "answer.proto",
         "concept.proto",
-        "database.proto",
-        "grakn.proto",
         "options.proto",
         "query.proto",
         "session.proto",

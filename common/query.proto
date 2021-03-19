@@ -20,8 +20,8 @@ syntax = "proto3";
 option java_package = "grakn.protocol";
 option java_outer_classname = "QueryProto";
 
-import "protobuf/answer.proto";
-import "protobuf/options.proto";
+import "common/answer.proto";
+import "common/options.proto";
 
 package grakn.protocol;
 

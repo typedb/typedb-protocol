@@ -39,45 +39,32 @@ nodejs_binary(
 )
 
 ts_grpc_compile(
-    name = "protocol",
+    name = "protocol-src",
     deps = [
-        "//protobuf:answer-proto",
-        "//protobuf:concept-proto",
-        "//protobuf:database-proto",
-        "//protobuf:grakn-proto",
-        "//protobuf:logic-proto",
-        "//protobuf:options-proto",
-        "//protobuf:query-proto",
-        "//protobuf:session-proto",
-        "//protobuf:transaction-proto",
+        "//cluster:server-proto",
+        "//cluster:database-proto",
+        "//cluster:service-proto", # TODO: do we need this?
+        "//common:answer-proto",
+        "//common:concept-proto",
+        "//common:logic-proto",
+        "//common:options-proto",
+        "//common:query-proto",
+        "//common:session-proto",
+        "//common:transaction-proto",
+        "//core:database-proto",
+        "//core:service-proto", # TODO: do we need this?
     ],
     grpc_deps = [
-        "//protobuf:grakn-proto",
-    ]
-)
-
-ts_grpc_compile(
-    name = "protocol-cluster",
-    deps = [
-        "//protobuf/cluster:cluster-proto",
-        "//protobuf/cluster:database-proto",
-        "//protobuf/cluster:grakn-cluster-proto",
-    ],
-    grpc_deps = [
-        "//protobuf/cluster:grakn-cluster-proto",
+        "//core:service-proto",
+        "//cluster:service-proto",
     ]
 )
 
 pkg_npm(
     name = "protocol-package",
     package_name = "graknlabs_protocol",
-    srcs = glob([
-        "package.json",
-    ]),
-    deps = [
-        ":protocol",
-        ":protocol-cluster",
-    ],
+    srcs = ["package.json"],
+    deps = [":protocol-src"],
 )
 
 assemble_npm(
