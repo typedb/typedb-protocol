@@ -21,9 +21,13 @@ load("@graknlabs_bazel_distribution//pip:rules.bzl", "assemble_pip", "deploy_pip
 load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
+
 python_grpc_compile(
     name = "protocol-src",
     deps = [
+        "//cluster:server-proto",
+        "//cluster:database-proto",
+        "//cluster:service-proto",
         "//common:answer-proto",
         "//common:concept-proto",
         "//common:logic-proto",
@@ -37,36 +41,16 @@ python_grpc_compile(
     visibility = ["//visibility:public"]
 )
 
-python_grpc_compile(
-    name = "protocol-cluster-src",
-    deps = [
-        "//cluster:server-proto",
-        "//cluster:database-proto",
-        "//cluster:service-proto",
-    ],
-    visibility = ["//visibility:public"]
-)
-
 python_repackage(
     name = "protocol-pkg",
     src = ":protocol-src",
-    src_package = "protobuf",
-    py_package_add_prefix = "grakn_protocol",
-)
-
-python_repackage(
-    name = "protocol-cluster-pkg",
-    src = ":protocol-cluster-src",
-    src_package = "cluster",
+    src_packages = ["common", "core", "cluster"],
     py_package_add_prefix = "grakn_protocol",
 )
 
 py_library(
     name = "protocol",
-    srcs = [
-        "protocol-pkg",
-        "protocol-cluster-pkg",
-    ],
+    srcs = ["protocol-pkg"],
     imports = ["../../../grpc/python"]
 )
 

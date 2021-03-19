@@ -26,6 +26,9 @@ load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
 java_grpc_compile(
     name = "protocol-src",
     deps = [
+        "//cluster:service-proto",
+        "//cluster:server-proto",
+        "//cluster:database-proto",
         "//common:answer-proto",
         "//common:concept-proto",
         "//common:logic-proto",
@@ -38,18 +41,9 @@ java_grpc_compile(
     ]
 )
 
-java_grpc_compile(
-    name = "protocol-cluster-src",
-    deps = [
-        "//cluster:service-proto",
-        "//cluster:server-proto",
-        "//cluster:database-proto"
-    ]
-)
-
 java_library(
     name = "protocol",
-    srcs = [":protocol-src", ":protocol-cluster-src"],
+    srcs = [":protocol-src"],
     deps = [
         "@maven//:com_google_guava_guava",
         "@maven//:com_google_protobuf_protobuf_java",
