@@ -17,15 +17,32 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.cluster";
-option java_outer_classname = "GraknClusterProto";
+option java_package = "grakn.protocol";
+option java_outer_classname = "AnswerProto";
 
-import "protobuf/cluster/cluster.proto";
-import "protobuf/cluster/database.proto";
+import "common/concept.proto";
 
-package grakn.protocol.cluster;
+package grakn.protocol;
 
-service GraknCluster {
-    rpc cluster_servers (Cluster.Servers.Req) returns (Cluster.Servers.Res);
-    rpc database_replicas (Database.Replicas.Req) returns (Database.Replicas.Res);
+message ConceptMap {
+    map<string, Concept> map = 1;
+    string pattern = 2;
+}
+
+message ConceptMapGroup {
+    Concept owner = 1;
+    repeated ConceptMap concept_maps = 2;
+}
+
+message Numeric {
+    oneof value {
+        int64 long_value = 1;
+        double double_value = 2;
+        bool nan = 3;
+    }
+}
+
+message NumericGroup {
+    Concept owner = 1;
+    Numeric number = 2;
 }

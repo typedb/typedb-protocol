@@ -17,16 +17,18 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.cluster";
-option java_outer_classname = "ClusterProto";
+option java_package = "grakn.protocol";
+option java_outer_classname = "ClusterServiceProto";
 
-package grakn.protocol.cluster;
+import "cluster/cluster_server.proto";
+import "cluster/cluster_database.proto";
 
-message Cluster {
-    message Servers {
-        message Req {}
-        message Res {
-            repeated string servers = 1;
-        }
-    }
+package grakn.protocol;
+
+service GraknCluster {
+
+    rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
+    rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
+    rpc databases_all (ClusterDatabaseManager.All.Req) returns (ClusterDatabaseManager.All.Res);
+
 }

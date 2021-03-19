@@ -36,8 +36,11 @@ message LogicManager {
         oneof res {
             GetRule.Res get_rule_res = 1;
             PutRule.Res put_rule_res = 2;
-            GetRules.Res get_rules_res = 3;
         }
+    }
+
+    message ResPart {
+        GetRules.ResPart get_rules_res_part = 1;
     }
 
     message GetRule {
@@ -64,7 +67,7 @@ message LogicManager {
 
     message GetRules {
         message Req {}
-        message Res {
+        message ResPart {
             repeated Rule rules = 1;
         }
     }

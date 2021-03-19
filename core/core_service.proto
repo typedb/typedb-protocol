@@ -21,28 +21,33 @@ option java_package = "grakn.protocol";
 option java_outer_classname = "GraknProto";
 option java_generic_services = true;
 
-import "protobuf/database.proto";
-import "protobuf/session.proto";
-import "protobuf/transaction.proto";
+import "core/core_database.proto";
+import "common/session.proto";
+import "common/transaction.proto";
 
 package grakn.protocol;
 
-service Grakn {
+service GraknCore {
 
-    rpc database_contains (Database.Contains.Req) returns (Database.Contains.Res);
-    rpc database_create (Database.Create.Req) returns (Database.Create.Res);
-    rpc database_all (Database.All.Req) returns (Database.All.Res);
-    rpc database_delete (Database.Delete.Req) returns (Database.Delete.Res);
+    // Database Manager API
+    rpc databases_contains (CoreDatabaseManager.Contains.Req) returns (CoreDatabaseManager.Contains.Res);
+    rpc databases_create (CoreDatabaseManager.Create.Req) returns (CoreDatabaseManager.Create.Res);
+    rpc databases_all (CoreDatabaseManager.All.Req) returns (CoreDatabaseManager.All.Res);
 
+    // Database API
+    rpc database_schema (CoreDatabase.Schema.Req) returns (CoreDatabase.Schema.Res);
+    rpc database_delete (CoreDatabase.Delete.Req) returns (CoreDatabase.Delete.Res);
+
+    // Session API
     rpc session_open (Session.Open.Req) returns (Session.Open.Res);
     rpc session_close (Session.Close.Req) returns (Session.Close.Res);
-
     // Checks with the server that the session is still alive, and informs it that it should be kept alive.
     rpc session_pulse (Session.Pulse.Req) returns (Session.Pulse.Res);
 
+    // Transaction Streaming API
     // Opens a bi-directional stream representing a stateful transaction, streaming
-    // requests and responses back-and-forth. The first request message must
+    // requests and responses back-and-forth. The first transaction client message must
     // be {Transaction.Open.Req}. Closing the stream closes the transaction.
-    rpc transaction (stream Transaction.Req) returns (stream Transaction.Res);
+    rpc transaction (stream Transaction.Client) returns (stream Transaction.Server);
 
 }
