@@ -22,11 +22,15 @@ option java_outer_classname = "ClusterServerProto";
 
 package grakn.protocol;
 
-message Server {
+message ServerManager {
     message All {
         message Req {}
         message Res {
-            repeated string addresses = 1;
+            repeated Server servers = 1;
         }
     }
+}
+
+message Server {
+    string address = 1;
 }

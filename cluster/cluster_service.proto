@@ -27,7 +27,7 @@ package grakn.protocol;
 
 service GraknCluster {
 
-    rpc server_all (Server.All.Req) returns (Server.All.Res);
+    rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
     rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
     rpc databases_all (ClusterDatabaseManager.All.Req) returns (ClusterDatabaseManager.All.Res);
 
