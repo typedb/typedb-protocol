@@ -17,13 +17,13 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.cluster";
+option java_package = "grakn.protocol";
 option java_outer_classname = "ClusterServiceProto";
 
 import "cluster/cluster_server.proto";
 import "cluster/cluster_database.proto";
 
-package grakn.protocol.cluster;
+package grakn.protocol;
 
 service GraknCluster {
 

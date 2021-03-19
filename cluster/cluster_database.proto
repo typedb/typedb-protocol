@@ -17,10 +17,10 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.cluster";
+option java_package = "grakn.protocol";
 option java_outer_classname = "ClusterDatabaseProto";
 
-package grakn.protocol.cluster;
+package grakn.protocol;
 
 message ClusterDatabaseManager {
 
