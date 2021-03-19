@@ -24,15 +24,15 @@ load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 python_grpc_compile(
     name = "protocol-src",
     deps = [
-        "//core:answer-proto",
-        "//core:concept-proto",
+        "//common:answer-proto",
+        "//common:concept-proto",
+        "//common:logic-proto",
+        "//common:options-proto",
+        "//common:query-proto",
+        "//common:session-proto",
+        "//common:transaction-proto",
         "//core:database-proto",
         "//core:service-proto",
-        "//core:logic-proto",
-        "//core:options-proto",
-        "//core:query-proto",
-        "//core:session-proto",
-        "//core:transaction-proto",
     ],
     visibility = ["//visibility:public"]
 )
