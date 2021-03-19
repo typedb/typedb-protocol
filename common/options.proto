@@ -36,7 +36,7 @@ message Options {
         bool explain = 3;
     }
     oneof parallel_opt {
-      bool parallel = 4;
+        bool parallel = 4;
     }
     oneof batch_size_opt {
         int32 batch_size = 5;

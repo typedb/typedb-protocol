@@ -17,45 +17,16 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol";
-option java_outer_classname = "SessionProto";
+option java_package = "grakn.protocol.cluster";
+option java_outer_classname = "ClusterServerProto";
 
-import "protobuf/options.proto";
+package grakn.protocol.cluster;
 
-package grakn.protocol;
-
-message Session {
-
-    enum Type {
-        DATA = 0;
-        SCHEMA = 1;
-    }
-
-    message Open {
-        message Req {
-            string database = 1;
-            Type type = 2;
-            Options options = 3;
-        }
+message Server {
+    message All {
+        message Req {}
         message Res {
-            bytes session_id = 1;
-            int32 server_duration_millis = 2;
-        }
-    }
-
-    message Close {
-        message Req {
-            bytes session_id = 1;
-        }
-        message Res {}
-    }
-
-    message Pulse {
-        message Req {
-            bytes session_id = 1;
-        }
-        message Res {
-            bool alive = 1;
+            repeated string addresses = 1;
         }
     }
 }

@@ -41,30 +41,30 @@ nodejs_binary(
 ts_grpc_compile(
     name = "protocol",
     deps = [
-        "//protobuf:answer-proto",
-        "//protobuf:concept-proto",
-        "//protobuf:database-proto",
-        "//protobuf:grakn-proto",
-        "//protobuf:logic-proto",
-        "//protobuf:options-proto",
-        "//protobuf:query-proto",
-        "//protobuf:session-proto",
-        "//protobuf:transaction-proto",
+        "//common:answer-proto",
+        "//common:concept-proto",
+        "//common:logic-proto",
+        "//common:options-proto",
+        "//common:query-proto",
+        "//common:session-proto",
+        "//common:transaction-proto",
+        "//core:database-proto",
+        "//core:service-proto",
     ],
     grpc_deps = [
-        "//protobuf:grakn-proto",
+        "//core:service-proto",
     ]
 )
 
 ts_grpc_compile(
     name = "protocol-cluster",
     deps = [
-        "//protobuf/cluster:cluster-proto",
-        "//protobuf/cluster:database-proto",
-        "//protobuf/cluster:grakn-cluster-proto",
+        "//cluster:server-proto",
+        "//cluster:database-proto",
+        "//cluster:service-proto", # TODO: do we need this?
     ],
     grpc_deps = [
-        "//protobuf/cluster:grakn-cluster-proto",
+        "//cluster:service-proto",
     ]
 )
 

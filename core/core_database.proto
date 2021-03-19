@@ -17,36 +17,52 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol.cluster";
-option java_outer_classname = "DatabaseProto";
+option java_package = "grakn.protocol";
+option java_outer_classname = "CoreDatabaseProto";
 
-package grakn.protocol.cluster;
+package grakn.protocol;
 
-message Database {
+message DatabaseManager {
 
-    string name = 1;
-    repeated Replica replicas = 2;
-
-    message Replica {
-        string address = 1;
-        bool primary = 2;
-        bool preferred = 3;
-        int64 term = 4;
-    }
-
-    message Get {
+    message Contains {
         message Req {
             string name = 1;
         }
         message Res {
-            Database database = 1;
+            bool contains = 1;
         }
+    }
+
+    message Create {
+        message Req {
+            string name = 1;
+        }
+        message Res {}
     }
 
     message All {
         message Req {}
         message Res {
-            repeated Database databases = 1;
+            repeated string names = 1;
         }
+    }
+}
+
+message Database {
+
+    message Schema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
+    }
+
+    message Delete {
+        message Req {
+            string name = 1;
+        }
+        message Res {}
     }
 }

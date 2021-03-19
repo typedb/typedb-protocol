@@ -24,15 +24,15 @@ load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 python_grpc_compile(
     name = "protocol-src",
     deps = [
-        "//protobuf:answer-proto",
-        "//protobuf:concept-proto",
-        "//protobuf:database-proto",
-        "//protobuf:grakn-proto",
-        "//protobuf:logic-proto",
-        "//protobuf:options-proto",
-        "//protobuf:query-proto",
-        "//protobuf:session-proto",
-        "//protobuf:transaction-proto",
+        "//core:answer-proto",
+        "//core:concept-proto",
+        "//core:database-proto",
+        "//core:service-proto",
+        "//core:logic-proto",
+        "//core:options-proto",
+        "//core:query-proto",
+        "//core:session-proto",
+        "//core:transaction-proto",
     ],
     visibility = ["//visibility:public"]
 )
@@ -40,9 +40,9 @@ python_grpc_compile(
 python_grpc_compile(
     name = "protocol-cluster-src",
     deps = [
-        "//protobuf/cluster:cluster-proto",
-        "//protobuf/cluster:database-proto",
-        "//protobuf/cluster:grakn-cluster-proto",
+        "//cluster:server-proto",
+        "//cluster:database-proto",
+        "//cluster:service-proto",
     ],
     visibility = ["//visibility:public"]
 )
@@ -57,7 +57,7 @@ python_repackage(
 python_repackage(
     name = "protocol-cluster-pkg",
     src = ":protocol-cluster-src",
-    src_package = "protobuf.cluster",
+    src_package = "cluster",
     py_package_add_prefix = "grakn_protocol",
 )
 

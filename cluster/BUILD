@@ -20,19 +20,22 @@ package(default_visibility = ["//visibility:public"])
 load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
-    name = "grakn-cluster-proto",
-    srcs = [":grakn_cluster.proto"],
-    deps = [":cluster-proto", ":database-proto"],
+    name = "service-proto",
+    srcs = [":cluster_service.proto"],
+    deps = [
+        ":server-proto",
+        ":database-proto"
+    ],
 )
 
 proto_library(
-    name = "cluster-proto",
-    srcs = [":cluster.proto"],
+    name = "server-proto",
+    srcs = [":cluster_server.proto"],
 )
 
 proto_library(
     name = "database-proto",
-    srcs = [":database.proto"],
+    srcs = [":cluster_database.proto"],
 )
 
 checkstyle_test(
