@@ -20,6 +20,9 @@ syntax = "proto3";
 option java_package = "grakn.protocol";
 option java_outer_classname = "LogicProto";
 
+import "common/answer.proto";
+
+
 package grakn.protocol;
 
 message LogicManager {
@@ -104,5 +107,16 @@ message Rule {
             string label = 1;
         }
         message Res {}
+    }
+}
+
+message Explanation {
+    Rule rule = 1;
+    map<string, VarsList> var_mapping = 2; // TODO perhaps this should be a "context" and contain more information about source
+    ConceptMap then_answer = 3;
+    ConceptMap when_answer = 4;
+
+    message VarsList {
+        repeated string vars = 1;
     }
 }

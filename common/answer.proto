@@ -26,7 +26,24 @@ package grakn.protocol;
 
 message ConceptMap {
     map<string, Concept> map = 1;
-    string pattern = 2;
+    Explainables explainables = 2;
+}
+
+message Explainables {
+    map<string, Explainable> explainable_relations = 1;
+    map<string, Explainable> explainable_attributes = 2;
+    repeated ExplainableOwnership explainable_ownerships = 3;
+}
+
+message ExplainableOwnership {
+    string owner = 1;
+    string attribute = 2;
+    Explainable explainable = 3;
+}
+
+message Explainable {
+    string conjunction = 1;
+    int64 id = 2;
 }
 
 message ConceptMapGroup {

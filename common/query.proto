@@ -21,6 +21,7 @@ option java_package = "grakn.protocol";
 option java_outer_classname = "QueryProto";
 
 import "common/answer.proto";
+import "common/logic.proto";
 import "common/options.proto";
 
 package grakn.protocol;
@@ -39,6 +40,7 @@ message QueryManager {
             Insert.Req insert_req = 106;
             Delete.Req delete_req = 107;
             Update.Req update_req = 108;
+            Explain.Req explain_req = 109;
         }
     }
 
@@ -58,6 +60,7 @@ message QueryManager {
             MatchGroupAggregate.ResPart match_group_aggregate_res_part = 102;
             Insert.ResPart insert_res_part = 103;
             Update.ResPart update_res_part = 104;
+            Explain.ResPart explain_res_part = 105;
         }
     }
 
@@ -97,6 +100,16 @@ message QueryManager {
 
         message ResPart {
             repeated NumericGroup answers = 1;
+        }
+    }
+
+    message Explain {
+        message Req {
+            int64 explainable_id = 1;
+        }
+
+        message ResPart {
+            repeated Explanation explanations = 1;
         }
     }
 
