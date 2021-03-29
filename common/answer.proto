@@ -30,15 +30,13 @@ message ConceptMap {
 }
 
 message Explainables {
-    map<string, Explainable> explainable_relations = 1;
-    map<string, Explainable> explainable_attributes = 2;
-    repeated ExplainableOwnership explainable_ownerships = 3;
-}
+    map<string, Explainable> relations = 1;
+    map<string, Explainable> attributes = 2;
+    map<string, Owned> ownerships = 3;
 
-message ExplainableOwnership {
-    string owner = 1;
-    string attribute = 2;
-    Explainable explainable = 3;
+    message Owned {
+        map<string, Explainable> owned = 1;
+    }
 }
 
 message Explainable {

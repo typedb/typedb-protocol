@@ -112,11 +112,11 @@ message Rule {
 
 message Explanation {
     Rule rule = 1;
-    map<string, VarsList> var_mapping = 2; // TODO perhaps this should be a "context" and contain more information about source
-    ConceptMap then_answer = 3;
-    ConceptMap when_answer = 4;
+    map<string, VarList> var_mapping = 2;
+    ConceptMap condition = 3;
+    ConceptMap conclusion = 4;
 
-    message VarsList {
+    message VarList {
         repeated string vars = 1;
     }
 }
