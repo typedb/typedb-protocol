@@ -20,6 +20,9 @@ syntax = "proto3";
 option java_package = "grakn.protocol";
 option java_outer_classname = "LogicProto";
 
+import "common/answer.proto";
+
+
 package grakn.protocol;
 
 message LogicManager {
@@ -104,5 +107,16 @@ message Rule {
             string label = 1;
         }
         message Res {}
+    }
+}
+
+message Explanation {
+    Rule rule = 1;
+    map<string, VarList> var_mapping = 2;
+    ConceptMap condition = 3;
+    ConceptMap conclusion = 4;
+
+    message VarList {
+        repeated string vars = 1;
     }
 }
