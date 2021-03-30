@@ -66,7 +66,7 @@ checkstyle_test(
 assemble_maven(
     name = "assemble-maven",
     target = ":protocol",
-    package = "grpc",
+    source_jar_prefix = "grakn/protocol/",
     version_overrides = version(artifacts_org = artifacts),
     workspace_refs = "@graknlabs_protocol_workspace_refs//:refs.json"
 )
