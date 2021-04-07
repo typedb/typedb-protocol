@@ -107,6 +107,7 @@ message Thing {
     bytes iid = 1;
     Type type = 2;
     Attribute.Value value = 3;
+    bool inferred = 4;
 
     message Req {
         bytes iid = 1;
@@ -114,12 +115,11 @@ message Thing {
             // Thing method requests
             Thing.Delete.Req thing_delete_req = 100;
             Thing.GetType.Req thing_get_type_req = 101;
-            Thing.IsInferred.Req thing_is_inferred_req = 102;
-            Thing.GetHas.Req thing_get_has_req = 103;
-            Thing.SetHas.Req thing_set_has_req = 104;
-            Thing.UnsetHas.Req thing_unset_has_req = 105;
-            Thing.GetRelations.Req thing_get_relations_req = 106;
-            Thing.GetPlaying.Req thing_get_playing_req = 107;
+            Thing.GetHas.Req thing_get_has_req = 102;
+            Thing.SetHas.Req thing_set_has_req = 103;
+            Thing.UnsetHas.Req thing_unset_has_req = 104;
+            Thing.GetRelations.Req thing_get_relations_req = 105;
+            Thing.GetPlaying.Req thing_get_playing_req = 106;
 
             // Relation method requests
             Relation.AddPlayer.Req relation_add_player_req = 200;
@@ -138,9 +138,8 @@ message Thing {
             // Thing method responses
             Thing.Delete.Res thing_delete_res = 100;
             Thing.GetType.Res thing_get_type_res = 101;
-            Thing.IsInferred.Res thing_is_inferred_res = 102;
-            Thing.SetHas.Res thing_set_has_res = 103;
-            Thing.UnsetHas.Res thing_unset_has_res = 104;
+            Thing.SetHas.Res thing_set_has_res = 102;
+            Thing.UnsetHas.Res thing_unset_has_res = 103;
 
             // Relation method responses
             Relation.AddPlayer.Res relation_add_player_res = 200;
@@ -168,13 +167,6 @@ message Thing {
     message Delete {
         message Req {}
         message Res {}
-    }
-
-    message IsInferred {
-        message Req {}
-        message Res {
-            bool inferred = 1;
-        }
     }
 
     message GetType {
