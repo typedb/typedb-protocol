@@ -38,8 +38,8 @@ message Options {
     oneof parallel_opt {
         bool parallel = 4;
     }
-    oneof batch_size_opt {
-        int32 batch_size = 5;
+    oneof prefetch_size_opt {
+        int32 prefetch_size = 5;
     }
     oneof prefetch_opt {
         bool prefetch = 6;
