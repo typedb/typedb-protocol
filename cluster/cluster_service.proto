@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2021 Grakn Labs
+// Copyright (C) 2021 TypeDB Labs
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -17,16 +17,16 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol";
+option java_package = "typedb.protocol";
 option java_outer_classname = "ClusterServiceProto";
 option java_generic_services = true;
 
 import "cluster/cluster_server.proto";
 import "cluster/cluster_database.proto";
 
-package grakn.protocol;
+package typedb.protocol;
 
-service GraknCluster {
+service TypeDBCluster {
 
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
     rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
