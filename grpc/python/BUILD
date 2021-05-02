@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Grakn Labs
+# Copyright (C) 2021 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -17,9 +17,9 @@
 
 package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//python:python_grpc_compile.bzl", "python_grpc_compile")
-load("@graknlabs_bazel_distribution//pip:rules.bzl", "assemble_pip", "deploy_pip", "python_repackage")
-load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
-load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("@vaticle_bazel_distribution//pip:rules.bzl", "assemble_pip", "deploy_pip", "python_repackage")
+load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
+load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 
 python_grpc_compile(
@@ -45,7 +45,7 @@ python_repackage(
     name = "protocol-pkg",
     src = ":protocol-src",
     src_packages = ["common", "core", "cluster"],
-    py_package_add_prefix = "grakn_protocol",
+    py_package_add_prefix = "typedb_protocol",
 )
 
 py_library(
@@ -64,7 +64,7 @@ checkstyle_test(
 assemble_pip(
     name = "assemble-pip",
     target = ":protocol",
-    package_name = "grakn-protocol",
+    package_name = "typedb-protocol",
     classifiers = [
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
@@ -79,13 +79,13 @@ assemble_pip(
         "Environment :: Console",
         "Topic :: Database :: Front-Ends"
     ],
-    url = "https://github.com/graknlabs/protocol/",
-    author = "Grakn Labs",
-    author_email = "grabl@grakn.ai",
+    url = "https://github.com/vaticle/typedb-protocol/",
+    author = "Vaticle",
+    author_email = "community@vaticle.com",
     license = "AGPLv3+",
     requirements_file = ":requirements.txt",
-    keywords = ["grakn", "database", "graph", "knowledgebase", "knowledge-engineering"],
-    description = "Grakn gRPC Protocol",
+    keywords = ["typedb", "typeql", "type-system", "strongly-typed", "database", "knowledge-base"],
+    description = "TypeDB GRPC Protocol",
     long_description_file = "//:README.md",
 )
 

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Grakn Labs
+# Copyright (C) 2021 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -17,11 +17,11 @@
 
 package(default_visibility = ["//visibility:public"])
 load("@stackb_rules_proto//java:java_grpc_compile.bzl", "java_grpc_compile")
-load("@graknlabs_bazel_distribution//maven:rules.bzl", "assemble_maven", "deploy_maven")
-load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-load("@graknlabs_dependencies//distribution/maven:version.bzl", "version")
-load("@graknlabs_dependencies//library/maven:artifacts.bzl", "artifacts")
-load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
+load("@vaticle_bazel_distribution//maven:rules.bzl", "assemble_maven", "deploy_maven")
+load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("@vaticle_dependencies//distribution/maven:version.bzl", "version")
+load("@vaticle_dependencies//library/maven:artifacts.bzl", "artifacts")
+load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 
 java_grpc_compile(
     name = "protocol-src",
@@ -53,7 +53,7 @@ java_library(
         "@maven//:io_grpc_grpc_api",
         "@maven//:javax_annotation_javax_annotation_api", # gRPC needs this in order to compile in Java 11 and Java 14
     ],
-    tags = ["maven_coordinates=io.grakn.protocol:grakn-protocol:{pom_version}", "checkstyle_ignore"],
+    tags = ["maven_coordinates=com.vaticle.typedb:typedb-protocol:{pom_version}", "checkstyle_ignore"],
 )
 
 checkstyle_test(
@@ -68,7 +68,7 @@ assemble_maven(
     target = ":protocol",
     source_jar_prefix = "",
     version_overrides = version(artifacts_org = artifacts),
-    workspace_refs = "@graknlabs_protocol_workspace_refs//:refs.json"
+    workspace_refs = "@vaticle_typedb_protocol_workspace_refs//:refs.json"
 )
 
 deploy_maven(

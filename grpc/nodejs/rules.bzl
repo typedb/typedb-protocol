@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Grakn Labs
+# Copyright (C) 2021 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -102,7 +102,7 @@ def ts_grpc_compile(
         # Run the node.js protoc (protocol compiler) with the following flags:
         #    Use the gen-ts plugin to generate typescript declaration files in addition to javascript
         #    Output javascript with commonjs style exports, to the genrule output directory.
-        #    Output services to the genrule output directory (without this line, grakn_grpc_pb is omitted)
+        #    Output services to the genrule output directory (without this line, typedb_grpc_pb is omitted)
         #    Output typescript to (you guessed it) the genrule output directory
         #    Set the .proto file relative path to root folder (same as where WORKSPACE resides)
         #    Use the .proto files found in the :proto-raw-buffers filegroup as inputs.

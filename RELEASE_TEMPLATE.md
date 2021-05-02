@@ -1,26 +1,21 @@
-Documentation: http://dev.grakn.ai/docs/client-api/java
+Documentation: http://docs.vaticle.com/docs/client-api/java
 
 ### Distribution
 
 #### For Java through Maven
 
-Available through https://repo.grakn.ai
+Available through https://repo.vaticle.com
 ```xml
 <repositories>
     <repository>
-        <id>repo.grakn.ai</id>
-        <url>https://repo.grakn.ai/repository/maven/</url>
+        <id>repo.vaticle.com</id>
+        <url>https://repo.vaticle.com/repository/maven/</url>
     </repository>
 </repositories>
 <dependencies>
     <dependency>
-        <groupid>io.grakn.protocol</groupid>
-        <artifactid>grakn-session</artifactid>
-        <version>{version}</version>
-    </dependency>
-    <dependency>
-        <groupid>io.grakn.protocol</groupid>
-        <artifactid>grakn-keyspace</artifactid>
+        <groupid>com.vaticle.typedb</groupid>
+        <artifactid>typedb-protocol</artifactid>
         <version>{version}</version>
     </dependency>
 </dependencies>

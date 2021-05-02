@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2021 Grakn Labs
+// Copyright (C) 2021 Vaticle
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -17,7 +17,7 @@
 
 syntax = "proto3";
 
-option java_package = "grakn.protocol";
+option java_package = "typedb.protocol";
 option java_outer_classname = "TransactionProto";
 
 import "common/concept.proto";
@@ -25,7 +25,7 @@ import "common/logic.proto";
 import "common/options.proto";
 import "common/query.proto";
 
-package grakn.protocol;
+package typedb.protocol;
 
 message Transaction {
 
@@ -52,7 +52,7 @@ message Transaction {
             ConceptManager.Req concept_manager_req = 8;
             LogicManager.Req logic_manager_req = 9;
             Rule.Req rule_req = 10;
-            grakn.protocol.Type.Req type_req = 11;
+            typedb.protocol.Type.Req type_req = 11;
             Thing.Req thing_req = 12;
         }
     }
@@ -67,7 +67,7 @@ message Transaction {
             ConceptManager.Res concept_manager_res = 6;
             LogicManager.Res logic_manager_res = 7;
             Rule.Res rule_res = 8;
-            grakn.protocol.Type.Res type_res = 9;
+            typedb.protocol.Type.Res type_res = 9;
             Thing.Res thing_res = 10;
         }
     }
@@ -78,7 +78,7 @@ message Transaction {
             Stream.ResPart stream_res_part = 2;
             QueryManager.ResPart query_manager_res_part = 3;
             LogicManager.ResPart logic_manager_res_part = 4;
-            grakn.protocol.Type.ResPart type_res_part = 5;
+            typedb.protocol.Type.ResPart type_res_part = 5;
             Thing.ResPart thing_res_part = 6;
         }
     }

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Grakn Labs
+# Copyright (C) 2021 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -18,8 +18,8 @@
 package(default_visibility = ["//visibility:public"])
 
 exports_files(["VERSION", "package.json"])
-load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-load("@graknlabs_bazel_distribution//github:rules.bzl", "deploy_github")
+load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("@vaticle_bazel_distribution//github:rules.bzl", "deploy_github")
 load("//:deployment.bzl", "deployment")
 
 checkstyle_test(
@@ -50,12 +50,9 @@ deploy_github(
 filegroup(
     name = "ci",
     data = [
-        "@graknlabs_dependencies//image/rbe:ubuntu-1604",
-        "@graknlabs_dependencies//library/maven:update",
-        "@graknlabs_dependencies//tool/bazelrun:rbe",
-        "@graknlabs_dependencies//tool/unuseddeps:unused-deps",
-        "@graknlabs_dependencies//tool/sync:dependencies",
-        "@graknlabs_dependencies//tool/release:approval",
-        "@graknlabs_dependencies//tool/release:create-notes",
+        "@vaticle_dependencies//library/maven:update",
+        "@vaticle_dependencies//tool/bazelrun:rbe",
+        "@vaticle_dependencies//tool/unuseddeps:unused-deps",
+        "@vaticle_dependencies//tool/release:create-notes",
     ],
 )

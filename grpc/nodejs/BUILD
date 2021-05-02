@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Grakn Labs
+# Copyright (C) 2021 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -16,10 +16,10 @@
 #
 
 package(default_visibility = ["//visibility:public"])
-load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@build_bazel_rules_nodejs//:index.bzl", "pkg_npm", "nodejs_binary")
-load("@graknlabs_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
-load("@graknlabs_dependencies//distribution:deployment.bzl", "deployment")
+load("@vaticle_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
+load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 load("//:deployment.bzl", github_deployment = "deployment")
 load("//grpc/nodejs:rules.bzl", "ts_grpc_compile")
 
@@ -62,7 +62,7 @@ ts_grpc_compile(
 
 pkg_npm(
     name = "protocol-package",
-    package_name = "graknlabs_protocol",
+    package_name = "vaticle_typedb_protocol",
     srcs = ["package.json"],
     deps = [":protocol-src"],
 )

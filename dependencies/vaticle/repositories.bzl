@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Grakn Labs
+# Copyright (C) 2021 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -15,11 +15,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-load("@graknlabs_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-checkstyle_test(
-    name = "checkstyle",
-    include = glob(["*"]),
-    license_type = "agpl",
-    size = "small",
-)
+def vaticle_dependencies():
+    git_repository(
+        name = "vaticle_dependencies",
+        remote = "https://github.com/vaticle/dependencies",
+        commit = "2f55e6378d1fd4267aebc0cc9c333ab0692ab09e", # sync-marker: do not remove this comment, this is used for sync-dependencies by @vaticle_dependencies
+    )
