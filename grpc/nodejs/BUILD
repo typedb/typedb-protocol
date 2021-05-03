@@ -62,7 +62,7 @@ ts_grpc_compile(
 
 pkg_npm(
     name = "protocol-package",
-    package_name = "vaticle_typedb_protocol",
+    package_name = "typedb_protocol",
     srcs = ["package.json"],
     deps = [":protocol-src"],
 )

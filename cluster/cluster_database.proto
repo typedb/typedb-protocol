@@ -17,7 +17,7 @@
 
 syntax = "proto3";
 
-option java_package = "typedb.protocol";
+option java_package = "com.vaticle.typedb.protocol";
 option java_outer_classname = "ClusterDatabaseProto";
 
 package typedb.protocol;

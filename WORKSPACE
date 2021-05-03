@@ -102,9 +102,9 @@ load("@vaticle_dependencies//library/maven:rules.bzl", "maven")
 load("//dependencies/maven:artifacts.bzl", "artifacts")
 maven(artifacts + vaticle_dependencies_tool_maven_artifacts + vaticle_bazel_distribution_maven_artifacts)
 
-#############################################
+##################################################
 # Create @vaticle_typedb_protocol_workspace_refs #
-#############################################
+##################################################
 
 load("@vaticle_bazel_distribution//common:rules.bzl", "workspace_refs")
 workspace_refs(
