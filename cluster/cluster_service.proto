@@ -28,10 +28,18 @@ import "cluster/cluster_database.proto";
 package typedb.protocol;
 
 service TypeDBCluster {
+    // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
+
+    // User Manager API
     rpc users_contains (ClusterUserManager.Contains.Req) returns (ClusterUserManager.Contains.Res);
     rpc users_create (ClusterUserManager.Create.Req) returns (ClusterUserManager.Create.Res);
     rpc users_all (ClusterUserManager.All.Req) returns (ClusterUserManager.All.Res);
+
+    // User API
+    rpc users_delete (ClusterUser.Delete.Req) returns (ClusterUser.Delete.Res);
+
+    // Database Manager API
     rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
     rpc databases_all (ClusterDatabaseManager.All.Req) returns (ClusterDatabaseManager.All.Res);
 }

@@ -48,3 +48,14 @@ message ClusterUserManager {
         }
     }
 }
+
+message ClusterUser {
+    message Delete {
+        message Req {
+            string name = 1;
+        }
+
+        message Res {}
+    }
+}
+
