@@ -28,6 +28,7 @@ java_grpc_compile(
     deps = [
         "//cluster:service-proto",
         "//cluster:server-proto",
+        "//cluster:user-proto",
         "//cluster:database-proto",
         "//common:answer-proto",
         "//common:concept-proto",

@@ -42,6 +42,7 @@ ts_grpc_compile(
     name = "protocol-src",
     deps = [
         "//cluster:server-proto",
+        "//cluster:user-proto",
         "//cluster:database-proto",
         "//cluster:service-proto", # TODO: do we need this?
         "//common:answer-proto",

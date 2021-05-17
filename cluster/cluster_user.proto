@@ -18,20 +18,33 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ClusterServiceProto";
-option java_generic_services = true;
-
-import "cluster/cluster_server.proto";
-import "cluster/cluster_user.proto";
-import "cluster/cluster_database.proto";
+option java_outer_classname = "ClusterUserProto";
 
 package typedb.protocol;
 
-service TypeDBCluster {
-    rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
-    rpc users_contains (ClusterUserManager.Contains.Req) returns (ClusterUserManager.Contains.Res);
-    rpc users_create (ClusterUserManager.Create.Req) returns (ClusterUserManager.Create.Res);
-    rpc users_all (ClusterUserManager.All.Req) returns (ClusterUserManager.All.Res);
-    rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
-    rpc databases_all (ClusterDatabaseManager.All.Req) returns (ClusterDatabaseManager.All.Res);
+message ClusterUserManager {
+
+    message Contains {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            bool contains = 1;
+        }
+    }
+
+    message Create {
+        message Req {
+            string name = 1;
+            string password = 2;
+        }
+        message Res {}
+    }
+
+    message All {
+        message Req {}
+        message Res {
+            repeated string names = 1;
+        }
+    }
 }
