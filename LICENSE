@@ -664,7 +664,7 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 ---
 
 The TypeDB protocol is distributed under the terms GNU Affero General Public
-License v3.0 (“AGPL 3.0”) as published by the Free Software Foundation, but
+License v3.0 ("AGPL 3.0") as published by the Free Software Foundation, but
 with the following special exception.
 
 Exception to AGPL 3.0: Any driver or client library (in each case) that
@@ -679,7 +679,7 @@ one of the following licences:
 - The MIT License: https://opensource.org/licenses/MIT
 - The BSD License (2-Clause): https://opensource.org/licenses/BSD-2-Clause
 
-As used above “successor entity” means any entity then owning copyrights in
+As used above "successor entity" means any entity then owning copyrights in
 the TypeDB software that were previously owned by Vaticle Limited.
 
 If you make any change to, or contribute to, (in each case) the TypeDB protocol,
