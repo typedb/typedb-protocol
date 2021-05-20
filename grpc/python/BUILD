@@ -23,7 +23,7 @@ load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 
 python_grpc_compile(
-    name = "protocol-src",
+    name = "typedb-protocol-src",
     deps = [
         "//cluster:server-proto",
         "//cluster:database-proto",
@@ -42,15 +42,15 @@ python_grpc_compile(
 )
 
 python_repackage(
-    name = "protocol-pkg",
-    src = ":protocol-src",
+    name = "typedb-protocol-pkg",
+    src = ":typedb-protocol-src",
     src_packages = ["common", "core", "cluster"],
     py_package_add_prefix = "typedb_protocol",
 )
 
 py_library(
-    name = "protocol",
-    srcs = ["protocol-pkg"],
+    name = "typedb-protocol",
+    srcs = ["typedb-protocol-pkg"],
     imports = ["../../../grpc/python"]
 )
 
@@ -63,8 +63,8 @@ checkstyle_test(
 
 assemble_pip(
     name = "assemble-pip",
-    target = ":protocol",
-    package_name = "typedb-protocol",
+    target = ":typedb-protocol",
+    package_name = "typedb-protocol-pkg",
     classifiers = [
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
@@ -82,10 +82,10 @@ assemble_pip(
     url = "https://github.com/vaticle/typedb-protocol/",
     author = "Vaticle",
     author_email = "community@vaticle.com",
-    license = "AGPLv3+",
+    license = "AGPL-3.0",
     requirements_file = ":requirements.txt",
     keywords = ["typedb", "typeql", "type-system", "strongly-typed", "database", "knowledge-base"],
-    description = "TypeDB GRPC Protocol",
+    description = "TypeDB Protocol",
     long_description_file = "//:README.md",
 )
 

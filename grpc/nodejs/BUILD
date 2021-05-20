@@ -39,7 +39,7 @@ nodejs_binary(
 )
 
 ts_grpc_compile(
-    name = "protocol-src",
+    name = "typedb-protocol-src",
     deps = [
         "//cluster:server-proto",
         "//cluster:database-proto",
@@ -61,15 +61,15 @@ ts_grpc_compile(
 )
 
 pkg_npm(
-    name = "protocol-package",
+    name = "typedb-protocol",
     package_name = "typedb_protocol",
     srcs = ["package.json"],
-    deps = [":protocol-src"],
+    deps = [":typedb-protocol-src"],
 )
 
 assemble_npm(
     name = "assemble-npm",
-    target = ":protocol-package",
+    target = ":typedb-protocol",
 )
 
 deploy_npm(
@@ -82,7 +82,6 @@ deploy_npm(
 checkstyle_test(
     name = "checkstyle",
     include = glob(["*"]),
-    exclude = ["package.json"],
     license_type = "agpl",
     size = "small",
 )

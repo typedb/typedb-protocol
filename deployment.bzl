@@ -17,5 +17,5 @@
 
 deployment = {
     "github.organisation": "vaticle",
-    "github.repository": "protocol"
+    "github.repository": "typedb-protocol"
 }

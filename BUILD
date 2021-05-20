@@ -41,7 +41,7 @@ deploy_github(
     organisation = deployment["github.organisation"],
     repository = deployment["github.repository"],
     release_description = "//:RELEASE_TEMPLATE.md",
-    title = "Protocol",
+    title = "TypeDB Protocol",
     title_append_version = True,
     draft = False,
 )

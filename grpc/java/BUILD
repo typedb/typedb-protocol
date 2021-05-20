@@ -24,7 +24,7 @@ load("@vaticle_dependencies//library/maven:artifacts.bzl", "artifacts")
 load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 
 java_grpc_compile(
-    name = "protocol-src",
+    name = "typedb-protocol-src",
     deps = [
         "//cluster:service-proto",
         "//cluster:server-proto",
@@ -42,8 +42,8 @@ java_grpc_compile(
 )
 
 java_library(
-    name = "protocol",
-    srcs = [":protocol-src"],
+    name = "typedb-protocol",
+    srcs = [":typedb-protocol-src"],
     deps = [
         "@maven//:com_google_guava_guava",
         "@maven//:com_google_protobuf_protobuf_java",
@@ -65,7 +65,7 @@ checkstyle_test(
 
 assemble_maven(
     name = "assemble-maven",
-    target = ":protocol",
+    target = ":typedb-protocol",
     version_overrides = version(artifacts_org = artifacts),
     workspace_refs = "@vaticle_typedb_protocol_workspace_refs//:refs.json"
 )

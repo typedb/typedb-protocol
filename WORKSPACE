@@ -124,6 +124,6 @@ node_repositories(
 )
 npm_install(
   name = "npm",
-  package_json = "//:package.json",
-  package_lock_json = "//:package-lock.json",
+  package_json = "//grpc/nodejs:package.json",
+  package_lock_json = "//grpc/nodejs:package-lock.json",
 )
