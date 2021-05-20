@@ -82,6 +82,10 @@ deploy_npm(
 checkstyle_test(
     name = "checkstyle",
     include = glob(["*"]),
+    exclude = [
+        "package.json",
+        "package-lock.json",
+    ],
     license_type = "agpl",
     size = "small",
 )
