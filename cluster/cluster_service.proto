@@ -37,7 +37,7 @@ service TypeDBCluster {
     rpc users_all (ClusterUserManager.All.Req) returns (ClusterUserManager.All.Res);
 
     // User API
-    rpc users_delete (ClusterUser.Delete.Req) returns (ClusterUser.Delete.Res);
+    rpc user_delete (ClusterUser.Delete.Req) returns (ClusterUser.Delete.Res);
 
     // Database Manager API
     rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
