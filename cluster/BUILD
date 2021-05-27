@@ -24,6 +24,7 @@ proto_library(
     srcs = [":cluster_service.proto"],
     deps = [
         ":server-proto",
+        ":user-proto",
         ":database-proto"
     ],
 )
@@ -31,6 +32,11 @@ proto_library(
 proto_library(
     name = "server-proto",
     srcs = [":cluster_server.proto"],
+)
+
+proto_library(
+    name = "user-proto",
+    srcs = [":cluster_user.proto"],
 )
 
 proto_library(

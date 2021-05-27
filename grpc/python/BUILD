@@ -26,6 +26,7 @@ python_grpc_compile(
     name = "typedb-protocol-src",
     deps = [
         "//cluster:server-proto",
+        "//cluster:user-proto",
         "//cluster:database-proto",
         "//cluster:service-proto",
         "//common:answer-proto",
