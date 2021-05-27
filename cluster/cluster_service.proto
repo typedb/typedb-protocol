@@ -28,6 +28,7 @@ import "cluster/cluster_database.proto";
 package typedb.protocol;
 
 service TypeDBCluster {
+
     // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
 

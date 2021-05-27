@@ -23,6 +23,7 @@ option java_outer_classname = "ClusterServerProto";
 package typedb.protocol;
 
 message ServerManager {
+
     message All {
         message Req {}
         message Res {
