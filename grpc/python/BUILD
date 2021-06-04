@@ -65,7 +65,7 @@ checkstyle_test(
 assemble_pip(
     name = "assemble-pip",
     target = ":typedb-protocol",
-    package_name = "typedb-protocol-pkg",
+    package_name = "typedb-protocol",
     classifiers = [
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
