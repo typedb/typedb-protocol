@@ -25,7 +25,7 @@
 @maven//:commons_logging_commons_logging
 @maven//:commons_logging_commons_logging_1_2
 @maven//:info_picocli_picocli
-@maven//:info_picocli_picocli_4_3_2
+@maven//:info_picocli_picocli_4_6_1
 @maven//:io_grpc_grpc_api
 @maven//:io_grpc_grpc_api_1_33_1
 @maven//:io_grpc_grpc_context
