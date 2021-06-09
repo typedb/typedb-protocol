@@ -66,8 +66,6 @@ build:
         export DEPLOY_NPM_USERNAME=$REPO_VATICLE_USERNAME
         export DEPLOY_NPM_PASSWORD=$REPO_VATICLE_PASSWORD
         export DEPLOY_NPM_EMAIL=$REPO_VATICLE_EMAIL
-        # Point NPM cache to a temporary directory that is writeable under Bazel sandboxing
-        sudo npm config -g set cache /tmp/npm-cache/
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
       dependencies: [build, build-dependency]
     deploy-pip-snapshot:
@@ -117,8 +115,6 @@ release:
         export DEPLOY_NPM_USERNAME=$REPO_NPM_USERNAME
         export DEPLOY_NPM_PASSWORD=$REPO_NPM_PASSWORD
         export DEPLOY_NPM_EMAIL=$REPO_VATICLE_EMAIL
-        # Point NPM cache to a temporary directory that is writeable under Bazel sandboxing
-        sudo npm config -g set cache /tmp/npm-cache/
         bazel run --define version=$(cat VERSION) //grpc/nodejs:deploy-npm -- release
       dependencies: [deploy-github]
     deploy-pip-release:
