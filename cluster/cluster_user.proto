@@ -51,6 +51,14 @@ message ClusterUserManager {
 
 message ClusterUser {
 
+    message Password {
+        message Req {
+            string name = 1;
+            string password = 2;
+        }
+        message Res {}
+    }
+
     message Delete {
         message Req {
             string name = 1;
