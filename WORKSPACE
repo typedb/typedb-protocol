@@ -117,13 +117,13 @@ workspace_refs(
 
 load("@vaticle_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
 nodejs_deps(["@vaticle_dependencies//builder/nodejs:remove-node-patches.patch"])
-load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "npm_install")
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
 
 node_repositories(
     preserve_symlinks = False,
 )
-npm_install(
+yarn_install(
   name = "npm",
   package_json = "//grpc/nodejs:package.json",
-  package_lock_json = "//grpc/nodejs:package-lock.json",
+  yarn_lock = "//grpc/nodejs:yarn.lock",
 )
