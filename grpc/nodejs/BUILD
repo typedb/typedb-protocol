@@ -85,7 +85,7 @@ checkstyle_test(
     include = glob(["*"]),
     exclude = [
         "package.json",
-        "package-lock.json",
+        "yarn.lock",
     ],
     license_type = "agpl",
     size = "small",
