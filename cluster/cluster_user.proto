@@ -74,7 +74,6 @@ message ClusterUser {
 
         message Res {
             string token = 1;
-            int64 expiry = 2;
         }
     }
 }
