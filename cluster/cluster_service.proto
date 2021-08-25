@@ -40,6 +40,7 @@ service TypeDBCluster {
     // User API
     rpc user_password (ClusterUser.Password.Req) returns (ClusterUser.Password.Res);
     rpc user_delete (ClusterUser.Delete.Req) returns (ClusterUser.Delete.Res);
+    rpc user_token(ClusterUser.Token.Req) returns (ClusterUser.Token.Res);
 
     // Database Manager API
     rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
