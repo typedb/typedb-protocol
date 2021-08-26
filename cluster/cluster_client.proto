@@ -26,20 +26,11 @@ message ClusterClient {
 
     message Token {
         message Req {
-            string name = 1;
-            string password = 2;
+            string username = 1;
         }
 
         message Res {
-            bytes client_id = 1;
-            string token = 2;
+            string token = 1;
         }
-    }
-
-    message Close {
-        message Req {
-            bytes client_id = 1;
-        }
-        message Res {}
     }
 }
