@@ -24,7 +24,7 @@ package typedb.protocol;
 
 message ClusterClient {
 
-    message Open {
+    message Token {
         message Req {
             string name = 1;
             string password = 2;

@@ -32,7 +32,7 @@ package typedb.protocol;
 service TypeDBCluster {
 
     // Client API
-    rpc client_open (ClusterClient.Open.Req) returns (ClusterClient.Open.Res);
+    rpc client_token (ClusterClient.Token.Req) returns (ClusterClient.Token.Res);
 
     // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
