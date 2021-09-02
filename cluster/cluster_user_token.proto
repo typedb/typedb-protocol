@@ -18,13 +18,13 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ClusterClientProto";
+option java_outer_classname = "ClusterUserTokenProto";
 
 package typedb.protocol;
 
-message ClusterClient {
+message ClusterUserToken {
 
-    message Token {
+    message Renew {
         message Req {
             string username = 1;
         }

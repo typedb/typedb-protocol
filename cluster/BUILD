@@ -32,7 +32,7 @@ proto_library(
 
 proto_library(
     name = "client-proto",
-    srcs = [":cluster_client.proto"],
+    srcs = [":cluster_user_token.proto"],
 )
 
 proto_library(
