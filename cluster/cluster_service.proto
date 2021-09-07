@@ -21,9 +21,11 @@ option java_package = "com.vaticle.typedb.protocol";
 option java_outer_classname = "ClusterServiceProto";
 option java_generic_services = true;
 
+
 import "cluster/cluster_server.proto";
 import "cluster/cluster_user.proto";
 import "cluster/cluster_database.proto";
+import "cluster/cluster_user_token.proto";
 
 package typedb.protocol;
 
@@ -40,6 +42,9 @@ service TypeDBCluster {
     // User API
     rpc user_password (ClusterUser.Password.Req) returns (ClusterUser.Password.Res);
     rpc user_delete (ClusterUser.Delete.Req) returns (ClusterUser.Delete.Res);
+
+    // User Token API
+    rpc user_token_renew (ClusterUserToken.Renew.Req) returns (ClusterUserToken.Renew.Res);
 
     // Database Manager API
     rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);

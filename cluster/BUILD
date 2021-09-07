@@ -23,10 +23,16 @@ proto_library(
     name = "service-proto",
     srcs = [":cluster_service.proto"],
     deps = [
+        ":client-proto",
         ":server-proto",
         ":user-proto",
         ":database-proto"
     ],
+)
+
+proto_library(
+    name = "client-proto",
+    srcs = [":cluster_user_token.proto"],
 )
 
 proto_library(
