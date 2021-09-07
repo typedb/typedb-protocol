@@ -18,35 +18,34 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "SessionProto";
+option java_outer_classname = "ClientProto";
 
 import "common/options.proto";
 
 package typedb.protocol;
 
-message Session {
-
-    enum Type {
-        DATA = 0;
-        SCHEMA = 1;
-    }
+message Client {
 
     message Open {
-        message Req {
-            string database = 1;
-            Type type = 2;
-            Options options = 3;
-        }
+        message Req {}
         message Res {
-            bytes session_id = 1;
-            int32 server_duration_millis = 2;
+            bytes client_id = 1;
         }
     }
 
     message Close {
         message Req {
-            bytes session_id = 1;
+            bytes client_id = 1;
         }
         message Res {}
+    }
+
+    message Pulse {
+        message Req {
+            bytes client_id = 1;
+        }
+        message Res {
+            bool alive = 1;
+        }
     }
 }

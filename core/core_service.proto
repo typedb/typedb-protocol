@@ -21,13 +21,20 @@ option java_package = "com.vaticle.typedb.protocol";
 option java_outer_classname = "CoreServiceProto";
 option java_generic_services = true;
 
-import "core/core_database.proto";
+import "common/client.proto";
 import "common/session.proto";
 import "common/transaction.proto";
+import "core/core_database.proto";
 
 package typedb.protocol;
 
 service TypeDB {
+
+    // Client API
+    // Checks with the server that the session is still alive, and informs it that it should be kept alive.
+    rpc client_open (Client.Open.Req) returns (Client.Open.Res);
+    rpc client_close (Client.Close.Req) returns (Client.Close.Res);
+    rpc client_pulse (Client.Pulse.Req) returns (Client.Pulse.Res);
 
     // Database Manager API
     rpc databases_contains (CoreDatabaseManager.Contains.Req) returns (CoreDatabaseManager.Contains.Res);
@@ -41,8 +48,6 @@ service TypeDB {
     // Session API
     rpc session_open (Session.Open.Req) returns (Session.Open.Res);
     rpc session_close (Session.Close.Req) returns (Session.Close.Res);
-    // Checks with the server that the session is still alive, and informs it that it should be kept alive.
-    rpc session_pulse (Session.Pulse.Req) returns (Session.Pulse.Res);
 
     // Transaction Streaming API
     // Opens a bi-directional stream representing a stateful transaction, streaming

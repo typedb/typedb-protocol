@@ -29,6 +29,7 @@ proto_library(
     srcs = ["core_service.proto"],
     deps = [
         "//core:database-proto",
+        "//common:client-proto",
         "//common:session-proto",
         "//common:transaction-proto",
     ],

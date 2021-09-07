@@ -52,6 +52,12 @@ proto_library(
 )
 
 proto_library(
+    name = "client-proto",
+    srcs = ["client.proto"],
+    deps = [":options-proto"],
+)
+
+proto_library(
     name = "session-proto",
     srcs = ["session.proto"],
     deps = [":options-proto"],

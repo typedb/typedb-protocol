@@ -51,6 +51,7 @@ ts_grpc_compile(
         "//common:logic-proto",
         "//common:options-proto",
         "//common:query-proto",
+        "//common:client-proto",
         "//common:session-proto",
         "//common:transaction-proto",
         "//core:database-proto",
