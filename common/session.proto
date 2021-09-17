@@ -33,9 +33,10 @@ message Session {
 
     message Open {
         message Req {
-            string database = 1;
-            Type type = 2;
-            Options options = 3;
+            bytes client_id = 1;
+            string database = 2;
+            Type type = 3;
+            Options options = 4;
         }
         message Res {
             bytes session_id = 1;
@@ -45,7 +46,8 @@ message Session {
 
     message Close {
         message Req {
-            bytes session_id = 1;
+            bytes client_id = 1;
+            bytes session_id = 2;
         }
         message Res {}
     }

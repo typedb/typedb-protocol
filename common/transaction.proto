@@ -90,10 +90,11 @@ message Transaction {
 
     message Open {
         message Req {
-            bytes session_id = 1;
-            Type type = 2;
-            Options options = 3;
-            int32 network_latency_millis = 4;
+            bytes client_id = 1;
+            bytes session_id = 2;
+            Type type = 3;
+            Options options = 4;
+            int32 network_latency_millis = 5;
         }
         message Res {}
     }
