@@ -31,9 +31,9 @@ package typedb.protocol;
 service TypeDB {
 
     // Client API
-    // Checks with the server that the session is still alive, and informs it that it should be kept alive.
     rpc client_open (Client.Open.Req) returns (Client.Open.Res);
     rpc client_close (Client.Close.Req) returns (Client.Close.Res);
+    // Checks with the server that the client is still alive, and informs it that it should be kept alive.
     rpc client_pulse (Client.Pulse.Req) returns (Client.Pulse.Res);
 
     // Database Manager API

@@ -27,7 +27,11 @@ package typedb.protocol;
 message Client {
 
     message Open {
-        message Req {}
+        message Req {
+            oneof idle_timeout_opt {
+                int32 idle_timeout_millis = 1;
+            }
+        }
         message Res {
             bytes client_id = 1;
         }
