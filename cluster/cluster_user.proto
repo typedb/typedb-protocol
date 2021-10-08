@@ -59,6 +59,16 @@ message ClusterUser {
         message Res {}
     }
 
+    message Token {
+        message Req {
+            string username = 1;
+        }
+
+        message Res {
+            string token = 1;
+        }
+    }
+
     message Delete {
         message Req {
             string username = 1;
