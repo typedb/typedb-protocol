@@ -27,7 +27,6 @@ java_grpc_compile(
     name = "typedb-protocol-src",
     deps = [
         "//cluster:service-proto",
-        "//cluster:client-proto",
         "//cluster:server-proto",
         "//cluster:user-proto",
         "//cluster:database-proto",

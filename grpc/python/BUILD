@@ -25,7 +25,6 @@ load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 python_grpc_compile(
     name = "typedb-protocol-src",
     deps = [
-        "//cluster:client-proto",
         "//cluster:server-proto",
         "//cluster:user-proto",
         "//cluster:database-proto",
