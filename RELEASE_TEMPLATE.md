@@ -1,10 +1,10 @@
-Documentation: http://docs.vaticle.com/docs/client-api/java
+Documentation: https://docs.vaticle.com/docs/client-api/
 
 ### Distribution
 
 #### For Java through Maven
 
-Available through https://repo.vaticle.com
+Available from https://repo.vaticle.com
 ```xml
 <repositories>
     <repository>
@@ -19,6 +19,26 @@ Available through https://repo.vaticle.com
         <version>{version}</version>
     </dependency>
 </dependencies>
+```
+
+#### For Python through PyPI
+
+Available from https://pypi.org/project/typedb-protocol/
+
+```sh
+pip install typedb-protocol
+```
+
+#### For Node.js through npm
+
+Available from https://www.npmjs.com/package/typedb-protocol
+
+```sh
+npm install typedb-protocol
+```
+or
+```sh
+yarn install typedb-protocol
 ```
 
 { release notes }
