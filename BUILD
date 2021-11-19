@@ -49,6 +49,6 @@ filegroup(
         "@vaticle_dependencies//library/maven:update",
         "@vaticle_dependencies//tool/bazelrun:rbe",
         "@vaticle_dependencies//tool/unuseddeps:unused-deps",
-        "@vaticle_dependencies//tool/release:create-notes",
+        "@vaticle_dependencies//tool/release/createnotes:bin",
     ],
 )
