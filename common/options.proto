@@ -47,10 +47,13 @@ message Options {
     oneof session_idle_timeout_opt {
         int32 session_idle_timeout_millis = 7;
     }
+    oneof transaction_timeout_opt {
+        int32 transaction_timeout_millis = 8;
+    }
     oneof schema_lock_acquire_timeout_opt {
-        int32 schema_lock_acquire_timeout_millis = 8;
+        int32 schema_lock_acquire_timeout_millis = 9;
     }
     oneof read_any_replica_opt {
-        bool read_any_replica = 9;
+        bool read_any_replica = 10;
     }
 }
