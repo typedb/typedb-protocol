@@ -26,19 +26,19 @@ build:
       owner: vaticle
       branch: master
     dependency-analysis:
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       command: |
         bazel run @vaticle_dependencies//factory/analysis:dependency-analysis
   correctness:
     build:
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       #NPM packages can't be built under RBE
       command: |
         bazel build //...
         bazel run @vaticle_dependencies//tool/checkstyle:test-coverage
         bazel test $(bazel query 'kind(checkstyle_test, //...)') --test_output=errors
     build-dependency:
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       command: |
         dependencies/maven/update.sh
         git diff --exit-code dependencies/maven/artifacts.snapshot
@@ -47,7 +47,7 @@ build:
       filter:
         owner: vaticle
         branch: master
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       dependencies: [build, build-dependency]
       command: |
         export DEPLOY_MAVEN_USERNAME=$REPO_VATICLE_USERNAME
@@ -57,7 +57,7 @@ build:
       filter:
         owner: vaticle
         branch: master
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       command: |
         curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
         wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -72,7 +72,7 @@ build:
       filter:
         owner: vaticle
         branch: master
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       type: foreground
       command: |
         pyenv global 3.6.10
@@ -89,7 +89,7 @@ release:
     branch: master
   deployment:
     deploy-github:
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       command: |
         pyenv install -s 3.6.10
         pyenv global 3.6.10 system
@@ -99,14 +99,14 @@ release:
         export DEPLOY_GITHUB_TOKEN=$REPO_GITHUB_TOKEN
         bazel run --define version=$(cat VERSION) //:deploy-github -- $GRABL_COMMIT
     deploy-maven-release:
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       command: |
         export DEPLOY_MAVEN_USERNAME=$REPO_VATICLE_USERNAME
         export DEPLOY_MAVEN_PASSWORD=$REPO_VATICLE_PASSWORD
         bazel run --define version=$(cat VERSION) //grpc/java:deploy-maven -- release
       dependencies: [deploy-github]
     deploy-npm-release:
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       command: |
         curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
         wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -118,7 +118,7 @@ release:
         bazel run --define version=$(cat VERSION) //grpc/nodejs:deploy-npm -- release
       dependencies: [deploy-github]
     deploy-pip-release:
-      image: vaticle-ubuntu-20.04
+      image: vaticle-ubuntu-21.04
       command: |
         pyenv global 3.6.10
         sudo unlink /usr/bin/python3
