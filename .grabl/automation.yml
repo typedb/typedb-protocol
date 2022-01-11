@@ -64,7 +64,7 @@ build:
         sudo apt update -y
         sudo apt install -y expect
         export DEPLOY_NPM_EMAIL=$REPO_VATICLE_EMAIL
-        export DEPLOY_NPM_TOKEN=$REPO_VATICLE_TOKEN
+        export DEPLOY_NPM_TOKEN=$REPO_VATICLE_NPM_TOKEN
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
       dependencies: [build, build-dependency]
     deploy-pip-snapshot:
