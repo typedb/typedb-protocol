@@ -63,9 +63,7 @@ build:
         wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         sudo apt update -y
         sudo apt install -y expect
-        export DEPLOY_NPM_USERNAME=$REPO_VATICLE_USERNAME
-        export DEPLOY_NPM_PASSWORD=$REPO_VATICLE_PASSWORD
-        export DEPLOY_NPM_EMAIL=$REPO_VATICLE_EMAIL
+        export DEPLOY_NPM_TOKEN=$REPO_VATICLE_NPM_TOKEN
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
       dependencies: [build, build-dependency]
     deploy-pip-snapshot:
@@ -112,9 +110,7 @@ release:
         wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         sudo apt update -y
         sudo apt install -y expect
-        export DEPLOY_NPM_USERNAME=$REPO_NPM_USERNAME
-        export DEPLOY_NPM_PASSWORD=$REPO_NPM_PASSWORD
-        export DEPLOY_NPM_EMAIL=$REPO_VATICLE_EMAIL
+        export DEPLOY_NPM_TOKEN=$REPO_NPM_TOKEN
         bazel run --define version=$(cat VERSION) //grpc/nodejs:deploy-npm -- release
       dependencies: [deploy-github]
     deploy-pip-release:
