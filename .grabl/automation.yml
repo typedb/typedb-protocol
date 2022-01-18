@@ -80,6 +80,7 @@ build:
         export DEPLOY_PIP_USERNAME=$REPO_VATICLE_USERNAME
         export DEPLOY_PIP_PASSWORD=$REPO_VATICLE_PASSWORD
         bazel run --define version=$(git rev-parse HEAD) //grpc/python:deploy-pip -- snapshot
+      dependencies: [build, build-dependency]
 
 release:
   filter:
