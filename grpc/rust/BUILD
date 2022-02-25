@@ -2,7 +2,7 @@ load("@rules_rust//proto:proto.bzl", "rust_grpc_library")
 load("@rules_rust//proto:toolchain.bzl", "rust_proto_toolchain")
 
 rust_proto_toolchain(
-    name = "proto-toolchain-impl",
+    name = "proto_toolchain_impl",
     # Path to the protobuf compiler.
     protoc = "@com_google_protobuf//:protoc",
     # Protobuf compiler plugin to generate rust gRPC stubs.
@@ -12,13 +12,13 @@ rust_proto_toolchain(
 )
 
 toolchain(
-    name = "proto-toolchain",
-    toolchain = ":proto-toolchain-impl",
+    name = "proto_toolchain",
+    toolchain = ":proto_toolchain_impl",
     toolchain_type = "@rules_rust//proto:toolchain",
 )
 
 rust_grpc_library(
-    name = "typedb-protocol-src",
+    name = "typedb_protocol_src",
     deps = [
         "//cluster:service-proto",
         "//cluster:server-proto",
