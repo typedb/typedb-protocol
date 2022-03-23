@@ -1,5 +1,29 @@
 load("@rules_rust//proto:proto.bzl", "rust_grpc_library")
 load("@rules_rust//proto:toolchain.bzl", "rust_proto_toolchain")
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+
+rust_binary(
+    name = "proto_compile",
+    srcs = ["main.rs"],
+    data = [
+        "//cluster:service-proto",
+        "//cluster:server-proto",
+        "//cluster:user-proto",
+        "//cluster:database-proto",
+        "//common:answer-proto",
+        "//common:concept-proto",
+        "//common:logic-proto",
+        "//common:options-proto",
+        "//common:query-proto",
+        "//common:session-proto",
+        "//common:transaction-proto",
+        "//core:database-proto",
+        "//core:service-proto",
+    ],
+    deps = [
+        "@vaticle_dependencies//library/crates:protoc_rust_grpc",
+    ],
+)
 
 rust_proto_toolchain(
     name = "proto_toolchain_impl",
