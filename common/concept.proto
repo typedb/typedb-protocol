@@ -308,6 +308,7 @@ message Type {
             Type.SetSupertype.Req type_set_supertype_req = 104;
             Type.GetSupertypes.Req type_get_supertypes_req = 105;
             Type.GetSubtypes.Req type_get_subtypes_req = 106;
+            Type.GetSubtypesExplicit.Req type_get_subtypes_explicit_req = 107;
 
             // RoleType method requests
             RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 200;
@@ -315,6 +316,7 @@ message Type {
 
             // ThingType method requests
             ThingType.GetInstances.Req thing_type_get_instances_req = 300;
+            ThingType.GetInstancesExplicit.Req thing_type_get_instances_explicit_req = 309; // TODO: reorder
             ThingType.SetAbstract.Req thing_type_set_abstract_req = 301;
             ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 302;
             ThingType.GetOwns.Req thing_type_get_owns_req = 303;
@@ -381,6 +383,7 @@ message Type {
             // Type method responses
             Type.GetSupertypes.ResPart type_get_supertypes_res_part = 100;
             Type.GetSubtypes.ResPart type_get_subtypes_res_part = 101;
+            Type.GetSubtypesExplicit.ResPart type_get_subtypes_explicit_res_part = 102;
 
             // RoleType method responses
             RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 200;
@@ -388,6 +391,7 @@ message Type {
 
             // ThingType method responses
             ThingType.GetInstances.ResPart thing_type_get_instances_res_part = 300;
+            ThingType.GetInstancesExplicit.ResPart thing_type_get_instances_explicit_res_part = 303; // TODO: reorder
             ThingType.GetOwns.ResPart thing_type_get_owns_res_part = 301;
             ThingType.GetPlays.ResPart thing_type_get_plays_res_part = 302;
 
@@ -455,6 +459,13 @@ message Type {
             repeated Type types = 1;
         }
     }
+
+    message GetSubtypesExplicit {
+        message Req {}
+        message ResPart {
+            repeated Type types = 1;
+        }
+    }
 }
 
 // RoleType methods
@@ -491,6 +502,13 @@ message ThingType {
     }
 
     message GetInstances {
+        message Req {}
+        message ResPart {
+            repeated Thing things = 1;
+        }
+    }
+
+    message GetInstancesExplicit {
         message Req {}
         message ResPart {
             repeated Thing things = 1;
