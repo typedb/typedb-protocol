@@ -59,6 +59,24 @@ message CoreDatabase {
         }
     }
 
+    message TypeSchema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
+    }
+
+    message RuleSchema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
+    }
+
     message Delete {
         message Req {
             string name = 1;
