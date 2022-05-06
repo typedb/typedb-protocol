@@ -396,7 +396,7 @@ message Type {
             ThingType.GetInstances.ResPart thing_type_get_instances_res_part = 300;
             ThingType.GetInstancesExplicit.ResPart thing_type_get_instances_explicit_res_part = 303; // TODO: reorder
             ThingType.GetOwns.ResPart thing_type_get_owns_res_part = 301;
-            ThingType.GetOwnsExplicit.ResPart thing_type_get_owns_res_explicit_part = 304; // TODO: reorder
+            ThingType.GetOwnsExplicit.ResPart thing_type_get_owns_explicit_res_part = 304; // TODO: reorder
             ThingType.GetPlays.ResPart thing_type_get_plays_res_part = 302;
 
             // RelationType method responses
