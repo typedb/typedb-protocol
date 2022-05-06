@@ -320,6 +320,8 @@ message Type {
             ThingType.SetAbstract.Req thing_type_set_abstract_req = 301;
             ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 302;
             ThingType.GetOwns.Req thing_type_get_owns_req = 303;
+            ThingType.GetOwnsExplicit.Req thing_type_get_owns_explicit_req = 310; // TODO: reorder
+            ThingType.GetOwnsOverridden.Req thing_type_get_owns_overridden_req = 311; // TODO: reorder
             ThingType.SetOwns.Req thing_type_set_owns_req = 304;
             ThingType.UnsetOwns.Req thing_type_unset_owns_req = 305;
             ThingType.GetPlays.Req thing_type_get_plays_req = 306;
@@ -356,6 +358,7 @@ message Type {
             // ThingType method responses
             ThingType.SetAbstract.Res thing_type_set_abstract_res = 300;
             ThingType.UnsetAbstract.Res thing_type_unset_abstract_res = 301;
+            ThingType.GetOwnsOverridden.Res thing_type_get_owns_overridden_res = 306; // TODO: reorder
             ThingType.SetOwns.Res thing_type_set_owns_res = 302;
             ThingType.UnsetOwns.Res thing_type_unset_owns_res = 303;
             ThingType.SetPlays.Res thing_type_set_plays_res = 304;
@@ -393,6 +396,7 @@ message Type {
             ThingType.GetInstances.ResPart thing_type_get_instances_res_part = 300;
             ThingType.GetInstancesExplicit.ResPart thing_type_get_instances_explicit_res_part = 303; // TODO: reorder
             ThingType.GetOwns.ResPart thing_type_get_owns_res_part = 301;
+            ThingType.GetOwnsExplicit.ResPart thing_type_get_owns_res_explicit_part = 304; // TODO: reorder
             ThingType.GetPlays.ResPart thing_type_get_plays_res_part = 302;
 
             // RelationType method responses
@@ -527,10 +531,26 @@ message ThingType {
         }
     }
 
-    message GetPlays {
-        message Req {}
+    message GetOwnsExplicit {
+        message Req {
+            oneof filter {
+                AttributeType.ValueType value_type = 1;
+            }
+            bool keys_only = 3;
+        }
         message ResPart {
-            repeated Type roles = 1;
+            repeated Type attribute_types = 1;
+        }
+    }
+
+    message GetOwnsOverridden {
+        message Req {
+            Type attribute_type = 1;
+        }
+        message Res {
+            oneof res {
+                Type type = 1;
+            }
         }
     }
 
@@ -545,19 +565,26 @@ message ThingType {
         message Res {}
     }
 
+    message UnsetOwns {
+        message Req {
+            Type attribute_type = 1;
+        }
+        message Res {}
+    }
+
+    message GetPlays {
+        message Req {}
+        message ResPart {
+            repeated Type roles = 1;
+        }
+    }
+
     message SetPlays {
         message Req {
             Type role = 1;
             oneof overridden {
                 Type overridden_role = 2;
             }
-        }
-        message Res {}
-    }
-
-    message UnsetOwns {
-        message Req {
-            Type attribute_type = 1;
         }
         message Res {}
     }
