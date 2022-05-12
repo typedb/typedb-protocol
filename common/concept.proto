@@ -344,6 +344,7 @@ message Type {
             AttributeType.GetRegex.Req attribute_type_get_regex_req = 602;
             AttributeType.SetRegex.Req attribute_type_set_regex_req = 603;
             AttributeType.GetOwners.Req attribute_type_get_owners_req = 604;
+            AttributeType.GetOwnersExplicit.Req attribute_type_get_owners_explicit_req = 605;
         }
     }
     message Res {
@@ -404,6 +405,7 @@ message Type {
 
             // AttributeType method responses
             AttributeType.GetOwners.ResPart attribute_type_get_owners_res_part = 600;
+            AttributeType.GetOwnersExplicit.ResPart attribute_type_get_owners_explicit_res_part = 601;
         }
     }
 
@@ -690,6 +692,15 @@ message AttributeType {
     }
 
     message GetOwners {
+        message Req {
+            bool only_key = 1;
+        }
+        message ResPart {
+            repeated Type owners = 1;
+        }
+    }
+
+    message GetOwnersExplicit {
         message Req {
             bool only_key = 1;
         }
