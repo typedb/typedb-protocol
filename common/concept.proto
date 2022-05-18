@@ -325,6 +325,7 @@ message Type {
             ThingType.SetOwns.Req thing_type_set_owns_req = 304;
             ThingType.UnsetOwns.Req thing_type_unset_owns_req = 305;
             ThingType.GetPlays.Req thing_type_get_plays_req = 306;
+            ThingType.GetPlaysExplicit.Req thing_type_get_plays_explicit_req = 312; // TODO: reorder
             ThingType.SetPlays.Req thing_type_set_plays_req = 307;
             ThingType.UnsetPlays.Req thing_type_unset_plays_req = 308;
 
@@ -399,6 +400,7 @@ message Type {
             ThingType.GetOwns.ResPart thing_type_get_owns_res_part = 301;
             ThingType.GetOwnsExplicit.ResPart thing_type_get_owns_explicit_res_part = 304; // TODO: reorder
             ThingType.GetPlays.ResPart thing_type_get_plays_res_part = 302;
+            ThingType.GetPlaysExplicit.ResPart thing_type_get_plays_explicit_res_part = 305; // TODO: reorder
 
             // RelationType method responses
             RelationType.GetRelates.ResPart relation_type_get_relates_res_part = 500;
@@ -575,6 +577,13 @@ message ThingType {
     }
 
     message GetPlays {
+        message Req {}
+        message ResPart {
+            repeated Type roles = 1;
+        }
+    }
+
+    message GetPlaysExplicit {
         message Req {}
         message ResPart {
             repeated Type roles = 1;
