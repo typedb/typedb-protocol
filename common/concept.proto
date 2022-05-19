@@ -555,7 +555,7 @@ message ThingType {
         }
         message Res {
             oneof res {
-                Type type = 1;
+                Type attribute_type = 1;
             }
         }
     }
@@ -581,14 +581,14 @@ message ThingType {
     message GetPlays {
         message Req {}
         message ResPart {
-            repeated Type roles = 1;
+            repeated Type role_types = 1;
         }
     }
 
     message GetPlaysExplicit {
         message Req {}
         message ResPart {
-            repeated Type roles = 1;
+            repeated Type role_types = 1;
         }
     }
 
@@ -605,9 +605,9 @@ message ThingType {
 
     message SetPlays {
         message Req {
-            Type role = 1;
+            Type role_type = 1;
             oneof overridden {
-                Type overridden_role = 2;
+                Type overridden_type = 2;
             }
         }
         message Res {}
@@ -615,7 +615,7 @@ message ThingType {
 
     message UnsetPlays {
         message Req {
-            Type role = 1;
+            Type role_type = 1;
         }
         message Res {}
     }
@@ -647,7 +647,7 @@ message RelationType {
     message GetRelates {
         message Req {}
         message ResPart {
-            repeated Type roles = 1;
+            repeated Type role_types = 1;
         }
     }
 
@@ -718,7 +718,7 @@ message AttributeType {
             bool only_key = 1;
         }
         message ResPart {
-            repeated Type owners = 1;
+            repeated Type thing_types = 1;
         }
     }
 
@@ -727,7 +727,7 @@ message AttributeType {
             bool only_key = 1;
         }
         message ResPart {
-            repeated Type owners = 1;
+            repeated Type thing_types = 1;
         }
     }
 
@@ -752,7 +752,7 @@ message AttributeType {
             }
         }
         message ResPart {
-            repeated Type types = 1;
+            repeated Type attribute_types = 1;
         }
     }
 
@@ -763,7 +763,7 @@ message AttributeType {
             }
         }
         message ResPart {
-            repeated Thing things = 1;
+            repeated Thing attributes = 1;
         }
     }
 }
