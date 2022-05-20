@@ -335,8 +335,10 @@ message Type {
 
             // RelationType method requests
             RelationType.Create.Req relation_type_create_req = 500;
-            RelationType.GetRelatesForRoleLabel.Req relation_type_get_relates_for_role_label_req = 501;
-            RelationType.GetRelates.Req relation_type_get_relates_req = 502;
+            RelationType.GetRelates.Req relation_type_get_relates_req = 502; // TODO: reorder
+            RelationType.GetRelatesExplicit.Req relation_type_get_relates_explicit_req = 505; // TODO: reorder
+            RelationType.GetRelatesForRoleLabel.Req relation_type_get_relates_for_role_label_req = 501;  // TODO: reorder
+            RelationType.GetRelatesOverridden.Req relation_type_get_relates_overridden_req = 506;  // TODO: reorder
             RelationType.SetRelates.Req relation_type_set_relates_req = 503;
             RelationType.UnsetRelates.Req relation_type_unset_relates_req = 504;
 
@@ -374,6 +376,7 @@ message Type {
             // RelationType method responses
             RelationType.Create.Res relation_type_create_res = 500;
             RelationType.GetRelatesForRoleLabel.Res relation_type_get_relates_for_role_label_res = 501;
+            RelationType.GetRelatesOverridden.Res relation_type_get_relates_overridden_res = 504; // TODO: reorder
             RelationType.SetRelates.Res relation_type_set_relates_res = 502;
             RelationType.UnsetRelates.Res relation_type_unset_relates_res = 503;
 
@@ -406,6 +409,7 @@ message Type {
 
             // RelationType method responses
             RelationType.GetRelates.ResPart relation_type_get_relates_res_part = 500;
+            RelationType.GetRelatesExplicit.ResPart relation_type_get_relates_explicit_res_part = 501;
 
             // AttributeType method responses
             AttributeType.GetOwners.ResPart attribute_type_get_owners_res_part = 600;
@@ -651,12 +655,30 @@ message RelationType {
         }
     }
 
+    message GetRelatesExplicit {
+        message Req {}
+        message ResPart {
+            repeated Type role_types = 1;
+        }
+    }
+
     message GetRelatesForRoleLabel {
         message Req {
             string label = 1;
         }
         message Res {
             oneof role {
+                Type role_type = 1;
+            }
+        }
+    }
+
+    message GetRelatesOverridden {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            oneof res {
                 Type role_type = 1;
             }
         }
