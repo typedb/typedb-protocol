@@ -329,7 +329,7 @@ message Type {
             ThingType.GetPlaysOverridden.Req thing_type_get_plays_overridden_req = 313; // TODO: reorder
             ThingType.SetPlays.Req thing_type_set_plays_req = 307;
             ThingType.UnsetPlays.Req thing_type_unset_plays_req = 308;
-            ThingType.Syntax.Req thing_type_syntax_req = 314; // TODO: reorder
+            ThingType.GetSyntax.Req thing_type_get_syntax_req = 314; // TODO: reorder
 
             // EntityType method requests
             EntityType.Create.Req entity_type_create_req = 400;
@@ -370,7 +370,7 @@ message Type {
             ThingType.GetPlaysOverridden.Res thing_type_get_plays_overridden_res = 307; // TODO: reorder
             ThingType.SetPlays.Res thing_type_set_plays_res = 304;
             ThingType.UnsetPlays.Res thing_type_unset_plays_res = 305;
-            ThingType.Syntax.Res thing_type_syntax_res = 308; // TODO: reorder
+            ThingType.GetSyntax.Res thing_type_get_syntax_res = 308; // TODO: reorder
 
             // EntityType method responses
             EntityType.Create.Res entity_type_create_res = 400;
@@ -626,10 +626,10 @@ message ThingType {
         message Res {}
     }
 
-    message Syntax {
+    message GetSyntax {
         message Req {}
         message Res {
-            string schema = 1;
+            string syntax = 1;
         }
     }
 }
