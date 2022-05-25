@@ -21,7 +21,6 @@ option java_package = "com.vaticle.typedb.protocol";
 option java_outer_classname = "LogicProto";
 
 import "common/answer.proto";
-import "common/concept.proto";
 
 
 package typedb.protocol;
@@ -115,7 +114,7 @@ message Explanation {
     Rule rule = 1;
     map<string, VarList> var_mapping = 2;
     ConceptMap condition = 3;
-    map<string, Concept> conclusion = 4;
+    ConceptMap conclusion = 4;
 
     message VarList {
         repeated string vars = 1;
