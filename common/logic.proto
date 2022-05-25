@@ -115,13 +115,9 @@ message Explanation {
     Rule rule = 1;
     map<string, VarList> var_mapping = 2;
     ConceptMap condition = 3;
-    ConclusionAnswer conclusion = 4;
+    map<string, Concept> conclusion = 4;
 
     message VarList {
         repeated string vars = 1;
-    }
-
-    message ConclusionAnswer {
-        map<string, Concept> map = 1;
     }
 }
