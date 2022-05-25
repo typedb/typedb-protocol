@@ -33,7 +33,10 @@ proto_library(
 proto_library(
     name = "logic-proto",
     srcs = ["logic.proto"],
-    deps = [":answer-proto"]
+    deps = [
+        ":answer-proto",
+        ":concept-proto"
+    ],
 )
 
 proto_library(
