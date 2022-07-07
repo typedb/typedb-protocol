@@ -52,6 +52,8 @@ deploy_github(
     draft = False,
 )
 
+exports_files(["README.md"])
+
 # CI targets that are not declared in any BUILD file, but are called externally
 filegroup(
     name = "ci",
