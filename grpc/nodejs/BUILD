@@ -87,6 +87,6 @@ checkstyle_test(
         "package.json",
         "yarn.lock",
     ],
-    license_type = "agpl",
+    license_type = "agpl-header",
     size = "small",
 )

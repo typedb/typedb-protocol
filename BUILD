@@ -25,10 +25,20 @@ load("//:deployment.bzl", "deployment")
 checkstyle_test(
     name = "checkstyle",
     include = glob([
-        "*",
+        ".bazelrc",
+        ".gitignore",
+        "BUILD",
+        "deployment.bzl",
+        "WORKSPACE",
         ".grabl/automation.yml",
     ]),
-    license_type = "agpl",
+    license_type = "agpl-header",
+    size = "small",
+)
+checkstyle_test(
+    name = "checkstyle-license",
+    include = ["LICENSE"],
+    license_type = "agpl-fulltext",
     size = "small",
 )
 
