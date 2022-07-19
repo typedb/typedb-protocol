@@ -25,10 +25,20 @@ load("//:deployment.bzl", "deployment")
 checkstyle_test(
     name = "checkstyle",
     include = glob([
-        "*",
+        ".bazelrc",
+        ".gitignore",
+        "BUILD",
+        "deployment.bzl",
+        "WORKSPACE",
         ".grabl/automation.yml",
     ]),
-    license_type = "agpl",
+    license_type = "agpl-header",
+    size = "small",
+)
+checkstyle_test(
+    name = "checkstyle-license",
+    include = ["LICENSE"],
+    license_type = "agpl-fulltext",
     size = "small",
 )
 
@@ -41,6 +51,8 @@ deploy_github(
     title_append_version = True,
     draft = False,
 )
+
+exports_files(["README.md"])
 
 # CI targets that are not declared in any BUILD file, but are called externally
 filegroup(

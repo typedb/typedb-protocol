@@ -21,6 +21,6 @@ checkstyle_test(
     name = "checkstyle",
     include = glob(["*"]),
     exclude = ["artifacts.snapshot"],
-    license_type = "agpl",
+    license_type = "agpl-header",
     size = "small",
 )
