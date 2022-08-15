@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Vaticle
+# Copyright (C) 2022 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -73,10 +73,11 @@ build:
       image: vaticle-ubuntu-21.04
       type: foreground
       command: |
-        pyenv global 3.6.10
+        pyenv install 3.7.12
+        pyenv global 3.7.12
         sudo unlink /usr/bin/python3
         sudo ln -s $(which python3) /usr/bin/python3
-        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.6.10/lib/python3.6/site-packages/lsb_release.py
+        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.7.12/lib/python3.7/site-packages/lsb_release.py
         export DEPLOY_PIP_USERNAME=$REPO_VATICLE_USERNAME
         export DEPLOY_PIP_PASSWORD=$REPO_VATICLE_PASSWORD
         bazel run --define version=$(git rev-parse HEAD) //grpc/python:deploy-pip -- snapshot
@@ -90,8 +91,8 @@ release:
     deploy-github:
       image: vaticle-ubuntu-21.04
       command: |
-        pyenv install -s 3.6.10
-        pyenv global 3.6.10 system
+        pyenv install -s 3.7.12
+        pyenv global 3.7.12 system
         pip3 install certifi
         export NOTES_CREATE_TOKEN=$REPO_GITHUB_TOKEN
         bazel run @vaticle_dependencies//tool/release/notes:create -- $GRABL_OWNER $GRABL_REPO $GRABL_COMMIT $(cat VERSION) ./RELEASE_TEMPLATE.md
@@ -117,10 +118,11 @@ release:
     deploy-pip-release:
       image: vaticle-ubuntu-21.04
       command: |
-        pyenv global 3.6.10
+        pyenv install 3.7.12
+        pyenv global 3.7.12
         sudo unlink /usr/bin/python3
         sudo ln -s $(which python3) /usr/bin/python3
-        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.6.10/lib/python3.6/site-packages/lsb_release.py
+        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.7.12/lib/python3.7/site-packages/lsb_release.py
         export DEPLOY_PIP_USERNAME=$REPO_PYPI_USERNAME
         export DEPLOY_PIP_PASSWORD=$REPO_PYPI_PASSWORD
         bazel run --define version=$(cat VERSION) //grpc/python:deploy-pip -- release

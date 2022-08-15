@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Vaticle
+# Copyright (C) 2022 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -19,4 +19,4 @@ build --incompatible_strict_action_env --java_language_version=11 --javacopt='--
 run --incompatible_strict_action_env
 test --incompatible_strict_action_env
 
-try-import /opt/credentials/bazel-remote-cache.rc
+# try-import /opt/credentials/bazel-remote-cache.rc

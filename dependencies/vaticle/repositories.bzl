@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2021 Vaticle
+# Copyright (C) 2022 Vaticle
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -18,12 +18,8 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 def vaticle_dependencies():
-#    git_repository(
-#        name = "vaticle_dependencies",
-#        remote = "https://github.com/vaticle/dependencies",
-#        commit = "249700ec1e6de8b46d528d0a4fde4d1c7a9b3aa5", # sync-marker: do not remove this comment, this is used for sync-dependencies by @vaticle_dependencies
-#    )
-    native.local_repository(
+    git_repository(
         name = "vaticle_dependencies",
-        path = "../dependencies",
+        remote = "https://github.com/vaticle/dependencies",
+        commit = "a8b3b714a5e0562d41f4c05ca8f266d48b7d0fd3", # sync-marker: do not remove this comment, this is used for sync-dependencies by @vaticle_dependencies
     )
