@@ -35,6 +35,7 @@ checkstyle_test(
     license_type = "agpl-header",
     size = "small",
 )
+
 checkstyle_test(
     name = "checkstyle-license",
     include = ["LICENSE"],
