@@ -78,8 +78,6 @@ rust_grpc_library(
     ]
 )
 
-# TODO: add assemble_crate and deploy_crate targets
-
 checkstyle_test(
     name = "checkstyle",
     include = glob(["*"]),
