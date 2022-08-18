@@ -2,6 +2,7 @@ load("@rules_rust//proto:proto.bzl", "rust_grpc_library")
 load("@rules_rust//proto:toolchain.bzl", "rust_proto_toolchain")
 load("@rules_rust//rust:defs.bzl", "rust_binary")
 
+# TODO: once we clarify how we should compile the gRPC + Protobuf library, delete this target
 rust_binary(
     name = "proto_compile",
     srcs = ["main.rs"],
@@ -38,7 +39,7 @@ rust_proto_toolchain(
 toolchain(
     name = "proto_toolchain",
     toolchain = ":proto_toolchain_impl",
-    toolchain_type = "@rules_rust//proto:toolchain",
+    toolchain_type = "@rules_rust//proto:toolchain_type",
 )
 
 rust_grpc_library(
