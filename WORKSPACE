@@ -46,6 +46,17 @@ kt_register_toolchains()
 load("@vaticle_dependencies//builder/python:deps.bzl", python_deps = "deps")
 python_deps()
 
+# Load //builder/rust
+load("@vaticle_dependencies//builder/rust:deps.bzl", rust_deps = "deps")
+rust_deps()
+
+load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
+rules_rust_dependencies()
+rust_register_toolchains(edition = "2021", include_rustc_srcs = True)
+
+load("@vaticle_dependencies//library/crates:crates.bzl", "raze_fetch_remote_crates")
+raze_fetch_remote_crates()
+
 # Load //tool/common
 load("@vaticle_dependencies//tool/common:deps.bzl", "vaticle_dependencies_ci_pip",
 vaticle_dependencies_tool_maven_artifacts = "maven_artifacts")
@@ -54,13 +65,20 @@ vaticle_dependencies_ci_pip()
 # Load //builder/grpc
 load("@vaticle_dependencies//builder/grpc:deps.bzl", grpc_deps = "deps")
 grpc_deps()
+
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl",
 com_github_grpc_grpc_deps = "grpc_deps")
 com_github_grpc_grpc_deps()
+
 load("@stackb_rules_proto//java:deps.bzl", "java_grpc_compile")
 java_grpc_compile()
+
 load("@stackb_rules_proto//node:deps.bzl", "node_grpc_compile")
 node_grpc_compile()
+
+load("@rules_rust//proto:repositories.bzl", "rust_proto_repositories")
+rust_proto_repositories()
+register_toolchains("//grpc/rust:proto_toolchain")
 
 # Load //tool/checkstyle
 load("@vaticle_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
