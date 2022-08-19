@@ -18,6 +18,7 @@
 load("@rules_rust//proto:proto.bzl", "rust_grpc_library")
 load("@rules_rust//proto:toolchain.bzl", "rust_proto_toolchain")
 load("@rules_rust//rust:defs.bzl", "rust_binary")
+load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 # TODO: once we clarify how we should compile the gRPC + Protobuf library, delete this target
 rust_binary(
