@@ -17,7 +17,8 @@
 
 load("@rules_rust//proto:proto.bzl", "rust_grpc_library")
 load("@rules_rust//proto:toolchain.bzl", "rust_proto_toolchain")
-load("@rules_rust//rust:defs.bzl", "rust_binary")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_library")
+load("@rules_rust//cargo:cargo_build_script.bzl", "cargo_build_script")
 load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 # TODO: once we clarify how we should compile the gRPC + Protobuf library, delete this target
@@ -84,4 +85,34 @@ checkstyle_test(
     include = glob(["*"]),
     license_type = "agpl-header",
     size = "small",
+)
+
+cargo_build_script(
+    name = "build_script",
+    srcs = ["build.rs"],
+    data = [
+        "//cluster:proto-files",
+        "//common:proto-files",
+        "//core:proto-files",
+    ],
+    build_script_env = {
+        "PROTOC": "/usr/local/bin/protoc"
+    },
+    deps = [
+        "@vaticle_dependencies//library/crates:tonic_build",
+    ],
+)
+
+rust_library(
+    name = "lib",
+    crate_name = "typedb_protocol",
+    srcs = [
+        "lib.rs"
+    ],
+    deps = [
+        ":build_script",
+        "@vaticle_dependencies//library/crates:tonic",
+        "@vaticle_dependencies//library/crates:prost",
+    ],
+    visibility = ["//visibility:public"],
 )
