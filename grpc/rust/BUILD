@@ -88,7 +88,7 @@ checkstyle_test(
 )
 
 cargo_build_script(
-    name = "typedb-protocol-client-src",
+    name = "typedb-protocol-src",
     srcs = ["build.rs"],
     data = [
         "//cluster:service-proto",
@@ -115,13 +115,13 @@ cargo_build_script(
 )
 
 rust_library(
-    name = "typedb-protocol-client",
+    name = "typedb-protocol",
     crate_name = "typedb_protocol_client",
     srcs = [
         "lib.rs"
     ],
     deps = [
-        ":typedb-protocol-client-src",
+        ":typedb-protocol-src",
         "@vaticle_dependencies//library/crates:tonic",
         "@vaticle_dependencies//library/crates:prost",
     ],
