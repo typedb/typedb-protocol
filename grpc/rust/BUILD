@@ -94,9 +94,10 @@ cargo_build_script(
         "//cluster:proto-files",
         "//common:proto-files",
         "//core:proto-files",
+        "@com_google_protobuf//:protoc",
     ],
     build_script_env = {
-        "PROTOC": "/usr/local/bin/protoc"
+        "PROTOC": "$(execpath @com_google_protobuf//:protoc)"
     },
     deps = [
         "@vaticle_dependencies//library/crates:tonic_build",
