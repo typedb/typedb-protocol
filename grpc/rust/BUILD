@@ -115,7 +115,7 @@ cargo_build_script(
 )
 
 rust_library(
-    name = "lib",
+    name = "typedb-protocol",
     crate_name = "typedb_protocol",
     srcs = [
         "lib.rs"
