@@ -1,6 +1,6 @@
+use std::env;
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // We can iterate over directories and match files with .proto extension instead of hardcoding it
-    // We can also get the ../.. directory via Bazel's make variables and pass it as build ENV variable
     tonic_build::configure()
         .build_server(false)
         .compile(
