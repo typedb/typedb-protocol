@@ -50,8 +50,3 @@ checkstyle_test(
     license_type = "agpl-header",
     size = "small",
 )
-
-filegroup(
-    name = "proto-files",
-    srcs = glob(["*.proto"]),
-)
