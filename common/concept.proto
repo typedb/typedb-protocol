@@ -312,7 +312,9 @@ message Type {
 
             // RoleType method requests
             RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 200;
-            RoleType.GetPlayers.Req role_type_get_players_req = 201;
+            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 201;
+            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 202;
+            RoleType.GetPlayerInstancesExplicit.Req role_type_get_player_instances_explicit_req = 203;
 
             // ThingType method requests
             ThingType.GetInstances.Req thing_type_get_instances_req = 300;
@@ -399,7 +401,9 @@ message Type {
 
             // RoleType method responses
             RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 200;
-            RoleType.GetPlayers.ResPart role_type_get_players_res_part = 201;
+            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res_part = 201;
+            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 202;
+            RoleType.GetPlayerInstancesExplicit.ResPart role_type_get_player_instances_explicit_res_part = 203;
 
             // ThingType method responses
             ThingType.GetInstances.ResPart thing_type_get_instances_res_part = 300;
@@ -495,10 +499,24 @@ message RoleType {
         }
     }
 
-    message GetPlayers {
+    message GetPlayerTypes {
         message Req {}
         message ResPart {
             repeated Type thing_types = 1;
+        }
+    }
+
+    message GetPlayerInstances {
+        message Req {}
+        message ResPart {
+            repeated Thing things = 1;
+        }
+    }
+
+    message GetPlayerInstancesExplicit {
+        message Req {}
+        message ResPart {
+            repeated Thing things = 1;
         }
     }
 }
