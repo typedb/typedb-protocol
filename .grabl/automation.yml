@@ -57,12 +57,8 @@ build:
       filter:
         owner: vaticle
         branch: master
-      image: vaticle-ubuntu-21.04
+      image: vaticle-ubuntu-20.04
       command: |
-        curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
-        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-        sudo apt update -y
-        sudo apt install -y expect
         export DEPLOY_NPM_TOKEN=$REPO_VATICLE_NPM_TOKEN
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
       dependencies: [build, build-dependency]
