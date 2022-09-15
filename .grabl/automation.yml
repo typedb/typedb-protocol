@@ -54,9 +54,9 @@ build:
         export DEPLOY_MAVEN_PASSWORD=$REPO_VATICLE_PASSWORD
         bazel run --define version=$(git rev-parse HEAD) //grpc/java:deploy-maven -- snapshot
     deploy-npm-snapshot:
-      #filter:
-        #owner: vaticle
-        #branch: master
+      filter:
+        owner: vaticle
+        branch: master
       image: vaticle-ubuntu-20.04
       command: |
         export DEPLOY_NPM_TOKEN=$REPO_VATICLE_NPM_TOKEN
