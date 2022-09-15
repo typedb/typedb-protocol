@@ -57,7 +57,7 @@ build:
       #filter:
         #owner: vaticle
         #branch: master
-      image: vaticle-ubuntu-21.04
+      image: vaticle-ubuntu-20.04
       command: |
         export DEPLOY_NPM_TOKEN=$REPO_VATICLE_NPM_TOKEN
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
