@@ -313,8 +313,10 @@ message Type {
             // RoleType method requests
             RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 200;
             RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 201;
-            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 202;
-            RoleType.GetPlayerInstancesExplicit.Req role_type_get_player_instances_explicit_req = 203;
+            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 202;
+            RoleType.GetRelationInstancesExplicit.Req role_type_get_relation_instances_explicit_req = 203;
+            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 204;
+            RoleType.GetPlayerInstancesExplicit.Req role_type_get_player_instances_explicit_req = 205;
 
             // ThingType method requests
             ThingType.GetInstances.Req thing_type_get_instances_req = 300;
@@ -402,8 +404,10 @@ message Type {
             // RoleType method responses
             RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 200;
             RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res_part = 201;
-            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 202;
-            RoleType.GetPlayerInstancesExplicit.ResPart role_type_get_player_instances_explicit_res_part = 203;
+            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res_part = 202;
+            RoleType.GetRelationInstancesExplicit.ResPart role_type_get_relation_instances_explicit_res_part = 203;
+            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 204;
+            RoleType.GetPlayerInstancesExplicit.ResPart role_type_get_player_instances_explicit_res_part = 205;
 
             // ThingType method responses
             ThingType.GetInstances.ResPart thing_type_get_instances_res_part = 300;
@@ -503,6 +507,20 @@ message RoleType {
         message Req {}
         message ResPart {
             repeated Type thing_types = 1;
+        }
+    }
+
+    message GetRelationInstances {
+        message Req {}
+        message ResPart {
+            repeated Relation relations = 1;
+        }
+    }
+
+    message GetRelationInstancesExplicit {
+        message Req {}
+        message ResPart {
+            repeated Relation relations = 1;
         }
     }
 
