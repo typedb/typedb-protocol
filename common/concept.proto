@@ -513,14 +513,14 @@ message RoleType {
     message GetRelationInstances {
         message Req {}
         message ResPart {
-            repeated Relation relations = 1;
+            repeated Thing relations = 1;
         }
     }
 
     message GetRelationInstancesExplicit {
         message Req {}
         message ResPart {
-            repeated Relation relations = 1;
+            repeated Thing relations = 1;
         }
     }
 
