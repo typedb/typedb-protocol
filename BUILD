@@ -30,7 +30,7 @@ checkstyle_test(
         "BUILD",
         "deployment.bzl",
         "WORKSPACE",
-        ".grabl/automation.yml",
+        ".factory/automation.yml",
     ]),
     license_type = "agpl-header",
     size = "small",
