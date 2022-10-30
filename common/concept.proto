@@ -322,6 +322,8 @@ message Type {
             // ThingType method requests
             ThingType.GetInstances.Req thing_type_get_instances_req = 300;
             ThingType.GetInstancesExplicit.Req thing_type_get_instances_explicit_req = 309; // TODO: reorder
+            ThingType.SetAbstract.Req thing_type_set_abstract_req = 301;
+            ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 302;
             ThingType.GetOwns.Req thing_type_get_owns_req = 303;
             ThingType.GetOwnsExplicit.Req thing_type_get_owns_explicit_req = 310; // TODO: reorder
             ThingType.GetOwnsOverridden.Req thing_type_get_owns_overridden_req = 311; // TODO: reorder
