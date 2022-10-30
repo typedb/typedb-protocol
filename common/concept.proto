@@ -294,7 +294,8 @@ message Type {
     string scope = 2;
     Encoding encoding = 3;
     AttributeType.ValueType value_type = 4;
-    bool root = 5;
+    bool isRoot = 5;
+    bool isAbstract = 6;
 
     message Req {
         string label = 1;
@@ -303,7 +304,6 @@ message Type {
             // Type method requests
             Type.Delete.Req type_delete_req = 100;
             Type.SetLabel.Req type_set_label_req = 101;
-            Type.IsAbstract.Req type_is_abstract_req = 102;
             Type.GetSupertype.Req type_get_supertype_req = 103;
             Type.SetSupertype.Req type_set_supertype_req = 104;
             Type.GetSupertypes.Req type_get_supertypes_req = 105;
@@ -322,8 +322,6 @@ message Type {
             // ThingType method requests
             ThingType.GetInstances.Req thing_type_get_instances_req = 300;
             ThingType.GetInstancesExplicit.Req thing_type_get_instances_explicit_req = 309; // TODO: reorder
-            ThingType.SetAbstract.Req thing_type_set_abstract_req = 301;
-            ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 302;
             ThingType.GetOwns.Req thing_type_get_owns_req = 303;
             ThingType.GetOwnsExplicit.Req thing_type_get_owns_explicit_req = 310; // TODO: reorder
             ThingType.GetOwnsOverridden.Req thing_type_get_owns_overridden_req = 311; // TODO: reorder
@@ -362,7 +360,6 @@ message Type {
             // Type method responses
             Type.Delete.Res type_delete_res = 100;
             Type.SetLabel.Res type_set_label_res = 101;
-            Type.IsAbstract.Res type_is_abstract_res = 102;
             Type.GetSupertype.Res type_get_supertype_res = 103;
             Type.SetSupertype.Res type_set_supertype_res = 104;
 
@@ -447,13 +444,6 @@ message Type {
             string label = 1;
         }
         message Res {}
-    }
-
-    message IsAbstract {
-        message Req {}
-        message Res {
-            bool abstract = 1;
-        }
     }
 
     message GetSupertype {
