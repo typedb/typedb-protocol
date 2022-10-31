@@ -104,7 +104,7 @@ release:
         bazel run --define version=$(cat VERSION) //grpc/nodejs:deploy-npm -- release
       dependencies: [deploy-github]
     deploy-pip-release:
-      image: vaticle-ubuntu-22.04
+      image: vaticle-ubuntu-20.04
       command: |
         export DEPLOY_PIP_USERNAME=$REPO_PYPI_USERNAME
         export DEPLOY_PIP_PASSWORD=$REPO_PYPI_PASSWORD
