@@ -70,11 +70,11 @@ build:
       type: foreground
       command: |
         export PYENV_ROOT="/opt/pyenv"
-        pyenv install 3.7.12
-        pyenv global 3.7.12
+        pyenv install 3.7.9
+        pyenv global 3.7.9
         sudo unlink /usr/bin/python3
         sudo ln -s $(which python3) /usr/bin/python3
-        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.7.12/lib/python3.7/site-packages/lsb_release.py
+        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.7.9/lib/python3.7/site-packages/lsb_release.py
         export DEPLOY_PIP_USERNAME=$REPO_VATICLE_USERNAME
         export DEPLOY_PIP_PASSWORD=$REPO_VATICLE_PASSWORD
         bazel run --define version=$(git rev-parse HEAD) //grpc/python:deploy-pip -- snapshot
@@ -120,11 +120,11 @@ release:
       image: vaticle-ubuntu-22.04
       command: |
         export PYENV_ROOT="/opt/pyenv"
-        pyenv install 3.7.12
-        pyenv global 3.7.12
+        pyenv install 3.7.9
+        pyenv global 3.7.9
         sudo unlink /usr/bin/python3
         sudo ln -s $(which python3) /usr/bin/python3
-        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.7.12/lib/python3.7/site-packages/lsb_release.py
+        sudo ln -s /usr/share/pyshared/lsb_release.py /opt/pyenv/versions/3.7.9/lib/python3.7/site-packages/lsb_release.py
         export DEPLOY_PIP_USERNAME=$REPO_PYPI_USERNAME
         export DEPLOY_PIP_PASSWORD=$REPO_PYPI_PASSWORD
         bazel run --define version=$(cat VERSION) //grpc/python:deploy-pip -- release
