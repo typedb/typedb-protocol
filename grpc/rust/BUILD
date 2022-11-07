@@ -55,6 +55,9 @@ rust_library(
         "@vaticle_dependencies//library/crates:tonic",
         "@vaticle_dependencies//library/crates:prost",
     ],
+    tags = [
+        "crate-name=typedb-protocol",
+    ],
     visibility = ["//visibility:public"],
 )
 
