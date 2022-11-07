@@ -76,10 +76,6 @@ java_grpc_compile()
 load("@stackb_rules_proto//node:deps.bzl", "node_grpc_compile")
 node_grpc_compile()
 
-load("@rules_rust//proto:repositories.bzl", "rust_proto_repositories")
-rust_proto_repositories()
-register_toolchains("//grpc/rust:proto_toolchain")
-
 # Load //tool/checkstyle
 load("@vaticle_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
 checkstyle_deps()
