@@ -59,6 +59,7 @@ exports_files(["README.md"])
 filegroup(
     name = "ci",
     data = [
+        "@vaticle_dependencies//ide/rust:sync",
         "@vaticle_dependencies//library/maven:update",
         "@vaticle_dependencies//tool/bazelrun:rbe",
         "@vaticle_dependencies//tool/unuseddeps:unused-deps",

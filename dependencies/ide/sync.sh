@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # Copyright (C) 2022 Vaticle
 #
@@ -15,62 +16,4 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-# Mac files #
-.DS_Store
-
-# Bazel files #
-bazel-*
-
-# IDE files #
-.idea/
-*.iml
-*.geany
-.ijwb/
-
-# VS Code files #
-.vscode/
-.settings/
-.project
-.classpath
-
-# Compiled files #
-dist/
-out/
-target/
-*.class
-
-# Cargo files #
-Cargo.toml
-Cargo.lock
-
-# Mobile Tools for Java (J2ME) files #
-.mtj.tmp/
-
-# Package Files #
-*.jarg
-*.war
-*.ear
-
-# Debug files #
-dep.tree
-
-# Databases #
-db/
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml #
-hs_err_pid*
-
-# Log files #
-logs/
-*.log
-
-
-# VIM swap files #
-*.swp
-*.swo
-
-# Python cache #
-__pycache__
-
-# Node Modules #
-node_modules
+bazel run @vaticle_dependencies//ide/rust:sync
