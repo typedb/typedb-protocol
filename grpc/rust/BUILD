@@ -48,7 +48,7 @@ cargo_build_script(
 
 rust_library(
     name = "typedb_protocol",
-    crate_name = "typedb_protocol",
+    crate_name = "typedb-protocol",
     srcs = ["lib.rs"],
     deps = [
         ":typedb_protocol_src",
