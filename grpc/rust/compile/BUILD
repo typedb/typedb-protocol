@@ -15,11 +15,19 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
-def vaticle_dependencies():
-    git_repository(
-        name = "vaticle_dependencies",
-        remote = "https://github.com/alexjpwalker/dependencies",
-        commit = "3244740dd87cb91306fe0dc3418f57ccc640cd0e", # sync-marker: do not remove this comment, this is used for sync-dependencies by @vaticle_dependencies
-    )
+rust_binary(
+    name = "compile",
+    srcs = ["compile.rs"],
+    deps = ["@vaticle_dependencies//library/crates:tonic_build"],
+    visibility = ["//visibility:public"]
+)
+
+checkstyle_test(
+    name = "checkstyle",
+    include = glob(["*"]),
+    license_type = "agpl-header",
+    size = "small",
+)

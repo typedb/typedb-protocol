@@ -16,13 +16,15 @@
 #
 
 load("@rules_rust//rust:defs.bzl", "rust_library")
-load("@rules_rust//cargo:cargo_build_script.bzl", "cargo_build_script")
+load("@vaticle_bazel_distribution//crates:rules.bzl", "assemble_crate", "deploy_crate")
+load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("//grpc/rust/compile:tonic_compile.bzl", "rust_tonic_compile")
 
-cargo_build_script(
+rust_tonic_compile(
     name = "typedb_protocol_src",
-    srcs = ["build.rs"],
-    data = [
+    packages = ["typedb.protocol"],
+    srcs = [
         "//cluster:service-proto",
         "//cluster:server-proto",
         "//cluster:user-proto",
@@ -36,28 +38,40 @@ cargo_build_script(
         "//common:transaction-proto",
         "//core:database-proto",
         "//core:service-proto",
-        "@com_google_protobuf//:protoc",
-    ],
-    build_script_env = {
-        "PROTOC": "$(execpath @com_google_protobuf//:protoc)"
-    },
-    deps = [
-        "@vaticle_dependencies//library/crates:tonic_build"
-    ],
+    ]
 )
 
 rust_library(
     name = "typedb_protocol",
-    srcs = ["lib.rs"],
-    deps = [
+    srcs = [
         ":typedb_protocol_src",
+        "lib.rs",
+    ],
+    deps = [
         "@vaticle_dependencies//library/crates:tonic",
         "@vaticle_dependencies//library/crates:prost",
     ],
     tags = [
         "crate-name=typedb-protocol",
     ],
+    version = "0.1.2",
     visibility = ["//visibility:public"],
+)
+
+assemble_crate(
+    name = "assemble_crate",
+    target = ":typedb_protocol",
+    description = "TypeDB Protocol",
+    homepage = "https://github.com/vaticle/typedb-protocol",
+    license = "AGPL-3.0-or-later",
+    repository = "https://github.com/vaticle/typedb-protocol",
+)
+
+deploy_crate(
+    name = "deploy_crate",
+    target = ":assemble_crate",
+    snapshot = deployment["crate.snapshot"],
+    release = deployment["crate.release"]
 )
 
 checkstyle_test(

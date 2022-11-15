@@ -15,4 +15,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-include!("typedb.protocol.rs");
+use std::env;
+
+fn main() -> std::io::Result<()> {
+    let protos_raw = env::var("PROTOS").expect("PROTOS environment variable is not set");
+    let protos: Vec<&str> = protos_raw.split(";").filter(|&str| !str.is_empty()).collect();
+
+    tonic_build::configure()
+        .compile(&protos, &[
+            env::var("PROTOS_ROOT").expect("PROTOS_ROOT environment variable is not set")
+        ])
+}
