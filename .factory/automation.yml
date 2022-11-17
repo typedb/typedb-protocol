@@ -79,6 +79,15 @@ build:
         export DEPLOY_PIP_PASSWORD=$REPO_VATICLE_PASSWORD
         bazel run --define version=$(git rev-parse HEAD) //grpc/python:deploy-pip -- snapshot
       dependencies: [build, build-dependency]
+    deploy-crate-snapshot:
+      filter:
+        owner: vaticle
+        branch: master
+      image: vaticle-ubuntu-22.04
+      command: |
+        export DEPLOY_CRATE_TOKEN=$REPO_VATICLE_CRATES_TOKEN
+        bazel run --define version=$(git rev-parse HEAD) //grpc/rust:deploy_crate -- snapshot
+      dependencies: [build, build-dependency]
 
 release:
   filter:
@@ -129,3 +138,12 @@ release:
         export DEPLOY_PIP_PASSWORD=$REPO_PYPI_PASSWORD
         bazel run --define version=$(cat VERSION) //grpc/python:deploy-pip -- release
       dependencies: [deploy-github]
+    deploy-crate-release:
+      filter:
+        owner: vaticle
+        branch: master
+      image: vaticle-ubuntu-22.04
+      command: |
+        export DEPLOY_CRATE_TOKEN=$REPO_CRATES_TOKEN
+        bazel run --define version=$(cat VERSION) //grpc/rust:deploy_crate -- release
+      dependencies: [build, build-dependency]
