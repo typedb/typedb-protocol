@@ -16,15 +16,10 @@
 #
 
 def _rust_tonic_compile_impl(ctx):
-    inputs = ctx.attr.protoc.files.to_list()
-    proto_paths_str = ""
-    for src in ctx.attr.srcs:
-        inputs.append(src[ProtoInfo].direct_sources[0])
-        proto_paths_str = proto_paths_str + src[ProtoInfo].direct_sources[0].path + ";"
+    protos = [src[ProtoInfo].direct_sources[0] for src in ctx.attr.srcs]
 
-    outputs = []
-    for package in ctx.attr.packages:
-        outputs.append(ctx.actions.declare_file("{}.rs".format(package)))
+    inputs = ctx.attr.protoc.files.to_list() + protos
+    outputs = [ctx.actions.declare_file("{}.rs".format(package)) for package in ctx.attr.packages]
 
     ctx.actions.run(
         inputs = inputs,
@@ -33,7 +28,7 @@ def _rust_tonic_compile_impl(ctx):
         env = {
             "OUT_DIR": outputs[0].dirname,
             "PROTOC": ctx.attr.protoc.files.to_list()[0].path,
-            "PROTOS": proto_paths_str,
+            "PROTOS": ";".join([src.path for src in protos]),
             "PROTOS_ROOT": ctx.attr.srcs[0][ProtoInfo].proto_source_root,
         },
         mnemonic = "RustTonicCompileAction"
