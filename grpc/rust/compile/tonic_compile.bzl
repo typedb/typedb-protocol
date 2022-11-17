@@ -54,9 +54,6 @@ rust_tonic_compile = rule(
             allow_empty = False,
             doc = "The Protobuf package names. Each package name corresponds to a single output file."
         ),
-        "deps": attr.label_list(
-            default = ["@vaticle_dependencies//library/crates:tonic_build"]
-        ),
         "protoc": attr.label(
             default = "@com_google_protobuf//:protoc",
             doc = "The protoc executable."
