@@ -139,9 +139,6 @@ release:
         bazel run --define version=$(cat VERSION) //grpc/python:deploy-pip -- release
       dependencies: [deploy-github]
     deploy-crate-release:
-      filter:
-        owner: vaticle
-        branch: master
       image: vaticle-ubuntu-22.04
       command: |
         export DEPLOY_CRATE_TOKEN=$REPO_CRATES_TOKEN
