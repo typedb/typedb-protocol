@@ -31,6 +31,7 @@ message ConceptManager {
             PutEntityType.Req put_entity_type_req = 3;
             PutAttributeType.Req put_attribute_type_req = 4;
             PutRelationType.Req put_relation_type_req = 5;
+            GetSchemaExceptions.Req get_schema_exceptions_req = 6;
         }
     }
 
@@ -41,6 +42,7 @@ message ConceptManager {
             PutEntityType.Res put_entity_type_res = 3;
             PutAttributeType.Res put_attribute_type_res = 4;
             PutRelationType.Res put_relation_type_res = 5;
+            GetSchemaExceptions.Res get_schema_exceptions_res = 6;
         }
     }
 
@@ -91,6 +93,13 @@ message ConceptManager {
         }
         message Res {
             Type relation_type = 1;
+        }
+    }
+
+    message GetSchemaExceptions {
+        message Req {}
+        message Res {
+            repeated string exceptions = 1;
         }
     }
 }
