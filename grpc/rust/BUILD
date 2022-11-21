@@ -54,7 +54,6 @@ rust_library(
     tags = [
         "crate-name=typedb-protocol",
     ],
-    version = "0.1.2",
     visibility = ["//visibility:public"],
 )
 
