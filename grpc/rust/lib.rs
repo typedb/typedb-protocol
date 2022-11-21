@@ -15,4 +15,4 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 
-tonic::include_proto!("typedb.protocol");
+include!("typedb.protocol.rs");
