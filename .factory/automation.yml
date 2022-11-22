@@ -143,4 +143,4 @@ release:
       command: |
         export DEPLOY_CRATE_TOKEN=$REPO_CRATES_TOKEN
         bazel run --define version=$(cat VERSION) //grpc/rust:deploy_crate -- release
-      dependencies: [build, build-dependency]
+      dependencies: [deploy-github]
