@@ -99,9 +99,14 @@ message ConceptManager {
     message GetSchemaExceptions {
         message Req {}
         message Res {
-            repeated string exceptions = 1;
+            repeated Exceptions exceptions = 1;
         }
     }
+}
+
+message Exceptions {
+    string code = 1;
+    string message = 2;
 }
 
 message Concept {
