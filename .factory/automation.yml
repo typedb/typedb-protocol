@@ -31,6 +31,7 @@ build:
         bazel run @vaticle_dependencies//factory/analysis:dependency-analysis
   correctness:
     build:
+      machine: 4-core-8-gb
       image: vaticle-ubuntu-22.04
       #NPM packages can't be built under RBE
       command: |
@@ -38,6 +39,7 @@ build:
         bazel run @vaticle_dependencies//tool/checkstyle:test-coverage
         bazel test $(bazel query 'kind(checkstyle_test, //...)') --test_output=errors
     build-dependency:
+      machine: 4-core-8-gb
       image: vaticle-ubuntu-22.04
       command: |
         dependencies/maven/update.sh
