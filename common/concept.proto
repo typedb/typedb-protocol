@@ -308,8 +308,8 @@ message Type {
     string scope = 2;
     Encoding encoding = 3;
     AttributeType.ValueType value_type = 4;
-    bool isRoot = 5;
-    bool isAbstract = 6;
+    bool is_root = 5;
+    bool is_abstract = 6;
 
     message Req {
         string label = 1;
