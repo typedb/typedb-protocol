@@ -45,7 +45,6 @@ rust_library(
     name = "typedb_protocol",
     srcs = [
         ":typedb_protocol_src",
-        "lib.rs",
     ],
     deps = [
         "@crates//:tonic",
