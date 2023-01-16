@@ -43,13 +43,13 @@ rust_tonic_compile(
 
 rust_library(
     name = "typedb_protocol",
+    crate_root = ":typedb_protocol_src",
     srcs = [
         ":typedb_protocol_src",
-        "lib.rs",
     ],
     deps = [
-        "@vaticle_dependencies//library/crates:tonic",
-        "@vaticle_dependencies//library/crates:prost",
+        "@crates//:tonic",
+        "@crates//:prost",
     ],
     tags = [
         "crate-name=typedb-protocol",
