@@ -48,8 +48,8 @@ rust_library(
         "lib.rs",
     ],
     deps = [
-        "@vaticle_dependencies//library/crates:tonic",
-        "@vaticle_dependencies//library/crates:prost",
+        "@crates//:tonic",
+        "@crates//:prost",
     ],
     tags = [
         "crate-name=typedb-protocol",
