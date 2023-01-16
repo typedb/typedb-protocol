@@ -64,6 +64,8 @@
 @maven//:org_checkerframework_checker_qual_3_5_0
 @maven//:org_codehaus_mojo_animal_sniffer_annotations
 @maven//:org_codehaus_mojo_animal_sniffer_annotations_1_19
+@maven//:org_jetbrains_compose_compiler_compiler
+@maven//:org_jetbrains_compose_compiler_compiler_1_3_2
 @maven//:org_slf4j_slf4j_api
 @maven//:org_slf4j_slf4j_api_1_7_2
 @maven//:org_zeroturnaround_zt_exec
