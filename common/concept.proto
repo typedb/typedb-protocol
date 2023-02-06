@@ -113,7 +113,7 @@ message Concept {
     oneof concept {
         Thing thing = 1;
         Type type = 2;
-        RawValue value = 3;
+        Value value = 3;
     }
 }
 
@@ -861,10 +861,10 @@ message AttributeType {
     }
 }
 
-message RawValue {
+message Value {
 
-    RawValue.ValueType valueType = 1;
-    RawValue.Value value = 2;
+    ValueType valueType = 1;
+    PrimitiveValue value = 2;
 
     enum ValueType {
         OBJECT = 0;
@@ -875,14 +875,14 @@ message RawValue {
         DATETIME = 5;
     }
 
-    message Value {
-            oneof value {
-                string string = 1;
-                bool boolean = 2;
-                int64 long = 3;
-                double double = 4;
-                // time since epoch in milliseconds
-                int64 date_time = 5;
-            }
+    message PrimitiveValue {
+        oneof value {
+            string string = 1;
+            bool boolean = 2;
+            int64 long = 3;
+            double double = 4;
+            // time since epoch in milliseconds
+            int64 date_time = 5;
+        }
     }
 }
