@@ -51,10 +51,19 @@ message ClusterUserManager {
 
 message ClusterUser {
 
-    message Password {
+    message PasswordAdmin {
         message Req {
             string username = 1;
             string password = 2;
+        }
+        message Res {}
+    }
+
+    message Password {
+        message Req {
+            string username = 1;
+            string oldPassword = 2;
+            string newPassword = 3;
         }
         message Res {}
     }
@@ -66,6 +75,16 @@ message ClusterUser {
 
         message Res {
             string token = 1;
+        }
+    }
+
+    message ExpiryDays {
+        message Req {
+            string username = 1;
+        }
+
+        message Res {
+            int64 expiryDays = 1;
         }
     }
 
