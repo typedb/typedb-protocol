@@ -22,11 +22,11 @@ option java_outer_classname = "ServiceProto";
 option java_generic_services = true;
 
 
-import "service/database.proto";
-import "service/server.proto";
-import "service/user.proto";
-import "common/session.proto";
-import "common/transaction.proto";
+import "proto/database.proto";
+import "proto/server.proto";
+import "proto/user.proto";
+import "proto/session.proto";
+import "proto/transaction.proto";
 
 package typedb.protocol;
 

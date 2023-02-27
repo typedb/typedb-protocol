@@ -18,44 +18,46 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "SessionProto";
+option java_outer_classname = "AnswerProto";
 
-import "common/options.proto";
+import "proto/concept.proto";
 
 package typedb.protocol;
 
-message Session {
+message ConceptMap {
+    map<string, Concept> map = 1;
+    Explainables explainables = 2;
+}
 
-    enum Type {
-        DATA = 0;
-        SCHEMA = 1;
-    }
+message Explainables {
+    map<string, Explainable> relations = 1;
+    map<string, Explainable> attributes = 2;
+    map<string, Owned> ownerships = 3;
 
-    message Open {
-        message Req {
-            string database = 1;
-            Type type = 2;
-            Options options = 3;
-        }
-        message Res {
-            bytes session_id = 1;
-            int32 server_duration_millis = 2;
-        }
+    message Owned {
+        map<string, Explainable> owned = 1;
     }
+}
 
-    message Close {
-        message Req {
-            bytes session_id = 1;
-        }
-        message Res {}
-    }
+message Explainable {
+    string conjunction = 1;
+    int64 id = 2;
+}
 
-    message Pulse {
-        message Req {
-            bytes session_id = 1;
-        }
-        message Res {
-            bool alive = 1;
-        }
+message ConceptMapGroup {
+    Concept owner = 1;
+    repeated ConceptMap concept_maps = 2;
+}
+
+message Numeric {
+    oneof value {
+        int64 long_value = 1;
+        double double_value = 2;
+        bool nan = 3;
     }
+}
+
+message NumericGroup {
+    Concept owner = 1;
+    Numeric number = 2;
 }

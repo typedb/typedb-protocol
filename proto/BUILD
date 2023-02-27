@@ -20,6 +20,33 @@ package(default_visibility = ["//visibility:public"])
 load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
+    name = "service-proto",
+    srcs = [":service.proto"],
+    deps = [
+        ":server-proto",
+        ":user-proto",
+        ":database-proto",
+        ":session-proto",
+        ":transaction-proto",
+    ],
+)
+
+proto_library(
+    name = "server-proto",
+    srcs = [":server.proto"],
+)
+
+proto_library(
+    name = "user-proto",
+    srcs = [":user.proto"],
+)
+
+proto_library(
+    name = "database-proto",
+    srcs = [":database.proto"],
+)
+
+proto_library(
     name = "answer-proto",
     srcs = ["answer.proto"],
     deps = [":concept-proto"],

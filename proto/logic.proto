@@ -20,7 +20,7 @@ syntax = "proto3";
 option java_package = "com.vaticle.typedb.protocol";
 option java_outer_classname = "LogicProto";
 
-import "common/answer.proto";
+import "proto/answer.proto";
 
 
 package typedb.protocol;

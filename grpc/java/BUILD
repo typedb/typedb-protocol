@@ -26,17 +26,17 @@ load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 java_grpc_compile(
     name = "typedb-protocol-src",
     deps = [
-        "//service:service-proto",
-        "//service:server-proto",
-        "//service:user-proto",
-        "//service:database-proto",
-        "//common:answer-proto",
-        "//common:concept-proto",
-        "//common:logic-proto",
-        "//common:options-proto",
-        "//common:query-proto",
-        "//common:session-proto",
-        "//common:transaction-proto",
+        "//proto:service-proto",
+        "//proto:server-proto",
+        "//proto:user-proto",
+        "//proto:database-proto",
+        "//proto:answer-proto",
+        "//proto:concept-proto",
+        "//proto:logic-proto",
+        "//proto:options-proto",
+        "//proto:query-proto",
+        "//proto:session-proto",
+        "//proto:transaction-proto",
     ]
 )
 
