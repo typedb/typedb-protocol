@@ -21,7 +21,7 @@ load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
     name = "service-proto",
-    srcs = [":cluster_service.proto"],
+    srcs = [":service.proto"],
     deps = [
         ":server-proto",
         ":user-proto",
@@ -33,17 +33,17 @@ proto_library(
 
 proto_library(
     name = "server-proto",
-    srcs = [":cluster_server.proto"],
+    srcs = [":server.proto"],
 )
 
 proto_library(
     name = "user-proto",
-    srcs = [":cluster_user.proto"],
+    srcs = [":user.proto"],
 )
 
 proto_library(
     name = "database-proto",
-    srcs = [":cluster_database.proto"],
+    srcs = [":database.proto"],
 )
 
 checkstyle_test(

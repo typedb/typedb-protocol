@@ -18,25 +18,25 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ClusterDatabaseProto";
+option java_outer_classname = "DatabaseProto";
 
 package typedb.protocol;
 
-message ClusterDatabaseManager {
+message DatabaseManager {
 
     message Get {
         message Req {
             string name = 1;
         }
         message Res {
-            ClusterDatabase database = 1;
+            DatabaseReplicas database = 1;
         }
     }
 
     message All {
         message Req {}
         message Res {
-            repeated ClusterDatabase databases = 1;
+            repeated DatabaseReplicas databases = 1;
         }
     }
 
@@ -57,7 +57,7 @@ message ClusterDatabaseManager {
     }
 }
 
-message ClusterDatabase {
+message DatabaseReplicas {
 
     string name = 1;
     repeated Replica replicas = 2;
@@ -70,7 +70,7 @@ message ClusterDatabase {
     }
 }
 
-message CoreDatabase {
+message Database {
 
     message Schema {
         message Req {

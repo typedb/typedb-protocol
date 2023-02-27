@@ -25,10 +25,10 @@ load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 python_grpc_compile(
     name = "typedb-protocol-src",
     deps = [
-        "//cluster:server-proto",
-        "//cluster:user-proto",
-        "//cluster:database-proto",
-        "//cluster:service-proto",
+        "//service:server-proto",
+        "//service:user-proto",
+        "//service:database-proto",
+        "//service:service-proto",
         "//common:answer-proto",
         "//common:concept-proto",
         "//common:logic-proto",
@@ -43,7 +43,7 @@ python_grpc_compile(
 python_repackage(
     name = "typedb-protocol-pkg",
     src = ":typedb-protocol-src",
-    src_packages = ["common", "cluster"],
+    src_packages = ["common", "service"],
     py_package_add_prefix = "typedb_protocol",
 )
 

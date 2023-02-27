@@ -41,10 +41,10 @@ nodejs_binary(
 ts_grpc_compile(
     name = "typedb-protocol-src",
     deps = [
-        "//cluster:server-proto",
-        "//cluster:user-proto",
-        "//cluster:database-proto",
-        "//cluster:service-proto", # TODO: do we need this?
+        "//service:server-proto",
+        "//service:user-proto",
+        "//service:database-proto",
+        "//service:service-proto", # TODO: do we need this?
         "//common:answer-proto",
         "//common:concept-proto",
         "//common:logic-proto",
@@ -54,7 +54,7 @@ ts_grpc_compile(
         "//common:transaction-proto",
     ],
     grpc_deps = [
-        "//cluster:service-proto",
+        "//service:service-proto",
     ]
 )
 

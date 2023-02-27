@@ -18,11 +18,11 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ClusterUserProto";
+option java_outer_classname = "UserProto";
 
 package typedb.protocol;
 
-message ClusterUserManager {
+message UserManager {
 
     message Contains {
         message Req {
@@ -73,7 +73,7 @@ message ClusterUserManager {
     }
 }
 
-message ClusterUser {
+message User {
 
     message PasswordUpdate {
         message Req {
@@ -101,4 +101,3 @@ message User {
         int64 password_expiry_seconds = 2;
     }
 }
-

@@ -18,46 +18,46 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ClusterServiceProto";
+option java_outer_classname = "ServiceProto";
 option java_generic_services = true;
 
 
-import "cluster/cluster_server.proto";
-import "cluster/cluster_user.proto";
-import "cluster/cluster_database.proto";
+import "service/database.proto";
+import "service/server.proto";
+import "service/user.proto";
 import "common/session.proto";
 import "common/transaction.proto";
 
 package typedb.protocol;
 
-service TypeDBCluster {
+service TypeDB {
 
     // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
 
     // User Manager API
-    rpc users_contains (ClusterUserManager.Contains.Req) returns (ClusterUserManager.Contains.Res);
-    rpc users_create (ClusterUserManager.Create.Req) returns (ClusterUserManager.Create.Res);
-    rpc users_delete (ClusterUserManager.Delete.Req) returns (ClusterUserManager.Delete.Res);
-    rpc users_all (ClusterUserManager.All.Req) returns (ClusterUserManager.All.Res);
-    rpc users_password_set (ClusterUserManager.PasswordSet.Req) returns (ClusterUserManager.PasswordSet.Res);
-    rpc users_get (ClusterUserManager.Get.Req) returns (ClusterUserManager.Get.Res);
+    rpc users_contains (UserManager.Contains.Req) returns (UserManager.Contains.Res);
+    rpc users_create (UserManager.Create.Req) returns (UserManager.Create.Res);
+    rpc users_delete (UserManager.Delete.Req) returns (UserManager.Delete.Res);
+    rpc users_all (UserManager.All.Req) returns (UserManager.All.Res);
+    rpc users_password_set (UserManager.PasswordSet.Req) returns (UserManager.PasswordSet.Res);
+    rpc users_get (UserManager.Get.Req) returns (UserManager.Get.Res);
 
     // User API
-    rpc user_password_update (ClusterUser.PasswordUpdate.Req) returns (ClusterUser.PasswordUpdate.Res);
-    rpc user_token (ClusterUser.Token.Req) returns (ClusterUser.Token.Res);
+    rpc user_password_update (User.PasswordUpdate.Req) returns (User.PasswordUpdate.Res);
+    rpc user_token (User.Token.Req) returns (User.Token.Res);
 
     // Database Manager API
-    rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
-    rpc databases_all (ClusterDatabaseManager.All.Req) returns (ClusterDatabaseManager.All.Res);
-    rpc databases_contains (ClusterDatabaseManager.Contains.Req) returns (ClusterDatabaseManager.Contains.Res);
-    rpc databases_create (ClusterDatabaseManager.Create.Req) returns (ClusterDatabaseManager.Create.Res);
+    rpc databases_get (DatabaseManager.Get.Req) returns (DatabaseManager.Get.Res);
+    rpc databases_all (DatabaseManager.All.Req) returns (DatabaseManager.All.Res);
+    rpc databases_contains (DatabaseManager.Contains.Req) returns (DatabaseManager.Contains.Res);
+    rpc databases_create (DatabaseManager.Create.Req) returns (DatabaseManager.Create.Res);
 
     // Database API
-    rpc database_schema (CoreDatabase.Schema.Req) returns (CoreDatabase.Schema.Res);
-    rpc database_type_schema (CoreDatabase.TypeSchema.Req) returns (CoreDatabase.TypeSchema.Res);
-    rpc database_rule_schema (CoreDatabase.RuleSchema.Req) returns (CoreDatabase.RuleSchema.Res);
-    rpc database_delete (CoreDatabase.Delete.Req) returns (CoreDatabase.Delete.Res);
+    rpc database_schema (Database.Schema.Req) returns (Database.Schema.Res);
+    rpc database_type_schema (Database.TypeSchema.Req) returns (Database.TypeSchema.Res);
+    rpc database_rule_schema (Database.RuleSchema.Req) returns (Database.RuleSchema.Res);
+    rpc database_delete (Database.Delete.Req) returns (Database.Delete.Res);
 
     // Session API
     rpc session_open (Session.Open.Req) returns (Session.Open.Res);
