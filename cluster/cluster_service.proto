@@ -25,6 +25,8 @@ option java_generic_services = true;
 import "cluster/cluster_server.proto";
 import "cluster/cluster_user.proto";
 import "cluster/cluster_database.proto";
+import "common/session.proto";
+import "common/transaction.proto";
 
 package typedb.protocol;
 
@@ -48,4 +50,24 @@ service TypeDBCluster {
     // Database Manager API
     rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
     rpc databases_all (ClusterDatabaseManager.All.Req) returns (ClusterDatabaseManager.All.Res);
+    rpc databases_contains (ClusterDatabaseManager.Contains.Req) returns (ClusterDatabaseManager.Contains.Res);
+    rpc databases_create (ClusterDatabaseManager.Create.Req) returns (ClusterDatabaseManager.Create.Res);
+
+    // Database API
+    rpc database_schema (CoreDatabase.Schema.Req) returns (CoreDatabase.Schema.Res);
+    rpc database_type_schema (CoreDatabase.TypeSchema.Req) returns (CoreDatabase.TypeSchema.Res);
+    rpc database_rule_schema (CoreDatabase.RuleSchema.Req) returns (CoreDatabase.RuleSchema.Res);
+    rpc database_delete (CoreDatabase.Delete.Req) returns (CoreDatabase.Delete.Res);
+
+    // Session API
+    rpc session_open (Session.Open.Req) returns (Session.Open.Res);
+    rpc session_close (Session.Close.Req) returns (Session.Close.Res);
+    // Checks with the server that the session is still alive, and informs it that it should be kept alive.
+    rpc session_pulse (Session.Pulse.Req) returns (Session.Pulse.Res);
+
+    // Transaction Streaming API
+    // Opens a bi-directional stream representing a stateful transaction, streaming
+    // requests and responses back-and-forth. The first transaction client message must
+    // be {Transaction.Open.Req}. Closing the stream closes the transaction.
+    rpc transaction (stream Transaction.Client) returns (stream Transaction.Server);
 }

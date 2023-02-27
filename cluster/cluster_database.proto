@@ -39,6 +39,22 @@ message ClusterDatabaseManager {
             repeated ClusterDatabase databases = 1;
         }
     }
+
+    message Contains {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            bool contains = 1;
+        }
+    }
+
+    message Create {
+        message Req {
+            string name = 1;
+        }
+        message Res {}
+    }
 }
 
 message ClusterDatabase {
@@ -51,5 +67,42 @@ message ClusterDatabase {
         bool primary = 2;
         bool preferred = 3;
         int64 term = 4;
+    }
+}
+
+message CoreDatabase {
+
+    message Schema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
+    }
+
+    message TypeSchema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
+    }
+
+    message RuleSchema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
+    }
+
+    message Delete {
+        message Req {
+            string name = 1;
+        }
+        message Res {}
     }
 }

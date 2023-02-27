@@ -52,11 +52,8 @@ ts_grpc_compile(
         "//common:query-proto",
         "//common:session-proto",
         "//common:transaction-proto",
-        "//core:database-proto",
-        "//core:service-proto", # TODO: do we need this?
     ],
     grpc_deps = [
-        "//core:service-proto",
         "//cluster:service-proto",
     ]
 )

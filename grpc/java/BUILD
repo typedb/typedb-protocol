@@ -37,8 +37,6 @@ java_grpc_compile(
         "//common:query-proto",
         "//common:session-proto",
         "//common:transaction-proto",
-        "//core:database-proto",
-        "//core:service-proto",
     ]
 )
 

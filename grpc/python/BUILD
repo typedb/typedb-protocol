@@ -36,8 +36,6 @@ python_grpc_compile(
         "//common:query-proto",
         "//common:session-proto",
         "//common:transaction-proto",
-        "//core:database-proto",
-        "//core:service-proto",
     ],
     visibility = ["//visibility:public"]
 )
@@ -45,7 +43,7 @@ python_grpc_compile(
 python_repackage(
     name = "typedb-protocol-pkg",
     src = ":typedb-protocol-src",
-    src_packages = ["common", "core", "cluster"],
+    src_packages = ["common", "cluster"],
     py_package_add_prefix = "typedb_protocol",
 )
 

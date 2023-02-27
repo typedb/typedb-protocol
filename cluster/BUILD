@@ -25,7 +25,9 @@ proto_library(
     deps = [
         ":server-proto",
         ":user-proto",
-        ":database-proto"
+        ":database-proto",
+        "//common:session-proto",
+        "//common:transaction-proto",
     ],
 )
 
