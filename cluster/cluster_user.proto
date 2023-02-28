@@ -41,17 +41,21 @@ message ClusterUserManager {
         message Res {}
     }
 
+    message Delete {
+        message Req {
+            string username = 1;
+        }
+        message Res {}
+    }
+
     message All {
         message Req {}
         message Res {
-            repeated string names = 1;
+            repeated User users = 1;
         }
     }
-}
 
-message ClusterUser {
-
-    message PasswordAdmin {
+    message PasswordSet {
         message Req {
             string username = 1;
             string password = 2;
@@ -59,7 +63,19 @@ message ClusterUser {
         message Res {}
     }
 
-    message Password {
+    message Get {
+        message Req {
+            string username = 1;
+        }
+        message Res {
+            User user = 1;
+        }
+    }
+}
+
+message ClusterUser {
+
+    message PasswordUpdate {
         message Req {
             string username = 1;
             string oldPassword = 2;
@@ -77,22 +93,10 @@ message ClusterUser {
             string token = 1;
         }
     }
+}
 
-    message ExpiryDays {
-        message Req {
-            string username = 1;
-        }
-
-        message Res {
-            int64 expiryDays = 1;
-        }
-    }
-
-    message Delete {
-        message Req {
-            string username = 1;
-        }
-        message Res {}
-    }
+message User {
+    string username = 1;
+    int64 passwordExpiryDays = 2;
 }
 

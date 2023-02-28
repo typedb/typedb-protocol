@@ -36,14 +36,14 @@ service TypeDBCluster {
     // User Manager API
     rpc users_contains (ClusterUserManager.Contains.Req) returns (ClusterUserManager.Contains.Res);
     rpc users_create (ClusterUserManager.Create.Req) returns (ClusterUserManager.Create.Res);
+    rpc users_delete (ClusterUserManager.Delete.Req) returns (ClusterUserManager.Delete.Res);
     rpc users_all (ClusterUserManager.All.Req) returns (ClusterUserManager.All.Res);
+    rpc users_password_set (ClusterUserManager.PasswordSet.Req) returns (ClusterUserManager.PasswordSet.Res);
+    rpc users_get (ClusterUserManager.Get.Req) returns (ClusterUserManager.Get.Res);
 
     // User API
-    rpc user_password (ClusterUser.Password.Req) returns (ClusterUser.Password.Res);
-    rpc user_password_admin (ClusterUser.PasswordAdmin.Req) returns (ClusterUser.PasswordAdmin.Res);
-    rpc user_expiry_days (ClusterUser.ExpiryDays.Req) returns (ClusterUser.ExpiryDays.Res);
+    rpc user_password_update (ClusterUser.PasswordUpdate.Req) returns (ClusterUser.PasswordUpdate.Res);
     rpc user_token (ClusterUser.Token.Req) returns (ClusterUser.Token.Res);
-    rpc user_delete (ClusterUser.Delete.Req) returns (ClusterUser.Delete.Res);
 
     // Database Manager API
     rpc databases_get (ClusterDatabaseManager.Get.Req) returns (ClusterDatabaseManager.Get.Res);
