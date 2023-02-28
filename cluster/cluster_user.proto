@@ -97,6 +97,8 @@ message ClusterUser {
 
 message User {
     string username = 1;
-    int64 passwordExpiryDays = 2;
+    oneof password_expiry_opt {
+        int64 passwordExpiryDays = 2;
+    }
 }
 
