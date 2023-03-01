@@ -78,8 +78,8 @@ message ClusterUser {
     message PasswordUpdate {
         message Req {
             string username = 1;
-            string oldPassword = 2;
-            string newPassword = 3;
+            string password_old = 2;
+            string password_new = 3;
         }
         message Res {}
     }
@@ -97,8 +97,8 @@ message ClusterUser {
 
 message User {
     string username = 1;
-    oneof password_expiry_opt {
-        int64 passwordExpiryDays = 2;
+    oneof password_expiry {
+        int64 password_expiry_days = 2;
     }
 }
 
