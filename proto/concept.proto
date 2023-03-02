@@ -321,29 +321,32 @@ message Type {
             RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 200;
             RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 201;
             RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 202;
-            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 204;
+            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 203;
 
             // ThingType method requests
             ThingType.GetInstances.Req thing_type_get_instances_req = 300;
             ThingType.SetAbstract.Req thing_type_set_abstract_req = 301;
             ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 302;
             ThingType.GetOwns.Req thing_type_get_owns_req = 303;
-            ThingType.SetOwns.Req thing_type_set_owns_req = 304;
-            ThingType.UnsetOwns.Req thing_type_unset_owns_req = 305;
-            ThingType.GetPlays.Req thing_type_get_plays_req = 306;
-            ThingType.SetPlays.Req thing_type_set_plays_req = 307;
-            ThingType.UnsetPlays.Req thing_type_unset_plays_req = 308;
-            ThingType.GetSyntax.Req thing_type_get_syntax_req = 314; // TODO: reorder
+            ThingType.GetOwnsOverridden.Req thing_type_get_owns_overridden_req = 304;
+            ThingType.SetOwns.Req thing_type_set_owns_req = 305;
+            ThingType.UnsetOwns.Req thing_type_unset_owns_req = 306;
+            ThingType.GetPlays.Req thing_type_get_plays_req = 307;
+            ThingType.GetPlaysOverridden.Req thing_type_get_plays_overridden_req = 308;
+            ThingType.SetPlays.Req thing_type_set_plays_req = 309;
+            ThingType.UnsetPlays.Req thing_type_unset_plays_req = 310;
+            ThingType.GetSyntax.Req thing_type_get_syntax_req = 311;
 
             // EntityType method requests
             EntityType.Create.Req entity_type_create_req = 400;
 
             // RelationType method requests
             RelationType.Create.Req relation_type_create_req = 500;
-            RelationType.GetRelates.Req relation_type_get_relates_req = 502; // TODO: reorder
-            RelationType.GetRelatesForRoleLabel.Req relation_type_get_relates_for_role_label_req = 501;  // TODO: reorder
-            RelationType.SetRelates.Req relation_type_set_relates_req = 503;
-            RelationType.UnsetRelates.Req relation_type_unset_relates_req = 504;
+            RelationType.GetRelates.Req relation_type_get_relates_req = 501;
+            RelationType.GetRelatesForRoleLabel.Req relation_type_get_relates_for_role_label_req = 502;
+            RelationType.GetRelatesOverridden.Req relation_type_get_relates_overridden_req = 503;
+            RelationType.SetRelates.Req relation_type_set_relates_req = 504;
+            RelationType.UnsetRelates.Req relation_type_unset_relates_req = 505;
 
             // AttributeType method requests
             AttributeType.Put.Req attribute_type_put_req = 600;
@@ -358,17 +361,19 @@ message Type {
             // Type method responses
             Type.Delete.Res type_delete_res = 100;
             Type.SetLabel.Res type_set_label_res = 101;
-            Type.GetSupertype.Res type_get_supertype_res = 103;
-            Type.SetSupertype.Res type_set_supertype_res = 104;
+            Type.GetSupertype.Res type_get_supertype_res = 102;
+            Type.SetSupertype.Res type_set_supertype_res = 103;
 
             // ThingType method responses
             ThingType.SetAbstract.Res thing_type_set_abstract_res = 300;
             ThingType.UnsetAbstract.Res thing_type_unset_abstract_res = 301;
-            ThingType.SetOwns.Res thing_type_set_owns_res = 302;
-            ThingType.UnsetOwns.Res thing_type_unset_owns_res = 303;
-            ThingType.SetPlays.Res thing_type_set_plays_res = 304;
-            ThingType.UnsetPlays.Res thing_type_unset_plays_res = 305;
-            ThingType.GetSyntax.Res thing_type_get_syntax_res = 308; // TODO: reorder
+            ThingType.GetOwnsOverridden.Res thing_type_get_owns_overridden_res = 302;
+            ThingType.SetOwns.Res thing_type_set_owns_res = 303;
+            ThingType.UnsetOwns.Res thing_type_unset_owns_res = 304;
+            ThingType.GetPlaysOverridden.Res thing_type_get_plays_overridden_res = 305;
+            ThingType.SetPlays.Res thing_type_set_plays_res = 306;
+            ThingType.UnsetPlays.Res thing_type_unset_plays_res = 307;
+            ThingType.GetSyntax.Res thing_type_get_syntax_res = 308;
 
             // EntityType method responses
             EntityType.Create.Res entity_type_create_res = 400;
@@ -376,8 +381,9 @@ message Type {
             // RelationType method responses
             RelationType.Create.Res relation_type_create_res = 500;
             RelationType.GetRelatesForRoleLabel.Res relation_type_get_relates_for_role_label_res = 501;
-            RelationType.SetRelates.Res relation_type_set_relates_res = 502;
-            RelationType.UnsetRelates.Res relation_type_unset_relates_res = 503;
+            RelationType.GetRelatesOverridden.Res relation_type_get_relates_overridden_res = 502;
+            RelationType.SetRelates.Res relation_type_set_relates_res = 503;
+            RelationType.UnsetRelates.Res relation_type_unset_relates_res = 504;
 
             // AttributeType method responses
             AttributeType.Put.Res attribute_type_put_res = 600;
@@ -540,10 +546,18 @@ message ThingType {
             optional AttributeType.ValueType filter = 1;
             bool explicit_only = 2;
             repeated Type.Annotation annotations = 3;
-            optional Type overridden = 4;
         }
         message ResPart {
             repeated Type attribute_types = 1;
+        }
+    }
+
+    message GetOwnsOverridden {
+        message Req {
+            Type attribute_type = 1;
+        }
+        message Res {
+            optional Type attribute_type = 1;
         }
     }
 
@@ -566,10 +580,18 @@ message ThingType {
     message GetPlays {
         message Req {
             optional bool explicit_only = 1;
-            optional Type overridden_role_type = 2;
         }
         message ResPart {
             repeated Type role_types = 1;
+        }
+    }
+
+    message GetPlaysOverridden {
+        message Req {
+            Type role_type = 2;
+        }
+        message Res {
+            optional Type role_type = 1;
         }
     }
 
@@ -622,7 +644,6 @@ message RelationType {
     message GetRelates {
         message Req {
             bool explicit_only = 1;
-            optional Type overridden = 2;
         }
         message ResPart {
             repeated Type role_types = 1;
@@ -630,6 +651,15 @@ message RelationType {
     }
 
     message GetRelatesForRoleLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            optional Type role_type = 1;
+        }
+    }
+
+    message GetRelatesOverridden {
         message Req {
             string label = 1;
         }
