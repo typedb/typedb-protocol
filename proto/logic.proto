@@ -51,9 +51,7 @@ message LogicManager {
             string label = 1;
         }
         message Res {
-            oneof res {
-                Rule rule = 1;
-            }
+            optional Rule rule = 1;
         }
     }
 

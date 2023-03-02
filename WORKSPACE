@@ -56,16 +56,14 @@ load("@crates//:defs.bzl", "crate_repositories")
 crate_repositories()
 
 # Load //tool/common
-load("@vaticle_dependencies//tool/common:deps.bzl", "vaticle_dependencies_ci_pip",
-vaticle_dependencies_tool_maven_artifacts = "maven_artifacts")
+load("@vaticle_dependencies//tool/common:deps.bzl", "vaticle_dependencies_ci_pip", vaticle_dependencies_tool_maven_artifacts = "maven_artifacts")
 vaticle_dependencies_ci_pip()
 
 # Load //builder/grpc
 load("@vaticle_dependencies//builder/grpc:deps.bzl", grpc_deps = "deps")
 grpc_deps()
 
-load("@com_github_grpc_grpc//bazel:grpc_deps.bzl",
-com_github_grpc_grpc_deps = "grpc_deps")
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", com_github_grpc_grpc_deps = "grpc_deps")
 com_github_grpc_grpc_deps()
 
 load("@stackb_rules_proto//java:deps.bzl", "java_grpc_compile")
@@ -110,3 +108,12 @@ load("@vaticle_bazel_distribution//maven:deps.bzl", vaticle_bazel_distribution_m
 load("@vaticle_dependencies//library/maven:rules.bzl", "maven")
 load("//dependencies/maven:artifacts.bzl", "artifacts")
 maven(artifacts + vaticle_dependencies_tool_maven_artifacts + vaticle_bazel_distribution_maven_artifacts)
+
+##################################################
+# Create @vaticle_typedb_protocol_workspace_refs #
+##################################################
+
+load("@vaticle_bazel_distribution//common:rules.bzl", "workspace_refs")
+workspace_refs(
+    name = "vaticle_typedb_protocol_workspace_refs"
+)

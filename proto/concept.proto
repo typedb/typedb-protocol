@@ -51,9 +51,7 @@ message ConceptManager {
             string label = 1;
         }
         message Res {
-            oneof res {
-                Type thing_type = 1;
-            }
+            optional Type thing_type = 1;
         }
     }
 
@@ -62,9 +60,7 @@ message ConceptManager {
             bytes iid = 1;
         }
         message Res {
-            oneof res {
-                Thing thing = 1;
-            }
+            optional Thing thing = 1;
         }
     }
 
@@ -293,9 +289,7 @@ message Attribute {
 
     message GetOwners {
         message Req {
-            oneof filter {
-                Type thing_type = 1;
-            }
+            optional Type filter = 1;
         }
         message ResPart {
             repeated Thing things = 1;
@@ -451,9 +445,7 @@ message Type {
     message GetSupertype {
         message Req {}
         message Res {
-            oneof res {
-                Type type = 1;
-            }
+            optional Type type = 1;
         }
     }
 
@@ -545,14 +537,10 @@ message ThingType {
 
     message GetOwns {
         message Req {
-            oneof filter {
-                AttributeType.ValueType value_type = 1;
-            }
+            optional AttributeType.ValueType filter = 1;
             bool explicit_only = 2;
             repeated Type.Annotation annotations = 3;
-            oneof overridden {
-                Type attribute_type = 4;
-            }
+            optional Type overridden = 4;
         }
         message ResPart {
             repeated Type attribute_types = 1;
@@ -562,9 +550,7 @@ message ThingType {
     message SetOwns {
         message Req {
             Type attribute_type = 1;
-            oneof overridden {
-                Type overridden_type = 2;
-            }
+            optional Type overridden_type = 2;
             repeated Type.Annotation annotations = 3;
         }
         message Res {}
@@ -579,10 +565,8 @@ message ThingType {
 
     message GetPlays {
         message Req {
-            bool explicit_only = 1;
-            oneof overridden {
-                Type role_type = 2;
-            }
+            optional bool explicit_only = 1;
+            optional Type overridden_role_type = 2;
         }
         message ResPart {
             repeated Type role_types = 1;
@@ -592,9 +576,7 @@ message ThingType {
     message SetPlays {
         message Req {
             Type role_type = 1;
-            oneof overridden {
-                Type overridden_type = 2;
-            }
+            optional Type overridden_role_type = 2;
         }
         message Res {}
     }
@@ -640,9 +622,7 @@ message RelationType {
     message GetRelates {
         message Req {
             bool explicit_only = 1;
-            oneof overridden {
-                Type role_type = 2;
-            }
+            optional Type overridden = 2;
         }
         message ResPart {
             repeated Type role_types = 1;
@@ -654,18 +634,14 @@ message RelationType {
             string label = 1;
         }
         message Res {
-            oneof role {
-                Type role_type = 1;
-            }
+            optional Type role_type = 1;
         }
     }
 
     message SetRelates {
         message Req {
             string label = 1;
-            oneof overridden {
-                string overridden_label = 2;
-            }
+            optional string overridden_label = 2;
         }
         message Res {}
     }
@@ -705,9 +681,7 @@ message AttributeType {
             Attribute.Value value = 1;
         }
         message Res {
-            oneof res {
-                Thing attribute = 1;
-            }
+            optional Thing attribute = 1;
         }
     }
 
@@ -737,9 +711,7 @@ message AttributeType {
 
     message GetSubtypes {
         message Req {
-            oneof req {
-                ValueType value_type = 1;
-            }
+            optional ValueType value_type = 1;
         }
         message ResPart {
             repeated Type attribute_types = 1;
@@ -748,9 +720,7 @@ message AttributeType {
 
     message GetInstances {
         message Req {
-            oneof req {
-                ValueType value_type = 1;
-            }
+            optional ValueType value_type = 1;
         }
         message ResPart {
             repeated Thing attributes = 1;
