@@ -88,6 +88,7 @@ assemble_pip(
     keywords = ["typedb", "typeql", "type-system", "strongly-typed", "database", "knowledge-base"],
     description = "TypeDB Protocol",
     long_description_file = "//:README.md",
+    python_requires = ">3.6.0",
 )
 
 deploy_pip(
