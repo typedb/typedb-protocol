@@ -548,6 +548,7 @@ message RoleType {
     string label = 1;
     string scope = 2;
     bool is_root = 3;
+    bool is_abstract = 4;
 
     message GetSupertype {
         message Req {}
