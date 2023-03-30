@@ -190,7 +190,7 @@ message Thing {
             Thing.GetRelations.Req thing_get_relations_req = 104;
             Thing.GetPlaying.Req thing_get_playing_req = 105;
 
-            Entity.GetType.Req thing_get_type_req = 200;
+            Entity.GetType.Req entity_get_type_req = 200;
 
             Relation.GetType.Req relation_get_type_req = 300;
             Relation.AddPlayer.Req relation_add_player_req = 301;
@@ -210,7 +210,7 @@ message Thing {
             Thing.SetHas.Res thing_set_has_res = 102;
             Thing.UnsetHas.Res thing_unset_has_res = 103;
 
-            Entity.GetType.Req thing_get_type_req = 200;
+            Entity.GetType.Req entity_get_type_req = 200;
 
             Relation.GetType.Req relation_get_type_req = 300;
             Relation.AddPlayer.Res relation_add_player_res = 301;
