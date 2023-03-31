@@ -402,13 +402,12 @@ message Type {
             Type.SetLabel.Req type_set_label_req = 101;
 
             RoleType.GetSupertype.Req role_type_get_supertype_req = 200;
-            RoleType.SetSupertype.Req role_type_set_supertype_req = 201;
-            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 202;
-            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 203;
-            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 204;
-            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 205;
-            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 206;
-            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 207;
+            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 201;
+            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 202;
+            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 203;
+            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 204;
+            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 205;
+            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 206;
 
             ThingType.SetAbstract.Req thing_type_set_abstract_req = 300;
             ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 301;
@@ -460,7 +459,6 @@ message Type {
             Type.SetLabel.Res type_set_label_res = 101;
 
             RoleType.GetSupertype.Res role_type_get_supertype_res = 200;
-            RoleType.SetSupertype.Res role_type_set_supertype_res = 201;
 
             ThingType.SetAbstract.Res thing_type_set_abstract_res = 300;
             ThingType.UnsetAbstract.Res thing_type_unset_abstract_res = 301;
@@ -495,12 +493,12 @@ message Type {
 
     message ResPart {
         oneof res {
-            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res = 202;
-            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res = 203;
-            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res = 204;
-            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res = 205;
-            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res = 206;
-            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res = 207;
+            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res = 201;
+            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res = 202;
+            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res = 203;
+            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res = 204;
+            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res = 205;
+            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res = 206;
 
             ThingType.GetOwns.ResPart thing_type_get_owns_res = 302;
             ThingType.GetPlays.ResPart thing_type_get_plays_res = 306;
@@ -555,13 +553,6 @@ message RoleType {
         message Res {
             RoleType role_type = 1;
         }
-    }
-
-    message SetSupertype {
-        message Req {
-            RoleType role_type = 1;
-        }
-        message Res {}
     }
 
     message GetSupertypes {
