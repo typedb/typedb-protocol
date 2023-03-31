@@ -210,13 +210,13 @@ message Thing {
             Thing.SetHas.Res thing_set_has_res = 102;
             Thing.UnsetHas.Res thing_unset_has_res = 103;
 
-            Entity.GetType.Req entity_get_type_req = 200;
+            Entity.GetType.Res entity_get_type_res = 200;
 
-            Relation.GetType.Req relation_get_type_req = 300;
+            Relation.GetType.Res relation_get_type_res = 300;
             Relation.AddPlayer.Res relation_add_player_res = 301;
             Relation.RemovePlayer.Res relation_remove_player_res = 302;
 
-            Attribute.GetType.Req attribute_get_type_req = 400;
+            Attribute.GetType.Res attribute_get_type_res = 400;
         }
     }
 
