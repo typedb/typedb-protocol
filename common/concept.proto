@@ -206,9 +206,9 @@ message Thing {
 
     message GetHas {
         message Req {
-            // Only one filter can be set at a time (attribute_types or keys_only). repeated can't be used in a oneof
+            // Only one filter can be set at a time (attribute_types or annotations). repeated can't be used in a oneof
             repeated Type attribute_types = 1;
-            bool keys_only = 2;
+            repeated Annotation annotations = 2;
         }
         message ResPart {
             repeated Thing attributes = 1;
@@ -797,7 +797,7 @@ message AttributeType {
 
     message GetOwners {
         message Req {
-            bool only_key = 1;
+            repeated Annotation annotations = 1;
         }
         message ResPart {
             repeated Type thing_types = 1;
@@ -806,7 +806,7 @@ message AttributeType {
 
     message GetOwnersExplicit {
         message Req {
-            bool only_key = 1;
+            repeated Annotation annotations = 1;
         }
         message ResPart {
             repeated Type thing_types = 1;
@@ -850,3 +850,10 @@ message AttributeType {
     }
 }
 
+
+message Annotation {
+    oneof annotation {
+        bool key = 1;
+        bool unique = 2;
+    }
+}
