@@ -623,7 +623,7 @@ message ThingType {
             oneof overridden {
                 Type overridden_type = 2;
             }
-            bool is_key = 3;
+            repeated Annotation annotations = 3;
         }
         message Res {}
     }
