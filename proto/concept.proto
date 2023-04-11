@@ -395,127 +395,65 @@ message Attribute {
 
 message Type {
     message Req {
-        string label = 1;
-        optional string scope = 2;
         oneof req {
-            Type.Delete.Req type_delete_req = 100;
-            Type.SetLabel.Req type_set_label_req = 101;
-
-            RoleType.GetSupertype.Req role_type_get_supertype_req = 200;
-            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 201;
-            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 202;
-            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 203;
-            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 204;
-            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 205;
-            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 206;
-
-            ThingType.SetAbstract.Req thing_type_set_abstract_req = 300;
-            ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 301;
-            ThingType.GetOwns.Req thing_type_get_owns_req = 302;
-            ThingType.GetOwnsOverridden.Req thing_type_get_owns_overridden_req = 303;
-            ThingType.SetOwns.Req thing_type_set_owns_req = 304;
-            ThingType.UnsetOwns.Req thing_type_unset_owns_req = 305;
-            ThingType.GetPlays.Req thing_type_get_plays_req = 306;
-            ThingType.GetPlaysOverridden.Req thing_type_get_plays_overridden_req = 307;
-            ThingType.SetPlays.Req thing_type_set_plays_req = 308;
-            ThingType.UnsetPlays.Req thing_type_unset_plays_req = 309;
-            ThingType.GetSyntax.Req thing_type_get_syntax_req = 310;
-
-            EntityType.Create.Req entity_type_create_req = 400;
-            EntityType.GetSupertype.Req entity_type_get_supertype_req = 401;
-            EntityType.SetSupertype.Req entity_type_set_supertype_req = 402;
-            EntityType.GetSupertypes.Req entity_type_get_supertypes_req = 403;
-            EntityType.GetSubtypes.Req entity_type_get_subtypes_req = 404;
-            EntityType.GetInstances.Req entity_type_get_instances_req = 405;
-
-            RelationType.Create.Req relation_type_create_req = 500;
-            RelationType.GetSupertype.Req relation_type_get_supertype_req = 501;
-            RelationType.SetSupertype.Req relation_type_set_supertype_req = 502;
-            RelationType.GetSupertypes.Req relation_type_get_supertypes_req = 503;
-            RelationType.GetSubtypes.Req relation_type_get_subtypes_req = 504;
-            RelationType.GetInstances.Req relation_type_get_instances_req = 505;
-            RelationType.GetRelates.Req relation_type_get_relates_req = 506;
-            RelationType.GetRelatesForRoleLabel.Req relation_type_get_relates_for_role_label_req = 507;
-            RelationType.GetRelatesOverridden.Req relation_type_get_relates_overridden_req = 508;
-            RelationType.SetRelates.Req relation_type_set_relates_req = 509;
-            RelationType.UnsetRelates.Req relation_type_unset_relates_req = 510;
-
-            AttributeType.Put.Req attribute_type_put_req = 600;
-            AttributeType.Get.Req attribute_type_get_req = 601;
-            AttributeType.GetSupertype.Req attribute_type_get_supertype_req = 602;
-            AttributeType.SetSupertype.Req attribute_type_set_supertype_req = 603;
-            AttributeType.GetSupertypes.Req attribute_type_get_supertypes_req = 604;
-            AttributeType.GetSubtypes.Req attribute_type_get_subtypes_req = 605;
-            AttributeType.GetInstances.Req attribute_type_get_instances_req = 606;
-            AttributeType.GetRegex.Req attribute_type_get_regex_req = 607;
-            AttributeType.SetRegex.Req attribute_type_set_regex_req = 608;
-            AttributeType.GetOwners.Req attribute_type_get_owners_req = 609;
+            RoleType.Req role_type_req = 1;
+            ThingType.Req thing_type_req = 2;
         }
     }
 
     message Res {
         oneof res {
-            Type.Delete.Res type_delete_res = 100;
-            Type.SetLabel.Res type_set_label_res = 101;
-
-            RoleType.GetSupertype.Res role_type_get_supertype_res = 200;
-
-            ThingType.SetAbstract.Res thing_type_set_abstract_res = 300;
-            ThingType.UnsetAbstract.Res thing_type_unset_abstract_res = 301;
-            ThingType.GetOwnsOverridden.Res thing_type_get_owns_overridden_res = 303;
-            ThingType.SetOwns.Res thing_type_set_owns_res = 304;
-            ThingType.UnsetOwns.Res thing_type_unset_owns_res = 305;
-            ThingType.GetPlaysOverridden.Res thing_type_get_plays_overridden_res = 307;
-            ThingType.SetPlays.Res thing_type_set_plays_res = 308;
-            ThingType.UnsetPlays.Res thing_type_unset_plays_res = 309;
-            ThingType.GetSyntax.Res thing_type_get_syntax_res = 310;
-
-            EntityType.Create.Res entity_type_create_res = 400;
-            EntityType.GetSupertype.Res entity_type_get_supertype_res = 401;
-            EntityType.SetSupertype.Res entity_type_set_supertype_res = 402;
-
-            RelationType.Create.Res relation_type_create_res = 500;
-            RelationType.GetSupertype.Res relation_type_get_supertype_res = 501;
-            RelationType.SetSupertype.Res relation_type_set_supertype_res = 502;
-            RelationType.GetRelatesForRoleLabel.Res relation_type_get_relates_for_role_label_res = 507;
-            RelationType.GetRelatesOverridden.Res relation_type_get_relates_overridden_res = 508;
-            RelationType.SetRelates.Res relation_type_set_relates_res = 509;
-            RelationType.UnsetRelates.Res relation_type_unset_relates_res = 510;
-
-            AttributeType.Put.Res attribute_type_put_res = 600;
-            AttributeType.Get.Res attribute_type_get_res = 601;
-            AttributeType.GetSupertype.Res attribute_type_get_supertype_res = 602;
-            AttributeType.SetSupertype.Res attribute_type_set_supertype_res = 603;
-            AttributeType.GetRegex.Res attribute_type_get_regex_res = 607;
-            AttributeType.SetRegex.Res attribute_type_set_regex_res = 608;
+            RoleType.Res role_type_res = 1;
+            ThingType.Res thing_type_res = 2;
         }
     }
 
     message ResPart {
         oneof res {
-            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res = 201;
-            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res = 202;
-            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res = 203;
-            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res = 204;
-            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res = 205;
-            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res = 206;
+            RoleType.ResPart role_type_res = 1;
+            ThingType.ResPart thing_type_res = 2;
+        }
+    }
+}
 
-            ThingType.GetOwns.ResPart thing_type_get_owns_res = 302;
-            ThingType.GetPlays.ResPart thing_type_get_plays_res = 306;
+message RoleType {
+    string label = 1;
+    string scope = 2;
+    bool is_root = 3;
+    bool is_abstract = 4;
 
-            EntityType.GetSupertypes.ResPart entity_type_get_supertypes_res = 403;
-            EntityType.GetSubtypes.ResPart entity_type_get_subtypes_res = 404;
-            EntityType.GetInstances.ResPart entity_type_get_instances_res = 405;
+    message Req {
+        string label = 1;
+        string scope = 2;
+        oneof req {
+            RoleType.Delete.Req role_type_delete_req = 101;
+            RoleType.SetLabel.Req role_type_set_label_req = 102;
+            RoleType.GetSupertype.Req role_type_get_supertype_req = 103;
+            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 104;
+            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 105;
+            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 106;
+            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 107;
+            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 108;
+            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 109;
+        }
+    }
 
-            RelationType.GetSupertypes.ResPart relation_type_get_supertypes_res = 503;
-            RelationType.GetSubtypes.ResPart relation_type_get_subtypes_res = 504;
-            RelationType.GetInstances.ResPart relation_type_get_instances_res = 505;
-            RelationType.GetRelates.ResPart relation_type_get_relates_res = 506;
+    message Res {
+        oneof res {
+            RoleType.Delete.Res type_delete_res = 100;
+            RoleType.SetLabel.Res type_set_label_res = 101;
+            RoleType.GetSupertype.Res role_type_get_supertype_res = 102;
+        }
+    }
 
-            AttributeType.GetSupertypes.ResPart attribute_type_get_supertypes_res = 604;
-            AttributeType.GetSubtypes.ResPart attribute_type_get_subtypes_res = 605;
-            AttributeType.GetInstances.ResPart attribute_type_get_instances_res = 606;
-            AttributeType.GetOwners.ResPart attribute_type_get_owners_res = 609;
+    message ResPart {
+        oneof res {
+            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res = 103;
+            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res = 104;
+            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res = 105;
+            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res = 106;
+            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res = 107;
+            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res = 108;
         }
     }
 
@@ -540,13 +478,6 @@ message Type {
         }
         message Res {}
     }
-}
-
-message RoleType {
-    string label = 1;
-    string scope = 2;
-    bool is_root = 3;
-    bool is_abstract = 4;
 
     message GetSupertype {
         message Req {}
@@ -609,6 +540,123 @@ message ThingType {
         EntityType entity_type = 1;
         RelationType relation_type = 2;
         AttributeType attribute_type = 3;
+    }
+
+    message Req {
+        string label = 1;
+        oneof req {
+            ThingType.Delete.Req thing_type_delete_req = 100;
+            ThingType.SetLabel.Req thing_type_set_label_req = 101;
+            ThingType.SetAbstract.Req thing_type_set_abstract_req = 102;
+            ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 103;
+            ThingType.GetOwns.Req thing_type_get_owns_req = 104;
+            ThingType.GetOwnsOverridden.Req thing_type_get_owns_overridden_req = 105;
+            ThingType.SetOwns.Req thing_type_set_owns_req = 106;
+            ThingType.UnsetOwns.Req thing_type_unset_owns_req = 107;
+            ThingType.GetPlays.Req thing_type_get_plays_req = 108;
+            ThingType.GetPlaysOverridden.Req thing_type_get_plays_overridden_req = 109;
+            ThingType.SetPlays.Req thing_type_set_plays_req = 110;
+            ThingType.UnsetPlays.Req thing_type_unset_plays_req = 111;
+            ThingType.GetSyntax.Req thing_type_get_syntax_req = 112;
+
+            EntityType.Create.Req entity_type_create_req = 200;
+            EntityType.GetSupertype.Req entity_type_get_supertype_req = 201;
+            EntityType.SetSupertype.Req entity_type_set_supertype_req = 202;
+            EntityType.GetSupertypes.Req entity_type_get_supertypes_req = 203;
+            EntityType.GetSubtypes.Req entity_type_get_subtypes_req = 204;
+            EntityType.GetInstances.Req entity_type_get_instances_req = 205;
+
+            RelationType.Create.Req relation_type_create_req = 300;
+            RelationType.GetSupertype.Req relation_type_get_supertype_req = 301;
+            RelationType.SetSupertype.Req relation_type_set_supertype_req = 302;
+            RelationType.GetSupertypes.Req relation_type_get_supertypes_req = 303;
+            RelationType.GetSubtypes.Req relation_type_get_subtypes_req = 304;
+            RelationType.GetInstances.Req relation_type_get_instances_req = 305;
+            RelationType.GetRelates.Req relation_type_get_relates_req = 306;
+            RelationType.GetRelatesForRoleLabel.Req relation_type_get_relates_for_role_label_req = 307;
+            RelationType.GetRelatesOverridden.Req relation_type_get_relates_overridden_req = 308;
+            RelationType.SetRelates.Req relation_type_set_relates_req = 309;
+            RelationType.UnsetRelates.Req relation_type_unset_relates_req = 310;
+
+            AttributeType.Put.Req attribute_type_put_req = 400;
+            AttributeType.Get.Req attribute_type_get_req = 401;
+            AttributeType.GetSupertype.Req attribute_type_get_supertype_req = 402;
+            AttributeType.SetSupertype.Req attribute_type_set_supertype_req = 403;
+            AttributeType.GetSupertypes.Req attribute_type_get_supertypes_req = 404;
+            AttributeType.GetSubtypes.Req attribute_type_get_subtypes_req = 405;
+            AttributeType.GetInstances.Req attribute_type_get_instances_req = 406;
+            AttributeType.GetRegex.Req attribute_type_get_regex_req = 407;
+            AttributeType.SetRegex.Req attribute_type_set_regex_req = 408;
+            AttributeType.GetOwners.Req attribute_type_get_owners_req = 409;
+        }
+    }
+
+    message Res {
+        oneof res {
+            ThingType.Delete.Res type_delete_res = 100;
+            ThingType.SetLabel.Res type_set_label_res = 101;
+            ThingType.SetAbstract.Res thing_type_set_abstract_res = 102;
+            ThingType.UnsetAbstract.Res thing_type_unset_abstract_res = 103;
+            ThingType.GetOwnsOverridden.Res thing_type_get_owns_overridden_res = 105;
+            ThingType.SetOwns.Res thing_type_set_owns_res = 106;
+            ThingType.UnsetOwns.Res thing_type_unset_owns_res = 107;
+            ThingType.GetPlaysOverridden.Res thing_type_get_plays_overridden_res = 109;
+            ThingType.SetPlays.Res thing_type_set_plays_res = 110;
+            ThingType.UnsetPlays.Res thing_type_unset_plays_res = 111;
+            ThingType.GetSyntax.Res thing_type_get_syntax_res = 112;
+
+            EntityType.Create.Res entity_type_create_res = 200;
+            EntityType.GetSupertype.Res entity_type_get_supertype_res = 201;
+            EntityType.SetSupertype.Res entity_type_set_supertype_res = 202;
+
+            RelationType.Create.Res relation_type_create_res = 300;
+            RelationType.GetSupertype.Res relation_type_get_supertype_res = 301;
+            RelationType.SetSupertype.Res relation_type_set_supertype_res = 302;
+            RelationType.GetRelatesForRoleLabel.Res relation_type_get_relates_for_role_label_res = 307;
+            RelationType.GetRelatesOverridden.Res relation_type_get_relates_overridden_res = 308;
+            RelationType.SetRelates.Res relation_type_set_relates_res = 309;
+            RelationType.UnsetRelates.Res relation_type_unset_relates_res = 310;
+
+            AttributeType.Put.Res attribute_type_put_res = 400;
+            AttributeType.Get.Res attribute_type_get_res = 401;
+            AttributeType.GetSupertype.Res attribute_type_get_supertype_res = 402;
+            AttributeType.SetSupertype.Res attribute_type_set_supertype_res = 403;
+            AttributeType.GetRegex.Res attribute_type_get_regex_res = 407;
+            AttributeType.SetRegex.Res attribute_type_set_regex_res = 408;
+        }
+    }
+
+    message ResPart {
+        oneof res {
+            ThingType.GetOwns.ResPart thing_type_get_owns_res = 104;
+            ThingType.GetPlays.ResPart thing_type_get_plays_res = 108;
+
+            EntityType.GetSupertypes.ResPart entity_type_get_supertypes_res = 203;
+            EntityType.GetSubtypes.ResPart entity_type_get_subtypes_res = 204;
+            EntityType.GetInstances.ResPart entity_type_get_instances_res = 205;
+
+            RelationType.GetSupertypes.ResPart relation_type_get_supertypes_res = 303;
+            RelationType.GetSubtypes.ResPart relation_type_get_subtypes_res = 304;
+            RelationType.GetInstances.ResPart relation_type_get_instances_res = 305;
+            RelationType.GetRelates.ResPart relation_type_get_relates_res = 306;
+
+            AttributeType.GetSupertypes.ResPart attribute_type_get_supertypes_res = 404;
+            AttributeType.GetSubtypes.ResPart attribute_type_get_subtypes_res = 405;
+            AttributeType.GetInstances.ResPart attribute_type_get_instances_res = 406;
+            AttributeType.GetOwners.ResPart attribute_type_get_owners_res = 409;
+        }
+    }
+
+    message Delete {
+        message Req {}
+        message Res {}
+    }
+
+    message SetLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {}
     }
 
     message SetAbstract {
