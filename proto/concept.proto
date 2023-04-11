@@ -376,10 +376,10 @@ message Attribute {
         oneof value {
             string string = 1;
             bool boolean = 2;
-            int64 long = 3;
+            sint64 long = 3;
             double double = 4;
             // time since epoch in milliseconds
-            int64 date_time = 5;
+            sint64 date_time = 5;
         }
     }
 

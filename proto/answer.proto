@@ -51,7 +51,7 @@ message ConceptMapGroup {
 
 message Numeric {
     oneof value {
-        int64 long_value = 1;
+        sint64 long_value = 1;
         double double_value = 2;
         bool nan = 3;
     }
