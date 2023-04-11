@@ -450,6 +450,13 @@ message Type {
         ROLE_TYPE = 4;
     }
 
+    message Annotation {
+        oneof annotation {
+            bool key = 1;
+            bool unique = 2;
+        }
+    }
+
     message Delete {
         message Req {}
         message Res {}
@@ -623,7 +630,7 @@ message ThingType {
             oneof overridden {
                 Type overridden_type = 2;
             }
-            repeated Annotation annotations = 3;
+            repeated Type.Annotation annotations = 3;
         }
         message Res {}
     }
@@ -797,7 +804,7 @@ message AttributeType {
 
     message GetOwners {
         message Req {
-            repeated Annotation annotations = 1;
+            repeated Type.Annotation annotations = 1;
         }
         message ResPart {
             repeated Type thing_types = 1;
@@ -806,7 +813,7 @@ message AttributeType {
 
     message GetOwnersExplicit {
         message Req {
-            repeated Annotation annotations = 1;
+            repeated Type.Annotation annotations = 1;
         }
         message ResPart {
             repeated Type thing_types = 1;
@@ -847,13 +854,5 @@ message AttributeType {
         message ResPart {
             repeated Thing attributes = 1;
         }
-    }
-}
-
-
-message Annotation {
-    oneof annotation {
-        bool key = 1;
-        bool unique = 2;
     }
 }
