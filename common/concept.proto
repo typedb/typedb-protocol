@@ -208,7 +208,7 @@ message Thing {
         message Req {
             // Only one filter can be set at a time (attribute_types or annotations). repeated can't be used in a oneof
             repeated Type attribute_types = 1;
-            repeated Annotation annotations = 2;
+            repeated Type.Annotation annotations = 2;
         }
         message ResPart {
             repeated Thing attributes = 1;
