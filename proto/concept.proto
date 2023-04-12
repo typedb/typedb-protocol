@@ -161,16 +161,6 @@ message Concept {
         Relation relation = 6;
         Attribute attribute = 7;
     }
-
-    enum Transitivity {
-        TRANSITIVE = 0;
-        EXPLICIT = 1;
-    }
-
-    enum OwnsFilter {
-        ALL = 0;
-        KEYS_ONLY = 1;
-    }
 }
 
 message Thing {
@@ -414,6 +404,16 @@ message Type {
             ThingType.ResPart thing_type_res = 2;
         }
     }
+
+    enum Transitivity {
+        TRANSITIVE = 0;
+        EXPLICIT = 1;
+    }
+
+    enum OwnsFilter {
+        ALL = 0;
+        KEYS_ONLY = 1;
+    }
 }
 
 message RoleType {
@@ -509,7 +509,7 @@ message RoleType {
 
     message GetPlayerTypes {
         message Req {
-            Concept.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
         }
         message ResPart {
             repeated ThingType thing_types = 1;
@@ -518,7 +518,7 @@ message RoleType {
 
     message GetRelationInstances {
         message Req {
-            Concept.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
         }
         message ResPart {
             repeated Relation relations = 1;
@@ -527,7 +527,7 @@ message RoleType {
 
     message GetPlayerInstances {
         message Req {
-            Concept.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
         }
         message ResPart {
             repeated Thing things = 1;
@@ -672,7 +672,7 @@ message ThingType {
     message GetOwns {
         message Req {
             optional AttributeType.ValueType filter = 1;
-            Concept.Transitivity transitivity = 2;
+            Type.Transitivity transitivity = 2;
             repeated Type.Annotation annotations = 3;
         }
         message ResPart {
@@ -707,7 +707,7 @@ message ThingType {
 
     message GetPlays {
         message Req {
-            optional Concept.Transitivity transitivity = 1;
+            optional Type.Transitivity transitivity = 1;
         }
         message ResPart {
             repeated RoleType role_types = 1;
@@ -788,7 +788,7 @@ message EntityType {
 
     message GetInstances {
         message Req {
-            Concept.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
         }
         message ResPart {
             repeated Entity entities = 1;
@@ -838,7 +838,7 @@ message RelationType {
 
     message GetInstances {
         message Req {
-            Concept.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
         }
         message ResPart {
             repeated Relation entities = 1;
@@ -847,7 +847,7 @@ message RelationType {
 
     message GetRelates {
         message Req {
-            Concept.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
         }
         message ResPart {
             repeated RoleType role_types = 1;
@@ -953,7 +953,7 @@ message AttributeType {
 
     message GetInstances {
         message Req {
-            Concept.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
             optional ValueType value_type = 2;
         }
         message ResPart {
@@ -963,7 +963,7 @@ message AttributeType {
 
     message GetOwners {
         message Req {
-            Concept.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
             repeated Type.Annotation annotations = 2;
         }
         message ResPart {
