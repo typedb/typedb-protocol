@@ -400,8 +400,8 @@ message Type {
 
     message ResPart {
         oneof res {
-            RoleType.ResPart role_type_res = 1;
-            ThingType.ResPart thing_type_res = 2;
+            RoleType.ResPart role_type_res_part = 1;
+            ThingType.ResPart thing_type_res_part = 2;
         }
     }
 
@@ -440,20 +440,20 @@ message RoleType {
 
     message Res {
         oneof res {
-            RoleType.Delete.Res type_delete_res = 100;
-            RoleType.SetLabel.Res type_set_label_res = 101;
+            RoleType.Delete.Res role_type_delete_res = 100;
+            RoleType.SetLabel.Res role_type_set_label_res = 101;
             RoleType.GetSupertype.Res role_type_get_supertype_res = 102;
         }
     }
 
     message ResPart {
         oneof res {
-            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res = 103;
-            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res = 104;
-            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res = 105;
-            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res = 106;
-            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res = 107;
-            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res = 108;
+            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res_part = 103;
+            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res_part = 104;
+            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 105;
+            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res_part = 106;
+            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res_part = 107;
+            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 108;
         }
     }
 
@@ -489,14 +489,14 @@ message RoleType {
     message GetSupertypes {
         message Req {}
         message ResPart {
-            repeated RoleType role_type = 1;
+            repeated RoleType role_types = 1;
         }
     }
 
     message GetSubtypes {
         message Req {}
         message ResPart {
-            repeated RoleType role_type = 1;
+            repeated RoleType role_types = 1;
         }
     }
 
@@ -593,8 +593,8 @@ message ThingType {
 
     message Res {
         oneof res {
-            ThingType.Delete.Res type_delete_res = 100;
-            ThingType.SetLabel.Res type_set_label_res = 101;
+            ThingType.Delete.Res thing_type_delete_res = 100;
+            ThingType.SetLabel.Res thing_type_set_label_res = 101;
             ThingType.SetAbstract.Res thing_type_set_abstract_res = 102;
             ThingType.UnsetAbstract.Res thing_type_unset_abstract_res = 103;
             ThingType.GetOwnsOverridden.Res thing_type_get_owns_overridden_res = 105;
@@ -628,22 +628,22 @@ message ThingType {
 
     message ResPart {
         oneof res {
-            ThingType.GetOwns.ResPart thing_type_get_owns_res = 104;
-            ThingType.GetPlays.ResPart thing_type_get_plays_res = 108;
+            ThingType.GetOwns.ResPart thing_type_get_owns_res_part = 104;
+            ThingType.GetPlays.ResPart thing_type_get_plays_res_part = 108;
 
-            EntityType.GetSupertypes.ResPart entity_type_get_supertypes_res = 203;
-            EntityType.GetSubtypes.ResPart entity_type_get_subtypes_res = 204;
-            EntityType.GetInstances.ResPart entity_type_get_instances_res = 205;
+            EntityType.GetSupertypes.ResPart entity_type_get_supertypes_res_part = 203;
+            EntityType.GetSubtypes.ResPart entity_type_get_subtypes_res_part = 204;
+            EntityType.GetInstances.ResPart entity_type_get_instances_res_part = 205;
 
-            RelationType.GetSupertypes.ResPart relation_type_get_supertypes_res = 303;
-            RelationType.GetSubtypes.ResPart relation_type_get_subtypes_res = 304;
-            RelationType.GetInstances.ResPart relation_type_get_instances_res = 305;
-            RelationType.GetRelates.ResPart relation_type_get_relates_res = 306;
+            RelationType.GetSupertypes.ResPart relation_type_get_supertypes_res_part = 303;
+            RelationType.GetSubtypes.ResPart relation_type_get_subtypes_res_part = 304;
+            RelationType.GetInstances.ResPart relation_type_get_instances_res_part = 305;
+            RelationType.GetRelates.ResPart relation_type_get_relates_res_part = 306;
 
-            AttributeType.GetSupertypes.ResPart attribute_type_get_supertypes_res = 404;
-            AttributeType.GetSubtypes.ResPart attribute_type_get_subtypes_res = 405;
-            AttributeType.GetInstances.ResPart attribute_type_get_instances_res = 406;
-            AttributeType.GetOwners.ResPart attribute_type_get_owners_res = 409;
+            AttributeType.GetSupertypes.ResPart attribute_type_get_supertypes_res_part = 404;
+            AttributeType.GetSubtypes.ResPart attribute_type_get_subtypes_res_part = 405;
+            AttributeType.GetInstances.ResPart attribute_type_get_instances_res_part = 406;
+            AttributeType.GetOwners.ResPart attribute_type_get_owners_res_part = 409;
         }
     }
 
@@ -775,14 +775,14 @@ message EntityType {
     message GetSupertypes {
         message Req {}
         message ResPart {
-            repeated EntityType entity_type = 1;
+            repeated EntityType entity_types = 1;
         }
     }
 
     message GetSubtypes {
         message Req {}
         message ResPart {
-            repeated EntityType entity_type = 1;
+            repeated EntityType entity_types = 1;
         }
     }
 
@@ -825,14 +825,14 @@ message RelationType {
     message GetSupertypes {
         message Req {}
         message ResPart {
-            repeated RelationType relation_type = 1;
+            repeated RelationType relation_types = 1;
         }
     }
 
     message GetSubtypes {
         message Req {}
         message ResPart {
-            repeated RelationType relation_type = 1;
+            repeated RelationType relation_types = 1;
         }
     }
 
@@ -841,7 +841,7 @@ message RelationType {
             Type.Transitivity transitivity = 1;
         }
         message ResPart {
-            repeated Relation entities = 1;
+            repeated Relation relations = 1;
         }
     }
 
@@ -938,7 +938,7 @@ message AttributeType {
     message GetSupertypes {
         message Req {}
         message ResPart {
-            repeated AttributeType attribute_type = 1;
+            repeated AttributeType attribute_types = 1;
         }
     }
 
@@ -947,7 +947,7 @@ message AttributeType {
             optional ValueType value_type = 1;
         }
         message ResPart {
-            repeated AttributeType attribute_type = 1;
+            repeated AttributeType attribute_types = 1;
         }
     }
 
@@ -957,7 +957,7 @@ message AttributeType {
             optional ValueType value_type = 2;
         }
         message ResPart {
-            repeated Attribute entities = 1;
+            repeated Attribute attributes = 1;
         }
     }
 
