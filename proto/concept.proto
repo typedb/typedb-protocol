@@ -160,6 +160,8 @@ message Concept {
         Entity entity = 5;
         Relation relation = 6;
         Attribute attribute = 7;
+
+        ThingType.Root root_thing_type = 10;
     }
 }
 
@@ -540,7 +542,10 @@ message ThingType {
         EntityType entity_type = 1;
         RelationType relation_type = 2;
         AttributeType attribute_type = 3;
+        ThingType.Root root_thing_type = 10;
     }
+
+    message Root {}
 
     message Req {
         string label = 1;
