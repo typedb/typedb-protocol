@@ -29,12 +29,12 @@ message ConceptManager {
             GetEntityType.Req get_entity_type_req = 1;
             GetRelationType.Req get_relation_type_req = 2;
             GetAttributeType.Req get_attribute_type_req = 3;
-            GetEntity.Req get_entity_req = 4;
-            GetRelation.Req get_relation_req = 5;
-            GetAttribute.Req get_attribute_req = 6;
-            PutEntityType.Req put_entity_type_req = 7;
-            PutRelationType.Req put_relation_type_req = 8;
-            PutAttributeType.Req put_attribute_type_req = 9;
+            PutEntityType.Req put_entity_type_req = 4;
+            PutRelationType.Req put_relation_type_req = 5;
+            PutAttributeType.Req put_attribute_type_req = 6;
+            GetEntity.Req get_entity_req = 7;
+            GetRelation.Req get_relation_req = 8;
+            GetAttribute.Req get_attribute_req = 9;
             GetSchemaExceptions.Req get_schema_exceptions_req = 10;
         }
     }
@@ -44,12 +44,12 @@ message ConceptManager {
             GetEntityType.Res get_entity_type_res = 1;
             GetRelationType.Res get_relation_type_res = 2;
             GetAttributeType.Res get_attribute_type_res = 3;
-            GetEntity.Res get_entity_res = 4;
-            GetRelation.Res get_relation_res = 5;
-            GetAttribute.Res get_attribute_res = 6;
-            PutEntityType.Res put_entity_type_res = 7;
-            PutRelationType.Res put_relation_type_res = 8;
-            PutAttributeType.Res put_attribute_type_res = 9;
+            PutEntityType.Res put_entity_type_res = 4;
+            PutRelationType.Res put_relation_type_res = 5;
+            PutAttributeType.Res put_attribute_type_res = 6;
+            GetEntity.Res get_entity_res = 7;
+            GetRelation.Res get_relation_res = 8;
+            GetAttribute.Res get_attribute_res = 9;
             GetSchemaExceptions.Res get_schema_exceptions_res = 10;
         }
     }
