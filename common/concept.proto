@@ -594,7 +594,7 @@ message ThingType {
             oneof filter {
                 AttributeType.ValueType value_type = 1;
             }
-            bool keys_only = 3;
+            repeated Type.Annotation annotations = 2;
         }
         message ResPart {
             repeated Type attribute_types = 1;
@@ -606,7 +606,7 @@ message ThingType {
             oneof filter {
                 AttributeType.ValueType value_type = 1;
             }
-            bool keys_only = 3;
+            repeated Type.Annotation annotations = 2;
         }
         message ResPart {
             repeated Type attribute_types = 1;
