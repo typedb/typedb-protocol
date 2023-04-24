@@ -231,20 +231,6 @@ message Thing {
         message Res {}
     }
 
-    message SetHas {
-        message Req {
-            Attribute attribute = 1;
-        }
-        message Res {}
-    }
-
-    message UnsetHas {
-        message Req {
-            Attribute attribute = 1;
-        }
-        message Res {}
-    }
-
     message GetHas {
         message Req {
             oneof filter {
@@ -264,11 +250,18 @@ message Thing {
         }
     }
 
-    message GetPlaying {
-        message Req {}
-        message ResPart {
-            repeated RoleType role_types = 1;
+    message SetHas {
+        message Req {
+            Attribute attribute = 1;
         }
+        message Res {}
+    }
+
+    message UnsetHas {
+        message Req {
+            Attribute attribute = 1;
+        }
+        message Res {}
     }
 
     message GetRelations {
@@ -277,6 +270,13 @@ message Thing {
         }
         message ResPart {
             repeated Relation relations = 1;
+        }
+    }
+
+    message GetPlaying {
+        message Req {}
+        message ResPart {
+            repeated RoleType role_types = 1;
         }
     }
 }
@@ -721,7 +721,7 @@ message ThingType {
 
     message GetPlaysOverridden {
         message Req {
-            RoleType role_type = 2;
+            RoleType role_type = 1;
         }
         message Res {
             optional RoleType role_type = 1;
