@@ -496,7 +496,9 @@ message RoleType {
     }
 
     message GetSubtypes {
-        message Req {}
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
         message ResPart {
             repeated RoleType role_types = 1;
         }
@@ -785,7 +787,9 @@ message EntityType {
     }
 
     message GetSubtypes {
-        message Req {}
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
         message ResPart {
             repeated EntityType entity_types = 1;
         }
@@ -835,7 +839,9 @@ message RelationType {
     }
 
     message GetSubtypes {
-        message Req {}
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
         message ResPart {
             repeated RelationType relation_types = 1;
         }
@@ -949,7 +955,8 @@ message AttributeType {
 
     message GetSubtypes {
         message Req {
-            optional ValueType value_type = 1;
+            Type.Transitivity transitivity = 1;
+            optional ValueType value_type = 2;
         }
         message ResPart {
             repeated AttributeType attribute_types = 1;
