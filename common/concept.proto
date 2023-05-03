@@ -80,7 +80,7 @@ message ConceptManager {
     message PutAttributeType {
         message Req {
             string label = 1;
-            AttributeType.ValueType value_type = 2;
+            ValueType value_type = 2;
         }
         message Res {
             Type attribute_type = 1;
@@ -121,7 +121,7 @@ message Thing {
 
     bytes iid = 1;
     Type type = 2;
-    Attribute.Value value = 3;
+    ConceptValue value = 3;
     bool inferred = 4;
 
     message Req {
@@ -281,17 +281,6 @@ message Relation {
 
 message Attribute {
 
-    message Value {
-        oneof value {
-            string string = 1;
-            bool boolean = 2;
-            int64 long = 3;
-            double double = 4;
-            // time since epoch in milliseconds
-            int64 date_time = 5;
-        }
-    }
-
     message GetOwners {
         message Req {
             oneof filter {
@@ -304,11 +293,37 @@ message Attribute {
     }
 }
 
+message Value {
+
+    ValueType valueType = 1;
+    ConceptValue value = 2;
+}
+
+enum ValueType {
+    OBJECT = 0;
+    BOOLEAN = 1;
+    LONG = 2;
+    DOUBLE = 3;
+    STRING = 4;
+    DATETIME = 5;
+}
+
+message ConceptValue {
+    oneof value {
+        string string = 1;
+        bool boolean = 2;
+        int64 long = 3;
+        double double = 4;
+        // time since epoch in milliseconds
+        int64 date_time = 5;
+    }
+}
+
 message Type {
     string label = 1;
     string scope = 2;
     Encoding encoding = 3;
-    AttributeType.ValueType value_type = 4;
+    ValueType value_type = 4;
     bool is_root = 5;
     bool is_abstract = 6;
 
@@ -596,7 +611,7 @@ message ThingType {
     message GetOwns {
         message Req {
             oneof filter {
-                AttributeType.ValueType value_type = 1;
+                ValueType value_type = 1;
             }
             repeated Type.Annotation annotations = 2;
         }
@@ -608,7 +623,7 @@ message ThingType {
     message GetOwnsExplicit {
         message Req {
             oneof filter {
-                AttributeType.ValueType value_type = 1;
+                ValueType value_type = 1;
             }
             repeated Type.Annotation annotations = 2;
         }
@@ -777,18 +792,9 @@ message RelationType {
 
 message AttributeType {
 
-    enum ValueType {
-        OBJECT = 0;
-        BOOLEAN = 1;
-        LONG = 2;
-        DOUBLE = 3;
-        STRING = 4;
-        DATETIME = 5;
-    }
-
     message Put {
         message Req {
-            Attribute.Value value = 1;
+            ConceptValue value = 1;
         }
         message Res {
             Thing attribute = 1;
@@ -797,7 +803,7 @@ message AttributeType {
 
     message Get {
         message Req {
-            Attribute.Value value = 1;
+            ConceptValue value = 1;
         }
         message Res {
             oneof res {
@@ -857,32 +863,6 @@ message AttributeType {
         }
         message ResPart {
             repeated Thing attributes = 1;
-        }
-    }
-}
-
-message Value {
-
-    ValueType valueType = 1;
-    PrimitiveValue value = 2;
-
-    enum ValueType {
-        OBJECT = 0;
-        BOOLEAN = 1;
-        LONG = 2;
-        DOUBLE = 3;
-        STRING = 4;
-        DATETIME = 5;
-    }
-
-    message PrimitiveValue {
-        oneof value {
-            string string = 1;
-            bool boolean = 2;
-            int64 long = 3;
-            double double = 4;
-            // time since epoch in milliseconds
-            int64 date_time = 5;
         }
     }
 }
