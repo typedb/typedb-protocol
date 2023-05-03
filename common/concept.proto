@@ -206,9 +206,9 @@ message Thing {
 
     message GetHas {
         message Req {
-            // Only one filter can be set at a time (attribute_types or keys_only). repeated can't be used in a oneof
+            // Only one filter can be set at a time (attribute_types or annotations). repeated can't be used in a oneof
             repeated Type attribute_types = 1;
-            bool keys_only = 2;
+            repeated Type.Annotation annotations = 2;
         }
         message ResPart {
             repeated Thing attributes = 1;
@@ -450,6 +450,13 @@ message Type {
         ROLE_TYPE = 4;
     }
 
+    message Annotation {
+        oneof annotation {
+            bool key = 1;
+            bool unique = 2;
+        }
+    }
+
     message Delete {
         message Req {}
         message Res {}
@@ -587,7 +594,7 @@ message ThingType {
             oneof filter {
                 AttributeType.ValueType value_type = 1;
             }
-            bool keys_only = 3;
+            repeated Type.Annotation annotations = 2;
         }
         message ResPart {
             repeated Type attribute_types = 1;
@@ -599,7 +606,7 @@ message ThingType {
             oneof filter {
                 AttributeType.ValueType value_type = 1;
             }
-            bool keys_only = 3;
+            repeated Type.Annotation annotations = 2;
         }
         message ResPart {
             repeated Type attribute_types = 1;
@@ -623,7 +630,7 @@ message ThingType {
             oneof overridden {
                 Type overridden_type = 2;
             }
-            bool is_key = 3;
+            repeated Type.Annotation annotations = 3;
         }
         message Res {}
     }
@@ -797,7 +804,7 @@ message AttributeType {
 
     message GetOwners {
         message Req {
-            bool only_key = 1;
+            repeated Type.Annotation annotations = 1;
         }
         message ResPart {
             repeated Type thing_types = 1;
@@ -806,7 +813,7 @@ message AttributeType {
 
     message GetOwnersExplicit {
         message Req {
-            bool only_key = 1;
+            repeated Type.Annotation annotations = 1;
         }
         message ResPart {
             repeated Type thing_types = 1;
@@ -849,4 +856,3 @@ message AttributeType {
         }
     }
 }
-
