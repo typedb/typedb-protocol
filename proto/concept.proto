@@ -412,9 +412,14 @@ message Type {
         EXPLICIT = 1;
     }
 
-    enum OwnsFilter {
-        ALL = 0;
-        KEYS_ONLY = 1;
+    message Annotation {
+        oneof annotation {
+            Key key = 1;
+            Unique unique = 2;
+        }
+
+        message Key {}
+        message Unique {}
     }
 }
 
@@ -457,16 +462,6 @@ message RoleType {
             RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res_part = 107;
             RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 108;
         }
-    }
-
-    message Annotation {
-        oneof annotation {
-            Key key = 1;
-            Unique unique = 2;
-        }
-
-        message Key {}
-        message Unique {}
     }
 
     message Delete {
