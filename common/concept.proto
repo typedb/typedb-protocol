@@ -452,9 +452,12 @@ message Type {
 
     message Annotation {
         oneof annotation {
-            bool key = 1;
-            bool unique = 2;
+            Key key = 1;
+            Unique unique = 2;
         }
+
+        message Key {}
+        message Unique {}
     }
 
     message Delete {
