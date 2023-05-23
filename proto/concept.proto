@@ -530,7 +530,7 @@ message ThingType {
 
     message GetOwns {
         message Req {
-            optional AttributeType.ValueType filter = 1;
+            optional AttributeType.ValueType value_type = 1;
             Type.Transitivity transitivity = 2;
             repeated Type.Annotation annotations = 3;
         }
