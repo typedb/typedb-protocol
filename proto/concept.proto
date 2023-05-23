@@ -182,10 +182,10 @@ message Thing {
             Thing.GetRelations.Req thing_get_relations_req = 104;
             Thing.GetPlaying.Req thing_get_playing_req = 105;
 
-            Relation.AddPlayer.Req relation_add_player_req = 200;
-            Relation.RemovePlayer.Req relation_remove_player_req = 201;
-            Relation.GetPlayers.Req relation_get_players_req = 202;
-            Relation.GetPlayersByRoleType.Req relation_get_players_by_role_type_req = 203;
+            Relation.AddRolePlayer.Req relation_add_role_player_req = 200;
+            Relation.RemoveRolePlayer.Req relation_remove_role_player_req = 201;
+            Relation.GetPlayersByRoleType.Req relation_get_players_by_role_type_req = 202;
+            Relation.GetRolePlayers.Req relation_get_role_players_req = 203;
             Relation.GetRelating.Req relation_get_relating_req = 204;
 
             Attribute.GetOwners.Req attribute_get_owners_req = 300;
@@ -198,8 +198,8 @@ message Thing {
             Thing.SetHas.Res thing_set_has_res = 101;
             Thing.UnsetHas.Res thing_unset_has_res = 102;
 
-            Relation.AddPlayer.Res relation_add_player_res = 200;
-            Relation.RemovePlayer.Res relation_remove_player_res = 201;
+            Relation.AddRolePlayer.Res relation_add_role_player_res = 200;
+            Relation.RemoveRolePlayer.Res relation_remove_role_player_res = 201;
         }
     }
 
@@ -209,8 +209,8 @@ message Thing {
             Thing.GetRelations.ResPart thing_get_relations_res_part = 101;
             Thing.GetPlaying.ResPart thing_get_playing_res_part = 102;
 
-            Relation.GetPlayers.ResPart relation_get_players_res_part = 200;
-            Relation.GetPlayersByRoleType.ResPart relation_get_players_by_role_type_res_part = 201;
+            Relation.GetPlayersByRoleType.ResPart relation_get_players_by_role_type_res_part = 200;
+            Relation.GetRolePlayers.ResPart relation_get_role_players_res_part = 201;
             Relation.GetRelating.ResPart relation_get_relating_res_part = 202;
 
             Attribute.GetOwners.ResPart attribute_get_owners_res_part = 300;
@@ -283,23 +283,21 @@ message Relation {
     RelationType relation_type = 2;
     bool inferred = 3;
 
-    message AddPlayer {
+    message AddRolePlayer {
         message Req {
-            RoleType role_type = 1;
-            Thing player = 2;
+            RolePlayer role_player = 1;
         }
         message Res {}
     }
 
-    message RemovePlayer {
+    message RemoveRolePlayer {
         message Req {
-            RoleType role_type = 1;
-            Thing player = 2;
+            RolePlayer role_player = 1;
         }
         message Res {}
     }
 
-    message GetPlayers {
+    message GetPlayersByRoleType {
         message Req {
             repeated RoleType role_types = 1;
         }
@@ -308,14 +306,10 @@ message Relation {
         }
     }
 
-    message GetPlayersByRoleType {
-        message RoleTypeWithPlayer {
-            RoleType role_type = 1;
-            Thing player = 2;
-        }
+    message GetRolePlayers {
         message Req {}
         message ResPart {
-            repeated RoleTypeWithPlayer role_types_with_players = 1;
+            repeated RolePlayer role_types_with_players = 1;
         }
     }
 
@@ -324,6 +318,11 @@ message Relation {
         message ResPart {
             repeated RoleType role_types = 1;
         }
+    }
+
+    message RolePlayer {
+        RoleType role_type = 1;
+        Thing player = 2;
     }
 }
 
