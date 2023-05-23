@@ -224,17 +224,8 @@ message Thing {
 
     message GetHas {
         message Req {
-            oneof filter {
-                AttributeTypes attribute_types = 1;
-                Annotations annotation_filter = 2;
-            }
-            // Only one filter can be set at a time. repeated can't be used in a oneof
-            message AttributeTypes {
-                repeated AttributeType attribute_types = 1;
-            }
-            message Annotations {
-                repeated Type.Annotation annotations = 1;
-            }
+            repeated AttributeType attribute_types = 1;
+            repeated Type.Annotation annotations = 2;
         }
         message ResPart {
             repeated Attribute attributes = 1;
