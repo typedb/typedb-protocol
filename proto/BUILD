@@ -37,13 +37,13 @@ proto_library(
 )
 
 proto_library(
-    name = "user-proto",
-    srcs = [":user.proto"],
+    name = "database-proto",
+    srcs = [":database.proto"],
 )
 
 proto_library(
-    name = "database-proto",
-    srcs = [":database.proto"],
+    name = "user-proto",
+    srcs = [":user.proto"],
 )
 
 proto_library(
