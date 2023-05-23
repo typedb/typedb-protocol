@@ -15,10 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-workspace(
-    name = "vaticle_typedb_protocol",
-    managed_directories = {"@npm": ["node_modules"]},
-)
+workspace(name = "vaticle_typedb_protocol")
 
 ################################
 # Load @vaticle_dependencies #
@@ -53,7 +50,7 @@ rust_deps()
 
 load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
 rules_rust_dependencies()
-rust_register_toolchains(edition = "2021", include_rustc_srcs = True)
+rust_register_toolchains(edition = "2021")
 
 load("@vaticle_dependencies//library/crates:crates.bzl", "fetch_crates")
 fetch_crates()
@@ -61,23 +58,18 @@ load("@crates//:defs.bzl", "crate_repositories")
 crate_repositories()
 
 # Load //tool/common
-load("@vaticle_dependencies//tool/common:deps.bzl", "vaticle_dependencies_ci_pip",
-vaticle_dependencies_tool_maven_artifacts = "maven_artifacts")
+load("@vaticle_dependencies//tool/common:deps.bzl", "vaticle_dependencies_ci_pip", vaticle_dependencies_tool_maven_artifacts = "maven_artifacts")
 vaticle_dependencies_ci_pip()
 
 # Load //builder/grpc
 load("@vaticle_dependencies//builder/grpc:deps.bzl", grpc_deps = "deps")
 grpc_deps()
 
-load("@com_github_grpc_grpc//bazel:grpc_deps.bzl",
-com_github_grpc_grpc_deps = "grpc_deps")
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", com_github_grpc_grpc_deps = "grpc_deps")
 com_github_grpc_grpc_deps()
 
 load("@stackb_rules_proto//java:deps.bzl", "java_grpc_compile")
 java_grpc_compile()
-
-load("@stackb_rules_proto//node:deps.bzl", "node_grpc_compile")
-node_grpc_compile()
 
 # Load //tool/checkstyle
 load("@vaticle_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
@@ -126,21 +118,4 @@ maven(artifacts + vaticle_dependencies_tool_maven_artifacts + vaticle_bazel_dist
 load("@vaticle_bazel_distribution//common:rules.bzl", "workspace_refs")
 workspace_refs(
     name = "vaticle_typedb_protocol_workspace_refs"
-)
-
-#########################
-# Load NPM dependencies #
-#########################
-
-load("@vaticle_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
-nodejs_deps(["@vaticle_dependencies//builder/nodejs:remove-node-patches.patch"])
-load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
-
-node_repositories(
-    preserve_symlinks = False,
-)
-yarn_install(
-  name = "npm",
-  package_json = "//grpc/nodejs:package.json",
-  yarn_lock = "//grpc/nodejs:yarn.lock",
 )

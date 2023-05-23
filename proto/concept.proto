@@ -1,0 +1,955 @@
+//
+// Copyright (C) 2022 Vaticle
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+syntax = "proto3";
+
+option java_package = "com.vaticle.typedb.protocol";
+option java_outer_classname = "ConceptProto";
+
+package typedb.protocol;
+
+message ConceptManager {
+
+    message Req {
+        oneof req {
+            GetEntityType.Req get_entity_type_req = 1;
+            GetRelationType.Req get_relation_type_req = 2;
+            GetAttributeType.Req get_attribute_type_req = 3;
+            PutEntityType.Req put_entity_type_req = 4;
+            PutRelationType.Req put_relation_type_req = 5;
+            PutAttributeType.Req put_attribute_type_req = 6;
+            GetEntity.Req get_entity_req = 7;
+            GetRelation.Req get_relation_req = 8;
+            GetAttribute.Req get_attribute_req = 9;
+            GetSchemaExceptions.Req get_schema_exceptions_req = 10;
+        }
+    }
+
+    message Res {
+        oneof res {
+            GetEntityType.Res get_entity_type_res = 1;
+            GetRelationType.Res get_relation_type_res = 2;
+            GetAttributeType.Res get_attribute_type_res = 3;
+            PutEntityType.Res put_entity_type_res = 4;
+            PutRelationType.Res put_relation_type_res = 5;
+            PutAttributeType.Res put_attribute_type_res = 6;
+            GetEntity.Res get_entity_res = 7;
+            GetRelation.Res get_relation_res = 8;
+            GetAttribute.Res get_attribute_res = 9;
+            GetSchemaExceptions.Res get_schema_exceptions_res = 10;
+        }
+    }
+
+    message GetEntityType {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            optional EntityType entity_type = 1;
+        }
+    }
+
+    message GetRelationType {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            optional RelationType relation_type = 1;
+        }
+    }
+
+    message GetAttributeType {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            optional AttributeType attribute_type = 1;
+        }
+    }
+
+    message PutEntityType {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            EntityType entity_type = 1;
+        }
+    }
+
+    message PutRelationType {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            RelationType relation_type = 1;
+        }
+    }
+
+    message PutAttributeType {
+        message Req {
+            string label = 1;
+            ValueType value_type = 2;
+        }
+        message Res {
+            AttributeType attribute_type = 1;
+        }
+    }
+
+    message GetEntity {
+        message Req {
+            bytes iid = 1;
+        }
+        message Res {
+            optional Entity entity = 1;
+        }
+    }
+
+    message GetRelation {
+        message Req {
+            bytes iid = 1;
+        }
+        message Res {
+            optional Relation relation = 1;
+        }
+    }
+
+    message GetAttribute {
+        message Req {
+            bytes iid = 1;
+        }
+        message Res {
+            optional Attribute attribute = 1;
+        }
+    }
+
+    message GetSchemaExceptions {
+        message Req {}
+        message Res {
+            repeated Exception exceptions = 1;
+        }
+    }
+}
+
+message Exception {
+    string code = 1;
+    string message = 2;
+}
+
+message Concept {
+    oneof concept {
+        EntityType entity_type = 1;
+        RelationType relation_type = 2;
+        AttributeType attribute_type = 3;
+
+        RoleType role_type = 4;
+
+        Entity entity = 5;
+        Relation relation = 6;
+        Attribute attribute = 7;
+
+        Value value = 8;
+
+        ThingType.Root thing_type_root = 10;
+    }
+}
+
+message Thing {
+    oneof thing {
+        Entity entity = 1;
+        Relation relation = 2;
+        Attribute attribute = 3;
+    }
+
+    message Req {
+        bytes iid = 1;
+        oneof req {
+            Thing.Delete.Req thing_delete_req = 100;
+            Thing.GetHas.Req thing_get_has_req = 101;
+            Thing.SetHas.Req thing_set_has_req = 102;
+            Thing.UnsetHas.Req thing_unset_has_req = 103;
+            Thing.GetRelations.Req thing_get_relations_req = 104;
+            Thing.GetPlaying.Req thing_get_playing_req = 105;
+
+            Relation.AddRolePlayer.Req relation_add_role_player_req = 200;
+            Relation.RemoveRolePlayer.Req relation_remove_role_player_req = 201;
+            Relation.GetPlayersByRoleType.Req relation_get_players_by_role_type_req = 202;
+            Relation.GetRolePlayers.Req relation_get_role_players_req = 203;
+            Relation.GetRelating.Req relation_get_relating_req = 204;
+
+            Attribute.GetOwners.Req attribute_get_owners_req = 300;
+        }
+    }
+
+    message Res {
+        oneof res {
+            Thing.Delete.Res thing_delete_res = 100;
+            Thing.SetHas.Res thing_set_has_res = 101;
+            Thing.UnsetHas.Res thing_unset_has_res = 102;
+
+            Relation.AddRolePlayer.Res relation_add_role_player_res = 200;
+            Relation.RemoveRolePlayer.Res relation_remove_role_player_res = 201;
+        }
+    }
+
+    message ResPart {
+        oneof res {
+            Thing.GetHas.ResPart thing_get_has_res_part = 100;
+            Thing.GetRelations.ResPart thing_get_relations_res_part = 101;
+            Thing.GetPlaying.ResPart thing_get_playing_res_part = 102;
+
+            Relation.GetPlayersByRoleType.ResPart relation_get_players_by_role_type_res_part = 200;
+            Relation.GetRolePlayers.ResPart relation_get_role_players_res_part = 201;
+            Relation.GetRelating.ResPart relation_get_relating_res_part = 202;
+
+            Attribute.GetOwners.ResPart attribute_get_owners_res_part = 300;
+        }
+    }
+
+    message Delete {
+        message Req {}
+        message Res {}
+    }
+
+    message GetHas {
+        message Req {
+            repeated AttributeType attribute_types = 1;
+            repeated Type.Annotation annotations = 2;
+        }
+        message ResPart {
+            repeated Attribute attributes = 1;
+        }
+    }
+
+    message SetHas {
+        message Req {
+            Attribute attribute = 1;
+        }
+        message Res {}
+    }
+
+    message UnsetHas {
+        message Req {
+            Attribute attribute = 1;
+        }
+        message Res {}
+    }
+
+    message GetRelations {
+        message Req {
+            repeated RoleType role_types = 1;
+        }
+        message ResPart {
+            repeated Relation relations = 1;
+        }
+    }
+
+    message GetPlaying {
+        message Req {}
+        message ResPart {
+            repeated RoleType role_types = 1;
+        }
+    }
+}
+
+message Entity {
+    bytes iid = 1;
+    EntityType entity_type = 2;
+    bool inferred = 3;
+}
+
+message Relation {
+    bytes iid = 1;
+    RelationType relation_type = 2;
+    bool inferred = 3;
+
+    message AddRolePlayer {
+        message Req {
+            RolePlayer role_player = 1;
+        }
+        message Res {}
+    }
+
+    message RemoveRolePlayer {
+        message Req {
+            RolePlayer role_player = 1;
+        }
+        message Res {}
+    }
+
+    message GetPlayersByRoleType {
+        message Req {
+            repeated RoleType role_types = 1;
+        }
+        message ResPart {
+            repeated Thing things = 1;
+        }
+    }
+
+    message GetRolePlayers {
+        message Req {}
+        message ResPart {
+            repeated RolePlayer role_players = 1;
+        }
+    }
+
+    message GetRelating {
+        message Req {}
+        message ResPart {
+            repeated RoleType role_types = 1;
+        }
+    }
+
+    message RolePlayer {
+        RoleType role_type = 1;
+        Thing player = 2;
+    }
+}
+
+message Attribute {
+    bytes iid = 1;
+    AttributeType attribute_type = 2;
+    Value value = 3;
+    bool inferred = 4;
+
+    message GetOwners {
+        message Req {
+            optional ThingType thing_type = 1;
+        }
+        message ResPart {
+            repeated Thing things = 1;
+        }
+    }
+}
+
+message Value {
+    oneof value {
+        string string = 1;
+        bool boolean = 2;
+        sint64 long = 3;
+        double double = 4;
+        // time since epoch in milliseconds
+        sint64 date_time = 5;
+    }
+}
+
+message Type {
+    message Req {
+        oneof req {
+            ThingType.Req thing_type_req = 1;
+            RoleType.Req role_type_req = 2;
+        }
+    }
+
+    message Res {
+        oneof res {
+            ThingType.Res thing_type_res = 1;
+            RoleType.Res role_type_res = 2;
+        }
+    }
+
+    message ResPart {
+        oneof res {
+            ThingType.ResPart thing_type_res_part = 1;
+            RoleType.ResPart role_type_res_part = 2;
+        }
+    }
+
+    enum Transitivity {
+        TRANSITIVE = 0;
+        EXPLICIT = 1;
+    }
+
+    message Annotation {
+        oneof annotation {
+            Key key = 1;
+            Unique unique = 2;
+        }
+
+        message Key {}
+        message Unique {}
+    }
+}
+
+message ThingType {
+    oneof type {
+        EntityType entity_type = 1;
+        RelationType relation_type = 2;
+        AttributeType attribute_type = 3;
+        ThingType.Root thing_type_root = 10;
+    }
+
+    message Root {}
+
+    message Req {
+        string label = 1;
+        oneof req {
+            ThingType.Delete.Req thing_type_delete_req = 100;
+            ThingType.SetLabel.Req thing_type_set_label_req = 101;
+            ThingType.SetAbstract.Req thing_type_set_abstract_req = 102;
+            ThingType.UnsetAbstract.Req thing_type_unset_abstract_req = 103;
+            ThingType.GetOwns.Req thing_type_get_owns_req = 104;
+            ThingType.GetOwnsOverridden.Req thing_type_get_owns_overridden_req = 105;
+            ThingType.SetOwns.Req thing_type_set_owns_req = 106;
+            ThingType.UnsetOwns.Req thing_type_unset_owns_req = 107;
+            ThingType.GetPlays.Req thing_type_get_plays_req = 108;
+            ThingType.GetPlaysOverridden.Req thing_type_get_plays_overridden_req = 109;
+            ThingType.SetPlays.Req thing_type_set_plays_req = 110;
+            ThingType.UnsetPlays.Req thing_type_unset_plays_req = 111;
+            ThingType.GetSyntax.Req thing_type_get_syntax_req = 112;
+
+            EntityType.Create.Req entity_type_create_req = 200;
+            EntityType.GetSupertype.Req entity_type_get_supertype_req = 201;
+            EntityType.SetSupertype.Req entity_type_set_supertype_req = 202;
+            EntityType.GetSupertypes.Req entity_type_get_supertypes_req = 203;
+            EntityType.GetSubtypes.Req entity_type_get_subtypes_req = 204;
+            EntityType.GetInstances.Req entity_type_get_instances_req = 205;
+
+            RelationType.Create.Req relation_type_create_req = 300;
+            RelationType.GetSupertype.Req relation_type_get_supertype_req = 301;
+            RelationType.SetSupertype.Req relation_type_set_supertype_req = 302;
+            RelationType.GetSupertypes.Req relation_type_get_supertypes_req = 303;
+            RelationType.GetSubtypes.Req relation_type_get_subtypes_req = 304;
+            RelationType.GetInstances.Req relation_type_get_instances_req = 305;
+            RelationType.GetRelates.Req relation_type_get_relates_req = 306;
+            RelationType.GetRelatesForRoleLabel.Req relation_type_get_relates_for_role_label_req = 307;
+            RelationType.GetRelatesOverridden.Req relation_type_get_relates_overridden_req = 308;
+            RelationType.SetRelates.Req relation_type_set_relates_req = 309;
+            RelationType.UnsetRelates.Req relation_type_unset_relates_req = 310;
+
+            AttributeType.Put.Req attribute_type_put_req = 400;
+            AttributeType.Get.Req attribute_type_get_req = 401;
+            AttributeType.GetSupertype.Req attribute_type_get_supertype_req = 402;
+            AttributeType.SetSupertype.Req attribute_type_set_supertype_req = 403;
+            AttributeType.GetSupertypes.Req attribute_type_get_supertypes_req = 404;
+            AttributeType.GetSubtypes.Req attribute_type_get_subtypes_req = 405;
+            AttributeType.GetInstances.Req attribute_type_get_instances_req = 406;
+            AttributeType.GetRegex.Req attribute_type_get_regex_req = 407;
+            AttributeType.SetRegex.Req attribute_type_set_regex_req = 408;
+            AttributeType.GetOwners.Req attribute_type_get_owners_req = 409;
+        }
+    }
+
+    message Res {
+        oneof res {
+            ThingType.Delete.Res thing_type_delete_res = 100;
+            ThingType.SetLabel.Res thing_type_set_label_res = 101;
+            ThingType.SetAbstract.Res thing_type_set_abstract_res = 102;
+            ThingType.UnsetAbstract.Res thing_type_unset_abstract_res = 103;
+            ThingType.GetOwnsOverridden.Res thing_type_get_owns_overridden_res = 104;
+            ThingType.SetOwns.Res thing_type_set_owns_res = 105;
+            ThingType.UnsetOwns.Res thing_type_unset_owns_res = 106;
+            ThingType.GetPlaysOverridden.Res thing_type_get_plays_overridden_res = 107;
+            ThingType.SetPlays.Res thing_type_set_plays_res = 108;
+            ThingType.UnsetPlays.Res thing_type_unset_plays_res = 109;
+            ThingType.GetSyntax.Res thing_type_get_syntax_res = 110;
+
+            EntityType.Create.Res entity_type_create_res = 200;
+            EntityType.GetSupertype.Res entity_type_get_supertype_res = 201;
+            EntityType.SetSupertype.Res entity_type_set_supertype_res = 202;
+
+            RelationType.Create.Res relation_type_create_res = 300;
+            RelationType.GetSupertype.Res relation_type_get_supertype_res = 301;
+            RelationType.SetSupertype.Res relation_type_set_supertype_res = 302;
+            RelationType.GetRelatesForRoleLabel.Res relation_type_get_relates_for_role_label_res = 303;
+            RelationType.GetRelatesOverridden.Res relation_type_get_relates_overridden_res = 304;
+            RelationType.SetRelates.Res relation_type_set_relates_res = 305;
+            RelationType.UnsetRelates.Res relation_type_unset_relates_res = 306;
+
+            AttributeType.Put.Res attribute_type_put_res = 400;
+            AttributeType.Get.Res attribute_type_get_res = 401;
+            AttributeType.GetSupertype.Res attribute_type_get_supertype_res = 402;
+            AttributeType.SetSupertype.Res attribute_type_set_supertype_res = 403;
+            AttributeType.GetRegex.Res attribute_type_get_regex_res = 404;
+            AttributeType.SetRegex.Res attribute_type_set_regex_res = 405;
+        }
+    }
+
+    message ResPart {
+        oneof res {
+            ThingType.GetOwns.ResPart thing_type_get_owns_res_part = 100;
+            ThingType.GetPlays.ResPart thing_type_get_plays_res_part = 101;
+
+            EntityType.GetSupertypes.ResPart entity_type_get_supertypes_res_part = 200;
+            EntityType.GetSubtypes.ResPart entity_type_get_subtypes_res_part = 201;
+            EntityType.GetInstances.ResPart entity_type_get_instances_res_part = 202;
+
+            RelationType.GetSupertypes.ResPart relation_type_get_supertypes_res_part = 300;
+            RelationType.GetSubtypes.ResPart relation_type_get_subtypes_res_part = 301;
+            RelationType.GetInstances.ResPart relation_type_get_instances_res_part = 302;
+            RelationType.GetRelates.ResPart relation_type_get_relates_res_part = 303;
+
+            AttributeType.GetSupertypes.ResPart attribute_type_get_supertypes_res_part = 400;
+            AttributeType.GetSubtypes.ResPart attribute_type_get_subtypes_res_part = 401;
+            AttributeType.GetInstances.ResPart attribute_type_get_instances_res_part = 402;
+            AttributeType.GetOwners.ResPart attribute_type_get_owners_res_part = 403;
+        }
+    }
+
+    message Delete {
+        message Req {}
+        message Res {}
+    }
+
+    message SetLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {}
+    }
+
+    message SetAbstract {
+        message Req {}
+        message Res {}
+    }
+
+    message UnsetAbstract {
+        message Req {}
+        message Res {}
+    }
+
+    message GetOwns {
+        message Req {
+            optional ValueType value_type = 1;
+            Type.Transitivity transitivity = 2;
+            repeated Type.Annotation annotations = 3;
+        }
+        message ResPart {
+            repeated AttributeType attribute_types = 1;
+        }
+    }
+
+    message GetOwnsOverridden {
+        message Req {
+            AttributeType attribute_type = 1;
+        }
+        message Res {
+            optional AttributeType attribute_type = 1;
+        }
+    }
+
+    message SetOwns {
+        message Req {
+            AttributeType attribute_type = 1;
+            optional AttributeType overridden_type = 2;
+            repeated Type.Annotation annotations = 3;
+        }
+        message Res {}
+    }
+
+    message UnsetOwns {
+        message Req {
+            AttributeType attribute_type = 1;
+        }
+        message Res {}
+    }
+
+    message GetPlays {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated RoleType role_types = 1;
+        }
+    }
+
+    message GetPlaysOverridden {
+        message Req {
+            RoleType role_type = 1;
+        }
+        message Res {
+            optional RoleType role_type = 1;
+        }
+    }
+
+    message SetPlays {
+        message Req {
+            RoleType role_type = 1;
+            optional RoleType overridden_role_type = 2;
+        }
+        message Res {}
+    }
+
+    message UnsetPlays {
+        message Req {
+            RoleType role_type = 1;
+        }
+        message Res {}
+    }
+
+    message GetSyntax {
+        message Req {}
+        message Res {
+            string syntax = 1;
+        }
+    }
+}
+
+message RoleType {
+    string label = 1;
+    string scope = 2;
+    bool is_root = 3;
+    bool is_abstract = 4;
+
+    message Req {
+        string label = 1;
+        string scope = 2;
+        oneof req {
+            RoleType.Delete.Req role_type_delete_req = 100;
+            RoleType.SetLabel.Req role_type_set_label_req = 101;
+            RoleType.GetSupertype.Req role_type_get_supertype_req = 102;
+            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 103;
+            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 104;
+            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 105;
+            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 106;
+            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 107;
+            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 108;
+        }
+    }
+
+    message Res {
+        oneof res {
+            RoleType.Delete.Res role_type_delete_res = 100;
+            RoleType.SetLabel.Res role_type_set_label_res = 101;
+            RoleType.GetSupertype.Res role_type_get_supertype_res = 102;
+        }
+    }
+
+    message ResPart {
+        oneof res {
+            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res_part = 100;
+            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res_part = 101;
+            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 102;
+            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res_part = 103;
+            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res_part = 104;
+            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 105;
+        }
+    }
+
+    message Delete {
+        message Req {}
+        message Res {}
+    }
+
+    message SetLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {}
+    }
+
+    message GetSupertype {
+        message Req {}
+        message Res {
+            RoleType role_type = 1;
+        }
+    }
+
+    message GetSupertypes {
+        message Req {}
+        message ResPart {
+            repeated RoleType role_types = 1;
+        }
+    }
+
+    message GetSubtypes {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated RoleType role_types = 1;
+        }
+    }
+
+    message GetRelationTypes {
+        message Req {}
+        message ResPart {
+            repeated RelationType relation_types = 1;
+        }
+    }
+
+    message GetPlayerTypes {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated ThingType thing_types = 1;
+        }
+    }
+
+    message GetRelationInstances {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated Relation relations = 1;
+        }
+    }
+
+    message GetPlayerInstances {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated Thing things = 1;
+        }
+    }
+}
+
+message EntityType {
+    string label = 1;
+    bool is_root = 2;
+    bool is_abstract = 3;
+
+    message Create {
+        message Req {}
+        message Res {
+            Entity entity = 1;
+        }
+    }
+
+    message GetSupertype {
+        message Req {}
+        message Res {
+            EntityType entity_type = 1;
+        }
+    }
+
+    message SetSupertype {
+        message Req {
+            EntityType entity_type = 1;
+        }
+        message Res {}
+    }
+
+    message GetSupertypes {
+        message Req {}
+        message ResPart {
+            repeated EntityType entity_types = 1;
+        }
+    }
+
+    message GetSubtypes {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated EntityType entity_types = 1;
+        }
+    }
+
+    message GetInstances {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated Entity entities = 1;
+        }
+    }
+}
+
+message RelationType {
+    string label = 1;
+    bool is_root = 2;
+    bool is_abstract = 3;
+
+    message Create {
+        message Req {}
+        message Res {
+            Relation relation = 1;
+        }
+    }
+
+    message GetSupertype {
+        message Req {}
+        message Res {
+            RelationType relation_type = 1;
+        }
+    }
+
+    message SetSupertype {
+        message Req {
+            RelationType relation_type = 1;
+        }
+        message Res {}
+    }
+
+    message GetSupertypes {
+        message Req {}
+        message ResPart {
+            repeated RelationType relation_types = 1;
+        }
+    }
+
+    message GetSubtypes {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated RelationType relation_types = 1;
+        }
+    }
+
+    message GetInstances {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated Relation relations = 1;
+        }
+    }
+
+    message GetRelates {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated RoleType role_types = 1;
+        }
+    }
+
+    message GetRelatesForRoleLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            optional RoleType role_type = 1;
+        }
+    }
+
+    message GetRelatesOverridden {
+        message Req {
+            string label = 1;
+        }
+        message Res {
+            optional RoleType role_type = 1;
+        }
+    }
+
+    message SetRelates {
+        message Req {
+            string label = 1;
+            optional string overridden_label = 2;
+        }
+        message Res {}
+    }
+
+    message UnsetRelates {
+        message Req {
+            string label = 1;
+        }
+        message Res {}
+    }
+}
+
+message AttributeType {
+    string label = 1;
+    ValueType value_type = 2;
+    bool is_root = 3;
+    bool is_abstract = 4;
+
+    message Put {
+        message Req {
+            Value value = 1;
+        }
+        message Res {
+            Attribute attribute = 1;
+        }
+    }
+
+    message Get {
+        message Req {
+            Value value = 1;
+        }
+        message Res {
+            optional Attribute attribute = 1;
+        }
+    }
+
+    message GetSupertype {
+        message Req {}
+        message Res {
+            AttributeType attribute_type = 1;
+        }
+    }
+
+    message SetSupertype {
+        message Req {
+            AttributeType attribute_type = 1;
+        }
+        message Res {}
+    }
+
+    message GetSupertypes {
+        message Req {}
+        message ResPart {
+            repeated AttributeType attribute_types = 1;
+        }
+    }
+
+    message GetSubtypes {
+        message Req {
+            Type.Transitivity transitivity = 1;
+            optional ValueType value_type = 2;
+        }
+        message ResPart {
+            repeated AttributeType attribute_types = 1;
+        }
+    }
+
+    message GetInstances {
+        message Req {
+            Type.Transitivity transitivity = 1;
+            optional ValueType value_type = 2;
+        }
+        message ResPart {
+            repeated Attribute attributes = 1;
+        }
+    }
+
+    message GetRegex {
+        message Req {}
+        message Res {
+            string regex = 1;
+        }
+    }
+
+    message SetRegex {
+        message Req {
+            string regex = 1;
+        }
+        message Res {}
+    }
+
+    message GetOwners {
+        message Req {
+            Type.Transitivity transitivity = 1;
+            repeated Type.Annotation annotations = 2;
+        }
+        message ResPart {
+            repeated ThingType thing_types = 1;
+        }
+    }
+}
+
+enum ValueType {
+    OBJECT = 0;
+    BOOLEAN = 1;
+    LONG = 2;
+    DOUBLE = 3;
+    STRING = 4;
+    DATETIME = 5;
+}

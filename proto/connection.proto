@@ -18,46 +18,20 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "AnswerProto";
+option java_outer_classname = "ConnectionProto";
+option java_generic_services = true;
 
-import "common/concept.proto";
+import "proto/version.proto";
 
 package typedb.protocol;
 
-message ConceptMap {
-    map<string, Concept> map = 1;
-    Explainables explainables = 2;
-}
+message Connection {
 
-message Explainables {
-    map<string, Explainable> relations = 1;
-    map<string, Explainable> attributes = 2;
-    map<string, Owned> ownerships = 3;
-
-    message Owned {
-        map<string, Explainable> owned = 1;
+  message Open {
+    message Req {
+      Version version = 1;
     }
-}
 
-message Explainable {
-    string conjunction = 1;
-    int64 id = 2;
-}
-
-message ConceptMapGroup {
-    Concept owner = 1;
-    repeated ConceptMap concept_maps = 2;
-}
-
-message Numeric {
-    oneof value {
-        int64 long_value = 1;
-        double double_value = 2;
-        bool nan = 3;
-    }
-}
-
-message NumericGroup {
-    Concept owner = 1;
-    Numeric number = 2;
+    message Res {}
+  }
 }

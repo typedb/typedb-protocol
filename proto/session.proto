@@ -20,7 +20,7 @@ syntax = "proto3";
 option java_package = "com.vaticle.typedb.protocol";
 option java_outer_classname = "SessionProto";
 
-import "common/options.proto";
+import "proto/options.proto";
 
 package typedb.protocol;
 
