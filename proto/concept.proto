@@ -161,7 +161,7 @@ message Concept {
         Relation relation = 6;
         Attribute attribute = 7;
 
-        ThingType.Root root_thing_type = 10;
+        ThingType.Root thing_type_root = 10;
     }
 }
 
@@ -363,15 +363,15 @@ message Type {
 
     message Res {
         oneof res {
-            RoleType.Res role_type_res = 1;
-            ThingType.Res thing_type_res = 2;
+            ThingType.Res thing_type_res = 1;
+            RoleType.Res role_type_res = 2;
         }
     }
 
     message ResPart {
         oneof res {
-            RoleType.ResPart role_type_res_part = 1;
-            ThingType.ResPart thing_type_res_part = 2;
+            ThingType.ResPart thing_type_res_part = 1;
+            RoleType.ResPart role_type_res_part = 2;
         }
     }
 
@@ -396,7 +396,7 @@ message ThingType {
         EntityType entity_type = 1;
         RelationType relation_type = 2;
         AttributeType attribute_type = 3;
-        ThingType.Root root_thing_type = 10;
+        ThingType.Root thing_type_root = 10;
     }
 
     message Root {}
