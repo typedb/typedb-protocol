@@ -300,7 +300,7 @@ message Relation {
     message GetRolePlayers {
         message Req {}
         message ResPart {
-            repeated RolePlayer role_types_with_players = 1;
+            repeated RolePlayer role_players = 1;
         }
     }
 
@@ -336,7 +336,7 @@ message Attribute {
 
     message GetOwners {
         message Req {
-            optional ThingType filter = 1;
+            optional ThingType thing_type = 1;
         }
         message ResPart {
             repeated Thing things = 1;
