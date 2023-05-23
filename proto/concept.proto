@@ -81,33 +81,6 @@ message ConceptManager {
         }
     }
 
-    message GetEntity {
-        message Req {
-            bytes iid = 1;
-        }
-        message Res {
-            optional Entity entity = 1;
-        }
-    }
-
-    message GetRelation {
-        message Req {
-            bytes iid = 1;
-        }
-        message Res {
-            optional Relation relation = 1;
-        }
-    }
-
-    message GetAttribute {
-        message Req {
-            bytes iid = 1;
-        }
-        message Res {
-            optional Attribute attribute = 1;
-        }
-    }
-
     message PutEntityType {
         message Req {
             string label = 1;
@@ -133,6 +106,33 @@ message ConceptManager {
         }
         message Res {
             AttributeType attribute_type = 1;
+        }
+    }
+
+    message GetEntity {
+        message Req {
+            bytes iid = 1;
+        }
+        message Res {
+            optional Entity entity = 1;
+        }
+    }
+
+    message GetRelation {
+        message Req {
+            bytes iid = 1;
+        }
+        message Res {
+            optional Relation relation = 1;
+        }
+    }
+
+    message GetAttribute {
+        message Req {
+            bytes iid = 1;
+        }
+        message Res {
+            optional Attribute attribute = 1;
         }
     }
 
@@ -226,13 +226,13 @@ message Thing {
         message Req {
             oneof filter {
                 AttributeTypes attribute_types = 1;
-                AnnotationFilter annotation_filter = 2;
+                Annotations annotation_filter = 2;
             }
             // Only one filter can be set at a time. repeated can't be used in a oneof
             message AttributeTypes {
                 repeated AttributeType attribute_types = 1;
             }
-            message AnnotationFilter {
+            message Annotations {
                 repeated Type.Annotation annotations = 1;
             }
         }
@@ -402,15 +402,15 @@ message RoleType {
         string label = 1;
         string scope = 2;
         oneof req {
-            RoleType.Delete.Req role_type_delete_req = 101;
-            RoleType.SetLabel.Req role_type_set_label_req = 102;
-            RoleType.GetSupertype.Req role_type_get_supertype_req = 103;
-            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 104;
-            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 105;
-            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 106;
-            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 107;
-            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 108;
-            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 109;
+            RoleType.Delete.Req role_type_delete_req = 100;
+            RoleType.SetLabel.Req role_type_set_label_req = 101;
+            RoleType.GetSupertype.Req role_type_get_supertype_req = 102;
+            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 103;
+            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 104;
+            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 105;
+            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 106;
+            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 107;
+            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 108;
         }
     }
 
@@ -937,16 +937,6 @@ message AttributeType {
         }
     }
 
-    message GetOwners {
-        message Req {
-            Type.Transitivity transitivity = 1;
-            repeated Type.Annotation annotations = 2;
-        }
-        message ResPart {
-            repeated ThingType thing_types = 1;
-        }
-    }
-
     message GetRegex {
         message Req {}
         message Res {
@@ -959,5 +949,15 @@ message AttributeType {
             string regex = 1;
         }
         message Res {}
+    }
+
+    message GetOwners {
+        message Req {
+            Type.Transitivity transitivity = 1;
+            repeated Type.Annotation annotations = 2;
+        }
+        message ResPart {
+            repeated ThingType thing_types = 1;
+        }
     }
 }
