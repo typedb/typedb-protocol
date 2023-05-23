@@ -75,9 +75,7 @@ message UserManager {
 
 message User {
     string username = 1;
-    oneof password_expiry {
-        int64 password_expiry_seconds = 2;
-    }
+    optional int64 password_expiry_seconds = 2;
 
     message PasswordUpdate {
         message Req {
