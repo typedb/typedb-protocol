@@ -195,8 +195,8 @@ message Thing {
     message Res {
         oneof res {
             Thing.Delete.Res thing_delete_res = 100;
-            Thing.SetHas.Res thing_set_has_res = 102;
-            Thing.UnsetHas.Res thing_unset_has_res = 103;
+            Thing.SetHas.Res thing_set_has_res = 101;
+            Thing.UnsetHas.Res thing_unset_has_res = 102;
 
             Relation.AddPlayer.Res relation_add_player_res = 200;
             Relation.RemovePlayer.Res relation_remove_player_res = 201;
@@ -205,13 +205,13 @@ message Thing {
 
     message ResPart {
         oneof res {
-            Thing.GetHas.ResPart thing_get_has_res_part = 101;
-            Thing.GetRelations.ResPart thing_get_relations_res_part = 104;
-            Thing.GetPlaying.ResPart thing_get_playing_res_part = 105;
+            Thing.GetHas.ResPart thing_get_has_res_part = 100;
+            Thing.GetRelations.ResPart thing_get_relations_res_part = 101;
+            Thing.GetPlaying.ResPart thing_get_playing_res_part = 102;
 
-            Relation.GetPlayers.ResPart relation_get_players_res_part = 202;
-            Relation.GetPlayersByRoleType.ResPart relation_get_players_by_role_type_res_part = 203;
-            Relation.GetRelating.ResPart relation_get_relating_res_part = 204;
+            Relation.GetPlayers.ResPart relation_get_players_res_part = 200;
+            Relation.GetPlayersByRoleType.ResPart relation_get_players_by_role_type_res_part = 201;
+            Relation.GetRelating.ResPart relation_get_relating_res_part = 202;
 
             Attribute.GetOwners.ResPart attribute_get_owners_res_part = 300;
         }
@@ -424,12 +424,12 @@ message RoleType {
 
     message ResPart {
         oneof res {
-            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res_part = 103;
-            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res_part = 104;
-            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 105;
-            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res_part = 106;
-            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res_part = 107;
-            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 108;
+            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res_part = 100;
+            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res_part = 101;
+            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 102;
+            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res_part = 103;
+            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res_part = 104;
+            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 105;
         }
     }
 
@@ -568,13 +568,13 @@ message ThingType {
             ThingType.SetLabel.Res thing_type_set_label_res = 101;
             ThingType.SetAbstract.Res thing_type_set_abstract_res = 102;
             ThingType.UnsetAbstract.Res thing_type_unset_abstract_res = 103;
-            ThingType.GetOwnsOverridden.Res thing_type_get_owns_overridden_res = 105;
-            ThingType.SetOwns.Res thing_type_set_owns_res = 106;
-            ThingType.UnsetOwns.Res thing_type_unset_owns_res = 107;
-            ThingType.GetPlaysOverridden.Res thing_type_get_plays_overridden_res = 109;
-            ThingType.SetPlays.Res thing_type_set_plays_res = 110;
-            ThingType.UnsetPlays.Res thing_type_unset_plays_res = 111;
-            ThingType.GetSyntax.Res thing_type_get_syntax_res = 112;
+            ThingType.GetOwnsOverridden.Res thing_type_get_owns_overridden_res = 104;
+            ThingType.SetOwns.Res thing_type_set_owns_res = 105;
+            ThingType.UnsetOwns.Res thing_type_unset_owns_res = 106;
+            ThingType.GetPlaysOverridden.Res thing_type_get_plays_overridden_res = 107;
+            ThingType.SetPlays.Res thing_type_set_plays_res = 108;
+            ThingType.UnsetPlays.Res thing_type_unset_plays_res = 109;
+            ThingType.GetSyntax.Res thing_type_get_syntax_res = 110;
 
             EntityType.Create.Res entity_type_create_res = 200;
             EntityType.GetSupertype.Res entity_type_get_supertype_res = 201;
@@ -583,38 +583,38 @@ message ThingType {
             RelationType.Create.Res relation_type_create_res = 300;
             RelationType.GetSupertype.Res relation_type_get_supertype_res = 301;
             RelationType.SetSupertype.Res relation_type_set_supertype_res = 302;
-            RelationType.GetRelatesForRoleLabel.Res relation_type_get_relates_for_role_label_res = 307;
-            RelationType.GetRelatesOverridden.Res relation_type_get_relates_overridden_res = 308;
-            RelationType.SetRelates.Res relation_type_set_relates_res = 309;
-            RelationType.UnsetRelates.Res relation_type_unset_relates_res = 310;
+            RelationType.GetRelatesForRoleLabel.Res relation_type_get_relates_for_role_label_res = 303;
+            RelationType.GetRelatesOverridden.Res relation_type_get_relates_overridden_res = 304;
+            RelationType.SetRelates.Res relation_type_set_relates_res = 305;
+            RelationType.UnsetRelates.Res relation_type_unset_relates_res = 306;
 
             AttributeType.Put.Res attribute_type_put_res = 400;
             AttributeType.Get.Res attribute_type_get_res = 401;
             AttributeType.GetSupertype.Res attribute_type_get_supertype_res = 402;
             AttributeType.SetSupertype.Res attribute_type_set_supertype_res = 403;
-            AttributeType.GetRegex.Res attribute_type_get_regex_res = 407;
-            AttributeType.SetRegex.Res attribute_type_set_regex_res = 408;
+            AttributeType.GetRegex.Res attribute_type_get_regex_res = 404;
+            AttributeType.SetRegex.Res attribute_type_set_regex_res = 405;
         }
     }
 
     message ResPart {
         oneof res {
-            ThingType.GetOwns.ResPart thing_type_get_owns_res_part = 104;
-            ThingType.GetPlays.ResPart thing_type_get_plays_res_part = 108;
+            ThingType.GetOwns.ResPart thing_type_get_owns_res_part = 100;
+            ThingType.GetPlays.ResPart thing_type_get_plays_res_part = 101;
 
-            EntityType.GetSupertypes.ResPart entity_type_get_supertypes_res_part = 203;
-            EntityType.GetSubtypes.ResPart entity_type_get_subtypes_res_part = 204;
-            EntityType.GetInstances.ResPart entity_type_get_instances_res_part = 205;
+            EntityType.GetSupertypes.ResPart entity_type_get_supertypes_res_part = 200;
+            EntityType.GetSubtypes.ResPart entity_type_get_subtypes_res_part = 201;
+            EntityType.GetInstances.ResPart entity_type_get_instances_res_part = 202;
 
-            RelationType.GetSupertypes.ResPart relation_type_get_supertypes_res_part = 303;
-            RelationType.GetSubtypes.ResPart relation_type_get_subtypes_res_part = 304;
-            RelationType.GetInstances.ResPart relation_type_get_instances_res_part = 305;
-            RelationType.GetRelates.ResPart relation_type_get_relates_res_part = 306;
+            RelationType.GetSupertypes.ResPart relation_type_get_supertypes_res_part = 300;
+            RelationType.GetSubtypes.ResPart relation_type_get_subtypes_res_part = 301;
+            RelationType.GetInstances.ResPart relation_type_get_instances_res_part = 302;
+            RelationType.GetRelates.ResPart relation_type_get_relates_res_part = 303;
 
-            AttributeType.GetSupertypes.ResPart attribute_type_get_supertypes_res_part = 404;
-            AttributeType.GetSubtypes.ResPart attribute_type_get_subtypes_res_part = 405;
-            AttributeType.GetInstances.ResPart attribute_type_get_instances_res_part = 406;
-            AttributeType.GetOwners.ResPart attribute_type_get_owners_res_part = 409;
+            AttributeType.GetSupertypes.ResPart attribute_type_get_supertypes_res_part = 400;
+            AttributeType.GetSubtypes.ResPart attribute_type_get_subtypes_res_part = 401;
+            AttributeType.GetInstances.ResPart attribute_type_get_instances_res_part = 402;
+            AttributeType.GetOwners.ResPart attribute_type_get_owners_res_part = 403;
         }
     }
 
