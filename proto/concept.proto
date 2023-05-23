@@ -356,8 +356,8 @@ message Attribute {
 message Type {
     message Req {
         oneof req {
-            RoleType.Req role_type_req = 1;
-            ThingType.Req thing_type_req = 2;
+            ThingType.Req thing_type_req = 1;
+            RoleType.Req role_type_req = 2;
         }
     }
 
@@ -388,117 +388,6 @@ message Type {
 
         message Key {}
         message Unique {}
-    }
-}
-
-message RoleType {
-    string label = 1;
-    string scope = 2;
-    bool is_root = 3;
-    bool is_abstract = 4;
-
-    message Req {
-        string label = 1;
-        string scope = 2;
-        oneof req {
-            RoleType.Delete.Req role_type_delete_req = 100;
-            RoleType.SetLabel.Req role_type_set_label_req = 101;
-            RoleType.GetSupertype.Req role_type_get_supertype_req = 102;
-            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 103;
-            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 104;
-            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 105;
-            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 106;
-            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 107;
-            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 108;
-        }
-    }
-
-    message Res {
-        oneof res {
-            RoleType.Delete.Res role_type_delete_res = 100;
-            RoleType.SetLabel.Res role_type_set_label_res = 101;
-            RoleType.GetSupertype.Res role_type_get_supertype_res = 102;
-        }
-    }
-
-    message ResPart {
-        oneof res {
-            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res_part = 100;
-            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res_part = 101;
-            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 102;
-            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res_part = 103;
-            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res_part = 104;
-            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 105;
-        }
-    }
-
-    message Delete {
-        message Req {}
-        message Res {}
-    }
-
-    message SetLabel {
-        message Req {
-            string label = 1;
-        }
-        message Res {}
-    }
-
-    message GetSupertype {
-        message Req {}
-        message Res {
-            RoleType role_type = 1;
-        }
-    }
-
-    message GetSupertypes {
-        message Req {}
-        message ResPart {
-            repeated RoleType role_types = 1;
-        }
-    }
-
-    message GetSubtypes {
-        message Req {
-            Type.Transitivity transitivity = 1;
-        }
-        message ResPart {
-            repeated RoleType role_types = 1;
-        }
-    }
-
-    message GetRelationTypes {
-        message Req {}
-        message ResPart {
-            repeated RelationType relation_types = 1;
-        }
-    }
-
-    message GetPlayerTypes {
-        message Req {
-            Type.Transitivity transitivity = 1;
-        }
-        message ResPart {
-            repeated ThingType thing_types = 1;
-        }
-    }
-
-    message GetRelationInstances {
-        message Req {
-            Type.Transitivity transitivity = 1;
-        }
-        message ResPart {
-            repeated Relation relations = 1;
-        }
-    }
-
-    message GetPlayerInstances {
-        message Req {
-            Type.Transitivity transitivity = 1;
-        }
-        message ResPart {
-            repeated Thing things = 1;
-        }
     }
 }
 
@@ -712,6 +601,117 @@ message ThingType {
         message Req {}
         message Res {
             string syntax = 1;
+        }
+    }
+}
+
+message RoleType {
+    string label = 1;
+    string scope = 2;
+    bool is_root = 3;
+    bool is_abstract = 4;
+
+    message Req {
+        string label = 1;
+        string scope = 2;
+        oneof req {
+            RoleType.Delete.Req role_type_delete_req = 100;
+            RoleType.SetLabel.Req role_type_set_label_req = 101;
+            RoleType.GetSupertype.Req role_type_get_supertype_req = 102;
+            RoleType.GetSupertypes.Req role_type_get_supertypes_req = 103;
+            RoleType.GetSubtypes.Req role_type_get_subtypes_req = 104;
+            RoleType.GetRelationTypes.Req role_type_get_relation_types_req = 105;
+            RoleType.GetPlayerTypes.Req role_type_get_player_types_req = 106;
+            RoleType.GetRelationInstances.Req role_type_get_relation_instances_req = 107;
+            RoleType.GetPlayerInstances.Req role_type_get_player_instances_req = 108;
+        }
+    }
+
+    message Res {
+        oneof res {
+            RoleType.Delete.Res role_type_delete_res = 100;
+            RoleType.SetLabel.Res role_type_set_label_res = 101;
+            RoleType.GetSupertype.Res role_type_get_supertype_res = 102;
+        }
+    }
+
+    message ResPart {
+        oneof res {
+            RoleType.GetSupertypes.ResPart role_type_get_supertypes_res_part = 100;
+            RoleType.GetSubtypes.ResPart role_type_get_subtypes_res_part = 101;
+            RoleType.GetRelationTypes.ResPart role_type_get_relation_types_res_part = 102;
+            RoleType.GetPlayerTypes.ResPart role_type_get_player_types_res_part = 103;
+            RoleType.GetRelationInstances.ResPart role_type_get_relation_instances_res_part = 104;
+            RoleType.GetPlayerInstances.ResPart role_type_get_player_instances_res_part = 105;
+        }
+    }
+
+    message Delete {
+        message Req {}
+        message Res {}
+    }
+
+    message SetLabel {
+        message Req {
+            string label = 1;
+        }
+        message Res {}
+    }
+
+    message GetSupertype {
+        message Req {}
+        message Res {
+            RoleType role_type = 1;
+        }
+    }
+
+    message GetSupertypes {
+        message Req {}
+        message ResPart {
+            repeated RoleType role_types = 1;
+        }
+    }
+
+    message GetSubtypes {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated RoleType role_types = 1;
+        }
+    }
+
+    message GetRelationTypes {
+        message Req {}
+        message ResPart {
+            repeated RelationType relation_types = 1;
+        }
+    }
+
+    message GetPlayerTypes {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated ThingType thing_types = 1;
+        }
+    }
+
+    message GetRelationInstances {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated Relation relations = 1;
+        }
+    }
+
+    message GetPlayerInstances {
+        message Req {
+            Type.Transitivity transitivity = 1;
+        }
+        message ResPart {
+            repeated Thing things = 1;
         }
     }
 }
