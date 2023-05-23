@@ -60,7 +60,6 @@ filegroup(
     name = "ci",
     data = [
         "@vaticle_dependencies//library/maven:update",
-        "@vaticle_dependencies//tool/bazelrun:rbe",
         "@vaticle_dependencies//tool/cargo:sync",
         "@vaticle_dependencies//tool/unuseddeps:unused-deps",
         "@vaticle_dependencies//tool/release/notes:create",
