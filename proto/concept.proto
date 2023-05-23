@@ -566,7 +566,7 @@ message ThingType {
 
     message GetPlays {
         message Req {
-            optional Type.Transitivity transitivity = 1;
+            Type.Transitivity transitivity = 1;
         }
         message ResPart {
             repeated RoleType role_types = 1;
