@@ -294,8 +294,7 @@ message Attribute {
 }
 
 message Value {
-
-    ValueType valueType = 1;
+    ValueType value_type = 1;
     ConceptValue value = 2;
 }
 
