@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+package typedb.protocol;
+
 enum Version {
 //  reserved; // add past version numbers into the reserved range
   UNSPECIFIED = 0;

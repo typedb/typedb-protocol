@@ -18,6 +18,8 @@
 syntax = "proto3";
 import "version.proto";
 
+package typedb.protocol;
+
 message Connection {
 
   message Req {
