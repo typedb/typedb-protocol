@@ -18,7 +18,7 @@
 syntax = "proto3";
 
 enum Version {
-  //    reserved;
+//  reserved; // add past version numbers into the reserved range
   UNSPECIFIED = 0;
   VERSION = 1;
 }
