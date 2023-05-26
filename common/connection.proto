@@ -16,7 +16,8 @@
 //
 
 syntax = "proto3";
-import "version.proto";
+
+import "common/version.proto";
 
 package typedb.protocol;
 
