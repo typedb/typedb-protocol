@@ -17,6 +17,10 @@
 
 syntax = "proto3";
 
+option java_package = "com.vaticle.typedb.protocol";
+option java_outer_classname = "ConnectionProto";
+option java_generic_services = true;
+
 import "common/version.proto";
 
 package typedb.protocol;
