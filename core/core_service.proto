@@ -22,12 +22,16 @@ option java_outer_classname = "CoreServiceProto";
 option java_generic_services = true;
 
 import "core/core_database.proto";
+import "common/connection.proto";
 import "common/session.proto";
 import "common/transaction.proto";
 
 package typedb.protocol;
 
 service TypeDB {
+
+    // Connection API
+    rpc connection_state (Connection.Req) returns (Connection.Res);
 
     // Database Manager API
     rpc databases_contains (CoreDatabaseManager.Contains.Req) returns (CoreDatabaseManager.Contains.Res);
@@ -51,4 +55,6 @@ service TypeDB {
     // requests and responses back-and-forth. The first transaction client message must
     // be {Transaction.Open.Req}. Closing the stream closes the transaction.
     rpc transaction (stream Transaction.Client) returns (stream Transaction.Server);
+
 }
+

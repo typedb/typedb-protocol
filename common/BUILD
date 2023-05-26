@@ -31,6 +31,14 @@ proto_library(
 )
 
 proto_library(
+    name = "connection-proto",
+    srcs = ["connection.proto"],
+    deps = [
+        ":version-proto",
+    ],
+)
+
+proto_library(
     name = "logic-proto",
     srcs = ["logic.proto"],
     deps = [":answer-proto"]
@@ -69,6 +77,11 @@ proto_library(
     ]
 )
 
+proto_library(
+    name = "version-proto",
+    srcs = ["version.proto"],
+)
+
 # TODO: THIS SHOULD BE MADE TO STOP EXISTING
 # This exists to support the nodejs build- when it becomes a real rule, we should extract the .src_files
 # from the above proto_library rules, but for now this is required to get the source files.
@@ -77,11 +90,13 @@ filegroup(
     srcs = [
         "answer.proto",
         "concept.proto",
+        "connection.proto",
         "options.proto",
         "query.proto",
         "session.proto",
         "transaction.proto",
         "logic.proto",
+        "version.proto",
     ]
 )
 
