@@ -27,19 +27,6 @@ package typedb.protocol;
 
 message Connection {
 
-  message Req {
-    oneof req {
-      Open.Req open_req = 1;
-    }
-  }
-
-  message Res {
-    oneof res {
-      Open.Res open_res = 1;
-    }
-  }
-
-
   message Open {
     message Req {
       Version version = 1;

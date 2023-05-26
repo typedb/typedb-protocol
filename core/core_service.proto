@@ -31,7 +31,7 @@ package typedb.protocol;
 service TypeDB {
 
     // Connection API
-    rpc connection (Connection.Req) returns (Connection.Res);
+    rpc connection_open (Connection.Open.Req) returns (Connection.Open.Res);
 
     // Database Manager API
     rpc databases_contains (CoreDatabaseManager.Contains.Req) returns (CoreDatabaseManager.Contains.Res);
