@@ -47,11 +47,13 @@ ts_grpc_compile(
         "//cluster:service-proto", # TODO: do we need this?
         "//common:answer-proto",
         "//common:concept-proto",
+        "//common:connection-proto",
         "//common:logic-proto",
         "//common:options-proto",
         "//common:query-proto",
         "//common:session-proto",
         "//common:transaction-proto",
+        "//common:version-proto",
         "//core:database-proto",
         "//core:service-proto", # TODO: do we need this?
     ],

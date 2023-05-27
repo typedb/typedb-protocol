@@ -22,12 +22,16 @@ option java_outer_classname = "CoreServiceProto";
 option java_generic_services = true;
 
 import "core/core_database.proto";
+import "common/connection.proto";
 import "common/session.proto";
 import "common/transaction.proto";
 
 package typedb.protocol;
 
 service TypeDB {
+
+    // Connection API
+    rpc connection_open (Connection.Open.Req) returns (Connection.Open.Res);
 
     // Database Manager API
     rpc databases_contains (CoreDatabaseManager.Contains.Req) returns (CoreDatabaseManager.Contains.Res);

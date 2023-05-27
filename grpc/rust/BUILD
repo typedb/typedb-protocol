@@ -31,11 +31,13 @@ rust_tonic_compile(
         "//cluster:database-proto",
         "//common:answer-proto",
         "//common:concept-proto",
+        "//common:connection-proto",
         "//common:logic-proto",
         "//common:options-proto",
         "//common:query-proto",
         "//common:session-proto",
         "//common:transaction-proto",
+        "//common:version-proto",
         "//core:database-proto",
         "//core:service-proto",
     ]
