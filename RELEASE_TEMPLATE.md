@@ -1,3 +1,5 @@
+# TypeDB Protocol
+
 Documentation: https://docs.vaticle.com/docs/client-api/
 
 ### Distribution

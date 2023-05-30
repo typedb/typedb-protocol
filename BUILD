@@ -47,7 +47,7 @@ deploy_github(
     name = "deploy-github",
     organisation = deployment["github.organisation"],
     repository = deployment["github.repository"],
-    release_description = "//:LATEST_RELEASE_NOTES.md",
+    release_description = "//:RELEASE_NOTES_LATEST.md",
     title = "TypeDB Protocol",
     title_append_version = True,
     draft = False,
