@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # Copyright (C) 2022 Vaticle
 #
@@ -15,11 +16,4 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-
-def vaticle_dependencies():
-    git_repository(
-        name = "vaticle_dependencies",
-        remote = "https://github.com/vaticle/dependencies",
-        commit = "172c7eed134bad3dd8a2d26cfd608b11b8e3996f", # sync-marker: do not remove this comment, this is used for sync-dependencies by @vaticle_dependencies
-    )
+ bazel run @vaticle_dependencies//tool/release/notes:create -- vaticle typedb-protocol HEAD $(cat VERSION) ./RELEASE_TEMPLATE.md ./LATEST_RELEASE_NOTES.md
