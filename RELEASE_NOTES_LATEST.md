@@ -1,7 +1,5 @@
 # TypeDB Protocol
 
-This release aims to fix the release pipeline for client-nodejs. The remaining released artifacts are identical to 2.18.0.
-
 Documentation: https://docs.vaticle.com/docs/client-api/
 
 ### Distribution
@@ -51,7 +49,10 @@ yarn install typedb-protocol
 
 ## Bugs Fixed
 
-- **Fix key loading from heroku for NPM**
+- **Fix npm deployment by pulling GPG keys using wget**
+
+
+- **Fix release note generation**
 
 
 ## Code Refactors
