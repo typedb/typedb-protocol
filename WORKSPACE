@@ -15,10 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-workspace(
-    name = "vaticle_typedb_protocol",
-    managed_directories = {"@npm": ["node_modules"]},
-)
+workspace(name = "vaticle_typedb_protocol")
 
 ################################
 # Load @vaticle_dependencies #
