@@ -116,8 +116,8 @@ def ts_grpc_compile(
         tools = [
             "//grpc/nodejs:grpc_tools_node_protoc",
             "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
-            "@npm//grpc_tools_node_protoc_ts",
-            "@npm//google-protobuf",
+#            "@npm//grpc_tools_node_protoc_ts",
+#            "@npm//google-protobuf",
         ],
         srcs = [proto_sources_name]
     )

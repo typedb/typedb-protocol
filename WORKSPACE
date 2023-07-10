@@ -24,10 +24,6 @@ workspace(name = "vaticle_typedb_protocol")
 load("//dependencies/vaticle:repositories.bzl", "vaticle_dependencies")
 vaticle_dependencies()
 
-# Load //builder/bazel for RBE
-load("@vaticle_dependencies//builder/bazel:deps.bzl", "bazel_toolchain")
-bazel_toolchain()
-
 # Load //builder/java
 load("@vaticle_dependencies//builder/java:deps.bzl", java_deps = "deps")
 java_deps()
@@ -82,14 +78,6 @@ rules_proto_toolchains()
 load("@rules_proto_grpc//java:repositories.bzl", rules_proto_grpc_java_repos = "java_repos")
 rules_proto_grpc_java_repos()
 
-#
-#load("@com_github_grpc_grpc//bazel:grpc_deps.bzl",
-#com_github_grpc_grpc_deps = "grpc_deps")
-#com_github_grpc_grpc_deps()
-
-
-
-
 # Load //tool/checkstyle
 load("@vaticle_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
 checkstyle_deps()
@@ -143,13 +131,18 @@ workspace_refs(
 # Load NPM dependencies #
 #########################
 
-## Load //builder/nodejs
+# Load //builder/nodejs
+load("@vaticle_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
+nodejs_deps()
 
-#node_repositories(
-#    preserve_symlinks = False,
-#)
-#yarn_install(
-#  name = "npm",
-#  package_json = "//grpc/nodejs:package.json",
-#  yarn_lock = "//grpc/nodejs:yarn.lock",
-#)
+load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_dependencies")
+build_bazel_rules_nodejs_dependencies()
+
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
+node_repositories()
+yarn_install(
+  name = "npm",
+  package_json = "//grpc/nodejs:package.json",
+  yarn_lock = "//grpc/nodejs:yarn.lock",
+  exports_directories_only = False,
+)
