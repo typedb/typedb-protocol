@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-build --incompatible_strict_action_env --java_language_version=11 --javacopt='--release 11'
+build --incompatible_strict_action_env --java_language_version=11 --javacopt='--release 11' --cxxopt=-std=c++14 --host_cxxopt=-std=c++14
 run --incompatible_strict_action_env
 test --incompatible_strict_action_env
 

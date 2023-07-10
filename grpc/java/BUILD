@@ -16,16 +16,18 @@
 #
 
 package(default_visibility = ["//visibility:public"])
-load("@stackb_rules_proto//java:java_grpc_compile.bzl", "java_grpc_compile")
+
+load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@vaticle_bazel_distribution//maven:rules.bzl", "assemble_maven", "deploy_maven")
 load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@vaticle_dependencies//distribution/maven:version.bzl", "version")
 load("@vaticle_dependencies//library/maven:artifacts.bzl", "artifacts")
 load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
+load("@rules_proto_grpc//java:defs.bzl", "java_proto_library")
 
-java_grpc_compile(
-    name = "typedb-protocol-src",
-    deps = [
+java_proto_library(
+    name = "typedb-protocol",
+    protos = [
         "//cluster:service-proto",
         "//cluster:server-proto",
         "//cluster:user-proto",
@@ -41,23 +43,31 @@ java_grpc_compile(
         "//common:version-proto",
         "//core:database-proto",
         "//core:service-proto",
-    ]
-)
-
-java_library(
-    name = "typedb-protocol",
-    srcs = [":typedb-protocol-src"],
-    deps = [
-        "@maven//:com_google_guava_guava",
-        "@maven//:com_google_protobuf_protobuf_java",
-        "@maven//:io_grpc_grpc_core",
-        "@maven//:io_grpc_grpc_protobuf",
-        "@maven//:io_grpc_grpc_stub",
-        "@maven//:io_grpc_grpc_api",
-        "@maven//:javax_annotation_javax_annotation_api", # gRPC needs this in order to compile in Java 11 and Java 14
     ],
+
+#        "@maven//:com_google_guava_guava",
+#        "@maven//:com_google_protobuf_protobuf_java",
+#        "@maven//:io_grpc_grpc_core",
+#        "@maven//:io_grpc_grpc_protobuf",
+#        "@maven//:io_grpc_grpc_stub",
+#        "@maven//:io_grpc_grpc_api",
+#        "@maven//:javax_annotation_javax_annotation_api", # gRPC needs this in order to compile in Java 11 and Java 14
     tags = ["maven_coordinates=com.vaticle.typedb:typedb-protocol:{pom_version}", "checkstyle_ignore"],
 )
+
+#load("@rules_proto_grpc//java:defs.bzl", "java_proto_compile")
+
+#java_proto_compile(
+#    name = "typedb-protocol-compiled",
+#    protos = ["//common:options-proto"]
+#)
+
+#java_proto_library(
+#    name = "typedb-protocol-java",
+##    protos = ["//core:service-proto"],
+##    deps = [":typedb-protocol"],
+#    protos = ["//common:options-proto"]
+#)
 
 checkstyle_test(
     name = "checkstyle",

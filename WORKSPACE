@@ -32,6 +32,11 @@ bazel_toolchain()
 load("@vaticle_dependencies//builder/java:deps.bzl", java_deps = "deps")
 java_deps()
 
+load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
+rules_jvm_external_deps()
+load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
+rules_jvm_external_setup()
+
 # Load //builder/kotlin
 load("@vaticle_dependencies//builder/kotlin:deps.bzl", kotlin_deps = "deps")
 kotlin_deps()
@@ -66,15 +71,24 @@ vaticle_dependencies_ci_pip()
 load("@vaticle_dependencies//builder/grpc:deps.bzl", grpc_deps = "deps")
 grpc_deps()
 
-load("@com_github_grpc_grpc//bazel:grpc_deps.bzl",
-com_github_grpc_grpc_deps = "grpc_deps")
-com_github_grpc_grpc_deps()
+load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_toolchains", "rules_proto_grpc_repos")
+rules_proto_grpc_toolchains()
+rules_proto_grpc_repos()
 
-load("@stackb_rules_proto//java:deps.bzl", "java_grpc_compile")
-java_grpc_compile()
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+rules_proto_dependencies()
+rules_proto_toolchains()
 
-load("@stackb_rules_proto//node:deps.bzl", "node_grpc_compile")
-node_grpc_compile()
+load("@rules_proto_grpc//java:repositories.bzl", rules_proto_grpc_java_repos = "java_repos")
+rules_proto_grpc_java_repos()
+
+#
+#load("@com_github_grpc_grpc//bazel:grpc_deps.bzl",
+#com_github_grpc_grpc_deps = "grpc_deps")
+#com_github_grpc_grpc_deps()
+
+
+
 
 # Load //tool/checkstyle
 load("@vaticle_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
@@ -129,15 +143,13 @@ workspace_refs(
 # Load NPM dependencies #
 #########################
 
-load("@vaticle_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
-nodejs_deps(["@vaticle_dependencies//builder/nodejs:remove-node-patches.patch"])
-load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
+## Load //builder/nodejs
 
-node_repositories(
-    preserve_symlinks = False,
-)
-yarn_install(
-  name = "npm",
-  package_json = "//grpc/nodejs:package.json",
-  yarn_lock = "//grpc/nodejs:yarn.lock",
-)
+#node_repositories(
+#    preserve_symlinks = False,
+#)
+#yarn_install(
+#  name = "npm",
+#  package_json = "//grpc/nodejs:package.json",
+#  yarn_lock = "//grpc/nodejs:yarn.lock",
+#)
