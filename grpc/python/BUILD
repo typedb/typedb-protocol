@@ -15,35 +15,45 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-#package(default_visibility = ["//visibility:public"])
-#load("@stackb_rules_proto//python:python_grpc_compile.bzl", "python_grpc_compile")
-#load("@vaticle_bazel_distribution//pip:rules.bzl", "assemble_pip", "deploy_pip", "python_repackage")
-#load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
-#load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+package(default_visibility = ["//visibility:public"])
+load("@rules_proto_grpc//python:defs.bzl", "python_grpc_library")
+load("@vaticle_bazel_distribution//pip:rules.bzl", "assemble_pip", "deploy_pip", "python_repackage")
+load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
+load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_python//python:defs.bzl", "py_test")
+load("@rules_python//python:proto.bzl", "py_proto_library")
+
+py_proto_library(
+    name = "pricetag_proto_py_pb2",
+    deps = ["//common:options-proto"]
+)
+
+
 #
-#
-#python_grpc_compile(
-#    name = "typedb-protocol-src",
-#    deps = [
-#        "//cluster:server-proto",
-#        "//cluster:user-proto",
-#        "//cluster:database-proto",
-#        "//cluster:service-proto",
-#        "//common:answer-proto",
-#        "//common:concept-proto",
-#        "//common:connection-proto",
-#        "//common:logic-proto",
-#        "//common:options-proto",
-#        "//common:query-proto",
-#        "//common:session-proto",
-#        "//common:transaction-proto",
-#        "//common:version-proto",
-#        "//core:database-proto",
-#        "//core:service-proto",
-#    ],
-#    visibility = ["//visibility:public"]
-#)
-#
+python_grpc_library(
+    name = "typedb-protocol-src",
+    protos = [
+        "//cluster:server-proto",
+        "//cluster:user-proto",
+        "//cluster:database-proto",
+        "//cluster:service-proto",
+        "//common:answer-proto",
+        "//common:concept-proto",
+        "//common:connection-proto",
+        "//common:logic-proto",
+        "//common:options-proto",
+        "//common:query-proto",
+        "//common:session-proto",
+        "//common:transaction-proto",
+        "//common:version-proto",
+        "//core:database-proto",
+        "//core:service-proto",
+    ],
+    visibility = ["//visibility:public"]
+)
+##
 #python_repackage(
 #    name = "typedb-protocol-pkg",
 #    src = ":typedb-protocol-src",
@@ -56,13 +66,13 @@
 #    srcs = ["typedb-protocol-pkg"],
 #    imports = ["../../../grpc/python"]
 #)
-#
-#checkstyle_test(
-#    name = "checkstyle",
-#    include = glob(["*"]),
-#    license_type = "agpl-header",
-#    size = "small",
-#)
+
+checkstyle_test(
+    name = "checkstyle",
+    include = glob(["*"]),
+    license_type = "agpl-header",
+    size = "small",
+)
 #
 #assemble_pip(
 #    name = "assemble-pip",

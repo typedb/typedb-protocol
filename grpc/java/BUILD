@@ -55,20 +55,6 @@ java_proto_library(
     tags = ["maven_coordinates=com.vaticle.typedb:typedb-protocol:{pom_version}", "checkstyle_ignore"],
 )
 
-#load("@rules_proto_grpc//java:defs.bzl", "java_proto_compile")
-
-#java_proto_compile(
-#    name = "typedb-protocol-compiled",
-#    protos = ["//common:options-proto"]
-#)
-
-#java_proto_library(
-#    name = "typedb-protocol-java",
-##    protos = ["//core:service-proto"],
-##    deps = [":typedb-protocol"],
-#    protos = ["//common:options-proto"]
-#)
-
 checkstyle_test(
     name = "checkstyle",
     include = glob(["*"]),
