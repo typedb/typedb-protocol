@@ -171,7 +171,10 @@ load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_d
 build_bazel_rules_nodejs_dependencies()
 
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
-node_repositories()
+node_repositories(
+    node_version = "17.9.1"
+)
+
 yarn_install(
     name = "npm",
     package_json = "//grpc/nodejs:package.json",
