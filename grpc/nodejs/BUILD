@@ -23,42 +23,13 @@ load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 load("//:deployment.bzl", github_deployment = "deployment")
 load("//grpc/nodejs:rules.bzl", "ts_grpc_compile")
 
-
-#nodejs_binary(
-#  name = "grpc_tools_node_protoc",
-#  data = ["@npm//grpc-tools:grpc-tools", ],
-#  entry_point = "@npm//:node_modules/grpc-tools/bin/protoc.js",
-#  templated_args = ["--nobazel_node_patches"],
-#)
-
-nodejs_binary(
-  name = "protoc-gen-ts",
-  data = ["@npm//protoc-gen-ts:protoc-gen-ts"],
-  entry_point = "@npm//:node_modules/protoc-gen-ts/bin/protoc-gen-ts.js",
-#  templated_args = ["--nobazel_node_patches"],
-)
-
-nodejs_binary(
-  name = "grpc_tools_node_protoc",
-  data = ["@npm//grpc-tools:grpc-tools", "@build_bazel_rules_nodejs//internal/node:node_patches.cjs"],
-  entry_point = "@npm//:node_modules/grpc-tools/bin/protoc.js",
-#  templated_args = ["--nobazel_node_patches"],
-)
-
-#nodejs_binary(
-#  name = "protoc-gen-ts",
-#  data = ["@npm//grpc_tools_node_protoc_ts:grpc_tools_node_protoc_ts"],
-#  entry_point = "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
-#  templated_args = ["--nobazel_node_patches"],
-#)
-
 ts_grpc_compile(
     name = "typedb-protocol-src",
     deps = [
         "//cluster:server-proto",
         "//cluster:user-proto",
         "//cluster:database-proto",
-        "//cluster:service-proto", # TODO: do we need this?
+        "//cluster:service-proto",
         "//common:answer-proto",
         "//common:concept-proto",
         "//common:connection-proto",
@@ -69,12 +40,8 @@ ts_grpc_compile(
         "//common:transaction-proto",
         "//common:version-proto",
         "//core:database-proto",
-        "//core:service-proto", # TODO: do we need this?
+        "//core:service-proto",
     ],
-#    grpc_deps = [
-#        "//core:service-proto",
-#        "//cluster:service-proto",
-#    ]
 )
 
 pkg_npm(

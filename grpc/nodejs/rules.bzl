@@ -172,15 +172,12 @@ ts_grpc_compile = rule(
         "_protoc": attr.label(
             cfg = "exec",
             executable = True,
-#            allow_single_file = True,
-#            default = ("//grpc/nodejs:grpc_tools_node_protoc")
             default = "@com_google_protobuf//:protoc"
         ),
         "_protoc_gen_ts": attr.label(
             cfg = "exec",
             executable = True,
-#            allow_single_file = True,
-            default = ("@npm//protoc-gen-ts/bin:protoc-gen-ts")
+            default = "@npm//protoc-gen-ts/bin:protoc-gen-ts"
         )
    }
 )
