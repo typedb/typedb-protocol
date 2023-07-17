@@ -24,6 +24,7 @@ load("@vaticle_dependencies//distribution/maven:version.bzl", "version")
 load("@vaticle_dependencies//library/maven:artifacts.bzl", "artifacts")
 load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 load("@rules_proto_grpc//java:defs.bzl", "java_proto_library")
+load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library")
 
 java_proto_library(
     name = "typedb-protocol",
