@@ -26,7 +26,7 @@ load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 load("@rules_proto_grpc//java:defs.bzl", "java_proto_library")
 load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library")
 
-java_proto_library(
+java_grpc_library(
     name = "typedb-protocol",
     protos = [
         "//cluster:service-proto",

@@ -87,7 +87,9 @@ load("@rules_proto_grpc//java:repositories.bzl", rules_proto_grpc_java_repos = "
 rules_proto_grpc_java_repos()
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
-#load("@io_grpc_grpc_java//:repositories.bzl", "IO_GRPC_GRPC_JAVA_ARTIFACTS", "IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS", "grpc_java_repositories")
+load("@io_grpc_grpc_java//:repositories.bzl", "IO_GRPC_GRPC_JAVA_ARTIFACTS", "IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS", "grpc_java_repositories")
+load("@vaticle_dependencies//library/maven:rules.bzl", "parse_unversioned")
+io_grpc_artifacts = [parse_unversioned(c) for c in IO_GRPC_GRPC_JAVA_ARTIFACTS]
 #maven_install(
 #    artifacts = IO_GRPC_GRPC_JAVA_ARTIFACTS,
 #    generate_compat_repositories = True,
@@ -96,7 +98,7 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 #        "https://repo.maven.apache.org/maven2/",
 #    ],
 #)
-
+#
 #load("@maven//:compat.bzl", "compat_repositories")
 #compat_repositories()
 #grpc_java_repositories()
@@ -166,7 +168,14 @@ vaticle_dependencies_ci_pip()
 
 load("@vaticle_dependencies//library/maven:rules.bzl", "maven")
 load("//dependencies/maven:artifacts.bzl", "artifacts")
-maven(artifacts + vaticle_dependencies_tool_maven_artifacts + vaticle_bazel_distribution_maven_artifacts)
+maven(artifacts + vaticle_dependencies_tool_maven_artifacts + vaticle_bazel_distribution_maven_artifacts + io_grpc_artifacts,
+      override_targets = IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS,
+      generate_compat_repositories = True,
+)
+
+load("@maven//:compat.bzl", "compat_repositories")
+compat_repositories()
+grpc_java_repositories()
 
 ##################################################
 # Create @vaticle_typedb_protocol_workspace_refs #
