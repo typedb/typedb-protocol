@@ -25,6 +25,9 @@ load("@vaticle_dependencies//library/maven:artifacts.bzl", "artifacts")
 load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library")
 
+
+# NOTE: This rule only generates code for services; it does not generate code for messages...
+
 java_grpc_library(
     name = "typedb-protocol",
     protos = [
