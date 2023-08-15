@@ -20,7 +20,7 @@ load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@vaticle_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
 load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
-load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@vaticle_typedb_protocol_npm//:defs.bzl", "npm_link_all_packages")
 load("//:deployment.bzl", github_deployment = "deployment")
 load("//grpc/nodejs:rules.bzl", "ts_grpc_compile")
 
@@ -28,7 +28,7 @@ npm_link_all_packages(name = "node_modules")
 
 exports_files(["package.json", "pnpm-lock.yaml"])
 
-load("@npm//grpc/nodejs:protoc-gen-ts/package_json.bzl", protoc_gen_ts_bin = "bin")
+load("@vaticle_typedb_protocol_npm//grpc/nodejs:protoc-gen-ts/package_json.bzl", protoc_gen_ts_bin = "bin")
 
 protoc_gen_ts_bin.protoc_gen_ts_binary(
     name = "protoc-gen-ts",
@@ -99,7 +99,7 @@ checkstyle_test(
     include = glob(["*"]),
     exclude = [
         "package.json",
-        "yarn.lock",
+        "pnpm-lock.yaml",
     ],
     license_type = "agpl-header",
     size = "small",

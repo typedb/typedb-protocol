@@ -191,7 +191,7 @@ nodejs_register_toolchains(
 
 load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
 npm_translate_lock(
-    name = "npm",
+    name = "vaticle_typedb_protocol_npm",
     bins = {
         "protoc-gen-ts": {
             "protoc-gen-ts-js": "./bin/protoc-gen-ts.js",
@@ -200,7 +200,7 @@ npm_translate_lock(
     pnpm_lock = "//grpc/nodejs:pnpm-lock.yaml",
 )
 
-load("@npm//:repositories.bzl", "npm_repositories")
+load("@vaticle_typedb_protocol_npm//:repositories.bzl", "npm_repositories")
 npm_repositories()
 
 # Setup rules_ts

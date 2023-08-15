@@ -40,7 +40,12 @@ def _get_outputs(target, ctx):
             dest = source.dirname[len(ctx.label.package) + 1:]
             if not dest:
                 dest = "."
-        output = ctx.actions.declare_file("/".join([dest, name])) # preserve dir structure for now
+
+        if dest != ".":
+            if name.startswith(dest):
+                name = name[len(dest)+1:]
+
+        output = ctx.actions.declare_file(name) # preserve dir structure for now
         outputs.append(output)
     return outputs
 
@@ -59,7 +64,7 @@ def _node_protoc(ctx):
         args = ctx.actions.args()
         # Output and Plugin path
         args.add(_as_path(ctx.executable._protoc_gen_ts.path, is_windows_host), format = "--plugin=protoc-gen-ts=%s")
-        args.add(paths.join(ctx.bin_dir.path, paths.dirname(ctx.build_file_path)), format = "--ts_out=%s")
+        args.add(paths.join(ctx.bin_dir.path, paths.dirname(ctx.file._file_in_project.path)), format = "--ts_out=%s")
 
         # Set in descriptors
         descriptor_sets_paths = [desc.path for desc in target[ProtoInfo].transitive_descriptor_sets.to_list()]
@@ -107,7 +112,11 @@ ts_grpc_compile = rule(
         "_protoc_gen_ts": attr.label(
             cfg = "exec",
             executable = True,
-            default = "//grpc/nodejs:protoc-gen-ts",
-        )
+            default = "@vaticle_typedb_protocol//grpc/nodejs:protoc-gen-ts",
+        ),
+        "_file_in_project": attr.label(
+            default = "@vaticle_typedb_protocol//grpc/nodejs:BUILD",
+            allow_single_file = True,
+        ),
    }
 )
