@@ -81,7 +81,7 @@ ts_project(
 
 npm_package(
     name = "typedb-protocol-package",
-    srcs = [":typedb-protocol"],
+    srcs = [":typedb-protocol", "package.json"],
     include_runfiles = False,
     package = "typedb-protocol",
     include_external_repositories = ["vaticle_typedb_protocol"],
