@@ -74,6 +74,7 @@ build:
       command: |
         export DEPLOY_NPM_USERNAME=$REPO_VATICLE_USERNAME
         export DEPLOY_NPM_PASSWORD=$REPO_VATICLE_PASSWORD
+        bazel run @vaticle_dependencies//tool/bazelinstall:remote_cache_setup.sh
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:typedb-protocol-package.publish -- --registry=https://repo.vaticle.com/repository/npm-snapshot/ --//repo.vaticle.com/repository/npm-snapshot/:_auth=$(base64 <<< "$DEPLOY_NPM_USERNAME:$DEPLOY_NPM_PASSWORD")
 
 release:
