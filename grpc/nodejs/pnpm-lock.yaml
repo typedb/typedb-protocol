@@ -8,6 +8,9 @@ dependencies:
   '@grpc/grpc-js':
     specifier: 1.9.0
     version: 1.9.0
+  google-protobuf:
+    specifier: 3.19.3
+    version: 3.19.3
 
 devDependencies:
   '@types/google-protobuf':
@@ -18,7 +21,7 @@ devDependencies:
     version: 20.0.0
   protoc-gen-ts:
     specifier: 0.8.6
-    version: 0.8.6(google-protobuf@3.15.8)(typescript@4.9.5)
+    version: 0.8.6(google-protobuf@3.19.3)(typescript@4.9.5)
   typescript:
     specifier: 4.9.5
     version: 4.9.5
@@ -145,9 +148,8 @@ packages:
     engines: {node: 6.* || 8.* || >= 10.*}
     dev: false
 
-  /google-protobuf@3.15.8:
-    resolution: {integrity: sha512-2jtfdqTaSxk0cuBJBtTTWsot4WtR9RVr2rXg7x7OoqiuOKopPrwXpM1G4dXIkLcUNRh3RKzz76C8IOkksZSeOw==}
-    dev: true
+  /google-protobuf@3.19.3:
+    resolution: {integrity: sha512-3GRDj8o9XjcALYjgxNKeD7Wm6w/V8r1Jo4sLYMic9+VaIMLBx8TQeHP9yaoRoDymNONhnkmmveDPyjw/Fpw8+A==}
 
   /is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
@@ -185,14 +187,14 @@ packages:
       long: 5.2.3
     dev: false
 
-  /protoc-gen-ts@0.8.6(google-protobuf@3.15.8)(typescript@4.9.5):
+  /protoc-gen-ts@0.8.6(google-protobuf@3.19.3)(typescript@4.9.5):
     resolution: {integrity: sha512-66oeorGy4QBvYjQGd/gaeOYyFqKyRmRgTpofmnw8buMG0P7A0jQjoKSvKJz5h5tNUaVkIzvGBUTRVGakrhhwpA==}
     hasBin: true
     peerDependencies:
       google-protobuf: ^3.13.0
       typescript: 4.x.x
     dependencies:
-      google-protobuf: 3.15.8
+      google-protobuf: 3.19.3
       typescript: 4.9.5
     dev: true
 

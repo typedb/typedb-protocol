@@ -65,6 +65,7 @@ def _node_protoc(ctx):
         # Output and Plugin path
         args.add(_as_path(ctx.executable._protoc_gen_ts.path, is_windows_host), format = "--plugin=protoc-gen-ts=%s")
         args.add(paths.join(ctx.bin_dir.path, paths.dirname(ctx.file._file_in_project.path)), format = "--ts_out=%s")
+        args.add("--ts_opt=no_namespace")
 
         # Set in descriptors
         descriptor_sets_paths = [desc.path for desc in target[ProtoInfo].transitive_descriptor_sets.to_list()]

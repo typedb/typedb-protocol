@@ -19,6 +19,7 @@ package(default_visibility = ["//visibility:public"])
 load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@vaticle_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
 load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
 load("@vaticle_typedb_protocol_npm//:defs.bzl", "npm_link_all_packages")
 load("//:deployment.bzl", github_deployment = "deployment")
@@ -62,17 +63,29 @@ ts_project(
             "module": "commonjs",
             "moduleResolution": "node",
             "esModuleInterop": True,
-        }
+        },
+        "include": [
+            "proto",
+        ]
     },
     declaration = True,
     deps = [
         ":node_modules/@grpc/grpc-js",
+        ":node_modules/google-protobuf",
         ":node_modules/@types/google-protobuf",
         ":node_modules/@types/node",
         ":node_modules/typescript",
     ],
     visibility = ["//visibility:public"],
-    out_dir = "dist",
+)
+
+npm_package(
+    name = "typedb-protocol-package",
+    srcs = [":typedb-protocol"],
+    include_runfiles = False,
+    package = "typedb-protocol",
+    include_external_repositories = ["vaticle_typedb_protocol"],
+    visibility = ["//visibility:public"],
 )
 
 #pkg_npm(
