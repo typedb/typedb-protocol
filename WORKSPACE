@@ -160,15 +160,6 @@ load("@maven//:compat.bzl", "compat_repositories")
 compat_repositories()
 grpc_java_repositories()
 
-##################################################
-# Create @vaticle_typedb_protocol_workspace_refs #
-##################################################
-
-load("@vaticle_bazel_distribution//common:rules.bzl", "workspace_refs")
-workspace_refs(
-    name = "vaticle_typedb_protocol_workspace_refs"
-)
-
 #########################
 # Load NPM dependencies #
 #########################
@@ -205,4 +196,13 @@ load("@aspect_rules_ts//ts:repositories.bzl", "rules_ts_dependencies")
 
 rules_ts_dependencies(
     ts_version_from = "//grpc/nodejs:package.json",
+)
+
+##################################################
+# Create @vaticle_typedb_protocol_workspace_refs #
+##################################################
+
+load("@vaticle_bazel_distribution//common:rules.bzl", "workspace_refs")
+workspace_refs(
+    name = "vaticle_typedb_protocol_workspace_refs"
 )
