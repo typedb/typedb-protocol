@@ -25,7 +25,7 @@ rust_tonic_compile(
     name = "typedb_protocol_src",
     packages = ["typedb.protocol"],
     srcs = [
-        "//proto:service-proto",
+        "//proto:typedb-service",
         "//proto:server-proto",
         "//proto:user-proto",
         "//proto:database-proto",

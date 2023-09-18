@@ -22,7 +22,7 @@ load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library")
 java_grpc_library(
     name = "typedb-protocol",
     protos = [
-        "//proto:service-proto",
+        "//proto:typedb-service",
         "//proto:server-proto",
         "//proto:user-proto",
         "//proto:database-proto",

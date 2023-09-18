@@ -20,8 +20,8 @@ package(default_visibility = ["//visibility:public"])
 load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
-    name = "service-proto",
-    srcs = [":service.proto"],
+    name = "typedb-service",
+    srcs = [":typedb-service.proto"],
     deps = [
         ":connection-proto",
         ":server-proto",

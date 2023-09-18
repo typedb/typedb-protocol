@@ -38,6 +38,7 @@ protoc_gen_ts_bin.protoc_gen_ts_binary(
 ts_grpc_compile(
     name = "typedb-protocol-src",
     deps = [
+        "//proto:typedb-service",
         "//proto:server-proto",
         "//proto:user-proto",
         "//proto:database-proto",
@@ -50,7 +51,6 @@ ts_grpc_compile(
         "//proto:session-proto",
         "//proto:transaction-proto",
         "//proto:version-proto",
-        "//proto:service-proto",
     ]
 )
 
