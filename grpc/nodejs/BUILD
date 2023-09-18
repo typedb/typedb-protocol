@@ -88,24 +88,17 @@ npm_package(
     visibility = ["//visibility:public"],
 )
 
-#pkg_npm(
-#    name = "typedb-protocol",
-#    package_name = "typedb_protocol",
-#    srcs = ["package.json"],
-#    deps = [":typedb-protocol-src"],
-#)
+assemble_npm(
+    name = "assemble-npm",
+    target = ":typedb-protocol-package",
+)
 
-#assemble_npm(
-#    name = "assemble-npm",
-#    target = ":typedb-protocol",
-#)
-
-#deploy_npm(
-#    name = "deploy-npm",
-#    target = ":assemble-npm",
-#    snapshot = deployment["npm.snapshot"],
-#    release = deployment["npm.release"],
-#)
+deploy_npm(
+    name = "deploy-npm",
+    target = ":assemble-npm",
+    snapshot = deployment["npm.snapshot"],
+    release = deployment["npm.release"],
+)
 
 checkstyle_test(
     name = "checkstyle",

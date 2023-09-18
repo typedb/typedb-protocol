@@ -67,15 +67,14 @@ build:
         bazel run --define version=$(git rev-parse HEAD) //grpc/rust:deploy_crate -- snapshot
       dependencies: [build, build-dependency]
     deploy-npm-snapshot:
-#      filter:
-#        owner: vaticle
-#        branch: master
+      filter:
+        owner: vaticle
+        branch: master
       image: vaticle-ubuntu-20.04
       command: |
         export DEPLOY_NPM_USERNAME=$REPO_VATICLE_USERNAME
         export DEPLOY_NPM_PASSWORD=$REPO_VATICLE_PASSWORD
-        bazel run @vaticle_dependencies//tool/bazelinstall:remote_cache_setup.sh
-        bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:typedb-protocol-package.publish -- --registry=https://repo.vaticle.com/repository/npm-snapshot/ --//repo.vaticle.com/repository/npm-snapshot/:_auth=$(base64 <<< "$DEPLOY_NPM_USERNAME:$DEPLOY_NPM_PASSWORD")
+        bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
 
 release:
   filter:
