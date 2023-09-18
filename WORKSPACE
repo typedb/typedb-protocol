@@ -110,21 +110,6 @@ checkstyle_deps()
 load("@vaticle_dependencies//tool/unuseddeps:deps.bzl", unuseddeps_deps = "deps")
 unuseddeps_deps()
 
-####################################
-# Load @com_google_protobuf #
-####################################
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-
-git_repository(
-    name = "com_google_protobuf",
-    remote = "https://github.com/protocolbuffers/protobuf",
-    commit = "ab840345966d0fa8e7100d771c92a73bfbadd25c",
-)
-
-# Load protoc binary dependencies
-load("@com_google_protobuf//:protobuf_deps.bzl", "PROTOBUF_MAVEN_ARTIFACTS", "protobuf_deps")
-protobuf_deps()
-
 ######################################
 # Load @vaticle_bazel_distribution #
 ######################################
