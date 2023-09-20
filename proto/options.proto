@@ -18,38 +18,19 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ClusterDatabaseProto";
+option java_outer_classname = "OptionsProto";
 
 package typedb.protocol;
 
-message ClusterDatabaseManager {
-
-    message Get {
-        message Req {
-            string name = 1;
-        }
-        message Res {
-            ClusterDatabase database = 1;
-        }
-    }
-
-    message All {
-        message Req {}
-        message Res {
-            repeated ClusterDatabase databases = 1;
-        }
-    }
-}
-
-message ClusterDatabase {
-
-    string name = 1;
-    repeated Replica replicas = 2;
-
-    message Replica {
-        string address = 1;
-        bool primary = 2;
-        bool preferred = 3;
-        int64 term = 4;
-    }
+message Options {
+    optional bool infer = 1;
+    optional bool trace_inference = 2;
+    optional bool explain = 3;
+    optional bool parallel = 4;
+    optional int32 prefetch_size = 5;
+    optional bool prefetch = 6;
+    optional int32 session_idle_timeout_millis = 7;
+    optional int32 transaction_timeout_millis = 8;
+    optional int32 schema_lock_acquire_timeout_millis = 9;
+    optional bool read_any_replica = 10;
 }

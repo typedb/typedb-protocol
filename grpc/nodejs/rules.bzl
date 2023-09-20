@@ -15,115 +15,109 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-def _proto_sources(ctx):
-    inputs = []
-    for dep in ctx.attr.deps:
-        for src in dep[ProtoInfo].direct_sources:
-            inputs.append(src)
-    return DefaultInfo(files = depset(inputs))
+load("@bazel_skylib//lib:paths.bzl", "paths")
+load("@rules_proto//proto:defs.bzl", "ProtoInfo")
 
+def _as_path(path, is_windows_host):
+    if is_windows_host:
+        return path.replace("/", "\\")
+    else:
+        return path
 
-def _unpack_proto_archive(ctx):
+def _get_outputs(target, ctx):
     outputs = []
-    for dep in ctx.attr.deps:
-        for src in dep[ProtoInfo].direct_sources:
-            outputs.extend([
-                ctx.actions.declare_file(
-                    src.path.replace('.proto', '_pb.d.ts')
-                ),
-                ctx.actions.declare_file(
-                    src.path.replace('.proto', '_pb.js')
-                ),
-            ])
+    root = target[ProtoInfo].proto_source_root
+    for source in target[ProtoInfo].direct_sources:
+        name = source.path
+        # test.proto -> {designated output dir}/test.ts
+        if name.endswith("." + source.extension):
+            name = name.rsplit(".", 1)[0]
+        name += ".ts"
 
-    for dep in ctx.attr.grpc_deps:
-        for src in dep[ProtoInfo].direct_sources:
-            outputs.extend([
-                ctx.actions.declare_file(
-                    src.path.replace('.proto', '_grpc_pb.js')
-                ),
-                ctx.actions.declare_file(
-                    src.path.replace('.proto', '_grpc_pb.d.ts')
-                ),
-            ])
-    ctx.actions.run_shell(
-        inputs = [ctx.file.archive],
-        outputs = outputs,
-        mnemonic='x',
-        command = "mkdir -p {} && tar -xvf {} -C {}/{}".format(
-            ctx.label.package, ctx.file.archive.path,
-            ctx.var["BINDIR"], ctx.label.package
+        dest = root
+        # if the dest is pwd then make sure that we do not strip subdirectories.
+        if dest == ".":
+            dest = source.dirname[len(ctx.label.package) + 1:]
+            if not dest:
+                dest = "."
+
+        if dest != ".":
+            if name.startswith(dest):
+                name = name[len(dest)+1:]
+
+        output = ctx.actions.declare_file(name) # preserve dir structure for now
+        outputs.append(output)
+    return outputs
+
+def _imported_protos(target, provided_sources = []):
+    proto_info = target[ProtoInfo]
+    source_root = proto_info.proto_source_root
+    if source_root == ".":
+        return [src.path for src in proto_info.direct_sources]
+    offset = len(source_root) + 1  # + '/'.
+    return [src.path[offset:] for src in proto_info.direct_sources]
+
+def _node_protoc(ctx):
+    all_outputs = []
+    is_windows_host = ctx.configuration.host_path_separator == ";"
+    for target in ctx.attr.deps:
+        args = ctx.actions.args()
+        # Output and Plugin path
+        args.add(_as_path(ctx.executable._protoc_gen_ts.path, is_windows_host), format = "--plugin=protoc-gen-ts=%s")
+        args.add(paths.join(ctx.bin_dir.path, paths.dirname(ctx.file._file_in_project.path)), format = "--ts_out=%s")
+        args.add("--ts_opt=no_namespace")
+
+        # Set in descriptors
+        descriptor_sets_paths = [desc.path for desc in target[ProtoInfo].transitive_descriptor_sets.to_list()]
+        args.add_joined("--descriptor_set_in", descriptor_sets_paths, join_with = ctx.configuration.host_path_separator)
+
+        # Direct sources
+        args.add_all(_imported_protos(target))
+
+        if not len(ctx.outputs.outs):
+            outputs = _get_outputs(target, ctx)
+            all_outputs.extend(outputs)
+        else:
+            outputs = ctx.outputs.outs
+            all_outputs = ctx.outputs.outs
+
+        ctx.actions.run(
+            inputs = depset(target[ProtoInfo].direct_sources, transitive = [target[ProtoInfo].transitive_descriptor_sets]),
+            tools = [ctx.executable._protoc_gen_ts],
+            executable = ctx.executable._protoc,
+            outputs = outputs,
+            arguments = [args],
+            progress_message = "Generating Protocol Buffers for Typescript %s" % ctx.label,
+            env = {"BAZEL_BINDIR": ctx.bin_dir.path},
         )
-    )
-    return DefaultInfo(files = depset(outputs))
+
+    return [
+        DefaultInfo(files = depset(all_outputs))
+    ]
 
 
-proto_sources = rule(
+ts_grpc_compile = rule(
+    implementation = _node_protoc,
     attrs = {
         "deps": attr.label_list(
+            doc = "List of proto_library targets.",
             providers = [ProtoInfo],
-        )
-    },
-    implementation = _proto_sources
-)
-
-unpack_proto_archive = rule(
-    attrs = {
-        "deps": attr.label_list(
-            providers = [ProtoInfo],
+            mandatory = True
         ),
-        "grpc_deps": attr.label_list(
-             providers = [ProtoInfo],
-         ),
-        "archive": attr.label(
-            allow_single_file = True
+        "outs": attr.output_list(),
+        "_protoc": attr.label(
+            cfg = "exec",
+            executable = True,
+            default = "@com_google_protobuf//:protoc"
         ),
-    },
-    implementation = _unpack_proto_archive
+        "_protoc_gen_ts": attr.label(
+            cfg = "exec",
+            executable = True,
+            default = "@vaticle_typedb_protocol//grpc/nodejs:protoc-gen-ts",
+        ),
+        "_file_in_project": attr.label(
+            default = "@vaticle_typedb_protocol//grpc/nodejs:BUILD",
+            allow_single_file = True,
+        ),
+   }
 )
-
-
-def ts_grpc_compile(
-        name,
-        deps,
-        grpc_deps):
-    proto_sources_name = "{}__do_not_reference_1".format(name)
-    genrule_name = "{}__do_not_reference_2".format(name)
-    proto_sources(
-        name = proto_sources_name,
-        deps = deps
-    )
-    native.genrule(
-        name = genrule_name,
-        outs = [
-            "{}.tar.gz".format(genrule_name),
-        ],
-        # The below command performs a protoc compilation of our proto files into typescript and javascript. Line by line:
-        # Run the node.js protoc (protocol compiler) with the following flags:
-        #    Use the gen-ts plugin to generate typescript declaration files in addition to javascript
-        #    Output javascript with commonjs style exports, to the genrule output directory.
-        #    Output services to the genrule output directory (without this line, typedb_grpc_pb is omitted)
-        #    Output typescript to (you guessed it) the genrule output directory
-        #    Set the .proto file relative path to root folder (same as where WORKSPACE resides)
-        #    Use the .proto files found in the :proto-raw-buffers filegroup as inputs.
-        cmd = "$(execpath //grpc/nodejs:grpc_tools_node_protoc) \
-                --plugin='protoc-gen-ts=$(rootpath @npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts)' \
-                --js_out='import_style=commonjs,binary:./$(@D)/' \
-                --grpc_out='grpc_js:./$(@D)/' \
-                --ts_out='grpc_js:./$(@D)/' \
-                --proto_path=. \
-                $(execpaths :{}) && tar cvf $@ -C ./$(@D)/ .".format(proto_sources_name),
-        tools = [
-            "//grpc/nodejs:grpc_tools_node_protoc",
-            "@npm//:node_modules/grpc_tools_node_protoc_ts/bin/protoc-gen-ts",
-            "@npm//grpc_tools_node_protoc_ts",
-            "@npm//google-protobuf",
-        ],
-        srcs = [proto_sources_name]
-    )
-    unpack_proto_archive(
-        name = name,
-        deps = deps,
-        grpc_deps = grpc_deps,
-        archive = genrule_name,
-    )

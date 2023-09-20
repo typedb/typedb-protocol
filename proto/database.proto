@@ -18,15 +18,31 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ClusterUserProto";
+option java_outer_classname = "DatabaseProto";
 
 package typedb.protocol;
 
-message ClusterUserManager {
+message DatabaseManager {
+
+    message Get {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            DatabaseReplicas database = 1;
+        }
+    }
+
+    message All {
+        message Req {}
+        message Res {
+            repeated DatabaseReplicas databases = 1;
+        }
+    }
 
     message Contains {
         message Req {
-            string username = 1;
+            string name = 1;
         }
         message Res {
             bool contains = 1;
@@ -35,70 +51,58 @@ message ClusterUserManager {
 
     message Create {
         message Req {
-            string username = 1;
-            string password = 2;
+            string name = 1;
         }
         message Res {}
+    }
+}
+
+message DatabaseReplicas {
+
+    string name = 1;
+    repeated Replica replicas = 2;
+
+    message Replica {
+        string address = 1;
+        bool primary = 2;
+        bool preferred = 3;
+        int64 term = 4;
+    }
+}
+
+message Database {
+
+    message Schema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
+    }
+
+    message TypeSchema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
+    }
+
+    message RuleSchema {
+        message Req {
+            string name = 1;
+        }
+        message Res {
+            string schema = 1;
+        }
     }
 
     message Delete {
         message Req {
-            string username = 1;
+            string name = 1;
         }
         message Res {}
     }
-
-    message All {
-        message Req {}
-        message Res {
-            repeated User users = 1;
-        }
-    }
-
-    message PasswordSet {
-        message Req {
-            string username = 1;
-            string password = 2;
-        }
-        message Res {}
-    }
-
-    message Get {
-        message Req {
-            string username = 1;
-        }
-        message Res {
-            User user = 1;
-        }
-    }
 }
-
-message ClusterUser {
-
-    message PasswordUpdate {
-        message Req {
-            string username = 1;
-            string password_old = 2;
-            string password_new = 3;
-        }
-        message Res {}
-    }
-
-    message Token {
-        message Req {
-            string username = 1;
-        }
-
-        message Res {
-            string token = 1;
-        }
-    }
-}
-
-message User {
-    string username = 1;
-    oneof password_expiry {
-        int64 password_expiry_seconds = 2;
-    }
-}
-

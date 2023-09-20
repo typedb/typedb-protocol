@@ -18,13 +18,44 @@
 syntax = "proto3";
 
 option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "VersionProto";
-option java_generic_services = true;
+option java_outer_classname = "SessionProto";
+
+import "proto/options.proto";
 
 package typedb.protocol;
 
-enum Version {
-//  reserved; // add past version numbers into the reserved range
-  UNSPECIFIED = 0;
-  VERSION = 1;
+message Session {
+
+    enum Type {
+        DATA = 0;
+        SCHEMA = 1;
+    }
+
+    message Open {
+        message Req {
+            string database = 1;
+            Type type = 2;
+            Options options = 3;
+        }
+        message Res {
+            bytes session_id = 1;
+            int32 server_duration_millis = 2;
+        }
+    }
+
+    message Close {
+        message Req {
+            bytes session_id = 1;
+        }
+        message Res {}
+    }
+
+    message Pulse {
+        message Req {
+            bytes session_id = 1;
+        }
+        message Res {
+            bool alive = 1;
+        }
+    }
 }

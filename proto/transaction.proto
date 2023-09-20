@@ -20,10 +20,10 @@ syntax = "proto3";
 option java_package = "com.vaticle.typedb.protocol";
 option java_outer_classname = "TransactionProto";
 
-import "common/concept.proto";
-import "common/logic.proto";
-import "common/options.proto";
-import "common/query.proto";
+import "proto/concept.proto";
+import "proto/logic.proto";
+import "proto/options.proto";
+import "proto/query.proto";
 
 package typedb.protocol;
 
