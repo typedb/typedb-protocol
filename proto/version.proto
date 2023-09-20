@@ -24,7 +24,7 @@ option java_generic_services = true;
 package typedb.protocol;
 
 enum Version {
-//  reserved; // add past version numbers into the reserved range
+  reserved 1; // add past version numbers into the reserved range
   UNSPECIFIED = 0;
   VERSION = 2;
 }
