@@ -1,5 +1,5 @@
 {
-  "name": "typedb_protocol",
+  "name": "typedb-protocol",
   "version": "2.20.0",
   "description": "TypeDB Protocol",
   "author": "Vaticle",
