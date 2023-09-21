@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/clients/2.x/clients
 Available from https://pypi.org/project/typedb-protocol/
 
 ```sh
-pip install typedb-protocol
+cargo add typedb-protocol
 ```
 
 #### For Node.js through npm
