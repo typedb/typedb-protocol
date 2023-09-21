@@ -51,15 +51,16 @@ build:
       filter:
         owner: vaticle
         branch: master
+      dependencies: [build, build-dependency]
       image: vaticle-ubuntu-22.04
       command: |
         export DEPLOY_CRATE_TOKEN=$REPO_VATICLE_CRATES_TOKEN
         bazel run --define version=$(git rev-parse HEAD) //grpc/rust:deploy_crate -- snapshot
-      dependencies: [build, build-dependency]
     deploy-npm-snapshot:
       filter:
         owner: vaticle
         branch: master
+      dependencies: [build, build-dependency]
       image: vaticle-ubuntu-20.04
       command: |
         export DEPLOY_NPM_USERNAME=$REPO_VATICLE_USERNAME
