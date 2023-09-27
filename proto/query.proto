@@ -23,7 +23,7 @@ option java_outer_classname = "QueryProto";
 import "proto/answer.proto";
 import "proto/logic.proto";
 import "proto/options.proto";
-import "concept.proto";
+import "proto/concept.proto";
 
 package typedb.protocol;
 
@@ -60,7 +60,7 @@ message QueryManager {
             Get.ResPart get_res_part = 100;
             GetGroup.ResPart get_group_res_part = 101;
             GetGroupAggregate.ResPart get_group_aggregate_res_part = 102;
-            Fetch.ResPart fech_res_part = 103;
+            Fetch.ResPart fetch_res_part = 103;
             Insert.ResPart insert_res_part = 104;
             Update.ResPart update_res_part = 105;
             Explain.ResPart explain_res_part = 106;

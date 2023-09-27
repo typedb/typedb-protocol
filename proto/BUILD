@@ -84,6 +84,7 @@ proto_library(
         ":answer-proto",
         ":logic-proto",
         ":options-proto",
+        ":concept-proto",
     ],
 )
 

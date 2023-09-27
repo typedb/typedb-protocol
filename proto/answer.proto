@@ -51,40 +51,42 @@ message ConceptMapGroup {
 
 message ValueGroup {
     Concept owner = 1;
-    Value number = 2;
+    optional Value value = 2;
 }
 
 message ReadableConceptTree {
+
+    Node.Map root = 1;
 
     message Node {
         oneof node {
             Map map = 1;
             List list = 2;
-            ReadableConcept leaf = 3;
+            ReadableConcept readableConcept = 3;
         }
-    }
 
-    message Map {
-        map<string, Node> map = 1;
-    }
+        message Map {
+            map<string, Node> map = 1;
+        }
 
-    message List {
-        repeated Node list = 1;
-    }
+        message List {
+            repeated Node list = 1;
+        }
 
-    message ReadableConcept {
-        oneof readable_concept {
-            EntityType entity_type = 1;
-            RelationType relation_type = 2;
-            AttributeType attribute_type = 3;
+        message ReadableConcept {
+            oneof readable_concept {
+                EntityType entity_type = 1;
+                RelationType relation_type = 2;
+                AttributeType attribute_type = 3;
 
-            RoleType role_type = 4;
+                RoleType role_type = 4;
 
-            Attribute attribute = 5;
+                Attribute attribute = 5;
 
-            Value value = 6;
+                Value value = 6;
 
-            ThingType.Root thing_type_root = 7;
+                ThingType.Root thing_type_root = 7;
+            }
         }
     }
 }
