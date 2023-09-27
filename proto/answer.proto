@@ -49,15 +49,42 @@ message ConceptMapGroup {
     repeated ConceptMap concept_maps = 2;
 }
 
-message Numeric {
-    oneof value {
-        sint64 long_value = 1;
-        double double_value = 2;
-        bool nan = 3;
-    }
+message ValueGroup {
+    Concept owner = 1;
+    Value number = 2;
 }
 
-message NumericGroup {
-    Concept owner = 1;
-    Numeric number = 2;
+message ReadableConceptTree {
+
+    message Node {
+        oneof node {
+            Map map = 1;
+            List list = 2;
+            ReadableConcept leaf = 3;
+        }
+    }
+
+    message Map {
+        map<string, Node> map = 1;
+    }
+
+    message List {
+        repeated Node list = 1;
+    }
+
+    message ReadableConcept {
+        oneof readable_concept {
+            EntityType entity_type = 1;
+            RelationType relation_type = 2;
+            AttributeType attribute_type = 3;
+
+            RoleType role_type = 4;
+
+            Attribute attribute = 5;
+
+            Value value = 6;
+
+            ThingType.Root thing_type_root = 7;
+        }
+    }
 }
