@@ -4,7 +4,7 @@
   "description": "TypeDB Protocol",
   "author": "Vaticle",
   "license": "AGPL-3.0",
-  "homepage": "https://vaticle.com",
+  "homepage": "https://typedb.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/vaticle/typedb-protocol"
