@@ -62,7 +62,9 @@ assemble_crate(
     target = ":typedb_protocol",
     description = "TypeDB Protocol",
     homepage = "https://github.com/vaticle/typedb-protocol",
+    readme_file = "//:README.md",
     license = "AGPL-3.0-or-later",
+    license_file = "//:LICENSE",
     repository = "https://github.com/vaticle/typedb-protocol",
 )
 

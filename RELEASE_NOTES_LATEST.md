@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/clients/2.x/clients
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol
+cargo add typedb-protocol@2.24.5
 ```
 
 #### For Node.js through npm
@@ -15,11 +15,11 @@ cargo add typedb-protocol
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol
+npm install typedb-protocol@2.24.5
 ```
 or
 ```sh
-yarn install typedb-protocol
+yarn add typedb-protocol@2.24.5
 ```
 
 
@@ -28,10 +28,10 @@ yarn install typedb-protocol
 
 ## Bugs Fixed
 
+- **Deploy crate contains LICENSE and README**
 
 ## Code Refactors
 
-- **Deploy NPM typedb_protocol as typedb-protocol**
 
 ## Other Improvements
 

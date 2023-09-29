@@ -2,12 +2,12 @@ Documentation: https://typedb.com/docs/clients/2.x/clients
 
 ### Distribution
 
-#### For Python through PyPI
+#### For Rust through crates.io
 
-Available from https://pypi.org/project/typedb-protocol/
+Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol
+cargo add typedb-protocol@{version}
 ```
 
 #### For Node.js through npm
@@ -15,11 +15,11 @@ cargo add typedb-protocol
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol
+npm install typedb-protocol@{version}
 ```
 or
 ```sh
-yarn install typedb-protocol
+yarn add typedb-protocol@{version}
 ```
 
 { release notes }
