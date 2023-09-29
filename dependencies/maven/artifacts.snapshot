@@ -48,7 +48,7 @@
 @maven//:io_netty_netty_tcnative_boringssl_static_osx_aarch_64_2_0_61_Final
 @maven//:io_netty_netty_tcnative_boringssl_static_osx_x86_64_2_0_61_Final
 @maven//:io_netty_netty_tcnative_boringssl_static_windows_x86_64_2_0_61_Final
-@maven//:io_netty_netty_tcnative_classes_2_0_54_Final
+@maven//:io_netty_netty_tcnative_classes_2_0_61_Final
 @maven//:io_netty_netty_transport_4_1_87_Final
 @maven//:io_netty_netty_transport_classes_epoll_4_1_87_Final
 @maven//:io_netty_netty_transport_native_epoll_linux_x86_64_4_1_87_Final
