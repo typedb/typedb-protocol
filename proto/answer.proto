@@ -62,7 +62,7 @@ message ReadableConceptTree {
         oneof node {
             Map map = 1;
             List list = 2;
-            ReadableConcept readableConcept = 3;
+            ReadableConcept readable_concept = 3;
         }
 
         message Map {
