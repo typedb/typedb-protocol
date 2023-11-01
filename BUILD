@@ -55,9 +55,9 @@ deploy_github(
 
 exports_files(["README.md"])
 
-# CI targets that are not declared in any BUILD file, but are called externally
+# Tools to be built during `build //...`
 filegroup(
-    name = "ci",
+    name = "tools",
     data = [
         "@vaticle_dependencies//library/maven:update",
         "@vaticle_dependencies//tool/ide:rust_sync",
