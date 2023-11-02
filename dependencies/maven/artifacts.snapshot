@@ -68,5 +68,6 @@
 @maven//:org_codehaus_mojo_animal_sniffer_annotations_1_21
 @maven//:org_hamcrest_hamcrest_core_1_3
 @maven//:org_jetbrains_compose_compiler_compiler_1_3_2
+@maven//:org_jsoup_jsoup_1_16_1
 @maven//:org_slf4j_slf4j_api_1_7_2
 @maven//:org_zeroturnaround_zt_exec_1_10
