@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/clients/2.x/clients
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@2.25.1
+cargo add typedb-protocol@2.25.2
 ```
 
 #### For Node.js through npm
@@ -15,11 +15,11 @@ cargo add typedb-protocol@2.25.1
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@2.25.1
+npm install typedb-protocol@2.25.2
 ```
 or
 ```sh
-yarn add typedb-protocol@2.25.1
+yarn add typedb-protocol@2.25.2
 ```
 
 
@@ -31,9 +31,8 @@ yarn add typedb-protocol@2.25.1
 
 ## Code Refactors
 
-- Add maven tag for Java to facilitate bundling TypeDB Core correctly
-
 
 ## Other Improvements
 
+- **Update build dependencies**
     
