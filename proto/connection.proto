@@ -30,6 +30,8 @@ message Connection {
   message Open {
     message Req {
       Version version = 1;
+      string driver_language = 2;
+      string driver_version = 3;
     }
 
     message Res {}
