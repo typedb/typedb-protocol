@@ -54,7 +54,7 @@ build:
       dependencies: [build, build-dependency]
       image: vaticle-ubuntu-22.04
       command: |
-        export DEPLOY_CRATE_TOKEN=$REPO_VATICLE_CRATES_TOKEN
+        export DEPLOY_CRATE_TOKEN=$REPO_TYPEDB_CRATES_TOKEN
         bazel run --define version=$(git rev-parse HEAD) //grpc/rust:deploy_crate -- snapshot
     deploy-npm-snapshot:
       filter:
@@ -63,8 +63,8 @@ build:
       dependencies: [build, build-dependency]
       image: vaticle-ubuntu-20.04
       command: |
-        export DEPLOY_NPM_USERNAME=$REPO_VATICLE_USERNAME
-        export DEPLOY_NPM_PASSWORD=$REPO_VATICLE_PASSWORD
+        export DEPLOY_NPM_USERNAME=$REPO_TYPEDB_USERNAME
+        export DEPLOY_NPM_PASSWORD=$REPO_TYPEDB_PASSWORD
         bazel run --define version=$(git rev-parse HEAD) //grpc/nodejs:deploy-npm -- snapshot
 
 release:
