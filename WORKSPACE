@@ -67,8 +67,8 @@ crate_repositories()
 load("@vaticle_dependencies//tool/common:deps.bzl", "vaticle_dependencies_ci_pip", vaticle_dependencies_tool_maven_artifacts = "maven_artifacts")
 vaticle_dependencies_ci_pip()
 
-# Load //builder/grpc
-load("@vaticle_dependencies//builder/grpc:deps.bzl", vaticle_grpc_deps = "deps")
+# Load //builder/proto_grpc
+load("@vaticle_dependencies//builder/proto_grpc:deps.bzl", vaticle_grpc_deps = "deps")
 vaticle_grpc_deps()
 
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
