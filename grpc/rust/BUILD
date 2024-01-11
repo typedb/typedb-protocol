@@ -19,7 +19,7 @@ load("@rules_rust//rust:defs.bzl", "rust_library")
 load("@vaticle_bazel_distribution//crates:rules.bzl", "assemble_crate", "deploy_crate")
 load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
 load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-load("@vaticle_dependencies//builder/grpc/rust:compile.bzl", "rust_tonic_compile")
+load("@vaticle_dependencies//builder/proto_grpc/rust:compile.bzl", "rust_tonic_compile")
 
 rust_tonic_compile(
     name = "typedb_protocol_src",
