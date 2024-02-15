@@ -32,6 +32,10 @@ checkstyle_test(
         "WORKSPACE",
         ".factory/automation.yml",
     ]),
+    exclude = [
+        ".bazel-remote-cache.rc",
+        ".bazel-cache-credential.json",
+    ],
     license_type = "agpl-header",
     size = "small",
 )
