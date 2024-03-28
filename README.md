@@ -6,9 +6,9 @@ A protocol for implementing a TypeDB driver, in many popular programming languag
 
 ## Licensing
 
-The TypeDB protocol is distributed under the terms GNU Affero General Public License v3.0 ("AGPL 3.0") as published by the Free Software Foundation, but with the following special exception.
+The TypeDB protocol is provided under the Mozilla Public License 2.0 (MPL 2.0), but with the following special exception.
 
-Exception to AGPL 3.0: Any driver or client library (in each case) that implements the TypeDB protocol, and that is used to communicate or interact (in each case) with a database created or managed or accessed (in each case) using a version of the TypeDB software that is made available by or on behalf of Vaticle Limited (UK Company Number 08766237) or any successor entity (but excluding any forked version of that software), may be distributed under one of the following licences:
+Any driver or client library (in each case) that implements the TypeDB protocol, and that is used to communicate or interact (in each case) with a database created or managed or accessed (in each case) using a version of the TypeDB software that is made available by or on behalf of Vaticle Limited (UK Company Number 08766237) or any successor entity (but excluding any forked version of that software), may be distributed under one of the following licences:
 
 - The Apache License version 2: https://www.apache.org/licenses/LICENSE-2.0.txt
 - The MIT License: https://opensource.org/licenses/MIT
