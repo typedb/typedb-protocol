@@ -1,6 +1,9 @@
 @maven//:com_eclipsesource_minimal_json_minimal_json_0_9_5
 @maven//:com_electronwill_night_config_core_3_6_5
 @maven//:com_electronwill_night_config_toml_3_6_5
+@maven//:com_fasterxml_jackson_core_jackson_annotations_2_10_1
+@maven//:com_fasterxml_jackson_core_jackson_core_2_10_1
+@maven//:com_fasterxml_jackson_core_jackson_databind_2_10_1
 @maven//:com_google_android_annotations_4_1_1_4
 @maven//:com_google_api_grpc_proto_google_common_protos_2_9_0
 @maven//:com_google_auth_google_auth_library_credentials_1_6_0
@@ -22,8 +25,8 @@
 @maven//:com_googlecode_java_diff_utils_diffutils_1_3_0
 @maven//:com_squareup_okhttp_okhttp_2_7_5
 @maven//:com_squareup_okio_okio_1_17_5
-@maven//:commons_codec_commons_codec_1_11
-@maven//:commons_io_commons_io_1_4
+@maven//:commons_codec_commons_codec_1_13
+@maven//:commons_io_commons_io_2_3
 @maven//:commons_logging_commons_logging_1_2
 @maven//:info_picocli_picocli_4_6_1
 @maven//:io_grpc_grpc_api
@@ -59,6 +62,7 @@
 @maven//:javax_annotation_javax_annotation_api_1_3_2
 @maven//:junit_junit_4_12
 @maven//:org_apache_commons_commons_compress_1_21
+@maven//:org_apache_commons_commons_lang3_3_9
 @maven//:org_apache_httpcomponents_httpclient_4_5_11
 @maven//:org_apache_httpcomponents_httpcore_4_4_13
 @maven//:org_apache_tomcat_annotations_api_6_0_53
@@ -66,7 +70,8 @@
 @maven//:org_checkerframework_checker_qual_3_5_0
 @maven//:org_codehaus_mojo_animal_sniffer_annotations_1_21
 @maven//:org_hamcrest_hamcrest_core_1_3
-@maven//:org_jetbrains_compose_compiler_compiler_1_3_2
+@maven//:org_jetbrains_compose_compiler_compiler_1_5_7
 @maven//:org_jsoup_jsoup_1_16_1
+@maven//:org_kohsuke_github_api_1_101
 @maven//:org_slf4j_slf4j_api_1_7_2
 @maven//:org_zeroturnaround_zt_exec_1_10
