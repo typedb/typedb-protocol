@@ -63,6 +63,7 @@ ts_project(
         ":node_modules/@types/node",
         ":node_modules/typescript",
     ],
+    transpiler = "tsc",
     visibility = ["//visibility:public"],
 )
 
