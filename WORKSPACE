@@ -138,14 +138,6 @@ grpc_java_repositories()
 # Load NPM dependencies #
 #########################
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-http_archive(
-    name = "aspect_bazel_lib",
-    sha256 = "04feedcd06f71d0497a81fdd3220140a373ff9d2bff94620fbd50b774f96d8e0",
-    strip_prefix = "bazel-lib-1.40.2",
-    url = "https://github.com/aspect-build/bazel-lib/releases/download/v1.40.2/bazel-lib-v1.40.2.tar.gz",
-)
-
 # Load //builder/nodejs
 load("@vaticle_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
 nodejs_deps()
