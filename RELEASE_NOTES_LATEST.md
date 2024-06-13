@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/clients/2.x/clients
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@2.28.0
+cargo add typedb-protocol@2.28.4
 ```
 
 #### For Node.js through npm
@@ -15,11 +15,11 @@ cargo add typedb-protocol@2.28.0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@2.28.0
+npm install typedb-protocol@2.28.4
 ```
 or
 ```sh
-yarn add typedb-protocol@2.28.0
+yarn add typedb-protocol@2.28.4
 ```
 
 
@@ -33,6 +33,4 @@ yarn add typedb-protocol@2.28.0
 
 
 ## Other Improvements
-- **Replace AGPL v3.0 with MPL 2.0**
-
-    
+- **Update dependencies for TypeScript rules build**
