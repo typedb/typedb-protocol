@@ -7,7 +7,7 @@
   "homepage": "https://typedb.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vaticle/typedb-protocol"
+    "url": "https://github.com/typedb/typedb-protocol"
   },
   "dependencies": {
     "@grpc/grpc-js": "1.9.0",
