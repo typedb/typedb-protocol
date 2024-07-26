@@ -10,7 +10,7 @@ config:
 build:
   quality:
     filter:
-      owner: vaticle
+      owner: typedb
       branch: master
     dependency-analysis:
       image: vaticle-ubuntu-22.04
@@ -33,7 +33,7 @@ build:
         bazel run @vaticle_dependencies//tool/unuseddeps:unused-deps -- list
     deploy-crate-snapshot:
       filter:
-        owner: vaticle
+        owner: typedb
         branch: [master, development]
       dependencies: [build, build-dependency]
       image: vaticle-ubuntu-22.04
@@ -43,7 +43,7 @@ build:
         bazel run --define version=$(git rev-parse HEAD) //grpc/rust:deploy_crate -- snapshot
     deploy-npm-snapshot:
       filter:
-        owner: vaticle
+        owner: typedb
         branch: [master, development]
       dependencies: [build, build-dependency]
       image: vaticle-ubuntu-20.04
@@ -54,7 +54,7 @@ build:
     sync-dependencies:
       image: vaticle-ubuntu-22.04
       filter:
-        owner: vaticle
+        owner: typedb
         branch: [master, development]
       dependencies:
         - build
@@ -67,7 +67,7 @@ build:
 
 release:
   filter:
-    owner: vaticle
+    owner: typedb
     branch: master
   validation:
     validate-release-notes:
@@ -107,7 +107,7 @@ release:
     sync-dependencies-release:
       image: vaticle-ubuntu-22.04
       filter:
-        owner: vaticle
+        owner: typedb
         branch: [master, development]
       dependencies:
         - deploy-github

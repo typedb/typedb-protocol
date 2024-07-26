@@ -48,11 +48,11 @@ assemble_crate(
     name = "assemble_crate",
     target = ":typedb_protocol",
     description = "TypeDB Protocol",
-    homepage = "https://github.com/vaticle/typedb-protocol",
+    homepage = "https://github.com/typedb/typedb-protocol",
     readme_file = "//:README.md",
     license = "MPL-2.0",
     license_file = "//:LICENSE",
-    repository = "https://github.com/vaticle/typedb-protocol",
+    repository = "https://github.com/typedb/typedb-protocol",
 )
 
 deploy_crate(
