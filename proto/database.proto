@@ -4,9 +4,6 @@
 
 syntax = "proto3";
 
-option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "DatabaseProto";
-
 package typedb.protocol;
 
 message DatabaseManager {
@@ -77,14 +74,14 @@ message Database {
         }
     }
 
-    message RuleSchema {
-        message Req {
-            string name = 1;
-        }
-        message Res {
-            string schema = 1;
-        }
-    }
+//    message RuleSchema {
+//        message Req {
+//            string name = 1;
+//        }
+//        message Res {
+//            string schema = 1;
+//        }
+//    }
 
     message Delete {
         message Req {

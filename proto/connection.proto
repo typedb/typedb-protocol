@@ -4,10 +4,6 @@
 
 syntax = "proto3";
 
-option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ConnectionProto";
-option java_generic_services = true;
-
 import "proto/version.proto";
 
 package typedb.protocol;
@@ -19,6 +15,23 @@ message Connection {
       Version version = 1;
     }
 
-    message Res {}
+    message Res {
+      ConnectionID connection_id = 1;
+      // also: initial Token
+    }
   }
+
+  message Pulse {
+    message Req {
+      ConnectionID connection_id = 1;
+    }
+
+    message Res {
+      int32 server_duration_millis = 1;
+    }
+  }
+}
+
+message ConnectionID {
+  bytes id = 1;
 }

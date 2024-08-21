@@ -4,14 +4,10 @@
 
 syntax = "proto3";
 
-option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "VersionProto";
-option java_generic_services = true;
-
 package typedb.protocol;
 
 enum Version {
   reserved 1, 2; // add past version numbers into the reserved range
   UNSPECIFIED = 0;
-  VERSION = 3;
+  VERSION = 4;
 }

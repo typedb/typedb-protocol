@@ -4,11 +4,7 @@
 
 syntax = "proto3";
 
-option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "TransactionProto";
-
-import "proto/concept.proto";
-import "proto/logic.proto";
+//import "proto/logic.proto";
 import "proto/options.proto";
 import "proto/query.proto";
 
@@ -17,13 +13,14 @@ package typedb.protocol;
 message Transaction {
 
     message Client {
-        repeated Req reqs = 1;
+        bytes connection_id = 1;
+        repeated Req reqs = 2;
     }
 
     message Server {
         oneof server {
-            Res res = 2;
-            ResPart res_part = 3;
+            Res res = 1;
+            ResPart res_part = 2;
         }
     }
 
@@ -32,15 +29,11 @@ message Transaction {
         map<string, string> metadata = 2;
         oneof req {
             Open.Req open_req = 3;
-            Stream.Req stream_req = 4;
-            Commit.Req commit_req = 5;
-            Rollback.Req rollback_req = 6;
-            QueryManager.Req query_manager_req = 7;
-            ConceptManager.Req concept_manager_req = 8;
-            LogicManager.Req logic_manager_req = 9;
-            Rule.Req rule_req = 10;
-            typedb.protocol.Type.Req type_req = 11;
-            Thing.Req thing_req = 12;
+            Query.Req query_req = 4;
+            Stream.Req stream_req = 5;
+            Commit.Req commit_req = 6;
+            Rollback.Req rollback_req = 7;
+            Close.Req close_req = 8;
         }
     }
 
@@ -48,52 +41,32 @@ message Transaction {
         bytes req_id = 1;
         oneof res {
             Open.Res open_res = 2;
-            Commit.Res commit_res = 3;
-            Rollback.Res rollback_res = 4;
-            QueryManager.Res query_manager_res = 5;
-            ConceptManager.Res concept_manager_res = 6;
-            LogicManager.Res logic_manager_res = 7;
-            Rule.Res rule_res = 8;
-            typedb.protocol.Type.Res type_res = 9;
-            Thing.Res thing_res = 10;
+            Query.Res query_res = 3;
+            Commit.Res commit_res = 5;
+            Rollback.Res rollback_res = 6;
         }
     }
 
     message ResPart {
         bytes req_id = 1;
-        oneof res {
-            Stream.ResPart stream_res_part = 2;
-            QueryManager.ResPart query_manager_res_part = 3;
-            LogicManager.ResPart logic_manager_res_part = 4;
-            typedb.protocol.Type.ResPart type_res_part = 5;
-            Thing.ResPart thing_res_part = 6;
-        }
+        Query.ResPart res = 2;
+        Stream.ResPart stream_res = 4;
     }
 
     enum Type {
         READ = 0;
         WRITE = 1;
+        SCHEMA = 2;
     }
 
     message Open {
         message Req {
-            bytes session_id = 1;
+            string database = 1;
             Type type = 2;
             Options options = 3;
-            int32 network_latency_millis = 4;
+            uint64 network_latency_millis = 4;
         }
         message Res {}
-    }
-
-    message Stream {
-        enum State {
-            CONTINUE = 0;
-            DONE = 1;
-        }
-        message Req {}
-        message ResPart {
-            State state = 1;
-        }
     }
 
     message Commit {
@@ -104,5 +77,35 @@ message Transaction {
     message Rollback {
         message Req {}
         message Res {}
+    }
+
+    message Close {
+        message Req {}
+        message Res {}
+    }
+
+    message GetSchemaExceptions {
+        message Req {}
+        message Res {
+            repeated SchemaException exceptions = 1;
+        }
+    }
+
+    message SchemaException {
+        string code = 1;
+        string message = 2;
+    }
+
+    message Stream {
+        message Req {}
+
+        message ResPart {
+            State state = 1;
+
+            enum State {
+                CONTINUE = 0;
+                DONE = 1;
+            }
+        }
     }
 }

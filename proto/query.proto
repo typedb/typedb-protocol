@@ -4,151 +4,70 @@
 
 syntax = "proto3";
 
-option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "QueryProto";
-
 import "proto/answer.proto";
-import "proto/logic.proto";
+//import "proto/logic.proto";
 import "proto/options.proto";
 import "proto/concept.proto";
 
 package typedb.protocol;
 
-message QueryManager {
+message Query {
 
     message Req {
         Options options = 1;
-        oneof req {
-            Define.Req define_req = 100;
-            Undefine.Req undefine_req = 101;
-            Get.Req get_req = 102;
-            GetAggregate.Req get_aggregate_req = 103;
-            GetGroup.Req get_group_req = 104;
-            GetGroupAggregate.Req get_group_aggregate_req = 105;
-            Fetch.Req fetch_req = 106;
-            Insert.Req insert_req = 107;
-            Delete.Req delete_req = 108;
-            Update.Req update_req = 109;
-            Explain.Req explain_req = 110;
-        }
+        string query = 2;
     }
 
     message Res {
-        oneof res {
-            Define.Res define_res = 100;
-            Undefine.Res undefine_res = 101;
-            GetAggregate.Res get_aggregate_res = 102;
-            Delete.Res delete_res = 104;
+        Error error = 1;
+        Ok ok = 2;
+
+        message Ok {
+            oneof ok {
+                Empty empty = 1;
+                Values values = 2;
+                ReadableConceptTreeStream readable_concept_tree_stream = 3;
+                ConceptMapStream concept_map_stream = 4;
+            }
+
+            message Empty {
+
+            }
+
+            message Values {
+                // note: we could use this first response to record debug info, type annotations, warnings, etc
+                repeated OptionalValue values = 1;
+
+                message OptionalValue {
+                    optional Value value = 1;
+                }
+            }
+
+            message ReadableConceptTreeStream {
+                // note: we could use this first response to record debug info, type annotations, warnings, etc
+            }
+
+            message ConceptMapStream {
+                // note: we could use this first response to record debug info, type annotations, warnings, etc
+            }
         }
     }
 
     message ResPart {
-        oneof res {
-            Get.ResPart get_res_part = 100;
-            GetGroup.ResPart get_group_res_part = 101;
-            GetGroupAggregate.ResPart get_group_aggregate_res_part = 102;
-            Fetch.ResPart fetch_res_part = 103;
-            Insert.ResPart insert_res_part = 104;
-            Update.ResPart update_res_part = 105;
-            Explain.ResPart explain_res_part = 106;
-        }
-    }
-
-    message Get {
-        message Req {
-            string query = 1;
-        }
-        message ResPart {
-            repeated ConceptMap answers = 1;
-        }
-    }
-
-    message GetAggregate {
-        message Req {
-            string query = 1;
-        }
+        repeated Res res = 1;
 
         message Res {
-            optional Value answer = 1;
+            oneof res {
+                Error error = 1;
+                ReadableConceptTree tree = 2;
+                ConceptMap concept_map = 3;
+            }
         }
     }
 
-    message GetGroup {
-        message Req {
-            string query = 1;
-        }
-
-        message ResPart {
-            repeated ConceptMapGroup answers = 1;
-        }
-    }
-
-    message GetGroupAggregate {
-        message Req {
-            string query = 1;
-        }
-
-        message ResPart {
-            repeated ValueGroup answers = 1;
-        }
-    }
-
-    message Fetch {
-        message Req {
-            string query = 1;
-        }
-
-        message ResPart {
-            repeated ReadableConceptTree answers = 1;
-        }
-    }
-
-    message Explain {
-        message Req {
-            int64 explainable_id = 1;
-        }
-
-        message ResPart {
-            repeated Explanation explanations = 1;
-        }
-    }
-
-    message Insert {
-        message Req {
-            string query = 1;
-        }
-        message ResPart {
-            repeated ConceptMap answers = 1;
-        }
-    }
-
-    message Delete {
-        message Req {
-            string query = 1;
-        }
-        message Res {}
-    }
-
-    message Update {
-        message Req {
-            string query = 1;
-        }
-        message ResPart {
-            repeated ConceptMap answers = 1;
-        }
-    }
-
-    message Define {
-        message Req {
-            string query = 1;
-        }
-        message Res {}
-    }
-
-    message Undefine {
-        message Req {
-            string query = 1;
-        }
-        message Res {}
+    message Error {
+        string source_code = 1;
+        string message = 2; // TODO: stack trace?
+        // TODO
     }
 }

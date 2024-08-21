@@ -4,9 +4,6 @@
 
 syntax = "proto3";
 
-option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ServerProto";
-
 package typedb.protocol;
 
 message ServerManager {

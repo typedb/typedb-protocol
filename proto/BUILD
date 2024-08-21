@@ -14,7 +14,6 @@ proto_library(
         ":server-proto",
         ":user-proto",
         ":database-proto",
-        ":session-proto",
         ":transaction-proto",
     ],
 )
@@ -75,11 +74,6 @@ proto_library(
     ],
 )
 
-proto_library(
-    name = "session-proto",
-    srcs = ["session.proto"],
-    deps = [":options-proto"],
-)
 
 proto_library(
     name = "transaction-proto",
@@ -109,7 +103,6 @@ filegroup(
         "connection.proto",
         "options.proto",
         "query.proto",
-        "session.proto",
         "transaction.proto",
         "logic.proto",
         "version.proto",

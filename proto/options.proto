@@ -4,20 +4,17 @@
 
 syntax = "proto3";
 
-option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "OptionsProto";
-
 package typedb.protocol;
 
 message Options {
-    optional bool infer = 1;
-    optional bool trace_inference = 2;
-    optional bool explain = 3;
+//    optional bool infer = 1;
+//    optional bool trace_inference = 2;
+//    optional bool explain = 3;
     optional bool parallel = 4;
-    optional int32 prefetch_size = 5;
+    optional uint64 prefetch_size = 5;
     optional bool prefetch = 6;
-    optional int32 session_idle_timeout_millis = 7;
-    optional int32 transaction_timeout_millis = 8;
-    optional int32 schema_lock_acquire_timeout_millis = 9;
+//    optional int32 session_idle_timeout_millis = 7;
+    optional uint64 transaction_timeout_millis = 8;
+    optional uint64 schema_lock_acquire_timeout_millis = 9;
     optional bool read_any_replica = 10;
 }

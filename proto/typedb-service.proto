@@ -4,15 +4,10 @@
 
 syntax = "proto3";
 
-option java_package = "com.vaticle.typedb.protocol";
-option java_outer_classname = "ServiceProto";
-option java_generic_services = true;
-
 import "proto/connection.proto";
 import "proto/database.proto";
 import "proto/server.proto";
 import "proto/user.proto";
-import "proto/session.proto";
 import "proto/transaction.proto";
 
 package typedb.protocol;
@@ -21,21 +16,22 @@ service TypeDB {
 
     // Connection API
     rpc connection_open (Connection.Open.Req) returns (Connection.Open.Res);
+    rpc connection_pulse (Connection.Pulse.Req) returns (Connection.Pulse.Res);
 
-    // Server Manager API
-    rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
-
-    // User Manager API
-    rpc users_contains (UserManager.Contains.Req) returns (UserManager.Contains.Res);
-    rpc users_create (UserManager.Create.Req) returns (UserManager.Create.Res);
-    rpc users_delete (UserManager.Delete.Req) returns (UserManager.Delete.Res);
-    rpc users_all (UserManager.All.Req) returns (UserManager.All.Res);
-    rpc users_password_set (UserManager.PasswordSet.Req) returns (UserManager.PasswordSet.Res);
-    rpc users_get (UserManager.Get.Req) returns (UserManager.Get.Res);
-
-    // User API
-    rpc user_password_update (User.PasswordUpdate.Req) returns (User.PasswordUpdate.Res);
-    rpc user_token (User.Token.Req) returns (User.Token.Res);
+//    // Server Manager API
+//    rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
+//
+//    // User Manager API
+//    rpc users_contains (UserManager.Contains.Req) returns (UserManager.Contains.Res);
+//    rpc users_create (UserManager.Create.Req) returns (UserManager.Create.Res);
+//    rpc users_delete (UserManager.Delete.Req) returns (UserManager.Delete.Res);
+//    rpc users_all (UserManager.All.Req) returns (UserManager.All.Res);
+//    rpc users_password_set (UserManager.PasswordSet.Req) returns (UserManager.PasswordSet.Res);
+//    rpc users_get (UserManager.Get.Req) returns (UserManager.Get.Res);
+//
+//    // User API
+//    rpc user_password_update (User.PasswordUpdate.Req) returns (User.PasswordUpdate.Res);
+//    rpc user_token (User.Token.Req) returns (User.Token.Res);
 
     // Database Manager API
     rpc databases_get (DatabaseManager.Get.Req) returns (DatabaseManager.Get.Res);
@@ -46,18 +42,13 @@ service TypeDB {
     // Database API
     rpc database_schema (Database.Schema.Req) returns (Database.Schema.Res);
     rpc database_type_schema (Database.TypeSchema.Req) returns (Database.TypeSchema.Res);
-    rpc database_rule_schema (Database.RuleSchema.Req) returns (Database.RuleSchema.Res);
+//    rpc database_rule_schema (Database.RuleSchema.Req) returns (Database.RuleSchema.Res);
     rpc database_delete (Database.Delete.Req) returns (Database.Delete.Res);
-
-    // Session API
-    rpc session_open (Session.Open.Req) returns (Session.Open.Res);
-    rpc session_close (Session.Close.Req) returns (Session.Close.Res);
-    // Checks with the server that the session is still alive, and informs it that it should be kept alive.
-    rpc session_pulse (Session.Pulse.Req) returns (Session.Pulse.Res);
 
     // Transaction Streaming API
     // Opens a bi-directional stream representing a stateful transaction, streaming
     // requests and responses back-and-forth. The first transaction client message must
     // be {Transaction.Open.Req}. Closing the stream closes the transaction.
+
     rpc transaction (stream Transaction.Client) returns (stream Transaction.Server);
 }

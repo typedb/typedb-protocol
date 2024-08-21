@@ -19,7 +19,6 @@ java_grpc_library(
         "//proto:logic-proto",
         "//proto:options-proto",
         "//proto:query-proto",
-        "//proto:session-proto",
         "//proto:transaction-proto",
         "//proto:version-proto",
     ],
