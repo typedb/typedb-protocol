@@ -8,10 +8,31 @@ import "proto/concept.proto";
 
 package typedb.protocol;
 
-message ConceptMap {
-    map<string, Concept> map = 1;
+message AnswerRow {
+    repeated Answer row = 1;
 //    Explainables explainables = 2;
 }
+
+message Answer {
+    oneof answer {
+        Empty empty = 1;
+        Concept concept = 2;
+        Value value = 3;
+        ConceptList concept_list = 4;
+        ValueList value_list = 5;
+    }
+
+    message Empty {}
+
+    message ConceptList {
+        repeated Concept concepts = 1;
+    }
+
+    message ValueList {
+        repeated Value values = 1;
+    }
+}
+
 //
 //message Explainables {
 //    map<string, Explainable> relations = 1;

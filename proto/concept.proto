@@ -16,8 +16,6 @@ message Concept {
         Entity entity = 5;
         Relation relation = 6;
         Attribute attribute = 7;
-
-        Value value = 8;
     }
 }
 
@@ -31,17 +29,23 @@ message Thing {
 
 message Entity {
     bytes iid = 1;
-    EntityType entity_type = 2; // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
+    // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
+    //       perhaps it's a query option?
+    optional EntityType entity_type = 2;
 }
 
 message Relation {
     bytes iid = 1;
-    RelationType relation_type = 2; // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
+    // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
+    //       perhaps it's a query option?
+    optional RelationType relation_type = 2;
 }
 
 message Attribute {
     bytes iid = 1;
-    AttributeType attribute_type = 2; // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
+    // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
+    //       perhaps it's a query option?
+    optional AttributeType attribute_type = 2;
     Value value = 3;
 }
 
@@ -105,7 +109,7 @@ message Type {
 }
 
 message RoleType {
-    string label = 1;
+    string name = 1;
     string scope = 2;
     repeated Annotation annotations = 3;
 }
@@ -122,7 +126,7 @@ message RelationType {
 
 message AttributeType {
     string label = 1;
-    ValueType value_type = 2;
+    optional ValueType value_type = 2;
     repeated Annotation annotations = 3;
 }
 
@@ -134,8 +138,8 @@ message ValueType {
         Decimal decimal = 4;
         String string = 5;
         Date date = 6;
-        Datetime datetime = 7;
-        Datetime_TZ datetime_tz = 8;
+        DateTime datetime = 7;
+        DateTime_TZ datetime_tz = 8;
         Duration duration = 9;
         Struct struct = 10;
     }
@@ -145,8 +149,8 @@ message ValueType {
     message Decimal {};
     message String {};
     message Date {};
-    message Datetime {};
-    message Datetime_TZ {};
+    message DateTime {};
+    message DateTime_TZ {};
     message Duration {};
     message Struct {
         string name = 1;

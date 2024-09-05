@@ -74,7 +74,6 @@ proto_library(
     ],
 )
 
-
 proto_library(
     name = "transaction-proto",
     srcs = ["transaction.proto"],

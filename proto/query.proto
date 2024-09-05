@@ -5,7 +5,6 @@
 syntax = "proto3";
 
 import "proto/answer.proto";
-//import "proto/logic.proto";
 import "proto/options.proto";
 import "proto/concept.proto";
 
@@ -19,15 +18,17 @@ message Query {
     }
 
     message Res {
-        Error error = 1;
-        Ok ok = 2;
+        oneof res {
+            Error error = 1;
+            Ok ok = 2;
+        }
 
         message Ok {
             oneof ok {
                 Empty empty = 1;
                 Values values = 2;
                 ReadableConceptTreeStream readable_concept_tree_stream = 3;
-                ConceptMapStream concept_map_stream = 4;
+                AnswerRowStream concept_map_stream = 4;
             }
 
             message Empty {
@@ -47,8 +48,8 @@ message Query {
                 // note: we could use this first response to record debug info, type annotations, warnings, etc
             }
 
-            message ConceptMapStream {
-                // note: we could use this first response to record debug info, type annotations, warnings, etc
+            message AnswerRowStream {
+                repeated string column_variable_names = 1;
             }
         }
     }
@@ -58,16 +59,17 @@ message Query {
 
         message Res {
             oneof res {
-                Error error = 1;
                 ReadableConceptTree tree = 2;
-                ConceptMap concept_map = 3;
+                AnswerRow answer_row = 3;
             }
         }
     }
+}
 
-    message Error {
-        string source_code = 1;
-        string message = 2; // TODO: stack trace?
-        // TODO
-    }
+// This is an emulation of the google ErrorDetails message. Sometimes we submit ErrorDetails via the GRPC error mechanism
+// and sometimes (in streams) we have to manually send errors
+message Error {
+    string error_code = 1;
+    string domain = 2;
+    repeated string stack_trace = 3;
 }

@@ -30,7 +30,7 @@ message Transaction {
         oneof req {
             Open.Req open_req = 3;
             Query.Req query_req = 4;
-            Stream.Req stream_req = 5;
+            StreamSignal.Req stream_req = 5;
             Commit.Req commit_req = 6;
             Rollback.Req rollback_req = 7;
             Close.Req close_req = 8;
@@ -49,8 +49,10 @@ message Transaction {
 
     message ResPart {
         bytes req_id = 1;
-        Query.ResPart res = 2;
-        Stream.ResPart stream_res = 4;
+        oneof res_part {
+            Query.ResPart query_res = 2;
+            StreamSignal.ResPart stream_res = 3;
+        }
     }
 
     enum Type {
@@ -96,16 +98,19 @@ message Transaction {
         string message = 2;
     }
 
-    message Stream {
+    message StreamSignal {
         message Req {}
 
         message ResPart {
-            State state = 1;
-
-            enum State {
-                CONTINUE = 0;
-                DONE = 1;
+            oneof state {
+                Continue continue = 1;
+                Done done = 2;
+                Error error = 3;
             }
+
+            message Continue {}
+
+            message Done {}
         }
     }
 }
