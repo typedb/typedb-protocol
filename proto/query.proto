@@ -28,7 +28,7 @@ message Query {
                 Empty empty = 1;
                 Values values = 2;
                 ReadableConceptTreeStream readable_concept_tree_stream = 3;
-                AnswerRowStream concept_map_stream = 4;
+                AnswerRowStream concept_row_stream = 4;
             }
 
             message Empty {
