@@ -16,7 +16,6 @@ service TypeDB {
 
     // Connection API
     rpc connection_open (Connection.Open.Req) returns (Connection.Open.Res);
-    rpc connection_pulse (Connection.Pulse.Req) returns (Connection.Pulse.Res);
 
 //    // Server Manager API
 //    rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
@@ -42,13 +41,12 @@ service TypeDB {
     // Database API
     rpc database_schema (Database.Schema.Req) returns (Database.Schema.Res);
     rpc database_type_schema (Database.TypeSchema.Req) returns (Database.TypeSchema.Res);
-//    rpc database_rule_schema (Database.RuleSchema.Req) returns (Database.RuleSchema.Res);
     rpc database_delete (Database.Delete.Req) returns (Database.Delete.Res);
 
     // Transaction Streaming API
     // Opens a bi-directional stream representing a stateful transaction, streaming
     // requests and responses back-and-forth. The first transaction client message must
     // be {Transaction.Open.Req}. Closing the stream closes the transaction.
-
     rpc transaction (stream Transaction.Client) returns (stream Transaction.Server);
+
 }

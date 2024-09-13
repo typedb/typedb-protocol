@@ -22,18 +22,9 @@ message Connection {
       // also: initial Token
     }
   }
-
-  message Pulse {
-    message Req {
-      ConnectionID connection_id = 1;
-    }
-
-    message Res {
-      int32 server_duration_millis = 1;
-    }
-  }
 }
 
+// Connection ID and Token are expected in all message metadata
 message ConnectionID {
   bytes id = 1;
 }
