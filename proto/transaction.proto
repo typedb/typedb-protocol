@@ -13,8 +13,7 @@ package typedb.protocol;
 message Transaction {
 
     message Client {
-        bytes connection_id = 1;
-        repeated Req reqs = 2;
+        repeated Req reqs = 1;
     }
 
     message Server {
@@ -68,7 +67,9 @@ message Transaction {
             Options options = 3;
             uint64 network_latency_millis = 4;
         }
-        message Res {}
+        message Res {
+            uint64 server_duration_millis = 2;
+        }
     }
 
     message Commit {

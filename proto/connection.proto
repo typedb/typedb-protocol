@@ -18,6 +18,7 @@ message Connection {
     }
 
     message Res {
+      uint64 server_duration_millis = 2;
       ConnectionID connection_id = 1;
       // also: initial Token
     }

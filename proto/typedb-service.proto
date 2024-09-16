@@ -18,7 +18,7 @@ service TypeDB {
     rpc connection_open (Connection.Open.Req) returns (Connection.Open.Res);
 
 //    // Server Manager API
-//    rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
+    rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
 //
 //    // User Manager API
 //    rpc users_contains (UserManager.Contains.Req) returns (UserManager.Contains.Res);
