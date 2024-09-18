@@ -95,7 +95,7 @@ message Value {
     }
 
     message Struct {
-
+        string struct_type_name = 1;
     }
 }
 
@@ -109,25 +109,20 @@ message Type {
 }
 
 message RoleType {
-    string name = 1;
-    string scope = 2;
-    repeated Annotation annotations = 3;
+    string label = 1;
 }
 
 message EntityType {
     string label = 1;
-    repeated Annotation annotations = 2;
 }
 
 message RelationType {
     string label = 1;
-    repeated Annotation annotations = 2;
 }
 
 message AttributeType {
     string label = 1;
     optional ValueType value_type = 2;
-    repeated Annotation annotations = 3;
 }
 
 message ValueType {

@@ -8,13 +8,13 @@ import "proto/concept.proto";
 
 package typedb.protocol;
 
-message AnswerRow {
-    repeated Answer row = 1;
+message ConceptRow {
+    repeated RowEntry row = 1;
 //    Explainables explainables = 2;
 }
 
-message Answer {
-    oneof answer {
+message RowEntry {
+    oneof entry {
         Empty empty = 1;
         Concept concept = 2;
         Value value = 3;

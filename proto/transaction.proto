@@ -40,7 +40,7 @@ message Transaction {
         bytes req_id = 1;
         oneof res {
             Open.Res open_res = 2;
-            Query.InitialRes query_res = 3;
+            Query.InitialRes query_initial_res = 3;
             Commit.Res commit_res = 5;
             Rollback.Res rollback_res = 6;
         }

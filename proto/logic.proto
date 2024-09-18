@@ -94,8 +94,8 @@ message Rule {
 message Explanation {
     Rule rule = 1;
     map<string, VarList> var_mapping = 2;
-    AnswerRow condition = 3;
-    AnswerRow conclusion = 4;
+    ConceptRow condition = 3;
+    ConceptRow conclusion = 4;
 
     message VarList {
         repeated string vars = 1;

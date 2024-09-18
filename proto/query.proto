@@ -27,7 +27,7 @@ message Query {
             oneof ok {
                 Empty empty = 1;
                 ReadableConceptTreeStream readable_concept_tree_stream = 3;
-                AnswerRowStream concept_row_stream = 4;
+                ConceptRowStream concept_row_stream = 4;
             }
 
             message Empty {
@@ -38,7 +38,7 @@ message Query {
                 // note: we could use this first response to record debug info, type annotations, warnings, etc
             }
 
-            message AnswerRowStream {
+            message ConceptRowStream {
                 repeated string column_variable_names = 1;
             }
         }
@@ -47,15 +47,15 @@ message Query {
     message ResPart {
         oneof res {
             ReadableConceptTreesRes trees_res = 1;
-            AnswerRowsRes rows_res = 2;
+            ConceptRowsRes rows_res = 2;
         }
 
         message ReadableConceptTreesRes {
             repeated ReadableConceptTree trees = 1;
         }
 
-        message AnswerRowsRes {
-            repeated AnswerRow rows = 1;
+        message ConceptRowsRes {
+            repeated ConceptRow rows = 1;
         }
     }
 }
