@@ -8,5 +8,5 @@ def vaticle_dependencies():
     git_repository(
         name = "vaticle_dependencies",
         remote = "https://github.com/vaticle/dependencies",
-        commit = "5387f4df1c571e5c3e6dd1139a3e3b321f3538cd", # sync-marker: do not remove this comment, this is used for sync-dependencies by @vaticle_dependencies
+        commit = "8a65b2ec3aa0178485b155265653ce2793389b8f", # sync-marker: do not remove this comment, this is used for sync-dependencies by @vaticle_dependencies
     )
