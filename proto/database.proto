@@ -37,7 +37,9 @@ message DatabaseManager {
         message Req {
             string name = 1;
         }
-        message Res {}
+        message Res {
+            DatabaseReplicas database = 1;
+        }
     }
 }
 

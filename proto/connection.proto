@@ -5,6 +5,7 @@
 syntax = "proto3";
 
 import "proto/version.proto";
+import "proto/database.proto";
 
 package typedb.protocol;
 
@@ -18,9 +19,13 @@ message Connection {
     }
 
     message Res {
-      uint64 server_duration_millis = 2;
-      ConnectionID connection_id = 1;
-      // also: initial Token
+      uint64 server_duration_millis = 1;
+      ConnectionID connection_id = 2;
+
+      // TODO: initial Token
+
+      // pre-send all databases and replica info
+      DatabaseManager.All.Res databases_all = 3;
     }
   }
 }
