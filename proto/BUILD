@@ -49,6 +49,7 @@ proto_library(
     srcs = ["connection.proto"],
     deps = [
         ":version-proto",
+        ":database-proto"
     ],
 )
 
