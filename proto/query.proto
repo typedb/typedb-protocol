@@ -12,6 +12,12 @@ package typedb.protocol;
 
 message Query {
 
+    enum Type {
+        READ = 0;
+        WRITE = 1;
+        SCHEMA = 2;
+    }
+
     message Req {
         Options options = 1;
         string query = 2;
@@ -36,10 +42,12 @@ message Query {
 
             message ReadableConceptTreeStream {
                 // note: we could use this first response to record debug info, type annotations, warnings, etc
+                // TODO: Add Type query_type
             }
 
             message ConceptRowStream {
                 repeated string column_variable_names = 1;
+                Type query_type = 2;
             }
         }
     }
