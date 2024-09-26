@@ -42,6 +42,7 @@ message Query {
 
             message ReadableConceptTreeStream {
                 // note: we could use this first response to record debug info, type annotations, warnings, etc
+                // TODO: Add Type query_type
             }
 
             message ConceptRowStream {
