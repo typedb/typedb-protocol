@@ -35,7 +35,7 @@ message RowEntry {
 
 message ConceptDocument {
 
-    Node.Map root = 1;
+    Node root = 1;
 
     message Node {
         oneof node {
