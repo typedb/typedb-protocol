@@ -84,6 +84,7 @@ message Value {
         Datetime datetime = 1;
         oneof timezone {
             string named = 2;
+            // offset in seconds
             sint32 offset = 3;
         }
     }
