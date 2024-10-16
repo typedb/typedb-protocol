@@ -55,7 +55,7 @@ message Query {
 
     message ResPart {
         oneof res {
-            ConceptDocumentsRes trees_res = 1;
+            ConceptDocumentsRes documents_res = 1;
             ConceptRowsRes rows_res = 2;
         }
 
