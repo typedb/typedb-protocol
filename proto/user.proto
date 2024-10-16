@@ -7,76 +7,72 @@ syntax = "proto3";
 package typedb.protocol;
 
 message UserManager {
-
-    message Contains {
-        message Req {
-            string username = 1;
-        }
-        message Res {
-            bool contains = 1;
-        }
-    }
-
-    message Create {
-        message Req {
-            string username = 1;
-            string password = 2;
-        }
-        message Res {}
-    }
-
-    message Delete {
-        message Req {
-            string username = 1;
-        }
-        message Res {}
-    }
-
     message All {
         message Req {}
+
         message Res {
             repeated User users = 1;
         }
     }
 
-    message PasswordSet {
+    message Contains {
         message Req {
-            string username = 1;
-            string password = 2;
+            string name = 1;
         }
-        message Res {}
+
+        message Res {
+            bool contains = 1;
+        }
     }
 
     message Get {
         message Req {
-            string username = 1;
+            string name = 1;
         }
+
         message Res {
             User user = 1;
         }
     }
+
+    message Create {
+        message Req {
+            User user = 1;
+        }
+
+        message Res {}
+    }
 }
 
 message User {
-    string username = 1;
-    optional int64 password_expiry_seconds = 2;
+    string name = 1;
+    optional Credential credential = 2;
 
-    message PasswordUpdate {
+    message Update {
         message Req {
-            string username = 1;
-            string password_old = 2;
-            string password_new = 3;
+            string name = 1;
+            string password = 2;
+            User user = 3;
         }
+
         message Res {}
     }
 
-    message Token {
+    message Delete {
         message Req {
-            string username = 1;
+            string name = 1;
         }
 
-        message Res {
-            string token = 1;
-        }
+        message Res {}
+    }
+}
+
+message Credential {
+    oneof credential {
+        Password password = 1;
+    }
+
+    message Password {
+        optional string value = 2;
     }
 }

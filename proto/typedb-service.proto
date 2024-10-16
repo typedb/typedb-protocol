@@ -17,20 +17,18 @@ service TypeDB {
     // Connection API
     rpc connection_open (Connection.Open.Req) returns (Connection.Open.Res);
 
-//    // Server Manager API
+    // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
-//
-//    // User Manager API
-//    rpc users_contains (UserManager.Contains.Req) returns (UserManager.Contains.Res);
-//    rpc users_create (UserManager.Create.Req) returns (UserManager.Create.Res);
-//    rpc users_delete (UserManager.Delete.Req) returns (UserManager.Delete.Res);
-//    rpc users_all (UserManager.All.Req) returns (UserManager.All.Res);
-//    rpc users_password_set (UserManager.PasswordSet.Req) returns (UserManager.PasswordSet.Res);
-//    rpc users_get (UserManager.Get.Req) returns (UserManager.Get.Res);
-//
-//    // User API
-//    rpc user_password_update (User.PasswordUpdate.Req) returns (User.PasswordUpdate.Res);
-//    rpc user_token (User.Token.Req) returns (User.Token.Res);
+
+    // User Manager API
+    rpc users_get (UserManager.Get.Req) returns (UserManager.Get.Res);
+    rpc users_all (UserManager.All.Req) returns (UserManager.All.Res);
+    rpc users_contains (UserManager.Contains.Req) returns (UserManager.Contains.Res);
+    rpc users_create (UserManager.Create.Req) returns (UserManager.Create.Res);
+
+    // User API
+    rpc users_update (User.Update.Req) returns (User.Update.Res);
+    rpc users_delete (User.Delete.Req) returns (User.Delete.Res);
 
     // Database Manager API
     rpc databases_get (DatabaseManager.Get.Req) returns (DatabaseManager.Get.Res);
