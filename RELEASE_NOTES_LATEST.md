@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/clients/2.x/clients
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.0.0-alpha-6
+cargo add typedb-protocol@3.0.0-alpha-7
 ```
 
 #### For Node.js through npm
@@ -15,11 +15,11 @@ cargo add typedb-protocol@3.0.0-alpha-6
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.0.0-alpha-6
+npm install typedb-protocol@3.0.0-alpha-7
 ```
 or
 ```sh
-yarn add typedb-protocol@3.0.0-alpha-6
+yarn add typedb-protocol@3.0.0-alpha-7
 ```
 
 
@@ -33,3 +33,5 @@ yarn add typedb-protocol@3.0.0-alpha-6
 
 
 ## Other Improvements
+
+    
