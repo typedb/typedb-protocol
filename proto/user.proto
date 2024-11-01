@@ -46,7 +46,7 @@ message UserManager {
 
 message User {
     string name = 1;
-    optional Credential credential = 2;
+    string password = 2;
 
     message Update {
         message Req {
@@ -64,15 +64,5 @@ message User {
         }
 
         message Res {}
-    }
-}
-
-message Credential {
-    oneof credential {
-        Password password = 1;
-    }
-
-    message Password {
-        optional string value = 2;
     }
 }
