@@ -1,0 +1,25 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+fn main() -> std::io::Result<()> {
+    let protos = vec![
+        "../../proto/answer.proto",
+        "../../proto/concept.proto",
+        "../../proto/connection.proto",
+        "../../proto/database.proto",
+        "../../proto/logic.proto",
+        "../../proto/options.proto",
+        "../../proto/query.proto",
+        "../../proto/server.proto",
+        "../../proto/transaction.proto",
+        "../../proto/typedb-service.proto",
+        "../../proto/user.proto",
+        "../../proto/version.proto",
+    ];
+
+    tonic_build::configure()
+        .server_mod_attribute(".", "#[allow(non_camel_case_types)]")
+        .client_mod_attribute(".", "#[allow(non_camel_case_types)]")
+        .compile_protos(&protos, &["../.."])
+}
