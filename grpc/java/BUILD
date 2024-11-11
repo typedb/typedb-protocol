@@ -23,7 +23,7 @@ java_grpc_library(
         "//proto:version-proto",
     ],
     # TypeDB Core bundles JARs by maven coordinate, we can remove this when Core is rewritten in Rust
-    tags = ["maven_coordinates=com.vaticle.typedb:typedb-protocol:{pom_version}"],
+    tags = ["maven_coordinates=com.typedb:typedb-protocol:{pom_version}"],
 )
 
 checkstyle_test(
