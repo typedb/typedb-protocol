@@ -3,6 +3,6 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 deployment = {
-    "github.organisation": "vaticle",
+    "github.organisation": "typedb",
     "github.repository": "typedb-protocol"
 }
