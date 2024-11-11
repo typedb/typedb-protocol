@@ -3,10 +3,10 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 load("@rules_rust//rust:defs.bzl", "rust_library")
-load("@vaticle_bazel_distribution//crates:rules.bzl", "assemble_crate", "deploy_crate")
-load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
-load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-load("@vaticle_dependencies//builder/proto_grpc/rust:compile.bzl", "rust_tonic_compile")
+load("@typedb_bazel_distribution//crates:rules.bzl", "assemble_crate", "deploy_crate")
+load("@typedb_dependencies//distribution:deployment.bzl", "deployment")
+load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("@typedb_dependencies//builder/proto_grpc/rust:compile.bzl", "rust_tonic_compile")
 
 rust_tonic_compile(
     name = "typedb_protocol_src",
@@ -47,11 +47,11 @@ assemble_crate(
     name = "assemble_crate",
     target = ":typedb_protocol",
     description = "TypeDB Protocol",
-    homepage = "https://github.com/vaticle/typedb-protocol",
+    homepage = "https://github.com/typedb/typedb-protocol",
     readme_file = "//:README.md",
     license = "MPL-2.0",
     license_file = "//:LICENSE",
-    repository = "https://github.com/vaticle/typedb-protocol",
+    repository = "https://github.com/typedb/typedb-protocol",
 )
 
 deploy_crate(

@@ -5,8 +5,8 @@
 package(default_visibility = ["//visibility:public"])
 
 exports_files(["VERSION", "package.json"])
-load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-load("@vaticle_bazel_distribution//github:rules.bzl", "deploy_github")
+load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("@typedb_bazel_distribution//github:rules.bzl", "deploy_github")
 load("//:deployment.bzl", "deployment")
 
 checkstyle_test(
@@ -50,10 +50,10 @@ exports_files(["README.md"])
 filegroup(
     name = "tools",
     data = [
-        "@vaticle_dependencies//library/maven:update",
-        "@vaticle_dependencies//tool/ide:rust_sync",
-        "@vaticle_dependencies//tool/unuseddeps:unused-deps",
-        "@vaticle_dependencies//tool/release/notes:create",
-        "@vaticle_dependencies//tool/sync:dependencies",
+        "@typedb_dependencies//library/maven:update",
+        "@typedb_dependencies//tool/ide:rust_sync",
+        "@typedb_dependencies//tool/unuseddeps:unused-deps",
+        "@typedb_dependencies//tool/release/notes:create",
+        "@typedb_dependencies//tool/sync:dependencies",
     ],
 )

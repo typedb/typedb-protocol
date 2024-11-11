@@ -15,22 +15,22 @@ build:
     dependency-analysis:
       image: vaticle-ubuntu-22.04
       command: |
-        bazel run @vaticle_dependencies//factory/analysis:dependency-analysis
+        bazel run @typedb_dependencies//factory/analysis:dependency-analysis
   correctness:
 #    build:
 #      image: vaticle-ubuntu-22.04
 #      command: |
-#        bazel run @vaticle_dependencies//tool/bazelinstall:remote_cache_setup.sh
+#        bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
 #        bazel build //...
-#        bazel run @vaticle_dependencies//tool/checkstyle:test-coverage
+#        bazel run @typedb_dependencies//tool/checkstyle:test-coverage
 #        bazel test $(bazel query 'kind(checkstyle_test, //...)') --test_output=errors
 #    build-dependency:
 #      image: vaticle-ubuntu-22.04
 #      command: |
-#        bazel run @vaticle_dependencies//tool/bazelinstall:remote_cache_setup.sh
+#        bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
 #        dependencies/maven/update.sh
 #        git diff --exit-code dependencies/maven/artifacts.snapshot
-#        bazel run @vaticle_dependencies//tool/unuseddeps:unused-deps -- list
+#        bazel run @typedb_dependencies//tool/unuseddeps:unused-deps -- list
     deploy-crate-snapshot:
       filter:
         owner: typedb
@@ -38,7 +38,7 @@ build:
 #      dependencies: [build, build-dependency]
       image: vaticle-ubuntu-22.04
       command: |
-        bazel run @vaticle_dependencies//tool/bazelinstall:remote_cache_setup.sh
+        bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
         export DEPLOY_CRATE_TOKEN=$REPO_TYPEDB_CRATES_TOKEN
         bazel run --define version=$(git rev-parse HEAD) //grpc/rust:deploy_crate -- snapshot
 #    deploy-npm-snapshot:
@@ -63,7 +63,7 @@ build:
 #        - deploy-npm-snapshot
 #      command: |
 #          export SYNC_DEPENDENCIES_TOKEN=$REPO_GITHUB_TOKEN
-#          bazel run @vaticle_dependencies//tool/sync:dependencies -- --source ${FACTORY_REPO}@${FACTORY_COMMIT}
+#          bazel run @typedb_dependencies//tool/sync:dependencies -- --source ${FACTORY_REPO}@${FACTORY_COMMIT}
 
 release:
   filter:
@@ -74,7 +74,7 @@ release:
       image: vaticle-ubuntu-22.04
       command: |
         export NOTES_VALIDATE_TOKEN=$REPO_GITHUB_TOKEN
-        bazel run @vaticle_dependencies//tool/release/notes:validate --test_output=streamed -- $FACTORY_OWNER $FACTORY_REPO ./RELEASE_NOTES_LATEST.md
+        bazel run @typedb_dependencies//tool/release/notes:validate --test_output=streamed -- $FACTORY_OWNER $FACTORY_REPO ./RELEASE_NOTES_LATEST.md
   deployment:
     deploy-github:
       image: vaticle-ubuntu-22.04
@@ -115,4 +115,4 @@ release:
 #        - deploy-npm-release
 #      command: |
 #          export SYNC_DEPENDENCIES_TOKEN=$REPO_GITHUB_TOKEN
-#          bazel run @vaticle_dependencies//tool/sync:dependencies -- --source ${FACTORY_REPO}@$(cat VERSION)
+#          bazel run @typedb_dependencies//tool/sync:dependencies -- --source ${FACTORY_REPO}@$(cat VERSION)

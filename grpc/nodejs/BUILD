@@ -3,12 +3,12 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 package(default_visibility = ["//visibility:public"])
-load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-load("@vaticle_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
-load("@vaticle_dependencies//distribution:deployment.bzl", "deployment")
+load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
+load("@typedb_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
+load("@typedb_dependencies//distribution:deployment.bzl", "deployment")
 load("@aspect_rules_js//npm:defs.bzl", "npm_package")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
-load("@vaticle_typedb_protocol_npm//:defs.bzl", "npm_link_all_packages")
+load("@typedb_protocol_npm//:defs.bzl", "npm_link_all_packages")
 load("//:deployment.bzl", github_deployment = "deployment")
 load("//grpc/nodejs:rules.bzl", "ts_grpc_compile")
 
@@ -16,7 +16,7 @@ npm_link_all_packages(name = "node_modules")
 
 exports_files(["package.json", "pnpm-lock.yaml"])
 
-load("@vaticle_typedb_protocol_npm//grpc/nodejs:protoc-gen-ts/package_json.bzl", protoc_gen_ts_bin = "bin")
+load("@typedb_protocol_npm//grpc/nodejs:protoc-gen-ts/package_json.bzl", protoc_gen_ts_bin = "bin")
 
 protoc_gen_ts_bin.protoc_gen_ts_binary(
     name = "protoc-gen-ts",
@@ -71,7 +71,7 @@ npm_package(
     srcs = [":typedb-protocol", "package.json"],
     include_runfiles = False,
     package = "typedb-protocol",
-    include_external_repositories = ["vaticle_typedb_protocol"],
+    include_external_repositories = ["typedb_protocol"],
     visibility = ["//visibility:public"],
 )
 

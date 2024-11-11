@@ -2,21 +2,21 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-workspace(name = "vaticle_typedb_protocol")
+workspace(name = "typedb_protocol")
 
 ################################
-# Load @vaticle_dependencies #
+# Load @typedb_dependencies #
 ################################
 
-load("//dependencies/vaticle:repositories.bzl", "vaticle_dependencies")
-vaticle_dependencies()
+load("//dependencies/typedb:repositories.bzl", "typedb_dependencies")
+typedb_dependencies()
 
 # Load //builder/bazel for RBE
-load("@vaticle_dependencies//builder/bazel:deps.bzl", "bazel_toolchain")
+load("@typedb_dependencies//builder/bazel:deps.bzl", "bazel_toolchain")
 bazel_toolchain()
 
 # Load //builder/java
-load("@vaticle_dependencies//builder/java:deps.bzl", java_deps = "deps")
+load("@typedb_dependencies//builder/java:deps.bzl", java_deps = "deps")
 java_deps()
 
 load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
@@ -26,7 +26,7 @@ load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
 rules_jvm_external_setup()
 
 # Load //builder/kotlin
-load("@vaticle_dependencies//builder/kotlin:deps.bzl", kotlin_deps = "deps")
+load("@typedb_dependencies//builder/kotlin:deps.bzl", kotlin_deps = "deps")
 kotlin_deps()
 load("@io_bazel_rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories")
 kotlin_repositories()
@@ -34,31 +34,31 @@ load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
 kt_register_toolchains()
 
 # Load //builder/python
-load("@vaticle_dependencies//builder/python:deps.bzl", python_deps = "deps")
+load("@typedb_dependencies//builder/python:deps.bzl", python_deps = "deps")
 python_deps()
 
 # Load //builder/rust
-load("@vaticle_dependencies//builder/rust:deps.bzl", rust_deps = "deps")
+load("@typedb_dependencies//builder/rust:deps.bzl", rust_deps = "deps")
 rust_deps()
 
 load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
 rules_rust_dependencies()
 rust_register_toolchains(edition = "2021")
 
-load("@vaticle_dependencies//library/crates:crates.bzl", "fetch_crates")
+load("@typedb_dependencies//library/crates:crates.bzl", "fetch_crates")
 fetch_crates()
 load("@crates//:defs.bzl", "crate_repositories")
 crate_repositories()
 
 # Load //tool/common
-load("@vaticle_dependencies//tool/common:deps.bzl", "vaticle_dependencies_ci_pip", vaticle_dependencies_tool_maven_artifacts = "maven_artifacts")
-vaticle_dependencies_ci_pip()
-load("@vaticle_dependencies_ci_pip//:requirements.bzl", "install_deps")
+load("@typedb_dependencies//tool/common:deps.bzl", "typedb_dependencies_ci_pip", typedb_dependencies_tool_maven_artifacts = "maven_artifacts")
+typedb_dependencies_ci_pip()
+load("@typedb_dependencies_ci_pip//:requirements.bzl", "install_deps")
 install_deps()
 
 # Load //builder/proto_grpc
-load("@vaticle_dependencies//builder/proto_grpc:deps.bzl", vaticle_grpc_deps = "deps")
-vaticle_grpc_deps()
+load("@typedb_dependencies//builder/proto_grpc:deps.bzl", typedb_grpc_deps = "deps")
+typedb_grpc_deps()
 
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
 rules_proto_grpc_toolchains()
@@ -72,7 +72,7 @@ load("@rules_proto_grpc//java:repositories.bzl", rules_proto_grpc_java_repos = "
 rules_proto_grpc_java_repos()
 
 load("@io_grpc_grpc_java//:repositories.bzl", "IO_GRPC_GRPC_JAVA_ARTIFACTS", "IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS", "grpc_java_repositories")
-load("@vaticle_dependencies//library/maven:rules.bzl", "parse_unversioned")
+load("@typedb_dependencies//library/maven:rules.bzl", "parse_unversioned")
 io_grpc_artifacts = [parse_unversioned(c) for c in IO_GRPC_GRPC_JAVA_ARTIFACTS]
 
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
@@ -92,40 +92,40 @@ load("@rules_proto_grpc_py3_deps//:requirements.bzl", "install_deps")
 install_deps()
 
 # Load //tool/checkstyle
-load("@vaticle_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
+load("@typedb_dependencies//tool/checkstyle:deps.bzl", checkstyle_deps = "deps")
 checkstyle_deps()
 
 # Load //tool/unuseddeps
-load("@vaticle_dependencies//tool/unuseddeps:deps.bzl", unuseddeps_deps = "deps")
+load("@typedb_dependencies//tool/unuseddeps:deps.bzl", unuseddeps_deps = "deps")
 unuseddeps_deps()
 
 ######################################
-# Load @vaticle_bazel_distribution #
+# Load @typedb_bazel_distribution #
 ######################################
 
-load("@vaticle_dependencies//distribution:deps.bzl", "vaticle_bazel_distribution")
-vaticle_bazel_distribution()
+load("@typedb_dependencies//distribution:deps.bzl", "typedb_bazel_distribution")
+typedb_bazel_distribution()
 
 # Load //common
-load("@vaticle_bazel_distribution//common:deps.bzl", "rules_pkg")
+load("@typedb_bazel_distribution//common:deps.bzl", "rules_pkg")
 rules_pkg()
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 rules_pkg_dependencies()
 
 # Load //github
-load("@vaticle_bazel_distribution//github:deps.bzl", github_deps = "deps")
+load("@typedb_bazel_distribution//github:deps.bzl", github_deps = "deps")
 github_deps()
 
 # Load //maven
-load("@vaticle_bazel_distribution//maven:deps.bzl", vaticle_bazel_distribution_maven_artifacts = "maven_artifacts")
+load("@typedb_bazel_distribution//maven:deps.bzl", typedb_bazel_distribution_maven_artifacts = "maven_artifacts")
 
 ############################
 # Load @maven dependencies #
 ############################
 
-load("@vaticle_dependencies//library/maven:rules.bzl", "maven")
+load("@typedb_dependencies//library/maven:rules.bzl", "maven")
 load("//dependencies/maven:artifacts.bzl", "artifacts")
-maven(artifacts + vaticle_dependencies_tool_maven_artifacts + vaticle_bazel_distribution_maven_artifacts + io_grpc_artifacts,
+maven(artifacts + typedb_dependencies_tool_maven_artifacts + typedb_bazel_distribution_maven_artifacts + io_grpc_artifacts,
       override_targets = IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS,
       generate_compat_repositories = True,
 )
@@ -139,7 +139,7 @@ grpc_java_repositories()
 #########################
 
 # Load //builder/nodejs
-load("@vaticle_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
+load("@typedb_dependencies//builder/nodejs:deps.bzl", nodejs_deps = "deps")
 nodejs_deps()
 
 load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
@@ -153,7 +153,7 @@ nodejs_register_toolchains(
 
 load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
 npm_translate_lock(
-    name = "vaticle_typedb_protocol_npm",
+    name = "typedb_protocol_npm",
     bins = {
         "protoc-gen-ts": {
             "protoc-gen-ts-js": "./bin/protoc-gen-ts.js",
@@ -162,7 +162,7 @@ npm_translate_lock(
     pnpm_lock = "//grpc/nodejs:pnpm-lock.yaml",
 )
 
-load("@vaticle_typedb_protocol_npm//:repositories.bzl", "npm_repositories")
+load("@typedb_protocol_npm//:repositories.bzl", "npm_repositories")
 npm_repositories()
 
 # Setup rules_ts
@@ -173,10 +173,10 @@ rules_ts_dependencies(
 )
 
 ##################################################
-# Create @vaticle_typedb_protocol_workspace_refs #
+# Create @typedb_typedb_protocol_workspace_refs #
 ##################################################
 
-load("@vaticle_bazel_distribution//common:rules.bzl", "workspace_refs")
+load("@typedb_bazel_distribution//common:rules.bzl", "workspace_refs")
 workspace_refs(
-    name = "vaticle_typedb_protocol_workspace_refs"
+    name = "typedb_typedb_protocol_workspace_refs"
 )

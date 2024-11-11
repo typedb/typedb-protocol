@@ -100,10 +100,10 @@ ts_grpc_compile = rule(
         "_protoc_gen_ts": attr.label(
             cfg = "exec",
             executable = True,
-            default = "@vaticle_typedb_protocol//grpc/nodejs:protoc-gen-ts",
+            default = "@typedb_protocol//grpc/nodejs:protoc-gen-ts",
         ),
         "_file_in_project": attr.label(
-            default = "@vaticle_typedb_protocol//grpc/nodejs:BUILD",
+            default = "@typedb_protocol//grpc/nodejs:BUILD",
             allow_single_file = True,
         ),
    }
