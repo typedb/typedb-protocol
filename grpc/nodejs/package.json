@@ -2,7 +2,7 @@
   "name": "typedb-protocol",
   "version": "2.20.0",
   "description": "TypeDB Protocol",
-  "author": "Vaticle",
+  "author": "TypeDB",
   "license": "MPL-2.0",
   "homepage": "https://typedb.com",
   "repository": {
