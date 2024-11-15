@@ -1,0 +1,18 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+[package]
+name = "typedb-protocol"
+version = "0.0.0"
+edition = "2021"
+
+[lib]
+path = "lib.rs"
+
+[build-dependencies]
+tonic-build = "^0.12"
+
+[dependencies]
+prost = "^0.13"
+tonic = { version = "^0.12", features = ["tls", "tls-roots"] }
