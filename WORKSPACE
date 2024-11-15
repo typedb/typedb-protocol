@@ -16,8 +16,8 @@ load("@typedb_dependencies//builder/bazel:deps.bzl", "bazel_toolchain")
 bazel_toolchain()
 
 # Load //builder/java
-load("@typedb_dependencies//builder/java:deps.bzl", java_deps = "deps")
-java_deps()
+load("@typedb_dependencies//builder/java:deps.bzl", "rules_jvm_external")
+rules_jvm_external()
 
 load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
 rules_jvm_external_deps()
@@ -26,16 +26,16 @@ load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
 rules_jvm_external_setup()
 
 # Load //builder/kotlin
-load("@typedb_dependencies//builder/kotlin:deps.bzl", kotlin_deps = "deps")
-kotlin_deps()
+load("@typedb_dependencies//builder/kotlin:deps.bzl", "io_bazel_rules_kotlin")
+io_bazel_rules_kotlin()
 load("@io_bazel_rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories")
 kotlin_repositories()
 load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
 kt_register_toolchains()
 
 # Load //builder/python
-load("@typedb_dependencies//builder/python:deps.bzl", python_deps = "deps")
-python_deps()
+load("@typedb_dependencies//builder/python:deps.bzl", "rules_python")
+rules_python()
 
 # Load //builder/rust
 load("@typedb_dependencies//builder/rust:deps.bzl", rust_deps = "deps")
@@ -113,8 +113,9 @@ load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 rules_pkg_dependencies()
 
 # Load //github
-load("@typedb_bazel_distribution//github:deps.bzl", github_deps = "deps")
-github_deps()
+load("@typedb_bazel_distribution//github:deps.bzl", "ghr_osx_zip", "ghr_linux_tar")
+ghr_osx_zip()
+ghr_linux_tar()
 
 # Load //maven
 load("@typedb_bazel_distribution//maven:deps.bzl", typedb_bazel_distribution_maven_artifacts = "maven_artifacts")
