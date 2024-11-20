@@ -65,14 +65,4 @@ message User {
 
         message Res {}
     }
-
-    message Token {
-        message Get {
-            message Req {}
-
-            message Res {
-                string token = 1;
-            }
-        }
-    }
 }
