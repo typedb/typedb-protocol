@@ -52,7 +52,7 @@ message Attribute {
 message Value {
     oneof value {
         bool boolean = 1;
-        sint64 long = 2;
+        sint64 integer = 2;
         double double = 3;
         Decimal decimal = 4;
         string string = 5;
@@ -129,7 +129,7 @@ message AttributeType {
 message ValueType {
     oneof value_type {
         Boolean boolean = 1;
-        Long long = 2;
+        Integer integer = 2;
         Double double = 3;
         Decimal decimal = 4;
         String string = 5;
@@ -140,7 +140,7 @@ message ValueType {
         Struct struct = 10;
     }
     message Boolean {};
-    message Long {};
+    message Integer {};
     message Double {};
     message Decimal {};
     message String {};
