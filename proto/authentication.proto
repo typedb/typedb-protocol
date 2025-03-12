@@ -8,11 +8,14 @@ package typedb.protocol;
 
 message Authentication {
 
-  // TODO: How to extend it if other credentials appear? Make SignInPassword + SignInXXX, or make username + password optional?
   message SignIn {
     message Req {
-      string username = 1;
-      string password = 2;
+      message Password {
+        string username = 1;
+        string password = 2;
+      }
+
+      optional Password password = 1;
     }
 
     message Res {
