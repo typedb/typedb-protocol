@@ -22,8 +22,6 @@ message Connection {
       uint64 server_duration_millis = 1;
       ConnectionID connection_id = 2;
 
-      // TODO: initial Token
-
       // pre-send all databases and replica info
       DatabaseManager.All.Res databases_all = 3;
     }
