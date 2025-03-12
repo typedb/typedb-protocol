@@ -1,0 +1,22 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+package typedb.protocol;
+
+message Authentication {
+
+  // TODO: How to extend it if other credentials appear? Make SignInPassword + SignInXXX, or make username + password optional?
+  message SignIn {
+    message Req {
+      string username = 1;
+      string password = 2;
+    }
+
+    message Res {
+      string token = 1;
+    }
+  }
+}

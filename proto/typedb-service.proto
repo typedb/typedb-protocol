@@ -4,6 +4,7 @@
 
 syntax = "proto3";
 
+import "proto/authentication.proto";
 import "proto/connection.proto";
 import "proto/database.proto";
 import "proto/server.proto";
@@ -16,6 +17,9 @@ service TypeDB {
 
     // Connection API
     rpc connection_open (Connection.Open.Req) returns (Connection.Open.Res);
+
+    // Authentication API
+    rpc sign_in (Authentication.SignIn.Req) returns (Authentication.SignIn.Res);
 
     // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
