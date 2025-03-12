@@ -15,7 +15,10 @@ message Authentication {
         string password = 2;
       }
 
-      optional Password password = 1;
+      oneof credentials {
+        Password password = 1;
+        // extend by other credential kinds
+      }
     }
 
     message Res {

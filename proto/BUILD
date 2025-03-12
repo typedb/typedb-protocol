@@ -11,6 +11,7 @@ proto_library(
     srcs = [":typedb-service.proto"],
     deps = [
         ":connection-proto",
+        ":authentication-proto",
         ":server-proto",
         ":user-proto",
         ":database-proto",
@@ -37,6 +38,11 @@ proto_library(
     name = "answer-proto",
     srcs = ["answer.proto"],
     deps = [":concept-proto"],
+)
+
+proto_library(
+    name = "authentication-proto",
+    srcs = ["authentication.proto"],
 )
 
 proto_library(
