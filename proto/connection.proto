@@ -4,8 +4,9 @@
 
 syntax = "proto3";
 
-import "proto/version.proto";
+import "proto/authentication.proto";
 import "proto/database.proto";
+import "proto/version.proto";
 
 package typedb.protocol;
 
@@ -16,6 +17,8 @@ message Connection {
       Version version = 1;
       string driver_lang = 2;
       string driver_version = 3;
+
+      Authentication.SignIn.Req authentication = 4;
     }
 
     message Res {
@@ -24,6 +27,8 @@ message Connection {
 
       // pre-send all databases and replica info
       DatabaseManager.All.Res databases_all = 3;
+
+      Authentication.SignIn.Res authentication = 4;
     }
   }
 }
