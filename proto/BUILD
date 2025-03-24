@@ -72,6 +72,15 @@ proto_library(
         ":logic-proto",
         ":options-proto",
         ":concept-proto",
+        ":query-structure-proto",
+    ],
+)
+
+proto_library(
+    name = "query-structure-proto",
+    srcs = ["query-structure.proto"],
+    deps = [
+        ":concept-proto",
     ],
 )
 
