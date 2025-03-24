@@ -17,8 +17,8 @@ message QueryStructure {
 
   message StructureEdge {
     EdgeType edge_type = 1;
-    ConstraintVertex from = 2;
-    ConstraintVertex to = 3;
+    StructureVertex from = 2;
+    StructureVertex to = 3;
     EdgeParameter param = 4;
 
     enum EdgeType {
@@ -40,20 +40,6 @@ message QueryStructure {
       COMPARATOR = 11;
     }
 
-    message ConstraintVertex {
-      oneof vertex {
-        uint64 variable_position = 1;
-        Concept constant = 2;
-        DerivedVertex derived = 3;
-      }
-    }
-
-    message DerivedVertex {
-      uint64 function_id = 1; // Uniquely represents the constraint in the query.
-      string label = 2;       // Function name or full expression
-      repeated uint64 variable_positions = 3; // Arguments (and return values)
-    }
-
     message EdgeParameter {
       oneof edge_parameter {
         uint64 variable_position = 1; // role-types
@@ -61,4 +47,20 @@ message QueryStructure {
       }
     }
   }
+
+  message StructureVertex {
+    oneof vertex {
+      uint64 variable_position = 1;
+      Concept constant = 2;
+      DerivedVertex derived = 3;
+    }
+
+
+    message DerivedVertex {
+      uint64 function_id = 1; // Uniquely represents the constraint in the query.
+      string label = 2;       // Function name or full expression
+      repeated uint64 variable_positions = 3; // Arguments (and return values)
+    }
+  }
+
 }
