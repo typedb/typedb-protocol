@@ -12,10 +12,10 @@ message QueryStructure {
   map<uint64, Branch> branches = 1;
 
   message Branch {
-    repeated ConstraintEdge constraints = 1;
+    repeated StructureEdge constraints = 1;
   }
 
-  message ConstraintEdge {
+  message StructureEdge {
     EdgeType edge_type = 1;
     ConstraintVertex from = 2;
     ConstraintVertex to = 3;
