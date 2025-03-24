@@ -19,7 +19,7 @@ service TypeDB {
     rpc connection_open (Connection.Open.Req) returns (Connection.Open.Res);
 
     // Authentication API
-    rpc sign_in (Authentication.Token.Create.Req) returns (Authentication.Token.Create.Res);
+    rpc authentication_token_create (Authentication.Token.Create.Req) returns (Authentication.Token.Create.Res);
 
     // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
