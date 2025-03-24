@@ -18,7 +18,7 @@ message Connection {
       string driver_lang = 2;
       string driver_version = 3;
 
-      Authentication.SignIn.Req authentication = 4;
+      Authentication.Token.Create.Req authentication = 4;
     }
 
     message Res {
@@ -28,7 +28,7 @@ message Connection {
       // pre-send all databases and replica info
       DatabaseManager.All.Res databases_all = 3;
 
-      Authentication.SignIn.Res authentication = 4;
+      Authentication.Token.Create.Res authentication = 4;
     }
   }
 }
