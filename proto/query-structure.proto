@@ -1,0 +1,67 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+import "proto/concept.proto";
+
+package typedb.protocol;
+
+message QueryStructure {
+  map<uint64, Branch> branches = 1;
+
+  message Branch {
+    repeated StructureEdge constraints = 1;
+  }
+
+  message StructureEdge {
+    EdgeType edge_type = 1;
+    StructureVertex from = 2;
+    StructureVertex to = 3;
+    EdgeParameter param = 4;
+
+    enum EdgeType {
+      ISA = 0;
+      HAS = 1;
+      LINKS = 2;
+
+      SUB = 3;
+      OWNS = 4;
+      RELATES = 5;
+      PLAYS = 6;
+
+      FUNCTION_ARG = 7;
+      FUNCTION_RES = 8;
+
+      EXPR_ARG = 9;
+      EXPR_RESULT = 10;
+
+      COMPARATOR = 11;
+    }
+
+    message EdgeParameter {
+      oneof edge_parameter {
+        uint64 position = 1; // for variable role-types
+        string label = 3;    // Constant role-types
+        uint64 index = 2;    // Arguments & returns
+      }
+    }
+  }
+
+  message StructureVertex {
+    oneof vertex {
+      uint64 variable_position = 1;
+      string label = 2;
+      Value value = 3;
+      DerivedVertex derived = 4;
+    }
+
+
+    message DerivedVertex {
+      uint64 function_id = 1; // Uniquely represents the constraint in the query.
+      string label = 2;       // Function name or full expression
+      repeated uint64 variable_positions = 3; // Arguments (and return values)
+    }
+  }
+}
