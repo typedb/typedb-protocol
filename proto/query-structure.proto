@@ -42,7 +42,8 @@ message QueryStructure {
 
     message EdgeParameter {
       oneof edge_parameter {
-        uint64 variable_position = 1; // role-types
+        uint64 position = 1; // for variable role-types
+        string label = 3;    // Constant role-types
         uint64 index = 2;    // Arguments & returns
       }
     }
@@ -51,8 +52,9 @@ message QueryStructure {
   message StructureVertex {
     oneof vertex {
       uint64 variable_position = 1;
-      Concept constant = 2;
-      DerivedVertex derived = 3;
+      string label = 2;
+      Value value = 3;
+      DerivedVertex derived = 4;
     }
 
 
@@ -62,5 +64,4 @@ message QueryStructure {
       repeated uint64 variable_positions = 3; // Arguments (and return values)
     }
   }
-
 }
