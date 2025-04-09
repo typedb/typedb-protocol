@@ -5,6 +5,7 @@
 fn main() -> std::io::Result<()> {
     let protos = vec![
         "../../proto/answer.proto",
+        "../../proto/authentication.proto",
         "../../proto/concept.proto",
         "../../proto/connection.proto",
         "../../proto/database.proto",
