@@ -1,4 +1,4 @@
-Documentation: https://typedb.com/docs/clients/2.x/clients
+Documentation: https://typedb.com/docs/drivers/
 
 ### Distribution
 
