@@ -7,14 +7,16 @@ syntax = "proto3";
 package typedb.protocol;
 
 message Options {
-//    optional bool infer = 1;
-//    optional bool trace_inference = 2;
-//    optional bool explain = 3;
-    optional bool parallel = 4;
-    optional uint64 prefetch_size = 5;
-    optional bool prefetch = 6;
-//    optional int32 session_idle_timeout_millis = 7;
-    optional uint64 transaction_timeout_millis = 8;
-    optional uint64 schema_lock_acquire_timeout_millis = 9;
-    optional bool read_any_replica = 10;
+    message Transaction {
+        optional bool parallel = 1;
+        optional uint64 transaction_timeout_millis = 2;
+        optional uint64 schema_lock_acquire_timeout_millis = 3;
+    }
+
+    message Query {
+        optional bool include_instance_types = 1;
+    }
+
+    Transaction transaction = 1;
+    Query query = 2;
 }
