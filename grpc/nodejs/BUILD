@@ -33,7 +33,6 @@ ts_grpc_compile(
         "//proto:concept-proto",
         "//proto:connection-proto",
         "//proto:authentication-proto",
-        "//proto:logic-proto",
         "//proto:options-proto",
         "//proto:query-proto",
         "//proto:transaction-proto",

@@ -16,7 +16,4 @@ message Options {
     message Query {
         optional bool include_instance_types = 1;
     }
-
-    Transaction transaction = 1;
-    Query query = 2;
 }
