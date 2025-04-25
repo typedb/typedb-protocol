@@ -4,7 +4,6 @@
 
 syntax = "proto3";
 
-//import "proto/logic.proto";
 import "proto/options.proto";
 import "proto/query.proto";
 
@@ -64,7 +63,7 @@ message Transaction {
         message Req {
             string database = 1;
             Type type = 2;
-            Options options = 3;
+            Options.Transaction options = 3;
             uint64 network_latency_millis = 4;
         }
         message Res {
