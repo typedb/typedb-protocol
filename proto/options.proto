@@ -15,5 +15,6 @@ message Options {
 
     message Query {
         optional bool include_instance_types = 1;
+        optional uint64 prefetch_size = 2;
     }
 }
