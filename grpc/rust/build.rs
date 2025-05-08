@@ -9,6 +9,7 @@ fn main() -> std::io::Result<()> {
         "../../proto/concept.proto",
         "../../proto/connection.proto",
         "../../proto/database.proto",
+        "../../proto/migration.proto",
         "../../proto/options.proto",
         "../../proto/query.proto",
         "../../proto/server.proto",

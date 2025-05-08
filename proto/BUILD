@@ -30,6 +30,11 @@ proto_library(
 )
 
 proto_library(
+    name = "migration-proto",
+    srcs = [":migration.proto"],
+)
+
+proto_library(
     name = "user-proto",
     srcs = [":user.proto"],
 )

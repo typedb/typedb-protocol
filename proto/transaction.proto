@@ -86,7 +86,7 @@ message Transaction {
         message Res {}
     }
 
-    message GetSchemaExceptions {
+    message GetSchemaExceptions { // TODO: Outdated?
         message Req {}
         message Res {
             repeated SchemaException exceptions = 1;
@@ -98,7 +98,7 @@ message Transaction {
         string message = 2;
     }
 
-    message StreamSignal {
+    message StreamSignal { // TODO: Move to common for database export and import to reuse?
         message Req {}
 
         message ResPart {

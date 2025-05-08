@@ -1,0 +1,81 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+package typedb.protocol;
+
+import "proto/concept.proto";
+
+message Item {
+    oneof item {
+        Attribute attribute = 1;
+        Entity entity = 2;
+        Relation relation = 3;
+
+        Header header = 15;
+        Checksums checksums = 16;
+    }
+
+    message Entity {
+        string id = 1;
+        string label = 2;
+        repeated OwnedAttribute attribute = 3;
+    }
+
+    message Attribute {
+        string id = 1;
+        string label = 2;
+        // 3 is deprecated
+        ValueObject value = 4;
+    }
+
+    message Relation {
+        string id = 1;
+        string label = 2;
+        repeated OwnedAttribute attribute = 3;
+        repeated Role role = 4;
+        message Role {
+            string label = 1;
+            repeated Player player = 2;
+            message Player {
+                string id = 1;
+            }
+        }
+    }
+
+    message OwnedAttribute {
+        string id = 1;
+    }
+
+    message Header {
+        string typedb_version = 1;
+        string original_database = 2;
+    }
+
+    message Checksums {
+        int64 entity_count = 1;
+        int64 attribute_count = 2;
+        int64 relation_count = 3;
+        int64 role_count = 4;
+        int64 ownership_count = 5;
+        // 6 was deleted and cannot be used until a breaking change occurs
+    }
+}
+
+message ValueObject {
+    oneof value {
+        string string = 1;
+        bool boolean = 2;
+        int64 integer = 3;
+        double double = 4;
+        int64 datetime_millis = 5; // reserved for 2.x, time since epoch in milliseconds
+        Value.Decimal decimal = 6;
+        Value.Date date = 8;
+        Value.Datetime datetime = 9;
+        Value.Datetime_TZ datetime_tz = 10;
+        Value.Duration duration = 11;
+        Value.Struct struct = 12;
+    }
+}

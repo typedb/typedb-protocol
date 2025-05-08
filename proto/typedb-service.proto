@@ -39,6 +39,7 @@ service TypeDB {
     rpc databases_all (DatabaseManager.All.Req) returns (DatabaseManager.All.Res);
     rpc databases_contains (DatabaseManager.Contains.Req) returns (DatabaseManager.Contains.Res);
     rpc databases_create (DatabaseManager.Create.Req) returns (DatabaseManager.Create.Res);
+//    rpc databases_import (stream DatabaseManager.Import.Req) returns (stream DatabaseManager.Import.ResPart); // TODO
 
     // Database API
     rpc database_schema (Database.Schema.Req) returns (Database.Schema.Res);
