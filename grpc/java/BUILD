@@ -13,6 +13,7 @@ java_grpc_library(
         "//proto:server-proto",
         "//proto:user-proto",
         "//proto:database-proto",
+        "//proto:migration-proto",
         "//proto:answer-proto",
         "//proto:concept-proto",
         "//proto:connection-proto",
