@@ -86,7 +86,7 @@ message Transaction {
         message Res {}
     }
 
-    message GetSchemaExceptions {
+    message GetSchemaExceptions { // TODO: Outdated?
         message Req {}
         message Res {
             repeated SchemaException exceptions = 1;
