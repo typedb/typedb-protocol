@@ -6,6 +6,7 @@ syntax = "proto3";
 
 import "proto/answer.proto";
 import "proto/options.proto";
+import "proto/error.proto";
 
 package typedb.protocol;
 
@@ -68,12 +69,4 @@ message Query {
             repeated ConceptRow rows = 1;
         }
     }
-}
-
-// This is an emulation of the google ErrorDetails message. Sometimes we submit ErrorDetails via the GRPC error mechanism
-// and sometimes (in streams) we have to manually send errors
-message Error {
-    string error_code = 1;
-    string domain = 2;
-    repeated string stack_trace = 3;
 }

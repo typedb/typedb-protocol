@@ -7,75 +7,151 @@ syntax = "proto3";
 package typedb.protocol;
 
 import "proto/concept.proto";
+import "proto/error.proto";
 
-message MigrationItem {
-    oneof item {
-        Attribute attribute = 1;
-        Entity entity = 2;
-        Relation relation = 3;
+message Migration {
+    message Export {
+        message Req {
+            string database = 1;
+        }
 
-        Header header = 15;
-        Checksums checksums = 16;
-    }
+        message Server {
+            oneof server {
+                InitialRes initial_res = 1;
+                ResPart res_part = 2;
+            }
+        }
 
-    message Entity {
-        string id = 1;
-        string label = 2;
-        repeated OwnedAttribute attribute = 3;
-    }
+        message InitialRes {
+            oneof res {
+                Error error = 1;
+                Ok ok = 2;
+            }
 
-    message Attribute {
-        string id = 1;
-        string label = 2;
-        // 3 is deprecated
-        MigrationValue value = 4;
-    }
+            message Ok {
+                string schema = 1;
+            }
+        }
 
-    message Relation {
-        string id = 1;
-        string label = 2;
-        repeated OwnedAttribute attribute = 3;
-        repeated Role role = 4;
-        message Role {
-            string label = 1;
-            repeated Player player = 2;
-            message Player {
-                string id = 1;
+        message ResPart {
+            oneof res_part {
+                MigrationItemResPart item_res = 1;
+                StreamSignalResPart stream_res = 2;
+            }
+
+            message MigrationItemResPart {
+                repeated Item items = 1;
+            }
+
+            message StreamSignalResPart {
+                oneof state {
+                    Done done = 1;
+                    Error error = 2;
+                }
+
+                message Done {}
             }
         }
     }
 
-    message OwnedAttribute {
-        string id = 1;
+    message Import {
+        message Client {
+            Req req = 1;
+        }
+
+        message Res { }
+
+        message Req {
+            oneof req {
+                InitialReq initial_req = 1;
+                ItemReqPart item_req_part = 2;
+            }
+
+            message InitialReq {
+                string name = 1;
+                string schema = 2;
+            }
+
+            message ItemReqPart {
+                repeated Item items = 1;
+            }
+        }
     }
 
-    message Header {
-        string typedb_version = 1;
-        string original_database = 2;
+    //
+    // ATTENTION: the messages below are used to import multiple versions of TypeDB.
+    // DO NOT reorder or delete existing and reserved indices. Be careful while extending this.
+    //
+
+    message Item {
+        oneof item {
+            Attribute attribute = 1;
+            Entity entity = 2;
+            Relation relation = 3;
+
+            Header header = 15;
+            Checksums checksums = 16;
+        }
+
+        message Entity {
+            string id = 1;
+            string label = 2;
+            repeated OwnedAttribute attribute = 3;
+        }
+
+        message Attribute {
+            string id = 1;
+            string label = 2;
+            // 3 is deprecated
+            MigrationValue value = 4;
+        }
+
+        message Relation {
+            string id = 1;
+            string label = 2;
+            repeated OwnedAttribute attribute = 3;
+            repeated Role role = 4;
+            message Role {
+                string label = 1;
+                repeated Player player = 2;
+                message Player {
+                    string id = 1;
+                }
+            }
+        }
+
+        message OwnedAttribute {
+            string id = 1;
+        }
+
+        message Header {
+            string typedb_version = 1;
+            string original_database = 2;
+        }
+
+        message Checksums {
+            int64 entity_count = 1;
+            int64 attribute_count = 2;
+            int64 relation_count = 3;
+            int64 role_count = 4;
+            int64 ownership_count = 5;
+            // 6 was deleted and cannot be used until a breaking change occurs
+        }
     }
 
-    message Checksums {
-        int64 entity_count = 1;
-        int64 attribute_count = 2;
-        int64 relation_count = 3;
-        int64 role_count = 4;
-        int64 ownership_count = 5;
-        // 6 was deleted and cannot be used until a breaking change occurs
-    }
-}
-
-message MigrationValue {
-    oneof value {
-        string string = 1;
-        bool boolean = 2;
-        int64 integer = 3;
-        double double = 4;
-        int64 datetime_millis = 5; // reserved for 2.x, time since epoch in milliseconds
-        Value.Decimal decimal = 6;
-        Value.Date date = 8;
-        Value.Datetime datetime = 9;
-        Value.Datetime_TZ datetime_tz = 10;
-        Value.Duration duration = 11;
-        Value.Struct struct = 12;
+    message MigrationValue {
+        oneof value {
+            string string = 1;
+            bool boolean = 2;
+            int64 integer = 3;
+            double double = 4;
+            int64 datetime_millis = 5; // reserved for 2.x, time since epoch
+            Value.Decimal decimal = 6;
+            Value.Date date = 8;
+            Value.Datetime datetime = 9;
+            Value.Datetime_TZ datetime_tz = 10;
+            Value.Duration duration = 11;
+            Value.Struct struct = 12;
+        }
     }
 }

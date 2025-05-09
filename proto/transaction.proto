@@ -98,7 +98,7 @@ message Transaction {
         string message = 2;
     }
 
-    message StreamSignal { // TODO: Move to common for database export and import to reuse?
+    message StreamSignal {
         message Req {}
 
         message ResPart {

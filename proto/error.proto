@@ -1,0 +1,15 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+package typedb.protocol;
+
+// This is an emulation of the google ErrorDetails message. Generally, ErrorDetails are submitted via the GRPC error
+// mechanism, but a manual error sending is required in streams
+message Error {
+    string error_code = 1;
+    string domain = 2;
+    repeated string stack_trace = 3;
+}
