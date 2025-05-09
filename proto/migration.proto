@@ -8,7 +8,7 @@ package typedb.protocol;
 
 import "proto/concept.proto";
 
-message Item {
+message MigrationItem {
     oneof item {
         Attribute attribute = 1;
         Entity entity = 2;
@@ -28,7 +28,7 @@ message Item {
         string id = 1;
         string label = 2;
         // 3 is deprecated
-        ValueObject value = 4;
+        MigrationValue value = 4;
     }
 
     message Relation {
@@ -64,7 +64,7 @@ message Item {
     }
 }
 
-message ValueObject {
+message MigrationValue {
     oneof value {
         string string = 1;
         bool boolean = 2;
