@@ -4,6 +4,7 @@
 
 syntax = "proto3";
 
+import "proto/error.proto";
 import "proto/options.proto";
 import "proto/query.proto";
 
