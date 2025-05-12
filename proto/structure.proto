@@ -63,20 +63,32 @@ message QueryStructure {
       uint64 end = 2;
     }
 
+    message ConstraintExactness {
+      oneof exactness {
+        Exact exact = 1;
+        Subtypes subtypes = 2;
+      }
+      message Exact {}
+      message Subtypes {}
+    }
+
     // Edges
     message Isa {
       QueryVariable thing = 1;
       QueryType type = 2;
+      ConstraintExactness exactness = 3;
     };
 
     message Has {
       QueryVariable owner = 1;
       QueryVariable attribute = 2;
+      ConstraintExactness exactness = 3;
     };
 
     message Links {
       QueryVariable relation = 1;
       repeated RolePlayer roleplayers = 2;
+      ConstraintExactness exactness = 3;
       message RolePlayer {
         QueryVariable player = 1;
         QueryType role = 2;
@@ -92,21 +104,25 @@ message QueryStructure {
     message Sub {
       QueryType subtype = 1;
       QueryType supertype = 2;
+      ConstraintExactness exactness = 3;
     };
 
     message Owns {
       QueryType subtype = 1;
       QueryType supertype = 2;
+      ConstraintExactness exactness = 3;
     };
 
     message Relates {
       QueryType relation = 1;
       QueryType role = 2;
+      ConstraintExactness exactness = 3;
     };
 
     message Plays {
       QueryType player = 1;
       QueryType role = 2;
+      ConstraintExactness exactness = 3;
     };
 
     // Function
