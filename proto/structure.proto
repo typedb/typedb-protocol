@@ -5,7 +5,6 @@
 syntax = "proto3";
 
 import "proto/answer.proto";
-import "proto/options.proto";
 import "proto/concept.proto";
 
 package typedb.protocol;
