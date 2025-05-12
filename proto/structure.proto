@@ -16,31 +16,6 @@ message QueryStructure {
     repeated QueryConstraint edges = 1;
   }
 
-  message QueryConstraint {
-    oneof edge {
-      // Thing
-      Isa isa = 1;
-      Has has = 2;
-      Links links = 3;
-
-      // Type
-      Kind kind = 4;
-      Sub sub = 5;
-      Owns owns = 6;
-      Relates relates = 7;
-      Plays plays = 8;
-
-      // Function
-      Comparison comparison = 9;
-      Expression expression = 10;
-      FunctionCall function_call = 11;
-
-      // Special
-      Is is = 12;
-      IID iid = 13;
-    }
-  }
-
   // Vertices
   message QueryVariable {
     string name = 1;
@@ -58,78 +33,109 @@ message QueryStructure {
     Value constant = 2;
   }
 
-  // Edges
-  message Isa {
-    QueryVariable thing = 1;
-    QueryType type = 2;
-  };
+  message QueryConstraint {
+    optional ConstraintSpan span = 1;
+    oneof edge {
+      // Thing
+      Isa isa = 2;
+      Has has = 3;
+      Links links = 4;
 
-  message Has {
-    QueryVariable owner = 1;
-    QueryVariable attribute = 2;
-  };
+      // Type
+      Kind kind = 5;
+      Sub sub = 6;
+      Owns owns = 7;
+      Relates relates = 8;
+      Plays plays = 9;
 
-  message Links {
-    QueryVariable relation = 1;
-    repeated RolePlayer roleplayers = 2;
-    message RolePlayer {
-      QueryVariable player = 1;
-      QueryType role = 2;
+      // Function
+      Comparison comparison = 10;
+      Expression expression = 11;
+      FunctionCall function_call = 12;
+
+      // Special
+      Is is = 13;
+      IID iid = 14;
     }
-  };
 
-  // Type
-  message Kind {
-    protocol.ConceptDocument.Node.Leaf.Kind kind = 1;
-    QueryType type = 2;
+    message ConstraintSpan {
+      uint64 begin = 1;
+      uint64 end = 2;
+    }
+
+    // Edges
+    message Isa {
+      QueryVariable thing = 1;
+      QueryType type = 2;
+    };
+
+    message Has {
+      QueryVariable owner = 1;
+      QueryVariable attribute = 2;
+    };
+
+    message Links {
+      QueryVariable relation = 1;
+      repeated RolePlayer roleplayers = 2;
+      message RolePlayer {
+        QueryVariable player = 1;
+        QueryType role = 2;
+      }
+    };
+
+    // Type
+    message Kind {
+      protocol.ConceptDocument.Node.Leaf.Kind kind = 1;
+      QueryType type = 2;
+    }
+
+    message Sub {
+      QueryType subtype = 1;
+      QueryType supertype = 2;
+    };
+
+    message Owns {
+      QueryType subtype = 1;
+      QueryType supertype = 2;
+    };
+
+    message Relates {
+      QueryType relation = 1;
+      QueryType role = 2;
+    };
+
+    message Plays {
+      QueryType player = 1;
+      QueryType role = 2;
+    };
+
+    // Function
+    message Comparison {
+      QueryValue lhs = 1;
+      QueryValue rhs = 2;
+    };
+
+    message Expression {
+      string text = 1;
+      QueryVariable assigned = 2;
+      repeated QueryVariable arguments = 3; // Treats constants as part of the text.
+    };
+
+    message FunctionCall {
+      string name = 1;
+      repeated QueryVariable assigned = 2;
+      repeated QueryValue arguments = 3; // Include constants, since variables are schema-objects
+    };
+
+    // Special
+    message Is {
+      QueryVariable lhs = 1;
+      QueryVariable rhs = 2;
+    };
+
+    message IID {
+      QueryVariable var = 1;
+      bytes IID = 2;
+    };
   }
-
-  message Sub {
-    QueryType subtype = 1;
-    QueryType supertype = 2;
-  };
-
-  message Owns {
-    QueryType subtype = 1;
-    QueryType supertype = 2;
-  };
-
-  message Relates {
-    QueryType relation = 1;
-    QueryType role = 2;
-  };
-
-  message Plays {
-    QueryType player = 1;
-    QueryType role = 2;
-  };
-
-  // Function
-  message Comparison {
-    QueryValue lhs = 1;
-    QueryValue rhs = 2;
-  };
-
-  message Expression {
-    string text = 1;
-    QueryVariable assigned = 2;
-    repeated QueryVariable arguments = 3; // Treats constants as part of the text.
-  };
-
-  message FunctionCall {
-    string name = 1;
-    repeated QueryVariable assigned = 2;
-    repeated QueryValue arguments = 3; // Include constants, since variables are schema-objects
-  };
-
-  // Special
-  message Is {
-    QueryVariable lhs = 1;
-    QueryVariable rhs = 2;
-  };
-
-  message IID {
-    QueryVariable var = 1;
-    bytes IID = 2;
-  };
 }
