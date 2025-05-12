@@ -25,19 +25,20 @@ message QueryStructure {
       Links links = 3;
 
       // Type
-      Sub sub = 4;
-      Owns owns = 5;
-      Relates relates = 6;
-      Plays plays = 7;
+      Kind kind = 4;
+      Sub sub = 5;
+      Owns owns = 6;
+      Relates relates = 7;
+      Plays plays = 8;
 
       // Function
-      Comparison comparison = 8;
-      Expression expression = 9;
-      FunctionCall function_call = 10;
+      Comparison comparison = 9;
+      Expression expression = 10;
+      FunctionCall function_call = 11;
 
       // Special
-      Is is = 11;
-      IID iid = 12;
+      Is is = 12;
+      IID iid = 13;
     }
   }
 
@@ -63,29 +64,42 @@ message QueryStructure {
     QueryVariable thing = 1;
     QueryType type = 2;
   };
+
   message Has {
     QueryVariable owner = 1;
     QueryVariable attribute = 2;
   };
+
   message Links {
     QueryVariable relation = 1;
-    QueryVariable player = 2;
-    QueryType role = 3;
+    repeated RolePlayer roleplayers = 2;
+    message RolePlayer {
+      QueryVariable player = 1;
+      QueryType role = 2;
+    }
   };
 
   // Type
+  message Kind {
+    protocol.ConceptDocument.Node.Leaf.Kind kind = 1;
+    QueryType type = 2;
+  }
+
   message Sub {
     QueryType subtype = 1;
     QueryType supertype = 2;
   };
+
   message Owns {
     QueryType subtype = 1;
     QueryType supertype = 2;
   };
+
   message Relates {
     QueryType relation = 1;
     QueryType role = 2;
   };
+
   message Plays {
     QueryType player = 1;
     QueryType role = 2;
@@ -102,6 +116,7 @@ message QueryStructure {
     QueryVariable assigned = 2;
     repeated QueryVariable arguments = 3; // Treats constants as part of the text.
   };
+
   message FunctionCall {
     string name = 1;
     repeated QueryVariable assigned = 2;
@@ -116,6 +131,6 @@ message QueryStructure {
 
   message IID {
     QueryVariable var = 1;
-    string IID = 2;
+    bytes IID = 2;
   };
 }
