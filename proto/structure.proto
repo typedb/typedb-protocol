@@ -13,13 +13,13 @@ message QueryStructure {
   repeated QueryBranch branches = 1;
 
   message QueryBranch {
-    repeated QueryConstraint edges = 1;
+    repeated QueryConstraint constraints = 1;
   }
 
   // Vertices
   message QueryVariable {
     oneof variable {
-      string name = 1;
+      string named = 1;
       string unavailable = 2;
     }
   }
@@ -40,7 +40,7 @@ message QueryStructure {
 
   message QueryConstraint {
     optional ConstraintSpan span = 1;
-    oneof edge {
+    oneof constraint {
       // Thing
       Isa isa = 2;
       Has has = 3;
