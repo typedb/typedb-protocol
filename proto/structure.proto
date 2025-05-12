@@ -24,7 +24,7 @@ message QueryStructure {
   message QueryType {
     oneof type {
       QueryVariable variable = 1;
-      string label = 2;
+      Concept label = 2;
     }
   }
 
