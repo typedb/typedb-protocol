@@ -24,6 +24,7 @@ rust_tonic_compile(
         "//proto:authentication-proto",
         "//proto:options-proto",
         "//proto:query-proto",
+        "//proto:structure-proto",
         "//proto:transaction-proto",
         "//proto:version-proto",
     ]

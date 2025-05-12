@@ -83,6 +83,15 @@ proto_library(
         ":concept-proto",
         ":error-proto",
         ":options-proto",
+        ":structure-proto"
+    ],
+)
+proto_library(
+    name = "structure-proto",
+    srcs = ["structure.proto"],
+    deps = [
+        ":answer-proto",
+        ":concept-proto",
     ],
 )
 
