@@ -10,6 +10,7 @@ package typedb.protocol;
 
 message ConceptRow {
     repeated RowEntry row = 1;
+    bytes provenance = 2;
 }
 
 message RowEntry {
