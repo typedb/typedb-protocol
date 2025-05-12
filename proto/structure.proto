@@ -18,7 +18,10 @@ message QueryStructure {
 
   // Vertices
   message QueryVariable {
-    string name = 1;
+    oneof variable {
+      string name = 1;
+      string unavailable = 2;
+    }
   }
 
   message QueryType {
