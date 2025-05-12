@@ -29,8 +29,10 @@ message QueryStructure {
   }
 
   message QueryValue {
-    QueryVariable variable = 1;
-    Value constant = 2;
+    oneof value {
+      QueryVariable variable = 1;
+      Value constant = 2;
+    }
   }
 
   message QueryConstraint {
