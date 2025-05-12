@@ -135,7 +135,7 @@ message QueryStructure {
 
     message Expression {
       string text = 1;
-      QueryVariable assigned = 2;
+      repeated QueryVariable assigned = 2;
       repeated QueryVariable arguments = 3; // Treats constants as part of the text.
     };
 
