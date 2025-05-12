@@ -65,6 +65,7 @@ message Migration {
             oneof req {
                 InitialReq initial_req = 1;
                 ItemReqPart item_req_part = 2;
+                DoneReq done_req = 3;
             }
 
             message InitialReq {
@@ -75,6 +76,8 @@ message Migration {
             message ItemReqPart {
                 repeated Item items = 1;
             }
+
+            message DoneReq { }
         }
     }
 
