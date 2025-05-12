@@ -110,8 +110,8 @@ message QueryStructure {
     };
 
     message Owns {
-      QueryType subtype = 1;
-      QueryType supertype = 2;
+      QueryType owner = 1;
+      QueryType attribute = 2;
       ConstraintExactness exactness = 3;
     };
 
