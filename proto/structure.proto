@@ -39,7 +39,7 @@ message QueryStructure {
   }
 
   message QueryConstraint {
-    optional ConstraintSpan span = 1;
+    ConstraintSpan span = 1;
     oneof constraint {
       // Thing
       Isa isa = 2;
@@ -95,8 +95,9 @@ message QueryStructure {
       repeated RolePlayer roleplayers = 2;
       ConstraintExactness exactness = 3;
       message RolePlayer {
-        QueryVariable player = 1;
-        QueryType role = 2;
+        ConstraintSpan span = 1;
+        QueryVariable player = 2;
+        QueryType role = 3;
       }
     };
 
