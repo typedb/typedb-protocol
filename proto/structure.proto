@@ -92,13 +92,9 @@ message QueryStructure {
 
     message Links {
       QueryVariable relation = 1;
-      repeated RolePlayer roleplayers = 2;
-      ConstraintExactness exactness = 3;
-      message RolePlayer {
-        ConstraintSpan span = 1;
-        QueryVariable player = 2;
-        QueryType role = 3;
-      }
+      QueryVariable player = 2;
+      QueryType role = 3;
+      ConstraintExactness exactness = 4;
     };
 
     // Type
