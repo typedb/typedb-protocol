@@ -20,7 +20,7 @@ message QueryStructure {
   message QueryVertex {
     oneof vertex {
       QueryVariable variable = 1;
-      Concept label = 2;
+      Type label = 2;
       Value value = 3;
     }
 
