@@ -7,7 +7,6 @@ syntax = "proto3";
 package typedb.protocol;
 
 import "proto/concept.proto";
-import "proto/error.proto";
 
 message Migration {
     message Export {
@@ -23,34 +22,20 @@ message Migration {
         }
 
         message InitialRes {
-            oneof res {
-                Error error = 1;
-                Ok ok = 2;
-            }
-
-            message Ok {
-                string schema = 1;
-            }
+            string schema = 1;
         }
 
         message ResPart {
             oneof res_part {
                 MigrationItemResPart item_res = 1;
-                StreamSignalResPart stream_res = 2;
+                Done done = 2;
             }
 
             message MigrationItemResPart {
                 repeated Item items = 1;
             }
 
-            message StreamSignalResPart {
-                oneof state {
-                    Done done = 1;
-                    Error error = 2;
-                }
-
-                message Done {}
-            }
+            message Done {}
         }
     }
 
@@ -99,7 +84,7 @@ message Migration {
         message Entity {
             string id = 1;
             string label = 2;
-            repeated OwnedAttribute attribute = 3;
+            repeated OwnedAttribute attributes = 3;
         }
 
         message Attribute {
@@ -112,11 +97,11 @@ message Migration {
         message Relation {
             string id = 1;
             string label = 2;
-            repeated OwnedAttribute attribute = 3;
+            repeated OwnedAttribute attributes = 3;
             repeated Role role = 4;
             message Role {
                 string label = 1;
-                repeated Player player = 2;
+                repeated Player players = 2;
                 message Player {
                     string id = 1;
                 }

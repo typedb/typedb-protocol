@@ -35,6 +35,7 @@ proto_library(
 proto_library(
     name = "migration-proto",
     srcs = [":migration.proto"],
+    deps = [":concept-proto"],
 )
 
 proto_library(
