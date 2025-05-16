@@ -29,6 +29,8 @@ ts_grpc_compile(
         "//proto:server-proto",
         "//proto:user-proto",
         "//proto:database-proto",
+        "//proto:migration-proto",
+        "//proto:error-proto",
         "//proto:answer-proto",
         "//proto:concept-proto",
         "//proto:connection-proto",
