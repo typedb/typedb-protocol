@@ -92,7 +92,7 @@ message Migration {
             string id = 1;
             string label = 2;
             repeated OwnedAttribute attributes = 3;
-            repeated Role role = 4;
+            repeated Role roles = 4;
             message Role {
                 string label = 1;
                 repeated Player players = 2;
