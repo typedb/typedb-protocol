@@ -10,10 +10,17 @@ import "proto/concept.proto";
 package typedb.protocol;
 
 message QueryStructure {
-  repeated QueryBlock branches = 1;
+  repeated QueryBlock blocks = 1;
+  map<uint32, VariableInfo> variables = 2;
+  repeated uint32 outputs = 3;
+
 
   message QueryBlock {
     repeated QueryConstraint constraints = 1;
+  }
+
+  message VariableInfo {
+    string name = 1;
   }
 
   // Vertices
