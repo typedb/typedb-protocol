@@ -84,7 +84,7 @@ message Migration {
         message Attribute {
             string id = 1;
             string label = 2;
-            // 3 is deprecated
+            repeated OwnedAttribute attributes = 3; // empty in 3.x, used for backwards compatibility
             MigrationValue value = 4;
         }
 
