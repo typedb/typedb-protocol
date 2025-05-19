@@ -52,8 +52,8 @@ message DatabaseManager {
             Migration.Import.Client client = 1;
         }
 
-        message Res {
-            Migration.Import.Res res = 1;
+        message Server {
+            Migration.Import.Server server = 1;
         }
     }
 }

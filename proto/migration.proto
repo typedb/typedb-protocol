@@ -35,13 +35,7 @@ message Migration {
 
     message Import {
         message Client {
-            Req req = 1;
-        }
-
-        message Res { }
-
-        message Req {
-            oneof req {
+            oneof client {
                 InitialReq initial_req = 1;
                 ReqPart req_part = 2;
                 Done done = 3;
@@ -55,6 +49,12 @@ message Migration {
             message ReqPart {
                 repeated Item items = 1;
             }
+
+            message Done { }
+        }
+
+        message Server {
+            Done done = 1;
 
             message Done { }
         }
