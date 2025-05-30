@@ -4,6 +4,7 @@
 
 syntax = "proto3";
 
+import "proto/error.proto";
 import "proto/options.proto";
 import "proto/query.proto";
 
@@ -86,7 +87,7 @@ message Transaction {
         message Res {}
     }
 
-    message GetSchemaExceptions {
+    message GetSchemaExceptions { // TODO: When actually used, should be probably merged with Error from error.proto
         message Req {}
         message Res {
             repeated SchemaException exceptions = 1;

@@ -6,12 +6,15 @@ syntax = "proto3";
 
 package typedb.protocol;
 
+import "proto/migration.proto";
+
 message DatabaseManager {
 
     message Get {
         message Req {
             string name = 1;
         }
+
         message Res {
             DatabaseReplicas database = 1;
         }
@@ -28,6 +31,7 @@ message DatabaseManager {
         message Req {
             string name = 1;
         }
+
         message Res {
             bool contains = 1;
         }
@@ -37,8 +41,19 @@ message DatabaseManager {
         message Req {
             string name = 1;
         }
+
         message Res {
             DatabaseReplicas database = 1;
+        }
+    }
+
+    message Import {
+        message Client {
+            Migration.Import.Client client = 1;
+        }
+
+        message Server {
+            Migration.Import.Server server = 1;
         }
     }
 }
@@ -62,6 +77,7 @@ message Database {
         message Req {
             string name = 1;
         }
+
         message Res {
             string schema = 1;
         }
@@ -71,19 +87,21 @@ message Database {
         message Req {
             string name = 1;
         }
+
         message Res {
             string schema = 1;
         }
     }
 
-//    message RuleSchema {
-//        message Req {
-//            string name = 1;
-//        }
-//        message Res {
-//            string schema = 1;
-//        }
-//    }
+    message Export {
+        message Req {
+            Migration.Export.Req req = 1;
+        }
+
+        message Server {
+            Migration.Export.Server server = 1;
+        }
+    }
 
     message Delete {
         message Req {
