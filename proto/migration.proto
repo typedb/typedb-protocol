@@ -11,7 +11,7 @@ import "proto/concept.proto";
 message Migration {
     message Export {
         message Req {
-            string database = 1;
+            string name = 1;
         }
 
         message Server {
@@ -117,7 +117,7 @@ message Migration {
             int64 relation_count = 3;
             int64 role_count = 4;
             int64 ownership_count = 5;
-            // 6 was deleted and cannot be used until a breaking change occurs
+            reserved 6; // was deleted and cannot be used until a breaking change occurs
         }
     }
 
@@ -127,7 +127,7 @@ message Migration {
             bool boolean = 2;
             int64 integer = 3;
             double double = 4;
-            int64 datetime_millis = 5; // reserved for 2.x, time since epoch
+            int64 datetime_millis = 5; // compatibility with 2.x, milliseconds since epoch
             Value.Decimal decimal = 6;
             Value.Date date = 8;
             Value.Datetime datetime = 9;
