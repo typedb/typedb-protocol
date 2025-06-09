@@ -60,6 +60,11 @@ message Migration {
         }
     }
 
+    //               _  _____ _____ _____ _   _ _____ ___ ___  _   _ _
+    //              / \|_   _|_   _| ____| \ | |_   _|_ _/ _ \| \ | | |
+    //             / _ \ | |   | | |  _| |  \| | | |  | | | | |  \| | |
+    //            / ___ \| |   | | | |___| |\  | | |  | | |_| | |\  |_|
+    //           /_/   \_\_|   |_| |_____|_| \_| |_| |___\___/|_| \_(_)
     //
     // ATTENTION: the messages below are used to import multiple versions of TypeDB.
     // DO NOT reorder or delete existing and reserved indices. Be careful while extending this.
