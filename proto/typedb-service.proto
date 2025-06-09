@@ -10,6 +10,7 @@ import "proto/database.proto";
 import "proto/server.proto";
 import "proto/user.proto";
 import "proto/transaction.proto";
+import "proto/migration.proto";
 
 package typedb.protocol;
 
@@ -39,11 +40,13 @@ service TypeDB {
     rpc databases_all (DatabaseManager.All.Req) returns (DatabaseManager.All.Res);
     rpc databases_contains (DatabaseManager.Contains.Req) returns (DatabaseManager.Contains.Res);
     rpc databases_create (DatabaseManager.Create.Req) returns (DatabaseManager.Create.Res);
+    rpc databases_import (stream DatabaseManager.Import.Client) returns (stream DatabaseManager.Import.Server);
 
     // Database API
     rpc database_schema (Database.Schema.Req) returns (Database.Schema.Res);
     rpc database_type_schema (Database.TypeSchema.Req) returns (Database.TypeSchema.Res);
     rpc database_delete (Database.Delete.Req) returns (Database.Delete.Res);
+    rpc database_export (Database.Export.Req) returns (stream Database.Export.Server);
 
     // Transaction Streaming API
     // Opens a bi-directional stream representing a stateful transaction, streaming

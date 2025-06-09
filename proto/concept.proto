@@ -29,22 +29,16 @@ message Thing {
 
 message Entity {
     bytes iid = 1;
-    // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
-    //       perhaps it's a query option?
     optional EntityType entity_type = 2;
 }
 
 message Relation {
     bytes iid = 1;
-    // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
-    //       perhaps it's a query option?
     optional RelationType relation_type = 2;
 }
 
 message Attribute {
     bytes iid = 1;
-    // TODO: not sure we should include types by default, since now they can get quite large with annotations included in every single response!
-    //       perhaps it's a query option?
     optional AttributeType attribute_type = 2;
     Value value = 3;
 }
@@ -57,7 +51,6 @@ message Value {
         Decimal decimal = 4;
         string string = 5;
         Date date = 6;
-        // time since epoch in milliseconds
         Datetime datetime = 7;
         Datetime_TZ datetime_tz = 8;
         Duration duration = 9;
@@ -151,15 +144,4 @@ message ValueType {
     message Struct {
         string name = 1;
     };
-}
-
-message Annotation {
-    oneof annotation {
-        Key key = 1;
-        Unique unique = 2;
-        // TODO
-    }
-
-    message Key {}
-    message Unique {}
 }

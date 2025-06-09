@@ -1,0 +1,144 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+package typedb.protocol;
+
+import "proto/concept.proto";
+
+message Migration {
+    message Export {
+        message Req {
+            string name = 1;
+        }
+
+        message Server {
+            oneof server {
+                InitialRes initial_res = 1;
+                ResPart res_part = 2;
+                Done done = 3;
+            }
+        }
+
+        message InitialRes {
+            string schema = 1;
+        }
+
+        message ResPart {
+            repeated Item items = 1;
+        }
+
+        message Done {}
+    }
+
+    message Import {
+        message Client {
+            oneof client {
+                InitialReq initial_req = 1;
+                ReqPart req_part = 2;
+                Done done = 3;
+            }
+
+            message InitialReq {
+                string name = 1;
+                string schema = 2;
+            }
+
+            message ReqPart {
+                repeated Item items = 1;
+            }
+
+            message Done { }
+        }
+
+        message Server {
+            Done done = 1;
+
+            message Done { }
+        }
+    }
+
+    //               _  _____ _____ _____ _   _ _____ ___ ___  _   _ _
+    //              / \|_   _|_   _| ____| \ | |_   _|_ _/ _ \| \ | | |
+    //             / _ \ | |   | | |  _| |  \| | | |  | | | | |  \| | |
+    //            / ___ \| |   | | | |___| |\  | | |  | | |_| | |\  |_|
+    //           /_/   \_\_|   |_| |_____|_| \_| |_| |___\___/|_| \_(_)
+    //
+    // ATTENTION: the messages below are used to import multiple versions of TypeDB.
+    // DO NOT reorder or delete existing and reserved indices. Be careful while extending this.
+    //
+
+    message Item {
+        oneof item {
+            Attribute attribute = 1;
+            Entity entity = 2;
+            Relation relation = 3;
+
+            Header header = 15;
+            Checksums checksums = 16;
+        }
+
+        message Entity {
+            string id = 1;
+            string label = 2;
+            repeated OwnedAttribute attributes = 3;
+        }
+
+        message Attribute {
+            string id = 1;
+            string label = 2;
+            repeated OwnedAttribute attributes = 3; // empty in 3.x, used for backwards compatibility
+            MigrationValue value = 4;
+        }
+
+        message Relation {
+            string id = 1;
+            string label = 2;
+            repeated OwnedAttribute attributes = 3;
+            repeated Role roles = 4;
+            message Role {
+                string label = 1;
+                repeated Player players = 2;
+                message Player {
+                    string id = 1;
+                }
+            }
+        }
+
+        message OwnedAttribute {
+            string id = 1;
+        }
+
+        message Header {
+            string typedb_version = 1;
+            string original_database = 2;
+        }
+
+        message Checksums {
+            int64 entity_count = 1;
+            int64 attribute_count = 2;
+            int64 relation_count = 3;
+            int64 role_count = 4;
+            int64 ownership_count = 5;
+            reserved 6; // was deleted and cannot be used until a breaking change occurs
+        }
+    }
+
+    message MigrationValue {
+        oneof value {
+            string string = 1;
+            bool boolean = 2;
+            int64 integer = 3;
+            double double = 4;
+            int64 datetime_millis = 5; // compatibility with 2.x, milliseconds since epoch
+            Value.Decimal decimal = 6;
+            Value.Date date = 8;
+            Value.Datetime datetime = 9;
+            Value.Datetime_TZ datetime_tz = 10;
+            Value.Duration duration = 11;
+            Value.Struct struct = 12;
+        }
+    }
+}

@@ -27,6 +27,15 @@ proto_library(
 proto_library(
     name = "database-proto",
     srcs = [":database.proto"],
+    deps = [
+        ":migration-proto",
+    ],
+)
+
+proto_library(
+    name = "migration-proto",
+    srcs = [":migration.proto"],
+    deps = [":concept-proto"],
 )
 
 proto_library(
@@ -70,9 +79,15 @@ proto_library(
     srcs = ["query.proto"],
     deps = [
         ":answer-proto",
-        ":options-proto",
         ":concept-proto",
+        ":error-proto",
+        ":options-proto",
     ],
+)
+
+proto_library(
+    name = "error-proto",
+    srcs = ["error.proto"],
 )
 
 proto_library(
@@ -81,6 +96,7 @@ proto_library(
     deps = [
         ":answer-proto",
         ":concept-proto",
+        ":error-proto",
         ":options-proto",
         ":query-proto",
     ]

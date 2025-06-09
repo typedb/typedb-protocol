@@ -10,7 +10,6 @@ package typedb.protocol;
 
 message ConceptRow {
     repeated RowEntry row = 1;
-//    Explainables explainables = 2;
 }
 
 message RowEntry {
