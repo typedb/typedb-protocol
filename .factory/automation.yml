@@ -17,25 +17,25 @@ build:
       command: |
         bazel run @typedb_dependencies//factory/analysis:dependency-analysis
   correctness:
-#    build:
-#      image: typedb-ubuntu-22.04
-#      command: |
-#        bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
-#        bazel build //...
-#        bazel run @typedb_dependencies//tool/checkstyle:test-coverage
-#        bazel test $(bazel query 'kind(checkstyle_test, //...)') --test_output=errors
-#    build-dependency:
-#      image: typedb-ubuntu-22.04
-#      command: |
-#        bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
-#        dependencies/maven/update.sh
-#        git diff --exit-code dependencies/maven/artifacts.snapshot
-#        bazel run @typedb_dependencies//tool/unuseddeps:unused-deps -- list
+    build:
+      image: typedb-ubuntu-22.04
+      command: |
+        bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
+        bazel build //...
+        bazel run @typedb_dependencies//tool/checkstyle:test-coverage
+        bazel test $(bazel query 'kind(checkstyle_test, //...)') --test_output=errors
+    build-dependency:
+      image: typedb-ubuntu-22.04
+      command: |
+        bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
+        dependencies/maven/update.sh
+        git diff --exit-code dependencies/maven/artifacts.snapshot
+        bazel run @typedb_dependencies//tool/unuseddeps:unused-deps -- list
     deploy-crate-snapshot:
       filter:
         owner: typedb
-        branch: [master, development, "3.0"]
-#      dependencies: [build, build-dependency]
+        branch: [master]
+      dependencies: [build, build-dependency]
       image: typedb-ubuntu-22.04
       command: |
         bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
@@ -68,7 +68,7 @@ build:
 release:
   filter:
     owner: typedb
-    branch: [ master, "3.0" ]
+    branch: [master]
   validation:
     validate-release-notes:
       image: typedb-ubuntu-22.04
