@@ -5,8 +5,9 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 def typedb_dependencies():
+    # TODO: Return typedb
     git_repository(
         name = "typedb_dependencies",
-        remote = "https://github.com/typedb/typedb-dependencies",
-        commit = "ab777bf067b1930e35146fd8e25a76a4a360aa74", # sync-marker: do not remove this comment, this is used for sync-dependencies by @typedb_dependencies
+        remote = "https://github.com/farost/typedb-dependencies",
+        commit = "24a0d12e3523c96a349e0742435194423f2dd1f9", # sync-marker: do not remove this comment, this is used for sync-dependencies by @typedb_dependencies
     )
