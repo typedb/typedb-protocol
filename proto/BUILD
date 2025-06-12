@@ -16,6 +16,7 @@ proto_library(
         ":user-proto",
         ":database-proto",
         ":transaction-proto",
+        ":migration-proto",
     ],
 )
 
