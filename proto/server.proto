@@ -7,15 +7,33 @@ syntax = "proto3";
 package typedb.protocol;
 
 message ServerManager {
-
     message All {
         message Req {}
         message Res {
             repeated Server servers = 1;
         }
     }
+
+    message Version {
+        message Req {}
+        message Res {
+            string distribution = 1;
+            string version = 2;
+        }
+    }
 }
 
 message Server {
-    string address = 1;
+    Address address = 1;
+    ReplicaType replica_type = 2;
+    int64 term = 3;
+
+    enum ReplicaType {
+        Primary = 0;
+        Secondary = 1;
+    }
+
+    message Address {
+        string address = 1;
+    }
 }
