@@ -14,8 +14,23 @@ message ServerManager {
             repeated Server servers = 1;
         }
     }
+
+    message Register {
+        message Req {
+            Server server = 1;
+        }
+        message Res {}
+    }
+
+    message Deregister {
+        message Req {
+            uint64 clustering_id = 1;
+        }
+        message Res {}
+    }
 }
 
 message Server {
-    string address = 1;
+    uint64 clustering_id = 1;
+    string address = 2;
 }
