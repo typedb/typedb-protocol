@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/drivers/
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.4.0-rc0
+cargo add typedb-protocol@3.4.0
 ```
 
 #### For Node.js through npm
@@ -15,11 +15,11 @@ cargo add typedb-protocol@3.4.0-rc0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.4.0-rc0
+npm install typedb-protocol@3.4.0
 ```
 or
 ```sh
-yarn add typedb-protocol@3.4.0-rc0
+yarn add typedb-protocol@3.4.0
 ```
 
 
@@ -40,5 +40,7 @@ yarn add typedb-protocol@3.4.0-rc0
 
 
 ## Other Improvements
-
-    
+- **Fix build errors and update dependencies**
+  Support build on Apple Clang 17+ by updating dependencies (details: https://github.com/typedb/typedb-dependencies/pull/577). 
+  Fix bazel build by adding an implicit dependency to the build configuration.
+  Reintroduce CI correctness validation jobs.
