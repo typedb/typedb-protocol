@@ -26,8 +26,7 @@ message Connection {
       ConnectionID connection_id = 2;
       DatabaseManager.All.Res databases_all = 3;
       Authentication.Token.Create.Res authentication = 4;
-      Server.Version.Res server_version = 5;
-      ServerManager.All.Res servers_all = 6;
+      ServerManager.All.Res servers_all = 5;
     }
   }
 }
