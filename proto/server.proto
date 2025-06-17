@@ -17,18 +17,21 @@ message ServerManager {
 
 message Server {
     Address address = 1;
-    ReplicaType replica_type = 2;
-    int64 term = 3;
+    optional ReplicationStatus replication_status = 2;
 
-    enum ReplicaType {
-        Primary = 0;
-        Secondary = 1;
-    }
-
-    // Address is encapsulated so it is a type-safe protobuf message which can be encoded in connection-related error
-    // messages.
+    // Address is encapsulated so it is a type-safe message which can be encoded in connection-related errors.
     message Address {
         string address = 1;
+    }
+
+    message ReplicationStatus {
+        ReplicaType replica_type = 1;
+        int64 term = 2;
+
+        enum ReplicaType {
+            Primary = 0;
+            Secondary = 1;
+        }
     }
 
     message Version {
