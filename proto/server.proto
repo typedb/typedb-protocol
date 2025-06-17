@@ -25,6 +25,8 @@ message Server {
         Secondary = 1;
     }
 
+    // Address is encapsulated so it is a type-safe protobuf message which can be encoded in connection-related error
+    // messages.
     message Address {
         string address = 1;
     }
