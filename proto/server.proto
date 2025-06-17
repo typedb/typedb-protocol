@@ -13,14 +13,6 @@ message ServerManager {
             repeated Server servers = 1;
         }
     }
-
-    message Version {
-        message Req {}
-        message Res {
-            string distribution = 1;
-            string version = 2;
-        }
-    }
 }
 
 message Server {
@@ -35,5 +27,13 @@ message Server {
 
     message Address {
         string address = 1;
+    }
+
+    message Version {
+        message Req {}
+        message Res {
+            string distribution = 1;
+            string version = 2;
+        }
     }
 }
