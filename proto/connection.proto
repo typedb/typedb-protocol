@@ -23,7 +23,7 @@ message Connection {
     message Res {
       uint64 server_duration_millis = 1;
       ConnectionID connection_id = 2;
-      ServerManager.All.Res servers_all = 3;
+      ServerManager.All.Res servers_all = 3; // TODO: It might not be used / needed in the end! Discuss.
       Authentication.Token.Create.Res authentication = 4;
     }
   }
