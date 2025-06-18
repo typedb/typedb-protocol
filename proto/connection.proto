@@ -12,7 +12,6 @@ import "proto/version.proto";
 package typedb.protocol;
 
 message Connection {
-
   message Open {
     message Req {
       Version version = 1;
@@ -24,9 +23,8 @@ message Connection {
     message Res {
       uint64 server_duration_millis = 1;
       ConnectionID connection_id = 2;
-      DatabaseManager.All.Res databases_all = 3;
+      ServerManager.All.Res servers_all = 3;
       Authentication.Token.Create.Res authentication = 4;
-      ServerManager.All.Res servers_all = 5;
     }
   }
 }
