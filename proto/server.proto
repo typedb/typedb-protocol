@@ -16,13 +16,8 @@ message ServerManager {
 }
 
 message Server {
-    Address address = 1;
+    string address = 1;
     optional ReplicationStatus replication_status = 2;
-
-    // Address is encapsulated so it is a type-safe message which can be encoded in connection-related errors.
-    message Address {
-        string address = 1;
-    }
 
     message ReplicationStatus {
         ReplicaType replica_type = 1;
