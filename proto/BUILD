@@ -66,6 +66,7 @@ proto_library(
     deps = [
         ":authentication-proto",
         ":database-proto",
+        ":server-proto",
         ":version-proto"
     ],
 )
