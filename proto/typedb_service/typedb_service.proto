@@ -31,6 +31,9 @@ service TypeDB {
     // Server API
     rpc server_version (Server.Version.Req) returns (Server.Version.Res);
 
+    // Server API
+    rpc server_version (Server.Version.Req) returns (Server.Version.Res);
+
     // User Manager API
     rpc users_get (UserManager.Get.Req) returns (UserManager.Get.Res);
     rpc users_all (UserManager.All.Req) returns (UserManager.All.Res);
