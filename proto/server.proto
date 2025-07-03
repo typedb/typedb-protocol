@@ -13,6 +13,21 @@ message ServerManager {
             repeated Server servers = 1;
         }
     }
+
+    message Register {
+        message Req {
+          uint64 replica_id = 1;
+          string address = 2;
+        }
+        message Res {}
+    }
+
+    message Deregister {
+        message Req {
+            uint64 replica_id = 1;
+        }
+        message Res {}
+    }
 }
 
 message Server {
@@ -20,6 +35,7 @@ message Server {
     optional ReplicaStatus replica_status = 2;
 
     message ReplicaStatus {
+        uint64 replica_id = 3;
         ReplicaType replica_type = 1;
         int64 term = 2;
 
