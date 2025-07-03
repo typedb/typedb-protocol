@@ -35,9 +35,9 @@ message Server {
     optional ReplicaStatus replica_status = 2;
 
     message ReplicaStatus {
-        uint64 replica_id = 3;
-        ReplicaType replica_type = 1;
-        int64 term = 2;
+        uint64 replica_id = 1;
+        ReplicaType replica_type = 2;
+        int64 term = 3;
 
         enum ReplicaType {
             Primary = 0;
