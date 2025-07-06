@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package raft;
+
+message PeeringRequest {
+  uint64 from_id = 1;
+  string from_address = 2;
+  bytes message = 3;
+}
+
+message PeeringResponse {
+}
+
+service RaftPeering {
+  rpc Peering(PeeringRequest) returns (PeeringResponse);
+}
