@@ -26,6 +26,7 @@ rust_tonic_compile(
         "//proto:migration-proto",
         "//proto:options-proto",
         "//proto:query-proto",
+        "//proto:raft-peering-service",
         "//proto:server-proto",
         "//proto:transaction-proto",
         "//proto:typedb-service",
@@ -33,22 +34,6 @@ rust_tonic_compile(
         "//proto:version-proto",
     ],
     packages = ["typedb.protocol"],
-)
-
-rust_library(
-    name = "raft_peering",
-    srcs = [
-        ":raft_peering_src",
-    ],
-    crate_root = ":raft_peering_src",
-    tags = [
-        "crate-name=raft",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        "@crates//:prost",
-        "@crates//:tonic",
-    ],
 )
 
 rust_library(
