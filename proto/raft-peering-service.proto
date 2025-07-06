@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package raft;
+package typedb.protocol;
 
 message PeeringRequest {
   uint64 from_id = 1;
