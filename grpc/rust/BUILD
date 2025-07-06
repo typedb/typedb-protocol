@@ -9,12 +9,6 @@ load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@typedb_dependencies//builder/proto_grpc/rust:compile.bzl", "rust_tonic_compile")
 
 rust_tonic_compile(
-    name = "raft_peering_src",
-    srcs = ["//proto:raft-peering-service"],
-    packages = ["raft"],
-)
-
-rust_tonic_compile(
     name = "typedb_protocol_src",
     srcs = [
         "//proto:answer-proto",
