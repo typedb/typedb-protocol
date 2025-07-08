@@ -9,6 +9,9 @@ load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 proto_library(
     name = "raft-peering-service",
     srcs = [":raft-peering-service.proto"],
+    deps = [
+        ":raft-peering-proto",
+    ],
 )
 
 proto_library(
@@ -23,6 +26,11 @@ proto_library(
         ":transaction-proto",
         ":user-proto",
     ],
+)
+
+proto_library(
+    name = "raft-peering-proto",
+    srcs = [":raft-peering.proto"],
 )
 
 proto_library(

@@ -1,15 +1,8 @@
 syntax = "proto3";
 
+import "proto/raft-peering.proto";
+
 package typedb.protocol;
-
-message PeeringRequest {
-  uint64 from_id = 1;
-  string from_address = 2;
-  bytes message = 3;
-}
-
-message PeeringResponse {
-}
 
 service RaftPeering {
   rpc Peering(PeeringRequest) returns (PeeringResponse);

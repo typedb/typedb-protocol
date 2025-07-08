@@ -20,6 +20,7 @@ rust_tonic_compile(
         "//proto:migration-proto",
         "//proto:options-proto",
         "//proto:query-proto",
+        "//proto:raft-peering-proto",
         "//proto:raft-peering-service",
         "//proto:server-proto",
         "//proto:transaction-proto",
