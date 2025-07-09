@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "proto/raft-peering.proto";
+
+package typedb.protocol;
+
+service RaftPeering {
+  rpc Peering(PeeringRequest) returns (PeeringResponse);
+}

@@ -20,6 +20,8 @@ fn main() -> std::io::Result<()> {
         "../../proto/typedb-service.proto",
         "../../proto/user.proto",
         "../../proto/version.proto",
+        "../../proto/raft-peering.proto",
+        "../../proto/raft-peering-service.proto",
     ];
 
     tonic_build::configure()
