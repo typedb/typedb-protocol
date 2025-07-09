@@ -7,17 +7,30 @@ package(default_visibility = ["//visibility:public"])
 load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
+    name = "raft-peering-service",
+    srcs = [":raft-peering-service.proto"],
+    deps = [
+        ":raft-peering-proto",
+    ],
+)
+
+proto_library(
     name = "typedb-service",
     srcs = [":typedb-service.proto"],
     deps = [
-        ":connection-proto",
         ":authentication-proto",
-        ":server-proto",
-        ":user-proto",
+        ":connection-proto",
         ":database-proto",
-        ":transaction-proto",
         ":migration-proto",
+        ":server-proto",
+        ":transaction-proto",
+        ":user-proto",
     ],
+)
+
+proto_library(
+    name = "raft-peering-proto",
+    srcs = [":raft-peering.proto"],
 )
 
 proto_library(
@@ -67,7 +80,7 @@ proto_library(
         ":authentication-proto",
         ":database-proto",
         ":server-proto",
-        ":version-proto"
+        ":version-proto",
     ],
 )
 
@@ -101,7 +114,7 @@ proto_library(
         ":error-proto",
         ":options-proto",
         ":query-proto",
-    ]
+    ],
 )
 
 proto_library(
@@ -122,12 +135,12 @@ filegroup(
         "query.proto",
         "transaction.proto",
         "version.proto",
-    ]
+    ],
 )
 
 checkstyle_test(
     name = "checkstyle",
+    size = "small",
     include = glob(["*"]),
     license_type = "mpl-header",
-    size = "small",
 )
