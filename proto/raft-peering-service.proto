@@ -5,5 +5,6 @@ import "proto/raft-peering.proto";
 package typedb.protocol;
 
 service RaftPeering {
-  rpc Peering(PeeringRequest) returns (PeeringResponse);
+  rpc peering (Peering.Req) returns (Peering.Res);
+  rpc server_status (ServerStatus.Req) returns (ServerStatus.Res);
 }
