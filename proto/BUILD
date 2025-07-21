@@ -31,6 +31,9 @@ proto_library(
 proto_library(
     name = "raft-peering-proto",
     srcs = [":raft-peering.proto"],
+    deps = [
+        ":server-proto",
+    ],
 )
 
 proto_library(

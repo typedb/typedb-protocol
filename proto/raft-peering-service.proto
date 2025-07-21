@@ -1,3 +1,7 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 syntax = "proto3";
 
 import "proto/raft-peering.proto";
@@ -5,5 +9,6 @@ import "proto/raft-peering.proto";
 package typedb.protocol;
 
 service RaftPeering {
-  rpc Peering(PeeringRequest) returns (PeeringResponse);
+  rpc peering (Peering.Req) returns (Peering.Res);
+  rpc server_status (ServerStatus.Req) returns (ServerStatus.Res);
 }

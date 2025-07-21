@@ -1,12 +1,29 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 syntax = "proto3";
 
 package typedb.protocol;
 
-message PeeringRequest {
-  uint64 from_id = 1;
-  string from_address = 2;
-  bytes message = 3;
+import "proto/server.proto";
+
+// TODO: Rename to Replication
+message Peering {
+    message Req {
+        uint64 from_id = 1;
+        string from_address = 2;
+        bytes message = 3;
+    }
+
+    message Res {}
 }
 
-message PeeringResponse {
+message ServerStatus {
+    message Req {}
+
+    message Res {
+        string connection_address = 1;
+        Server.ReplicaStatus replica_status = 2;
+    }
 }
