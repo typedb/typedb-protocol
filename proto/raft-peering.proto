@@ -8,6 +8,7 @@ package typedb.protocol;
 
 import "proto/server.proto";
 
+// TODO: Rename to Replication
 message Peering {
     message Req {
         uint64 from_id = 1;
@@ -22,9 +23,6 @@ message ServerStatus {
     message Req {}
 
     message Res {
-        // TODO: Currently, it's identical to Server. But it won't necessarily be the case forever, so these fields are
-        // split. Additionally, we want to highlight that the address is the connection address.
-        // TODO: We may move ReplicaStatus somewhere else now...
         string connection_address = 1;
         Server.ReplicaStatus replica_status = 2;
     }
