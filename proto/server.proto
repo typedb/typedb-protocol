@@ -41,7 +41,8 @@ message Server {
 
         enum ReplicaType {
             Primary = 0;
-            Secondary = 1;
+            Candidate = 1;
+            Secondary = 2;
         }
     }
 
