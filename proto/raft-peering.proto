@@ -22,8 +22,6 @@ message Peering {
 message Ping {
     message Req {
         bytes req_id = 1;
-        uint64 from_id = 2;
-        string from_address = 3;
     }
 
     message Res {
