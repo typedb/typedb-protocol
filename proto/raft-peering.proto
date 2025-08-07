@@ -8,8 +8,7 @@ package typedb.protocol;
 
 import "proto/server.proto";
 
-// TODO: Rename to Replication
-message Peering {
+message Replication {
     message Req {
         uint64 from_id = 1;
         string from_address = 2;
@@ -17,6 +16,18 @@ message Peering {
     }
 
     message Res {}
+}
+
+message Ping {
+    message Req {
+        bytes req_id = 1;
+        uint64 from_id = 2;
+        string from_address = 3;
+    }
+
+    message Res {
+        bytes req_id = 1;
+    }
 }
 
 message ServerStatus {
