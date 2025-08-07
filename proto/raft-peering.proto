@@ -8,7 +8,8 @@ package typedb.protocol;
 
 import "proto/server.proto";
 
-message Replication {
+// TODO: Rename to Replication
+message Peering {
     message Req {
         uint64 from_id = 1;
         string from_address = 2;
