@@ -9,7 +9,7 @@ import "proto/raft-peering.proto";
 package typedb.protocol;
 
 service RaftPeering {
-  rpc peering (Replication.Req) returns (Replication.Res);
+  rpc replication (Replication.Req) returns (Replication.Res);
   rpc ping (Ping.Req) returns (Ping.Res);
   rpc server_status (ServerStatus.Req) returns (ServerStatus.Res);
 }
