@@ -9,13 +9,9 @@ package typedb.protocol;
 import "proto/typedb_service/server.proto";
 
 message Registration {
-    message Req {
-        bytes req_id = 1;
-    }
+    message Req {}
 
-    message Res {
-        bytes req_id = 1;
-    }
+    message Res {}
 }
 
 message ServerStatus {
