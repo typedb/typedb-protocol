@@ -15,9 +15,7 @@ message ServerManager {
     }
 
     message Get {
-        message Req {
-            uint64 replica_id = 1;
-        }
+        message Req {}
         message Res {
             Server server = 1;
         }
