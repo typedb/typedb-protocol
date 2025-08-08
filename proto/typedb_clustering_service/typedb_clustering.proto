@@ -6,20 +6,9 @@ syntax = "proto3";
 
 package typedb.protocol;
 
-import "proto/server.proto";
+import "proto/typedb_service/server.proto";
 
-// TODO: Rename to Replication
-message Peering {
-    message Req {
-        uint64 from_id = 1;
-        string from_address = 2;
-        bytes message = 3;
-    }
-
-    message Res {}
-}
-
-message Ping {
+message Registration {
     message Req {
         bytes req_id = 1;
     }

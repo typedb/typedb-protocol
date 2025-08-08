@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package typedb.protocol;
 
-import "proto/migration.proto";
+import "proto/typedb_service/migration.proto";
 
 message DatabaseManager {
 

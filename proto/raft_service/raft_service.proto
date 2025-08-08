@@ -4,12 +4,11 @@
 
 syntax = "proto3";
 
-import "proto/raft-peering.proto";
+import "proto/raft_service/replication.proto";
 
 package typedb.protocol;
 
-service RaftPeering {
-  rpc peering (Peering.Req) returns (Peering.Res);
-  rpc ping (Ping.Req) returns (Ping.Res);
-  rpc server_status (ServerStatus.Req) returns (ServerStatus.Res);
+// TODO: If the protocol is exposed, maybe it's actually `TypeDBRaft`?
+service Raft {
+  rpc replication (Replication.Req) returns (Replication.Res);
 }
