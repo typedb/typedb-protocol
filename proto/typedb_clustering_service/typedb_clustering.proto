@@ -18,7 +18,6 @@ message ServerStatus {
     message Req {}
 
     message Res {
-        string connection_address = 1;
-        Server.ReplicaStatus replica_status = 2;
+        Server server = 1;
     }
 }
