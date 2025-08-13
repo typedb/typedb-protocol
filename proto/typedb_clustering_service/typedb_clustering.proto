@@ -9,7 +9,9 @@ package typedb.protocol;
 import "proto/typedb_service/server.proto";
 
 message Registration {
-    message Req {}
+    message Req {
+        uint64 replica_id = 1;
+    }
 
     message Res {}
 }
