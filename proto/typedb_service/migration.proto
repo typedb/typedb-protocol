@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package typedb.protocol;
 
-import "proto/concept.proto";
+import "proto/typedb_service/concept.proto";
 
 message Migration {
     message Export {

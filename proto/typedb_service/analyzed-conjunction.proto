@@ -4,8 +4,8 @@
 
 syntax = "proto3";
 
-import "proto/answer.proto";
-import "proto/concept.proto";
+import "proto/typedb_service/answer.proto";
+import "proto/typedb_service/concept.proto";
 
 package typedb.protocol;
 
