@@ -14,6 +14,13 @@ message ServerManager {
         }
     }
 
+    message Get {
+        message Req {}
+        message Res {
+            Server server = 1;
+        }
+    }
+
     message Register {
         message Req {
           uint64 replica_id = 1;
