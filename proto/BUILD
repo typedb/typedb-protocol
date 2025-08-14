@@ -17,8 +17,11 @@ proto_library(
 filegroup(
     name = "proto-raw-buffers",
     srcs = [
+<<<<<<< HEAD
         "//proto/typedb_service:analyze.proto",
         "//proto/typedb_service:analyzed-conjunction.proto",
+=======
+>>>>>>> 55ed142 (Split protocol into 3 separate services (#230))
         "//proto/typedb_service:answer.proto",
         "//proto/typedb_service:concept.proto",
         "//proto/typedb_service:connection.proto",

@@ -50,7 +50,11 @@ ts_grpc_compile(
         "//proto/typedb_service:transaction-proto",
         "//proto/typedb_service:typedb-service",
         "//proto/typedb_service:user-proto",
+<<<<<<< HEAD
     ],
+=======
+    ]
+>>>>>>> 55ed142 (Split protocol into 3 separate services (#230))
 )
 
 ts_project(

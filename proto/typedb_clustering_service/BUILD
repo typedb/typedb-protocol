@@ -14,7 +14,7 @@ proto_library(
     ],
 )
 
-proto_library(
+proto/typedb_service/BUILDproto_library(
     name = "typedb-clustering-proto",
     srcs = ["typedb_clustering.proto"],
     deps = [
