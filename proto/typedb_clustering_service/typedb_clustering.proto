@@ -6,14 +6,11 @@ syntax = "proto3";
 
 package typedb.protocol;
 
-import "proto/server.proto";
+import "proto/typedb_service/server.proto";
 
-// TODO: Rename to Replication
-message Peering {
+message CanRegister {
     message Req {
-        uint64 from_id = 1;
-        string from_address = 2;
-        bytes message = 3;
+        uint64 replica_id = 1;
     }
 
     message Res {}
@@ -23,7 +20,6 @@ message ServerStatus {
     message Req {}
 
     message Res {
-        string connection_address = 1;
-        Server.ReplicaStatus replica_status = 2;
+        Server server = 1;
     }
 }
