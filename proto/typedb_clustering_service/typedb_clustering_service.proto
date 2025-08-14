@@ -9,6 +9,6 @@ import "proto/typedb_clustering_service/typedb_clustering.proto";
 package typedb.protocol;
 
 service TypeDBClustering {
-  rpc registration (Registration.Req) returns (Registration.Res);
+  rpc can_register (CanRegister.Req) returns (CanRegister.Res);
   rpc server_status (ServerStatus.Req) returns (ServerStatus.Res);
 }

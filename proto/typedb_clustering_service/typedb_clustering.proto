@@ -8,7 +8,7 @@ package typedb.protocol;
 
 import "proto/typedb_service/server.proto";
 
-message Registration {
+message CanRegister {
     message Req {
         uint64 replica_id = 1;
     }
