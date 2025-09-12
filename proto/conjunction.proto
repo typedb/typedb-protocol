@@ -9,36 +9,18 @@ import "proto/concept.proto";
 
 package typedb.protocol;
 
-message QueryStructure {
-  repeated QueryBlock blocks = 1;
-  map<uint32, VariableInfo> variables = 2;
-  repeated uint32 outputs = 3;
+message ConjunctionStructure {
+  repeated Constraint constraints = 1;
 
-
-  message QueryBlock {
-    repeated QueryConstraint constraints = 1;
-  }
-
-  message VariableInfo {
-    string name = 1;
-  }
-
-  // Vertices
-  message QueryVertex {
+  message StructureVertex {
     oneof vertex {
-      QueryVariable variable = 1;
+      uint32 variable = 1;
       Type label = 2;
       Value value = 3;
     }
-
-    message QueryVariable {
-      string named = 1;
-      uint32 id = 2;
-      bool in_answer = 3;
-    }
   }
 
-  message QueryConstraint {
+  message Constraint {
     ConstraintSpan span = 1;
     oneof constraint {
       // Thing
@@ -68,91 +50,87 @@ message QueryStructure {
       uint64 end = 2;
     }
 
-    message ConstraintExactness {
-      oneof exactness {
-        Exact exact = 1;
-        Subtypes subtypes = 2;
-      }
-      message Exact {}
-      message Subtypes {}
+    enum ConstraintExactness {
+      EXACT = 0;
+      SUBTYPES = 1;
     }
 
     // Edges
     message Isa {
-      QueryVertex thing = 1;
-      QueryVertex type = 2;
+      StructureVertex thing = 1;
+      StructureVertex type = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Has {
-      QueryVertex owner = 1;
-      QueryVertex attribute = 2;
+      StructureVertex owner = 1;
+      StructureVertex attribute = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Links {
-      QueryVertex relation = 1;
-      QueryVertex player = 2;
-      QueryVertex role = 3;
+      StructureVertex relation = 1;
+      StructureVertex player = 2;
+      StructureVertex role = 3;
       ConstraintExactness exactness = 4;
     };
 
     // Type
     message Kind {
       protocol.ConceptDocument.Node.Leaf.Kind kind = 1;
-      QueryVertex type = 2;
+      StructureVertex type = 2;
     }
 
     message Sub {
-      QueryVertex subtype = 1;
-      QueryVertex supertype = 2;
+      StructureVertex subtype = 1;
+      StructureVertex supertype = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Owns {
-      QueryVertex owner = 1;
-      QueryVertex attribute = 2;
+      StructureVertex owner = 1;
+      StructureVertex attribute = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Relates {
-      QueryVertex relation = 1;
-      QueryVertex role = 2;
+      StructureVertex relation = 1;
+      StructureVertex role = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Plays {
-      QueryVertex player = 1;
-      QueryVertex role = 2;
+      StructureVertex player = 1;
+      StructureVertex role = 2;
       ConstraintExactness exactness = 3;
     };
 
     // Function
     message Comparison {
-      QueryVertex lhs = 1;
-      QueryVertex rhs = 2;
+      StructureVertex lhs = 1;
+      StructureVertex rhs = 2;
     };
 
     message Expression {
       string text = 1;
-      repeated QueryVertex assigned = 2;
-      repeated QueryVertex arguments = 3; // Treats constants as part of the text.
+      repeated StructureVertex assigned = 2;
+      repeated StructureVertex arguments = 3; // Treats constants as part of the text.
     };
 
     message FunctionCall {
       string name = 1;
-      repeated QueryVertex assigned = 2;
-      repeated QueryVertex arguments = 3; // Include constants, since variables are schema-objects
+      repeated StructureVertex assigned = 2;
+      repeated StructureVertex arguments = 3; // Include constants, since variables are schema-objects
     };
 
     // Special
     message Is {
-      QueryVertex lhs = 1;
-      QueryVertex rhs = 2;
+      StructureVertex lhs = 1;
+      StructureVertex rhs = 2;
     };
 
     message IID {
-      QueryVertex var = 1;
+      StructureVertex var = 1;
       bytes IID = 2;
     };
   }

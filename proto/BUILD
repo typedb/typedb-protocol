@@ -83,15 +83,6 @@ proto_library(
         ":concept-proto",
         ":error-proto",
         ":options-proto",
-        ":structure-proto"
-    ],
-)
-proto_library(
-    name = "structure-proto",
-    srcs = ["structure.proto"],
-    deps = [
-        ":answer-proto",
-        ":concept-proto",
     ],
 )
 
@@ -110,6 +101,23 @@ proto_library(
         ":options-proto",
         ":query-proto",
     ]
+)
+
+proto_library(
+    name = "analyze-proto",
+    srcs = ["analyze.proto"],
+    deps = [
+        ":conjunction-proto",
+    ],
+)
+
+proto_library(
+    name = "conjunction-proto",
+    srcs = ["conjunction.proto"],
+    deps = [
+        ":answer-proto",
+        ":concept-proto",
+    ],
 )
 
 proto_library(

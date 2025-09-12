@@ -37,8 +37,9 @@ ts_grpc_compile(
         "//proto:authentication-proto",
         "//proto:options-proto",
         "//proto:query-proto",
-        "//proto:structure-proto",
         "//proto:transaction-proto",
+        "//proto:analyze-proto",
+        "//proto:conjunction-proto",
         "//proto:version-proto",
     ]
 )

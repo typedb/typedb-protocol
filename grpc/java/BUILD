@@ -21,8 +21,9 @@ java_grpc_library(
         "//proto:authentication-proto",
         "//proto:options-proto",
         "//proto:query-proto",
-        "//proto:structure-proto",
         "//proto:transaction-proto",
+        "//proto:analyze-proto",
+        "//proto:conjunction-proto",
         "//proto:version-proto",
     ],
     # TypeDB Core bundles JARs by maven coordinate, we can remove this when Core is rewritten in Rust

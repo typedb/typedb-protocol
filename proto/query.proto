@@ -7,7 +7,6 @@ syntax = "proto3";
 import "proto/answer.proto";
 import "proto/options.proto";
 import "proto/error.proto";
-import "proto/structure.proto";
 
 package typedb.protocol;
 
