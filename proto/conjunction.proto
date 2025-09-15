@@ -65,11 +65,11 @@ message ConjunctionStructure {
     }
 
     message Negation {
-      uint32 inner = 1;
+      uint32 conjunction = 1;
     }
 
     message Optional {
-      uint32 inner = 1;
+      uint32 conjunction = 1;
     }
 
     // Edges
