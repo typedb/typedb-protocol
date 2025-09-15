@@ -4,10 +4,12 @@
 
 fn main() -> std::io::Result<()> {
     let protos = vec![
+        "../../proto/analyze.proto",
         "../../proto/answer.proto",
         "../../proto/authentication.proto",
         "../../proto/concept.proto",
         "../../proto/connection.proto",
+        "../../proto/conjunction.proto",
         "../../proto/database.proto",
         "../../proto/error.proto",
         "../../proto/migration.proto",
