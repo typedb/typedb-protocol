@@ -131,9 +131,11 @@ proto_library(
 filegroup(
     name = "proto-raw-buffers",
     srcs = [
+        "analyze.proto",
         "answer.proto",
         "concept.proto",
         "connection.proto",
+        "conjunction.proto",
         "options.proto",
         "query.proto",
         "transaction.proto",
