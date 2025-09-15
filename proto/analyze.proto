@@ -88,13 +88,20 @@ message Analyze {
         message Select {
           repeated uint32 variables = 1;
         }
-        message  Sort {
-          repeated uint32 variables = 1;
+        message Sort {
+          repeated SortVariable sort_variables = 1;
+          message SortVariable {
+            uint32 variable = 1;
+            SortDirection direction = 2;
+            enum SortDirection {
+              ASC = 0;
+              DESC = 1;
+            }
+          }
         }
         message Require {
           repeated uint32 variables = 1;
         }
-
         message Offset {
           uint64 offset = 1;
         }

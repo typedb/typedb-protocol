@@ -23,26 +23,30 @@ message ConjunctionStructure {
   message StructureConstraint {
     ConstraintSpan span = 1;
     oneof constraint {
+      Disjunction disjunction = 2;
+      Negation negation = 3;
+      Optional optional = 4;
+
       // Thing
-      Isa isa = 2;
-      Has has = 3;
-      Links links = 4;
+      Isa isa = 5;
+      Has has = 6;
+      Links links = 7;
 
       // Type
-      Kind kind = 5;
-      Sub sub = 6;
-      Owns owns = 7;
-      Relates relates = 8;
-      Plays plays = 9;
+      Kind kind = 8;
+      Sub sub = 9;
+      Owns owns = 10;
+      Relates relates = 11;
+      Plays plays = 12;
 
       // Function
-      Comparison comparison = 10;
-      Expression expression = 11;
-      FunctionCall function_call = 12;
+      Comparison comparison = 13;
+      Expression expression = 14;
+      FunctionCall function_call = 15;
 
       // Special
-      Is is = 13;
-      IID iid = 14;
+      Is is = 16;
+      IID iid = 17;
     }
 
     message ConstraintSpan {
@@ -53,6 +57,19 @@ message ConjunctionStructure {
     enum ConstraintExactness {
       EXACT = 0;
       SUBTYPES = 1;
+    }
+
+    // Nested
+    message Disjunction {
+      repeated uint32 branches = 1;
+    }
+
+    message Negation {
+      uint32 inner = 1;
+    }
+
+    message Optional {
+      uint32 inner = 1;
     }
 
     // Edges
