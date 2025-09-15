@@ -10,7 +10,7 @@ import "proto/concept.proto";
 package typedb.protocol;
 
 message ConjunctionStructure {
-  repeated Constraint constraints = 1;
+  repeated StructureConstraint constraints = 1;
 
   message StructureVertex {
     oneof vertex {
@@ -20,7 +20,7 @@ message ConjunctionStructure {
     }
   }
 
-  message Constraint {
+  message StructureConstraint {
     ConstraintSpan span = 1;
     oneof constraint {
       // Thing
