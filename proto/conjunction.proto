@@ -23,9 +23,9 @@ message ConjunctionStructure {
   message StructureConstraint {
     ConstraintSpan span = 1;
     oneof constraint {
-      Disjunction disjunction = 2;
-      Negation negation = 3;
-      Optional optional = 4;
+      Or or = 2;
+      Not not = 3;
+      Try try = 4;
 
       // Thing
       Isa isa = 5;
@@ -60,15 +60,15 @@ message ConjunctionStructure {
     }
 
     // Nested
-    message Disjunction {
+    message Or {
       repeated uint32 branches = 1;
     }
 
-    message Negation {
+    message Not {
       uint32 conjunction = 1;
     }
 
-    message Optional {
+    message Try {
       uint32 conjunction = 1;
     }
 
