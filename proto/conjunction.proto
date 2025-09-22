@@ -19,8 +19,10 @@ message ConjunctionStructure {
       Value value = 3;
     }
     message Label {
-      Type resolved = 1;
-      string failedInference = 2;
+      oneof label {
+        Type resolved = 1;
+        string failedInference = 2;
+      }
     }
   }
 
