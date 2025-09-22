@@ -15,8 +15,12 @@ message ConjunctionStructure {
   message StructureVertex {
     oneof vertex {
       uint32 variable = 1;
-      Type label = 2;
+      Label label = 2;
       Value value = 3;
+    }
+    message Label {
+      Type resolved = 1;
+      string failedInference = 2;
     }
   }
 
