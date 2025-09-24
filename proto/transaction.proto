@@ -4,6 +4,7 @@
 
 syntax = "proto3";
 
+import "proto/analyze.proto";
 import "proto/error.proto";
 import "proto/options.proto";
 import "proto/query.proto";
@@ -33,6 +34,8 @@ message Transaction {
             Commit.Req commit_req = 6;
             Rollback.Req rollback_req = 7;
             Close.Req close_req = 8;
+
+            Analyze.Req analyze_req = 9;
         }
     }
 
@@ -43,6 +46,8 @@ message Transaction {
             Query.InitialRes query_initial_res = 3;
             Commit.Res commit_res = 5;
             Rollback.Res rollback_res = 6;
+
+            Analyze.Res analyze_res = 9;
         }
     }
 
