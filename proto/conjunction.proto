@@ -181,7 +181,7 @@ message ConjunctionStructure {
     };
 
     message IID {
-      StructureVertex var = 1;
+      StructureVertex concept = 1;
       bytes IID = 2;
     };
   }
