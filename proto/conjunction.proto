@@ -141,7 +141,7 @@ message ConjunctionStructure {
     }
 
     message Value {
-      StructureVertex type = 1;
+      StructureVertex attribute_type = 1;
       ValueType value_type = 2;
     }
 
