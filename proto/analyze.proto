@@ -20,7 +20,7 @@ message Analyze {
 
     message FunctionStructure {
       PipelineStructure body = 1;
-      repeated uint32 arguments = 2;
+      repeated ConjunctionStructure.Variable arguments = 2;
       oneof returns {// TODO: Does this need to be flattened up?
         ReturnOpStream stream = 3;
         ReturnOpSingle single = 4;
@@ -29,11 +29,11 @@ message Analyze {
       };
 
       message ReturnOpStream {
-        repeated uint32 variables = 1;
+        repeated ConjunctionStructure.Variable variables = 1;
       }
       message ReturnOpSingle {
         string selector = 1;
-        repeated uint32 variables = 2;
+        repeated ConjunctionStructure.Variable variables = 2;
       }
       message ReturnOpCheck {}
       message ReturnOpReduce {
@@ -45,7 +45,7 @@ message Analyze {
       repeated ConjunctionStructure conjunctions = 1;
       repeated PipelineStage stages = 2;
       map<uint32, VariableInfo> variable_info = 3;
-      repeated uint32 outputs = 4;
+      repeated ConjunctionStructure.Variable outputs = 4;
 
       message VariableInfo {
         string name = 1;
@@ -82,16 +82,16 @@ message Analyze {
         }
         message Delete {
           uint32 block = 1;
-          repeated uint32 deleted_variables = 2;
+          repeated ConjunctionStructure.Variable deleted_variables = 2;
         }
 
         message Select {
-          repeated uint32 variables = 1;
+          repeated ConjunctionStructure.Variable variables = 1;
         }
         message Sort {
           repeated SortVariable sort_variables = 1;
           message SortVariable {
-            uint32 variable = 1;
+            ConjunctionStructure.Variable variable = 1;
             SortDirection direction = 2;
             enum SortDirection {
               ASC = 0;
@@ -100,7 +100,7 @@ message Analyze {
           }
         }
         message Require {
-          repeated uint32 variables = 1;
+          repeated ConjunctionStructure.Variable variables = 1;
         }
         message Offset {
           uint64 offset = 1;
@@ -111,10 +111,10 @@ message Analyze {
         message Distinct {}
         message Reduce {
           repeated ReduceAssign reducers = 1;
-          repeated uint32 groupby = 2;
+          repeated ConjunctionStructure.Variable groupby = 2;
 
           message ReduceAssign {
-            uint32 assigned = 1;
+            ConjunctionStructure.Variable assigned = 1;
             Reducer reducer = 2;
           }
         }
@@ -123,7 +123,7 @@ message Analyze {
 
     message Reducer {
       string reducer = 1;
-      repeated uint32 variables = 2;
+      repeated ConjunctionStructure.Variable variables = 2;
     }
   }
 }

@@ -11,13 +11,17 @@ package typedb.protocol;
 
 message ConjunctionStructure {
   repeated StructureConstraint constraints = 1;
+  message Variable {
+    uint32 id = 1;
+  }
 
   message StructureVertex {
     oneof vertex {
-      uint32 variable = 1;
+      Variable variable = 1;
       Label label = 2;
       Value value = 3;
     }
+
     message Label {
       oneof label {
         Type resolved = 1;
