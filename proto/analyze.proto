@@ -41,7 +41,7 @@ message Analyze {
         }
         message ReturnOpCheck {}
         message ReturnOpReduce {
-          repeated Reducer reducer = 1;
+          repeated Reducer reducers = 1;
         }
       }
 
