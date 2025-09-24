@@ -48,15 +48,18 @@ message ConjunctionStructure {
       Owns owns = 10;
       Relates relates = 11;
       Plays plays = 12;
+      Value value = 13;
+      Label label = 14;
+
 
       // Function
-      Comparison comparison = 13;
-      Expression expression = 14;
-      FunctionCall function_call = 15;
+      Comparison comparison = 15;
+      Expression expression = 16;
+      FunctionCall function_call = 17;
 
       // Special
-      Is is = 16;
-      IID iid = 17;
+      Is is = 18;
+      IID iid = 19;
     }
 
     message ConstraintSpan {
@@ -132,10 +135,31 @@ message ConjunctionStructure {
       ConstraintExactness exactness = 3;
     };
 
+    message Label {
+      StructureVertex type = 1;
+      string label = 2;
+    }
+
+    message Value {
+      StructureVertex type = 1;
+      ValueType value_type = 2;
+    }
+
     // Function
     message Comparison {
       StructureVertex lhs = 1;
       StructureVertex rhs = 2;
+      Comparator comparator = 3;
+      enum Comparator {
+        EQUAL = 0;
+        NOT_EQUAL = 1;
+        LESS = 2;
+        GREATER = 3;
+        LESS_OR_EQUAL =4;
+        GREATER_OR_EQUAL = 5;
+        LIKE = 6;
+        CONTAINS = 7;
+      }
     };
 
     message Expression {
