@@ -15,6 +15,9 @@ message Analyze {
   }
 
   message Res {
+    QueryStructure structure = 1;
+    QueryAnnotations annotations = 2;
+
     message QueryStructure {
       PipelineStructure query = 1;
       repeated FunctionStructure preamble = 2;
