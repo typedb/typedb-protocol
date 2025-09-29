@@ -5,6 +5,7 @@
 syntax = "proto3";
 
 import "proto/conjunction.proto";
+import "concept.proto";
 
 package typedb.protocol;
 
@@ -132,8 +133,18 @@ message Analyze {
     }
 
     message QueryAnnotations {
-      // TODO
+      // TODO: All of this could be absorbed into Conjunction
+      PipelineAnnotations query = 1;
+      repeated PipelineAnnotations preamble = 2;
+      message PipelineAnnotations {
+        repeated ConjunctionAnnotations conjunctions = 1;
+        message ConjunctionAnnotations {
+            map<uint32, VariableAnnotations> annotations = 1;
+            message VariableAnnotations {
+              repeated Type annotation = 1;
+            }
+        }
+      }
     }
   }
-
 }

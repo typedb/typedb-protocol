@@ -109,6 +109,7 @@ proto_library(
     srcs = ["analyze.proto"],
     deps = [
         ":conjunction-proto",
+        ":concept-proto",
     ],
 )
 
