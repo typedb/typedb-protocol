@@ -95,6 +95,7 @@ proto_library(
     name = "transaction-proto",
     srcs = ["transaction.proto"],
     deps = [
+        ":analyze-proto",
         ":answer-proto",
         ":concept-proto",
         ":error-proto",
