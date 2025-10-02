@@ -173,7 +173,7 @@ message Analyze {
 
         }
         message ConceptVariableAnnotations {
-          repeated Type thing = 1;
+          repeated Type types = 1;
         }
       }
     }
