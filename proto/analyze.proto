@@ -138,13 +138,16 @@ message Analyze {
       repeated PipelineAnnotations preamble = 2;
       FetchAnnotations fetch = 3;
 
+      message FunctionAnnotations {
+        repeated VariableAnnotations arguments = 1;
+        repeated VariableAnnotations returns = 2;
+        PipelineAnnotations body = 3;
+      }
+
       message PipelineAnnotations {
         repeated ConjunctionAnnotations conjunctions = 1;
         message ConjunctionAnnotations {
-            map<uint32, VariableAnnotations> annotations = 1;
-            message VariableAnnotations {
-              repeated Type annotation = 1;
-            }
+            map<uint32, VariableAnnotations> variable_annotations = 1;
         }
       }
 
@@ -158,7 +161,18 @@ message Analyze {
           map<string, FetchAnnotations> annotations = 1;
         }
         message Leaf {
-           repeated Type annotation = 1;
+           repeated ValueType annotations = 1;
+        }
+      }
+
+      message VariableAnnotations {
+        oneof annotations {
+          ConceptVariableAnnotations concept_annotations = 1;
+          ValueType value_annotations = 2;
+
+        }
+        message ConceptVariableAnnotations {
+          repeated Type annotations = 1;
         }
       }
     }
