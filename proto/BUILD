@@ -110,6 +110,7 @@ proto_library(
     deps = [
         ":conjunction-proto",
         ":concept-proto",
+        ":error-proto",
     ],
 )
 

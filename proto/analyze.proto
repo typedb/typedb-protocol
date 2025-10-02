@@ -6,6 +6,7 @@ syntax = "proto3";
 
 import "proto/conjunction.proto";
 import "proto/concept.proto";
+import "proto/error.proto";
 
 package typedb.protocol;
 
@@ -16,164 +17,171 @@ message Analyze {
   }
 
   message Res {
-    QueryStructure structure = 1;
-    QueryAnnotations annotations = 2;
+    oneof result {
+      Error err = 1;
+      AnalyzedQuery ok = 2;
+    }
 
-    message QueryStructure {
-      PipelineStructure query = 1;
-      repeated FunctionStructure preamble = 2;
+    message AnalyzedQuery {
+      QueryStructure structure = 1;
+      QueryAnnotations annotations = 2;
 
-      message FunctionStructure {
-        PipelineStructure body = 1;
-        repeated ConjunctionStructure.Variable arguments = 2;
-        oneof returns {// TODO: Does this need to be flattened up?
-          ReturnOpStream stream = 3;
-          ReturnOpSingle single = 4;
-          ReturnOpCheck check = 5;
-          ReturnOpReduce reduce = 6;
-        };
+      message QueryStructure {
+        PipelineStructure query = 1;
+        repeated FunctionStructure preamble = 2;
 
-        message ReturnOpStream {
-          repeated ConjunctionStructure.Variable variables = 1;
-        }
-        message ReturnOpSingle {
-          string selector = 1;
-          repeated ConjunctionStructure.Variable variables = 2;
-        }
-        message ReturnOpCheck {}
-        message ReturnOpReduce {
-          repeated Reducer reducers = 1;
-        }
-      }
+        message FunctionStructure {
+          PipelineStructure body = 1;
+          repeated ConjunctionStructure.Variable arguments = 2;
+          oneof returns {// TODO: Does this need to be flattened up?
+            ReturnOpStream stream = 3;
+            ReturnOpSingle single = 4;
+            ReturnOpCheck check = 5;
+            ReturnOpReduce reduce = 6;
+          };
 
-      message PipelineStructure {
-        repeated ConjunctionStructure conjunctions = 1;
-        repeated PipelineStage stages = 2;
-        map<uint32, VariableInfo> variable_info = 3;
-        repeated ConjunctionStructure.Variable outputs = 4;
-
-        message VariableInfo {
-          string name = 1;
-        }
-
-        message PipelineStage {
-          oneof stage {
-            Match match = 1;
-            Insert insert = 2;
-            Put put = 3;
-            Update update = 4;
-            Delete delete = 5;
-            Select select = 6;
-            Sort sort = 7;
-            Require require = 8;
-            Offset offset = 9;
-            Limit limit = 10;
-            Distinct distinct = 11;
-            Reduce reduce = 12;
-          }
-
-          // They're all the same structure. Should we just use one?
-          message Match {
-            uint32 block = 1;
-          }
-          message Insert {
-            uint32 block = 1;
-          }
-          message Put {
-            uint32 block = 1;
-          }
-          message Update {
-            uint32 block = 1;
-          }
-          message Delete {
-            uint32 block = 1;
-            repeated ConjunctionStructure.Variable deleted_variables = 2;
-          }
-
-          message Select {
+          message ReturnOpStream {
             repeated ConjunctionStructure.Variable variables = 1;
           }
-          message Sort {
-            repeated SortVariable sort_variables = 1;
-            message SortVariable {
-              ConjunctionStructure.Variable variable = 1;
-              SortDirection direction = 2;
-              enum SortDirection {
-                ASC = 0;
-                DESC = 1;
+          message ReturnOpSingle {
+            string selector = 1;
+            repeated ConjunctionStructure.Variable variables = 2;
+          }
+          message ReturnOpCheck {}
+          message ReturnOpReduce {
+            repeated Reducer reducers = 1;
+          }
+        }
+
+        message PipelineStructure {
+          repeated ConjunctionStructure conjunctions = 1;
+          repeated PipelineStage stages = 2;
+          map<uint32, VariableInfo> variable_info = 3;
+          repeated ConjunctionStructure.Variable outputs = 4;
+
+          message VariableInfo {
+            string name = 1;
+          }
+
+          message PipelineStage {
+            oneof stage {
+              Match match = 1;
+              Insert insert = 2;
+              Put put = 3;
+              Update update = 4;
+              Delete delete = 5;
+              Select select = 6;
+              Sort sort = 7;
+              Require require = 8;
+              Offset offset = 9;
+              Limit limit = 10;
+              Distinct distinct = 11;
+              Reduce reduce = 12;
+            }
+
+            // They're all the same structure. Should we just use one?
+            message Match {
+              uint32 block = 1;
+            }
+            message Insert {
+              uint32 block = 1;
+            }
+            message Put {
+              uint32 block = 1;
+            }
+            message Update {
+              uint32 block = 1;
+            }
+            message Delete {
+              uint32 block = 1;
+              repeated ConjunctionStructure.Variable deleted_variables = 2;
+            }
+
+            message Select {
+              repeated ConjunctionStructure.Variable variables = 1;
+            }
+            message Sort {
+              repeated SortVariable sort_variables = 1;
+              message SortVariable {
+                ConjunctionStructure.Variable variable = 1;
+                SortDirection direction = 2;
+                enum SortDirection {
+                  ASC = 0;
+                  DESC = 1;
+                }
+              }
+            }
+            message Require {
+              repeated ConjunctionStructure.Variable variables = 1;
+            }
+            message Offset {
+              uint64 offset = 1;
+            }
+            message Limit {
+              uint64 limit = 1;
+            }
+            message Distinct {}
+            message Reduce {
+              repeated ReduceAssign reducers = 1;
+              repeated ConjunctionStructure.Variable groupby = 2;
+
+              message ReduceAssign {
+                ConjunctionStructure.Variable assigned = 1;
+                Reducer reducer = 2;
               }
             }
           }
-          message Require {
-            repeated ConjunctionStructure.Variable variables = 1;
-          }
-          message Offset {
-            uint64 offset = 1;
-          }
-          message Limit {
-            uint64 limit = 1;
-          }
-          message Distinct {}
-          message Reduce {
-            repeated ReduceAssign reducers = 1;
-            repeated ConjunctionStructure.Variable groupby = 2;
+        }
 
-            message ReduceAssign {
-              ConjunctionStructure.Variable assigned = 1;
-              Reducer reducer = 2;
-            }
-          }
+        message Reducer {
+          string reducer = 1;
+          repeated ConjunctionStructure.Variable variables = 2;
         }
       }
 
-      message Reducer {
-        string reducer = 1;
-        repeated ConjunctionStructure.Variable variables = 2;
-      }
-    }
+      message QueryAnnotations {
+        PipelineAnnotations query = 1;
+        repeated FunctionAnnotations preamble = 2;
+        FetchAnnotations fetch = 3;
 
-    message QueryAnnotations {
-      PipelineAnnotations query = 1;
-      repeated FunctionAnnotations preamble = 2;
-      FetchAnnotations fetch = 3;
+        message FunctionAnnotations {
+          repeated VariableAnnotations arguments = 1;
+          repeated VariableAnnotations returns = 2;
+          bool returns_stream = 3;
+          PipelineAnnotations body = 4;
+        }
 
-      message FunctionAnnotations {
-        repeated VariableAnnotations arguments = 1;
-        repeated VariableAnnotations returns = 2;
-        bool returns_stream = 3;
-        PipelineAnnotations body = 4;
-      }
-
-      message PipelineAnnotations {
-        repeated ConjunctionAnnotations conjunctions = 1;
-        message ConjunctionAnnotations {
+        message PipelineAnnotations {
+          repeated ConjunctionAnnotations conjunctions = 1;
+          message ConjunctionAnnotations {
             map<uint32, VariableAnnotations> variable_annotations = 1;
+          }
         }
-      }
 
-      message FetchAnnotations {
-        oneof node {
-          Object object = 1;
-          FetchAnnotations list = 2;
-          Leaf leaf = 3;
+        message FetchAnnotations {
+          oneof node {
+            Object object = 1;
+            FetchAnnotations list = 2;
+            Leaf leaf = 3;
+          }
+          message Object {
+            map<string, FetchAnnotations> annotations = 1;
+          }
+          message Leaf {
+            repeated ValueType annotations = 1;
+          }
         }
-        message Object {
-          map<string, FetchAnnotations> annotations = 1;
-        }
-        message Leaf {
-           repeated ValueType annotations = 1;
-        }
-      }
 
-      message VariableAnnotations {
-        oneof annotations {
-          ConceptVariableAnnotations thing = 1;
-          ConceptVariableAnnotations type = 2;
-          ValueType value_annotations = 3;
+        message VariableAnnotations {
+          oneof annotations {
+            ConceptVariableAnnotations thing = 1;
+            ConceptVariableAnnotations type = 2;
+            ValueType value_annotations = 3;
 
-        }
-        message ConceptVariableAnnotations {
-          repeated Type types = 1;
+          }
+          message ConceptVariableAnnotations {
+            repeated Type types = 1;
+          }
         }
       }
     }
