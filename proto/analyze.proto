@@ -167,12 +167,13 @@ message Analyze {
 
       message VariableAnnotations {
         oneof annotations {
-          ConceptVariableAnnotations concept_annotations = 1;
-          ValueType value_annotations = 2;
+          ConceptVariableAnnotations thing = 1;
+          ConceptVariableAnnotations type = 2;
+          ValueType value_annotations = 3;
 
         }
         message ConceptVariableAnnotations {
-          repeated Type annotations = 1;
+          repeated Type thing = 1;
         }
       }
     }
