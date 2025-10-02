@@ -141,7 +141,8 @@ message Analyze {
       message FunctionAnnotations {
         repeated VariableAnnotations arguments = 1;
         repeated VariableAnnotations returns = 2;
-        PipelineAnnotations body = 3;
+        bool returns_stream = 3;
+        PipelineAnnotations body = 4;
       }
 
       message PipelineAnnotations {
