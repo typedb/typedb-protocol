@@ -133,9 +133,8 @@ message Analyze {
     }
 
     message QueryAnnotations {
-      // TODO: All of this could be absorbed into Conjunction
       PipelineAnnotations query = 1;
-      repeated PipelineAnnotations preamble = 2;
+      repeated FunctionAnnotations preamble = 2;
       FetchAnnotations fetch = 3;
 
       message FunctionAnnotations {
