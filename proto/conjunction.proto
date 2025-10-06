@@ -21,6 +21,8 @@ message ConjunctionStructure {
       Type label = 2;
       Value value = 3;
       NamedRole named_role = 4;
+      // Error condition. Should be unreachable.
+      string unresolved = 5;
     }
 
     message NamedRole {
