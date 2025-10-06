@@ -18,15 +18,14 @@ message ConjunctionStructure {
   message StructureVertex {
     oneof vertex {
       Variable variable = 1;
-      Label label = 2;
+      Type label = 2;
       Value value = 3;
+      NamedRole named_role = 4;
     }
 
-    message Label {
-      oneof label {
-        Type resolved = 1;
-        string unresolved = 2;
-      }
+    message NamedRole {
+        Variable variable = 1;
+        string name = 2;
     }
   }
 
