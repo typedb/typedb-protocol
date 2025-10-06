@@ -25,7 +25,7 @@ message ConjunctionStructure {
     message Label {
       oneof label {
         Type resolved = 1;
-        string failedInference = 2;
+        string unresolved = 2;
       }
     }
   }
