@@ -33,7 +33,7 @@ message Analyze {
         message FunctionStructure {
           PipelineStructure body = 1;
           repeated ConjunctionStructure.Variable arguments = 2;
-          oneof returns {// TODO: Does this need to be flattened up?
+          oneof returns {
             ReturnOpStream stream = 3;
             ReturnOpSingle single = 4;
             ReturnOpCheck check = 5;
