@@ -4,7 +4,7 @@
 
 syntax = "proto3";
 
-import "proto/conjunction.proto";
+import "proto/structure.proto";
 import "proto/concept.proto";
 import "proto/error.proto";
 

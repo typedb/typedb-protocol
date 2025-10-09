@@ -9,7 +9,7 @@ fn main() -> std::io::Result<()> {
         "../../proto/authentication.proto",
         "../../proto/concept.proto",
         "../../proto/connection.proto",
-        "../../proto/conjunction.proto",
+        "../../proto/structure.proto",
         "../../proto/database.proto",
         "../../proto/error.proto",
         "../../proto/migration.proto",
