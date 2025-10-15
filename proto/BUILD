@@ -95,12 +95,32 @@ proto_library(
     name = "transaction-proto",
     srcs = ["transaction.proto"],
     deps = [
+        ":analyze-proto",
         ":answer-proto",
         ":concept-proto",
         ":error-proto",
         ":options-proto",
         ":query-proto",
     ]
+)
+
+proto_library(
+    name = "analyze-proto",
+    srcs = ["analyze.proto"],
+    deps = [
+        ":structure-proto",
+        ":concept-proto",
+        ":error-proto",
+    ],
+)
+
+proto_library(
+    name = "structure-proto",
+    srcs = ["structure.proto"],
+    deps = [
+        ":answer-proto",
+        ":concept-proto",
+    ],
 )
 
 proto_library(
@@ -114,9 +134,11 @@ proto_library(
 filegroup(
     name = "proto-raw-buffers",
     srcs = [
+        "analyze.proto",
         "answer.proto",
         "concept.proto",
         "connection.proto",
+        "structure.proto",
         "options.proto",
         "query.proto",
         "transaction.proto",

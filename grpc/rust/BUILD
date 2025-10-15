@@ -25,6 +25,8 @@ rust_tonic_compile(
         "//proto:options-proto",
         "//proto:query-proto",
         "//proto:transaction-proto",
+        "//proto:analyze-proto",
+        "//proto:structure-proto",
         "//proto:version-proto",
     ]
 )
