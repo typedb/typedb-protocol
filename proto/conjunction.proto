@@ -9,8 +9,10 @@ import "proto/concept.proto";
 
 package typedb.protocol;
 
-message ConjunctionStructure {
+message Conjunction {
   repeated StructureConstraint constraints = 1;
+  map<uint32, VariableAnnotations> variable_annotations = 2;
+
   message Variable {
     uint32 id = 1;
   }
@@ -185,5 +187,17 @@ message ConjunctionStructure {
       StructureVertex concept = 1;
       bytes IID = 2;
     };
+  }
+
+  message VariableAnnotations {
+    oneof annotations {
+      ConceptVariableAnnotations thing = 1;
+      ConceptVariableAnnotations type = 2;
+      ValueType value_annotations = 3;
+
+    }
+    message ConceptVariableAnnotations {
+      repeated Type types = 1;
+    }
   }
 }

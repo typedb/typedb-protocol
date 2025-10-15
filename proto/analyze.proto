@@ -23,41 +23,43 @@ message Analyze {
     }
 
     message AnalyzedQuery {
-      QueryStructure structure = 1;
-      QueryAnnotations annotations = 2;
+        Pipeline query = 1;
+        repeated Function preamble = 2;
+        Fetch fetch = 3;
 
-      message QueryStructure {
-        PipelineStructure query = 1;
-        repeated FunctionStructure preamble = 2;
+        message Function {
+          Pipeline body = 1;
+          repeated Conjunction.Variable arguments = 2;
+          repeated Conjunction.VariableAnnotations arguments_annotations = 3;
+          repeated Conjunction.VariableAnnotations return_annotations = 4;
+          ReturnOperation return_operation = 5;
 
-        message FunctionStructure {
-          PipelineStructure body = 1;
-          repeated ConjunctionStructure.Variable arguments = 2;
-          oneof returns {
-            ReturnOpStream stream = 3;
-            ReturnOpSingle single = 4;
-            ReturnOpCheck check = 5;
-            ReturnOpReduce reduce = 6;
-          };
-
-          message ReturnOpStream {
-            repeated ConjunctionStructure.Variable variables = 1;
-          }
-          message ReturnOpSingle {
-            string selector = 1;
-            repeated ConjunctionStructure.Variable variables = 2;
-          }
-          message ReturnOpCheck {}
-          message ReturnOpReduce {
-            repeated Reducer reducers = 1;
+          message ReturnOperation {
+            oneof return_operation {
+              ReturnOpStream stream = 1;
+              ReturnOpSingle single = 2;
+              ReturnOpCheck check = 3;
+              ReturnOpReduce reduce = 4;
+            };
+            message ReturnOpStream {
+              repeated Conjunction.Variable variables = 1;
+            }
+            message ReturnOpSingle {
+              string selector = 1;
+              repeated Conjunction.Variable variables = 2;
+            }
+            message ReturnOpCheck {}
+            message ReturnOpReduce {
+              repeated Reducer reducers = 1;
+            }
           }
         }
 
-        message PipelineStructure {
-          repeated ConjunctionStructure conjunctions = 1;
+        message Pipeline {
+          repeated Conjunction conjunctions = 1;
           repeated PipelineStage stages = 2;
           map<uint32, VariableInfo> variable_info = 3;
-          repeated ConjunctionStructure.Variable outputs = 4;
+          repeated Conjunction.Variable outputs = 4;
 
           message VariableInfo {
             string name = 1;
@@ -94,16 +96,16 @@ message Analyze {
             }
             message Delete {
               uint32 block = 1;
-              repeated ConjunctionStructure.Variable deleted_variables = 2;
+              repeated Conjunction.Variable deleted_variables = 2;
             }
 
             message Select {
-              repeated ConjunctionStructure.Variable variables = 1;
+              repeated Conjunction.Variable variables = 1;
             }
             message Sort {
               repeated SortVariable sort_variables = 1;
               message SortVariable {
-                ConjunctionStructure.Variable variable = 1;
+                Conjunction.Variable variable = 1;
                 SortDirection direction = 2;
                 enum SortDirection {
                   ASC = 0;
@@ -112,7 +114,7 @@ message Analyze {
               }
             }
             message Require {
-              repeated ConjunctionStructure.Variable variables = 1;
+              repeated Conjunction.Variable variables = 1;
             }
             message Offset {
               uint64 offset = 1;
@@ -123,10 +125,10 @@ message Analyze {
             message Distinct {}
             message Reduce {
               repeated ReduceAssign reducers = 1;
-              repeated ConjunctionStructure.Variable groupby = 2;
+              repeated Conjunction.Variable groupby = 2;
 
               message ReduceAssign {
-                ConjunctionStructure.Variable assigned = 1;
+                Conjunction.Variable assigned = 1;
                 Reducer reducer = 2;
               }
             }
@@ -135,28 +137,11 @@ message Analyze {
 
         message Reducer {
           string reducer = 1;
-          repeated ConjunctionStructure.Variable variables = 2;
-        }
-      }
-
-      message QueryAnnotations {
-        PipelineAnnotations query = 1;
-        repeated FunctionAnnotations preamble = 2;
-        FetchAnnotations fetch = 3;
-
-        message FunctionAnnotations {
-          repeated VariableAnnotations arguments = 1;
-          repeated VariableAnnotations returns = 2;
-          bool returns_stream = 3;
-          PipelineAnnotations body = 4;
+          repeated Conjunction.Variable variables = 2;
         }
 
-        message PipelineAnnotations {
-          repeated ConjunctionAnnotations conjunctions = 1;
-          message ConjunctionAnnotations {
-            map<uint32, VariableAnnotations> variable_annotations = 1;
-          }
-        }
+      message Fetch {
+        FetchAnnotations fetch = 1;
 
         message FetchAnnotations {
           oneof node {
@@ -169,18 +154,6 @@ message Analyze {
           }
           message Leaf {
             repeated ValueType annotations = 1;
-          }
-        }
-
-        message VariableAnnotations {
-          oneof annotations {
-            ConceptVariableAnnotations thing = 1;
-            ConceptVariableAnnotations type = 2;
-            ValueType value_annotations = 3;
-
-          }
-          message ConceptVariableAnnotations {
-            repeated Type types = 1;
           }
         }
       }
