@@ -39,7 +39,7 @@ ts_grpc_compile(
         "//proto:query-proto",
         "//proto:transaction-proto",
         "//proto:analyze-proto",
-        "//proto:structure-proto",
+        "//proto:conjunction-proto",
         "//proto:version-proto",
     ]
 )
