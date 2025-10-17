@@ -141,20 +141,16 @@ message Analyze {
         }
 
       message Fetch {
-        FetchAnnotations fetch = 1;
-
-        message FetchAnnotations {
-          oneof node {
-            Object object = 1;
-            FetchAnnotations list = 2;
-            Leaf leaf = 3;
-          }
-          message Object {
-            map<string, FetchAnnotations> annotations = 1;
-          }
-          message Leaf {
-            repeated ValueType annotations = 1;
-          }
+        oneof node {
+          Object object = 1;
+          Fetch list = 2;
+          Leaf leaf = 3;
+        }
+        message Object {
+          map<string, Fetch> fetch = 1;
+        }
+        message Leaf {
+          repeated ValueType annotations = 1;
         }
       }
     }
