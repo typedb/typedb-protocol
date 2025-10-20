@@ -20,6 +20,12 @@ proto_library(
     deps = [],
 )
 
+proto_library(
+    name = "request-proto",
+    srcs = ["request.proto"],
+    deps = [],
+)
+
 checkstyle_test(
     name = "checkstyle",
     size = "small",
