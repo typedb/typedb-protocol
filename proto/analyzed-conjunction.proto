@@ -10,14 +10,14 @@ import "proto/concept.proto";
 package typedb.protocol;
 
 message AnalyzedConjunction {
-  repeated StructureConstraint constraints = 1;
+  repeated Constraint constraints = 1;
   map<uint32, VariableAnnotations> variable_annotations = 2;
 
   message Variable {
     uint32 id = 1;
   }
 
-  message StructureVertex {
+  message ConstraintVertex {
     oneof vertex {
       Variable variable = 1;
       Type label = 2;
@@ -33,7 +33,7 @@ message AnalyzedConjunction {
     }
   }
 
-  message StructureConstraint {
+  message Constraint {
     ConstraintSpan span = 1;
     oneof constraint {
       Or or = 2;
@@ -90,68 +90,68 @@ message AnalyzedConjunction {
 
     // Edges
     message Isa {
-      StructureVertex thing = 1;
-      StructureVertex type = 2;
+      ConstraintVertex thing = 1;
+      ConstraintVertex type = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Has {
-      StructureVertex owner = 1;
-      StructureVertex attribute = 2;
+      ConstraintVertex owner = 1;
+      ConstraintVertex attribute = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Links {
-      StructureVertex relation = 1;
-      StructureVertex player = 2;
-      StructureVertex role = 3;
+      ConstraintVertex relation = 1;
+      ConstraintVertex player = 2;
+      ConstraintVertex role = 3;
       ConstraintExactness exactness = 4;
     };
 
     // Type
     message Kind {
       protocol.ConceptDocument.Node.Leaf.Kind kind = 1;
-      StructureVertex type = 2;
+      ConstraintVertex type = 2;
     }
 
     message Sub {
-      StructureVertex subtype = 1;
-      StructureVertex supertype = 2;
+      ConstraintVertex subtype = 1;
+      ConstraintVertex supertype = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Owns {
-      StructureVertex owner = 1;
-      StructureVertex attribute = 2;
+      ConstraintVertex owner = 1;
+      ConstraintVertex attribute = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Relates {
-      StructureVertex relation = 1;
-      StructureVertex role = 2;
+      ConstraintVertex relation = 1;
+      ConstraintVertex role = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Plays {
-      StructureVertex player = 1;
-      StructureVertex role = 2;
+      ConstraintVertex player = 1;
+      ConstraintVertex role = 2;
       ConstraintExactness exactness = 3;
     };
 
     message Label {
-      StructureVertex type = 1;
+      ConstraintVertex type = 1;
       string label = 2;
     }
 
     message Value {
-      StructureVertex attribute_type = 1;
+      ConstraintVertex attribute_type = 1;
       ValueType value_type = 2;
     }
 
     // Function
     message Comparison {
-      StructureVertex lhs = 1;
-      StructureVertex rhs = 2;
+      ConstraintVertex lhs = 1;
+      ConstraintVertex rhs = 2;
       Comparator comparator = 3;
       enum Comparator {
         EQUAL = 0;
@@ -167,24 +167,24 @@ message AnalyzedConjunction {
 
     message Expression {
       string text = 1;
-      repeated StructureVertex assigned = 2;
-      repeated StructureVertex arguments = 3; // Treats constants as part of the text.
+      repeated ConstraintVertex assigned = 2;
+      repeated ConstraintVertex arguments = 3; // Treats constants as part of the text.
     };
 
     message FunctionCall {
       string name = 1;
-      repeated StructureVertex assigned = 2;
-      repeated StructureVertex arguments = 3; // Include constants, since variables are schema-objects
+      repeated ConstraintVertex assigned = 2;
+      repeated ConstraintVertex arguments = 3; // Include constants, since variables are schema-objects
     };
 
     // Special
     message Is {
-      StructureVertex lhs = 1;
-      StructureVertex rhs = 2;
+      ConstraintVertex lhs = 1;
+      ConstraintVertex rhs = 2;
     };
 
     message IID {
-      StructureVertex concept = 1;
+      ConstraintVertex concept = 1;
       bytes IID = 2;
     };
   }
