@@ -194,8 +194,9 @@ message AnalyzedConjunction {
       ConceptVariableAnnotations thing = 1;
       ConceptVariableAnnotations type = 2;
       ValueType value_annotations = 3;
-
     }
+    bool is_optional = 4;
+
     message ConceptVariableAnnotations {
       repeated Type types = 1;
     }
