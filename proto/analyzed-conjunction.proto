@@ -9,7 +9,7 @@ import "proto/concept.proto";
 
 package typedb.protocol;
 
-message Conjunction {
+message AnalyzedConjunction {
   repeated StructureConstraint constraints = 1;
   map<uint32, VariableAnnotations> variable_annotations = 2;
 

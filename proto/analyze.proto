@@ -4,7 +4,7 @@
 
 syntax = "proto3";
 
-import "proto/conjunction.proto";
+import "proto/analyzed-conjunction.proto";
 import "proto/concept.proto";
 import "proto/error.proto";
 
@@ -23,15 +23,16 @@ message Analyze {
     }
 
     message AnalyzedQuery {
-        Pipeline query = 1;
-        repeated Function preamble = 2;
-        Fetch fetch = 3;
+        string source = 1;
+        Pipeline query = 2;
+        repeated Function preamble = 3;
+        Fetch fetch = 4;
 
         message Function {
           Pipeline body = 1;
-          repeated Conjunction.Variable arguments = 2;
-          repeated Conjunction.VariableAnnotations arguments_annotations = 3;
-          repeated Conjunction.VariableAnnotations return_annotations = 4;
+          repeated AnalyzedConjunction.Variable arguments = 2;
+          repeated AnalyzedConjunction.VariableAnnotations arguments_annotations = 3;
+          repeated AnalyzedConjunction.VariableAnnotations return_annotations = 4;
           ReturnOperation return_operation = 5;
 
           message ReturnOperation {
@@ -42,11 +43,11 @@ message Analyze {
               ReturnOpReduce reduce = 4;
             };
             message ReturnOpStream {
-              repeated Conjunction.Variable variables = 1;
+              repeated AnalyzedConjunction.Variable variables = 1;
             }
             message ReturnOpSingle {
               string selector = 1;
-              repeated Conjunction.Variable variables = 2;
+              repeated AnalyzedConjunction.Variable variables = 2;
             }
             message ReturnOpCheck {}
             message ReturnOpReduce {
@@ -56,10 +57,10 @@ message Analyze {
         }
 
         message Pipeline {
-          repeated Conjunction conjunctions = 1;
+          repeated AnalyzedConjunction conjunctions = 1;
           repeated PipelineStage stages = 2;
           map<uint32, VariableInfo> variable_info = 3;
-          repeated Conjunction.Variable outputs = 4;
+          repeated AnalyzedConjunction.Variable outputs = 4;
 
           message VariableInfo {
             string name = 1;
@@ -81,7 +82,6 @@ message Analyze {
               Reduce reduce = 12;
             }
 
-            // They're all the same structure. Should we just use one?
             message Match {
               uint32 block = 1;
             }
@@ -96,16 +96,16 @@ message Analyze {
             }
             message Delete {
               uint32 block = 1;
-              repeated Conjunction.Variable deleted_variables = 2;
+              repeated AnalyzedConjunction.Variable deleted_variables = 2;
             }
 
             message Select {
-              repeated Conjunction.Variable variables = 1;
+              repeated AnalyzedConjunction.Variable variables = 1;
             }
             message Sort {
               repeated SortVariable sort_variables = 1;
               message SortVariable {
-                Conjunction.Variable variable = 1;
+                AnalyzedConjunction.Variable variable = 1;
                 SortDirection direction = 2;
                 enum SortDirection {
                   ASC = 0;
@@ -114,7 +114,7 @@ message Analyze {
               }
             }
             message Require {
-              repeated Conjunction.Variable variables = 1;
+              repeated AnalyzedConjunction.Variable variables = 1;
             }
             message Offset {
               uint64 offset = 1;
@@ -125,10 +125,10 @@ message Analyze {
             message Distinct {}
             message Reduce {
               repeated ReduceAssign reducers = 1;
-              repeated Conjunction.Variable groupby = 2;
+              repeated AnalyzedConjunction.Variable groupby = 2;
 
               message ReduceAssign {
-                Conjunction.Variable assigned = 1;
+                AnalyzedConjunction.Variable assigned = 1;
                 Reducer reducer = 2;
               }
             }
@@ -137,7 +137,7 @@ message Analyze {
 
         message Reducer {
           string reducer = 1;
-          repeated Conjunction.Variable variables = 2;
+          repeated AnalyzedConjunction.Variable variables = 2;
         }
 
       message Fetch {

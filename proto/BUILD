@@ -108,15 +108,15 @@ proto_library(
     name = "analyze-proto",
     srcs = ["analyze.proto"],
     deps = [
-        ":conjunction-proto",
+        ":analyzed-conjunction-proto",
         ":concept-proto",
         ":error-proto",
     ],
 )
 
 proto_library(
-    name = "conjunction-proto",
-    srcs = ["conjunction.proto"],
+    name = "analyzed-conjunction-proto",
+    srcs = ["analyzed-conjunction.proto"],
     deps = [
         ":answer-proto",
         ":concept-proto",
@@ -138,7 +138,7 @@ filegroup(
         "answer.proto",
         "concept.proto",
         "connection.proto",
-        "conjunction.proto",
+        "analyzed-conjunction.proto",
         "options.proto",
         "query.proto",
         "transaction.proto",
