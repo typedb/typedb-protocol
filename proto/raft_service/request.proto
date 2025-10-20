@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package typedb.cluster.state;
+package typedb.protocol;
 
 // Mirrors Rust enum Request in `raft_request_response.rs`.
 message Request {
