@@ -23,8 +23,6 @@ message AnalyzedConjunction {
       Type label = 2;
       Value value = 3;
       NamedRole named_role = 4;
-      // Error condition. Should be unreachable.
-      string unresolved = 5;
     }
 
     message NamedRole {
@@ -167,7 +165,7 @@ message AnalyzedConjunction {
 
     message Expression {
       string text = 1;
-      repeated ConstraintVertex assigned = 2;
+      ConstraintVertex assigned = 2;
       repeated ConstraintVertex arguments = 3; // Treats constants as part of the text.
     };
 
