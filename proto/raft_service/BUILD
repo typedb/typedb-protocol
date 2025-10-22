@@ -11,6 +11,7 @@ proto_library(
     srcs = ["raft_service.proto"],
     deps = [
         ":replication-proto",
+        ":request-proto"
     ],
 )
 
