@@ -1,0 +1,202 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+import "proto/answer.proto";
+import "proto/concept.proto";
+
+package typedb.protocol;
+
+message AnalyzedConjunction {
+  repeated Constraint constraints = 1;
+  map<uint32, VariableAnnotations> variable_annotations = 2;
+
+  message Variable {
+    uint32 id = 1;
+  }
+
+  message ConstraintVertex {
+    oneof vertex {
+      Variable variable = 1;
+      Type label = 2;
+      Value value = 3;
+      NamedRole named_role = 4;
+    }
+
+    message NamedRole {
+        Variable variable = 1;
+        string name = 2;
+    }
+  }
+
+  message Constraint {
+    ConstraintSpan span = 1;
+    oneof constraint {
+      Or or = 2;
+      Not not = 3;
+      Try try = 4;
+
+      // Thing
+      Isa isa = 5;
+      Has has = 6;
+      Links links = 7;
+
+      // Type
+      Kind kind = 8;
+      Sub sub = 9;
+      Owns owns = 10;
+      Relates relates = 11;
+      Plays plays = 12;
+      Value value = 13;
+      Label label = 14;
+
+
+      // Function
+      Comparison comparison = 15;
+      Expression expression = 16;
+      FunctionCall function_call = 17;
+
+      // Special
+      Is is = 18;
+      IID iid = 19;
+    }
+
+    message ConstraintSpan {
+      uint64 begin = 1;
+      uint64 end = 2;
+    }
+
+    enum ConstraintExactness {
+      EXACT = 0;
+      SUBTYPES = 1;
+    }
+
+    // Nested
+    message Or {
+      repeated uint32 branches = 1;
+    }
+
+    message Not {
+      uint32 conjunction = 1;
+    }
+
+    message Try {
+      uint32 conjunction = 1;
+    }
+
+    // Edges
+    message Isa {
+      ConstraintVertex thing = 1;
+      ConstraintVertex type = 2;
+      ConstraintExactness exactness = 3;
+    };
+
+    message Has {
+      ConstraintVertex owner = 1;
+      ConstraintVertex attribute = 2;
+      ConstraintExactness exactness = 3;
+    };
+
+    message Links {
+      ConstraintVertex relation = 1;
+      ConstraintVertex player = 2;
+      ConstraintVertex role = 3;
+      ConstraintExactness exactness = 4;
+    };
+
+    // Type
+    message Kind {
+      protocol.ConceptDocument.Node.Leaf.Kind kind = 1;
+      ConstraintVertex type = 2;
+    }
+
+    message Sub {
+      ConstraintVertex subtype = 1;
+      ConstraintVertex supertype = 2;
+      ConstraintExactness exactness = 3;
+    };
+
+    message Owns {
+      ConstraintVertex owner = 1;
+      ConstraintVertex attribute = 2;
+      ConstraintExactness exactness = 3;
+    };
+
+    message Relates {
+      ConstraintVertex relation = 1;
+      ConstraintVertex role = 2;
+      ConstraintExactness exactness = 3;
+    };
+
+    message Plays {
+      ConstraintVertex player = 1;
+      ConstraintVertex role = 2;
+      ConstraintExactness exactness = 3;
+    };
+
+    message Label {
+      ConstraintVertex type = 1;
+      string label = 2;
+    }
+
+    message Value {
+      ConstraintVertex attribute_type = 1;
+      ValueType value_type = 2;
+    }
+
+    // Function
+    message Comparison {
+      ConstraintVertex lhs = 1;
+      ConstraintVertex rhs = 2;
+      Comparator comparator = 3;
+      enum Comparator {
+        EQUAL = 0;
+        NOT_EQUAL = 1;
+        LESS = 2;
+        GREATER = 3;
+        LESS_OR_EQUAL =4;
+        GREATER_OR_EQUAL = 5;
+        LIKE = 6;
+        CONTAINS = 7;
+      }
+    };
+
+    message Expression {
+      string text = 1;
+      ConstraintVertex assigned = 2;
+      repeated ConstraintVertex arguments = 3; // Treats constants as part of the text.
+    };
+
+    message FunctionCall {
+      string name = 1;
+      repeated ConstraintVertex assigned = 2;
+      repeated ConstraintVertex arguments = 3; // Include constants, since variables are schema-objects
+    };
+
+    // Special
+    message Is {
+      ConstraintVertex lhs = 1;
+      ConstraintVertex rhs = 2;
+    };
+
+    message IID {
+      ConstraintVertex concept = 1;
+      bytes IID = 2;
+    };
+  }
+
+  message VariableAnnotations {
+    oneof annotations {
+      ConceptVariableAnnotations thing = 1;
+      ConceptVariableAnnotations type = 2;
+      ValueType value_annotations = 3;
+    }
+    bool is_optional = 4;
+
+    message ConceptVariableAnnotations {
+      repeated Type types = 1;
+    }
+  }
+}
