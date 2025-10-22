@@ -10,65 +10,64 @@ message Request {
     DatabaseCommit database_commit = 3;
     UserManager user_manager = 4;
   }
-}
 
-// ----- Load -----
-message Load {}
+  message Load {}
 
-// ----- DatabaseManager -----
-message DatabaseManager {
-  oneof op {
-    DbAll all = 1;
-    DbGet get = 2;
-    DbGetUnrestricted get_unrestricted = 3;
-    DbCreate create = 4;
-    DbCreateUnrestricted create_unrestricted = 5;
-    DbDelete delete = 6;
+  message DatabaseManager {
+    oneof op {
+      DbAll all = 1;
+      DbGet get = 2;
+      DbGetUnrestricted get_unrestricted = 3;
+      DbCreate create = 4;
+      DbCreateUnrestricted create_unrestricted = 5;
+      DbDelete delete = 6;
+    }
+
+    message DbAll {}
+    message DbGet { string name = 1; }
+    message DbGetUnrestricted { string name = 1; }
+    message DbCreate { string name = 1; }
+    message DbCreateUnrestricted { string name = 1; }
+    message DbDelete { string name = 1; }
+  }
+
+  // ----- DatabaseCommit -----
+  message DatabaseCommit {
+    oneof kind {
+      SchemaCommit schema = 1;
+      DataCommit data = 2;
+    }
+
+    // commit_record is binary payload of CommitRecord serialisation
+    message SchemaCommit {
+      string name = 1;
+      bytes commit_record = 2;
+    }
+
+    message DataCommit {
+      string name = 1;
+      bytes commit_record = 2;
+    }
+  }
+
+  // ----- UserManager -----
+  message UserManager {
+    oneof op {
+      UserAll all = 1;
+      UserGet get = 2;
+      UserContains contains = 3;
+      UserCreate create = 4;
+      UserUpdate update = 5;
+      UserDelete delete = 6;
+    }
+
+    message UserAll { string accessor = 1; }
+    message UserGet { string name = 1; string accessor = 2; }
+    message UserContains { string name = 1; }
+    // commit_record is binary payload of CommitRecord serialisation
+    message UserCreate { bytes commit_record = 1; }
+    message UserUpdate { bytes commit_record = 1; }
+    message UserDelete { bytes commit_record = 1; }
   }
 }
 
-message DbAll {}
-message DbGet { string name = 1; }
-message DbGetUnrestricted { string name = 1; }
-message DbCreate { string name = 1; }
-message DbCreateUnrestricted { string name = 1; }
-message DbDelete { string name = 1; }
-
-// ----- DatabaseCommit -----
-message DatabaseCommit {
-  oneof kind {
-    SchemaCommit schema = 1;
-    DataCommit data = 2;
-  }
-}
-
-// commit_record is binary payload of CommitRecord serialisation
-message SchemaCommit {
-  string name = 1;
-  bytes commit_record = 2;
-}
-
-message DataCommit {
-  string name = 1;
-  bytes commit_record = 2;
-}
-
-// ----- UserManager -----
-message UserManager {
-  oneof op {
-    UserAll all = 1;
-    UserGet get = 2;
-    UserContains contains = 3;
-    UserCreate create = 4;
-    UserUpdate update = 5;
-    UserDelete delete = 6;
-  }
-}
-
-message UserAll { string accessor = 1; }
-message UserGet { string name = 1; string accessor = 2; }
-message UserContains { string name = 1; }
-// commit_record is binary payload of CommitRecord serialisation
-message UserCreate { bytes commit_record = 1; }
-message UserUpdate { bytes commit_record = 1; }
-message UserDelete { bytes commit_record = 1; }
