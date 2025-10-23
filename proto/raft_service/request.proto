@@ -2,9 +2,8 @@ syntax = "proto3";
 
 package typedb.protocol;
 
-// Mirrors Rust enum Request in `raft_request_response.rs`.
 message Request {
-  oneof kind {
+  oneof request {
     Load load = 1;
     DatabaseManager database_manager = 2;
     DatabaseCommit database_commit = 3;
@@ -14,31 +13,29 @@ message Request {
   message Load {}
 
   message DatabaseManager {
-    oneof op {
-      DbAll all = 1;
-      DbGet get = 2;
-      DbGetUnrestricted get_unrestricted = 3;
-      DbCreate create = 4;
-      DbCreateUnrestricted create_unrestricted = 5;
-      DbDelete delete = 6;
+    oneof database_manager {
+      All all = 1;
+      Get get = 2;
+      GetUnrestricted get_unrestricted = 3;
+      Create create = 4;
+      CreateUnrestricted create_unrestricted = 5;
+      Delete delete = 6;
     }
 
-    message DbAll {}
-    message DbGet { string name = 1; }
-    message DbGetUnrestricted { string name = 1; }
-    message DbCreate { string name = 1; }
-    message DbCreateUnrestricted { string name = 1; }
-    message DbDelete { string name = 1; }
+    message All {}
+    message Get { string name = 1; }
+    message GetUnrestricted { string name = 1; }
+    message Create { string name = 1; }
+    message CreateUnrestricted { string name = 1; }
+    message Delete { string name = 1; }
   }
 
-  // ----- DatabaseCommit -----
   message DatabaseCommit {
-    oneof kind {
+    oneof database_commit {
       SchemaCommit schema = 1;
       DataCommit data = 2;
     }
 
-    // commit_record is binary payload of CommitRecord serialisation
     message SchemaCommit {
       string name = 1;
       bytes commit_record = 2;
@@ -50,24 +47,22 @@ message Request {
     }
   }
 
-  // ----- UserManager -----
   message UserManager {
-    oneof op {
-      UserAll all = 1;
-      UserGet get = 2;
-      UserContains contains = 3;
-      UserCreate create = 4;
-      UserUpdate update = 5;
-      UserDelete delete = 6;
+    oneof user_manager {
+      All all = 1;
+      Get get = 2;
+      Contains contains = 3;
+      Create create = 4;
+      Update update = 5;
+      Delete delete = 6;
     }
 
-    message UserAll { string accessor = 1; }
-    message UserGet { string name = 1; string accessor = 2; }
-    message UserContains { string name = 1; }
-    // commit_record is binary payload of CommitRecord serialisation
-    message UserCreate { bytes commit_record = 1; }
-    message UserUpdate { bytes commit_record = 1; }
-    message UserDelete { bytes commit_record = 1; }
+    message All { string accessor = 1; }
+    message Get { string name = 1; string accessor = 2; }
+    message Contains { string name = 1; }
+    message Create { bytes commit_record = 1; }
+    message Update { bytes commit_record = 1; }
+    message Delete { bytes commit_record = 1; }
   }
 }
 
