@@ -5,10 +5,12 @@
 syntax = "proto3";
 
 import "proto/raft_service/replication.proto";
+import "proto/raft_service/request.proto";
 
 package typedb.protocol;
 
 // TODO: If the protocol is exposed, maybe it's actually `TypeDBRaft`?
 service Raft {
   rpc replication (Replication.Req) returns (Replication.Res);
+  rpc request (Request) returns (Request);
 }
