@@ -3,6 +3,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 package(default_visibility = ["//visibility:public"])
+
 load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@typedb_bazel_distribution//npm:rules.bzl", "assemble_npm", "deploy_npm")
 load("@typedb_dependencies//distribution:deployment.bzl", "deployment")
@@ -14,7 +15,10 @@ load("//grpc/nodejs:rules.bzl", "ts_grpc_compile")
 
 npm_link_all_packages(name = "node_modules")
 
-exports_files(["package.json", "pnpm-lock.yaml"])
+exports_files([
+    "package.json",
+    "pnpm-lock.yaml",
+])
 
 load("@typedb_protocol_npm//grpc/nodejs:protoc-gen-ts/package_json.bzl", protoc_gen_ts_bin = "bin")
 
@@ -28,8 +32,9 @@ ts_grpc_compile(
         "//proto:version-proto",
         "//proto/raft_service:raft-service",
         "//proto/raft_service:replication-proto",
-        "//proto/typedb_clustering_service:typedb-clustering-service",
+        "//proto/raft_service:request-proto",
         "//proto/typedb_clustering_service:typedb-clustering-proto",
+        "//proto/typedb_clustering_service:typedb-clustering-service",
         "//proto/typedb_service:analyze-proto",
         "//proto/typedb_service:analyzed-conjunction-proto",
         "//proto/typedb_service:answer-proto",
@@ -45,12 +50,14 @@ ts_grpc_compile(
         "//proto/typedb_service:transaction-proto",
         "//proto/typedb_service:typedb-service",
         "//proto/typedb_service:user-proto",
-    ]
+    ],
 )
 
 ts_project(
     name = "typedb-protocol",
     srcs = [":typedb-protocol-src"],
+    declaration = True,
+    transpiler = "tsc",
     tsconfig = {
         "compilerOptions": {
             "target": "es2019",
@@ -60,26 +67,27 @@ ts_project(
         },
         "include": [
             "proto",
-        ]
+        ],
     },
-    declaration = True,
+    visibility = ["//visibility:public"],
     deps = [
         ":node_modules/@grpc/grpc-js",
-        ":node_modules/google-protobuf",
         ":node_modules/@types/google-protobuf",
         ":node_modules/@types/node",
+        ":node_modules/google-protobuf",
         ":node_modules/typescript",
     ],
-    transpiler = "tsc",
-    visibility = ["//visibility:public"],
 )
 
 npm_package(
     name = "typedb-protocol-package",
-    srcs = [":typedb-protocol", "package.json"],
+    srcs = [
+        "package.json",
+        ":typedb-protocol",
+    ],
+    include_external_repositories = ["typedb_protocol"],
     include_runfiles = False,
     package = "typedb-protocol",
-    include_external_repositories = ["typedb_protocol"],
     visibility = ["//visibility:public"],
 )
 
@@ -90,18 +98,18 @@ assemble_npm(
 
 deploy_npm(
     name = "deploy-npm",
-    target = ":assemble-npm",
-    snapshot = deployment["npm"]["snapshot"],
     release = deployment["npm"]["release"],
+    snapshot = deployment["npm"]["snapshot"],
+    target = ":assemble-npm",
 )
 
 checkstyle_test(
     name = "checkstyle",
+    size = "small",
     include = glob(["*"]),
     exclude = [
         "package.json",
         "pnpm-lock.yaml",
     ],
     license_type = "mpl-header",
-    size = "small",
 )

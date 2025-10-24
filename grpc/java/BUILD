@@ -3,6 +3,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 package(default_visibility = ["//visibility:public"])
+
 load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library")
 
@@ -12,8 +13,9 @@ java_grpc_library(
         "//proto:version-proto",
         "//proto/raft_service:raft-service",
         "//proto/raft_service:replication-proto",
-        "//proto/typedb_clustering_service:typedb-clustering-service",
+        "//proto/raft_service:request-proto",
         "//proto/typedb_clustering_service:typedb-clustering-proto",
+        "//proto/typedb_clustering_service:typedb-clustering-service",
         "//proto/typedb_service:analyze-proto",
         "//proto/typedb_service:analyzed-conjunction-proto",
         "//proto/typedb_service:answer-proto",
@@ -36,7 +38,7 @@ java_grpc_library(
 
 checkstyle_test(
     name = "checkstyle",
+    size = "small",
     include = glob(["*"]),
     license_type = "mpl-header",
-    size = "small",
 )
