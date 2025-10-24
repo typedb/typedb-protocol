@@ -11,12 +11,19 @@ proto_library(
     srcs = ["raft_service.proto"],
     deps = [
         ":replication-proto",
+        ":request-proto",
     ],
 )
 
 proto_library(
     name = "replication-proto",
     srcs = ["replication.proto"],
+    deps = [],
+)
+
+proto_library(
+    name = "request-proto",
+    srcs = ["request.proto"],
     deps = [],
 )
 
