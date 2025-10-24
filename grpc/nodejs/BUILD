@@ -51,10 +51,14 @@ ts_grpc_compile(
         "//proto/typedb_service:typedb-service",
         "//proto/typedb_service:user-proto",
 <<<<<<< HEAD
+<<<<<<< HEAD
     ],
 =======
     ]
 >>>>>>> 55ed142 (Split protocol into 3 separate services (#230))
+=======
+    ],
+>>>>>>> ee7a259 (Add protobuf schema for Raft's 'state mutation request' (#232))
 )
 
 ts_project(
