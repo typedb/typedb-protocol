@@ -38,12 +38,12 @@ message AnalyzedConjunction {
       Not not = 3;
       Try try = 4;
 
-      // Thing
+      // Data
       Isa isa = 5;
       Has has = 6;
       Links links = 7;
 
-      // Type
+      // Schema
       Kind kind = 8;
       Sub sub = 9;
       Owns owns = 10;
@@ -88,7 +88,7 @@ message AnalyzedConjunction {
 
     // Edges
     message Isa {
-      ConstraintVertex thing = 1;
+      ConstraintVertex instance = 1;
       ConstraintVertex type = 2;
       ConstraintExactness exactness = 3;
     };
@@ -189,7 +189,7 @@ message AnalyzedConjunction {
 
   message VariableAnnotations {
     oneof annotations {
-      ConceptVariableAnnotations thing = 1;
+      ConceptVariableAnnotations instance = 1;
       ConceptVariableAnnotations type = 2;
       ValueType value_annotations = 3;
     }
