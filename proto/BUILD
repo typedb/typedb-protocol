@@ -111,6 +111,7 @@ proto_library(
         ":analyzed-conjunction-proto",
         ":concept-proto",
         ":error-proto",
+        ":options-proto",
     ],
 )
 

@@ -7,13 +7,15 @@ syntax = "proto3";
 import "proto/analyzed-conjunction.proto";
 import "proto/concept.proto";
 import "proto/error.proto";
+import "proto/options.proto";
 
 package typedb.protocol;
 
 message Analyze {
 
   message Req {
-    string query = 1;
+    Options.Analyze options = 1;
+    string query = 2;
   }
 
   message Res {

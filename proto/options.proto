@@ -17,4 +17,8 @@ message Options {
         optional bool include_instance_types = 1;
         optional uint64 prefetch_size = 2;
     }
+
+    message Analyze {
+        optional bool include_plan = 1;
+    }
 }
