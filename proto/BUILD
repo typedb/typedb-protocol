@@ -79,6 +79,7 @@ proto_library(
     name = "query-proto",
     srcs = ["query.proto"],
     deps = [
+        ":analyze-proto",
         ":answer-proto",
         ":concept-proto",
         ":error-proto",
