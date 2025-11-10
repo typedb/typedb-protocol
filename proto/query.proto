@@ -4,6 +4,7 @@
 
 syntax = "proto3";
 
+import "proto/analyze.proto";
 import "proto/answer.proto";
 import "proto/options.proto";
 import "proto/error.proto";
@@ -51,6 +52,7 @@ message Query {
                 // TODO: network optimisation: replace types (== mostly constant strings) with a IDs, sending types in the header to rebuild on the client side
                 repeated string column_variable_names = 1;
                 Type query_type = 2;
+                optional Analyze.Res.AnalyzedQuery.Pipeline query_structure = 3;
             }
         }
     }

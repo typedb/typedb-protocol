@@ -1,0 +1,160 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+import "proto/analyzed-conjunction.proto";
+import "proto/concept.proto";
+import "proto/error.proto";
+import "proto/options.proto";
+
+package typedb.protocol;
+
+message Analyze {
+
+  message Req {
+    Options.Analyze options = 1;
+    string query = 2;
+  }
+
+  message Res {
+    oneof result {
+      Error err = 1;
+      AnalyzedQuery ok = 2;
+    }
+
+    message AnalyzedQuery {
+        string source = 1;
+        Pipeline query = 2;
+        repeated Function preamble = 3;
+        Fetch fetch = 4;
+
+        message Function {
+          Pipeline body = 1;
+          repeated AnalyzedConjunction.Variable arguments = 2;
+          repeated AnalyzedConjunction.VariableAnnotations arguments_annotations = 3;
+          repeated AnalyzedConjunction.VariableAnnotations return_annotations = 4;
+          ReturnOperation return_operation = 5;
+
+          message ReturnOperation {
+            oneof return_operation {
+              ReturnOpStream stream = 1;
+              ReturnOpSingle single = 2;
+              ReturnOpCheck check = 3;
+              ReturnOpReduce reduce = 4;
+            };
+            message ReturnOpStream {
+              repeated AnalyzedConjunction.Variable variables = 1;
+            }
+            message ReturnOpSingle {
+              string selector = 1;
+              repeated AnalyzedConjunction.Variable variables = 2;
+            }
+            message ReturnOpCheck {}
+            message ReturnOpReduce {
+              repeated Reducer reducers = 1;
+            }
+          }
+        }
+
+        message Pipeline {
+          repeated AnalyzedConjunction conjunctions = 1;
+          repeated PipelineStage stages = 2;
+          map<uint32, VariableInfo> variable_info = 3;
+          repeated AnalyzedConjunction.Variable outputs = 4;
+
+          message VariableInfo {
+            string name = 1;
+          }
+
+          message PipelineStage {
+            oneof stage {
+              Match match = 1;
+              Insert insert = 2;
+              Put put = 3;
+              Update update = 4;
+              Delete delete = 5;
+              Select select = 6;
+              Sort sort = 7;
+              Require require = 8;
+              Offset offset = 9;
+              Limit limit = 10;
+              Distinct distinct = 11;
+              Reduce reduce = 12;
+            }
+
+            message Match {
+              uint32 block = 1;
+            }
+            message Insert {
+              uint32 block = 1;
+            }
+            message Put {
+              uint32 block = 1;
+            }
+            message Update {
+              uint32 block = 1;
+            }
+            message Delete {
+              uint32 block = 1;
+              repeated AnalyzedConjunction.Variable deleted_variables = 2;
+            }
+
+            message Select {
+              repeated AnalyzedConjunction.Variable variables = 1;
+            }
+            message Sort {
+              repeated SortVariable sort_variables = 1;
+              message SortVariable {
+                AnalyzedConjunction.Variable variable = 1;
+                SortDirection direction = 2;
+                enum SortDirection {
+                  ASC = 0;
+                  DESC = 1;
+                }
+              }
+            }
+            message Require {
+              repeated AnalyzedConjunction.Variable variables = 1;
+            }
+            message Offset {
+              uint64 offset = 1;
+            }
+            message Limit {
+              uint64 limit = 1;
+            }
+            message Distinct {}
+            message Reduce {
+              repeated ReduceAssign reducers = 1;
+              repeated AnalyzedConjunction.Variable groupby = 2;
+
+              message ReduceAssign {
+                AnalyzedConjunction.Variable assigned = 1;
+                Reducer reducer = 2;
+              }
+            }
+          }
+        }
+
+        message Reducer {
+          string reducer = 1;
+          repeated AnalyzedConjunction.Variable variables = 2;
+        }
+
+      message Fetch {
+        oneof node {
+          Object object = 1;
+          Fetch list = 2;
+          Leaf leaf = 3;
+        }
+        message Object {
+          map<string, Fetch> fetch = 1;
+        }
+        message Leaf {
+          repeated ValueType annotations = 1;
+        }
+      }
+    }
+  }
+}

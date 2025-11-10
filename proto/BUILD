@@ -79,6 +79,7 @@ proto_library(
     name = "query-proto",
     srcs = ["query.proto"],
     deps = [
+        ":analyze-proto",
         ":answer-proto",
         ":concept-proto",
         ":error-proto",
@@ -95,12 +96,33 @@ proto_library(
     name = "transaction-proto",
     srcs = ["transaction.proto"],
     deps = [
+        ":analyze-proto",
         ":answer-proto",
         ":concept-proto",
         ":error-proto",
         ":options-proto",
         ":query-proto",
     ]
+)
+
+proto_library(
+    name = "analyze-proto",
+    srcs = ["analyze.proto"],
+    deps = [
+        ":analyzed-conjunction-proto",
+        ":concept-proto",
+        ":error-proto",
+        ":options-proto",
+    ],
+)
+
+proto_library(
+    name = "analyzed-conjunction-proto",
+    srcs = ["analyzed-conjunction.proto"],
+    deps = [
+        ":answer-proto",
+        ":concept-proto",
+    ],
 )
 
 proto_library(
@@ -114,9 +136,11 @@ proto_library(
 filegroup(
     name = "proto-raw-buffers",
     srcs = [
+        "analyze.proto",
         "answer.proto",
         "concept.proto",
         "connection.proto",
+        "analyzed-conjunction.proto",
         "options.proto",
         "query.proto",
         "transaction.proto",
