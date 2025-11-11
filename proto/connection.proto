@@ -15,6 +15,7 @@ message Connection {
   message Open {
     message Req {
       Version version = 1;
+      ExtensionVersion extension_version = 5;
       string driver_lang = 2;
       string driver_version = 3;
 
