@@ -95,6 +95,7 @@ message Request {
 
     message Contains {
       string name = 1;
+      string accessor = 2;
     }
 
     message Get {
