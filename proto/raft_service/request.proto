@@ -20,13 +20,18 @@ message Request {
   message DatabaseManager {
     oneof database_manager {
       All all = 1;
-      Get get = 2;
-      GetUnrestricted get_unrestricted = 3;
-      Create create = 4;
-      CreateUnrestricted create_unrestricted = 5;
+      Contains contains = 2;
+      Get get = 3;
+      GetUnrestricted get_unrestricted = 4;
+      Create create = 5;
+      CreateUnrestricted create_unrestricted = 6;
     }
 
     message All {}
+
+    message Contains {
+      string name = 1;
+    }
 
     message Get {
       string name = 1;
@@ -35,7 +40,6 @@ message Request {
     message GetUnrestricted {
       string name = 1;
     }
-
     message Create {
       string name = 1;
     }
@@ -80,8 +84,8 @@ message Request {
   message UserManager {
     oneof user_manager {
       All all = 1;
-      Get get = 2;
-      Contains contains = 3;
+      Contains contains = 2;
+      Get get = 3;
       Create create = 4;
     }
 
@@ -89,13 +93,13 @@ message Request {
       string accessor = 1;
     }
 
+    message Contains {
+      string name = 1;
+    }
+
     message Get {
       string name = 1;
       string accessor = 2;
-    }
-
-    message Contains {
-      string name = 1;
     }
 
     message Create {
@@ -118,4 +122,3 @@ message Request {
     }
   }
 }
-
