@@ -1,0 +1,63 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+package typedb.protocol;
+
+message ServerManager {
+    message All {
+        message Req {}
+        message Res {
+            repeated Server servers = 1;
+        }
+    }
+
+    message Get {
+        message Req {}
+        message Res {
+            Server server = 1;
+        }
+    }
+
+    message Register {
+        message Req {
+          uint64 replica_id = 1;
+          string address = 2;
+        }
+        message Res {}
+    }
+
+    message Deregister {
+        message Req {
+            uint64 replica_id = 1;
+        }
+        message Res {}
+    }
+}
+
+message Server {
+    optional string address = 1;
+    optional ReplicaStatus replica_status = 2;
+
+    message ReplicaStatus {
+        uint64 replica_id = 1;
+        optional ReplicaType replica_type = 2;
+        optional uint64 term = 3;
+
+        enum ReplicaType {
+            Primary = 0;
+            Candidate = 1;
+            Secondary = 2;
+        }
+    }
+
+    message Version {
+        message Req {}
+        message Res {
+            string distribution = 1;
+            string version = 2;
+        }
+    }
+}

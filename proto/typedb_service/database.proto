@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package typedb.protocol;
 
-import "proto/migration.proto";
+import "proto/typedb_service/migration.proto";
 
 message DatabaseManager {
 
@@ -16,14 +16,14 @@ message DatabaseManager {
         }
 
         message Res {
-            DatabaseReplicas database = 1;
+            Database database = 1;
         }
     }
 
     message All {
         message Req {}
         message Res {
-            repeated DatabaseReplicas databases = 1;
+            repeated Database databases = 1;
         }
     }
 
@@ -43,7 +43,7 @@ message DatabaseManager {
         }
 
         message Res {
-            DatabaseReplicas database = 1;
+            Database database = 1;
         }
     }
 
@@ -58,20 +58,8 @@ message DatabaseManager {
     }
 }
 
-message DatabaseReplicas {
-
-    string name = 1;
-    repeated Replica replicas = 2;
-
-    message Replica {
-        string address = 1;
-        bool primary = 2;
-        bool preferred = 3;
-        int64 term = 4;
-    }
-}
-
 message Database {
+    string name = 1;
 
     message Schema {
         message Req {

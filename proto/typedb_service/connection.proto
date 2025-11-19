@@ -4,37 +4,32 @@
 
 syntax = "proto3";
 
-import "proto/authentication.proto";
-import "proto/database.proto";
+import "proto/typedb_service/authentication.proto";
+import "proto/typedb_service/database.proto";
+import "proto/typedb_service/server.proto";
 import "proto/version.proto";
 
 package typedb.protocol;
 
 message Connection {
-
   message Open {
     message Req {
       Version version = 1;
       ExtensionVersion extension_version = 5;
       string driver_lang = 2;
       string driver_version = 3;
-
       Authentication.Token.Create.Req authentication = 4;
     }
 
     message Res {
       uint64 server_duration_millis = 1;
       ConnectionID connection_id = 2;
-
-      // pre-send all databases and replica info
-      DatabaseManager.All.Res databases_all = 3;
-
+      ServerManager.All.Res servers_all = 3;
       Authentication.Token.Create.Res authentication = 4;
     }
   }
 }
 
-// Connection ID and Token are expected in all message metadata
 message ConnectionID {
   bytes id = 1;
 }

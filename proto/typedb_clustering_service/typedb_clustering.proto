@@ -6,16 +6,20 @@ syntax = "proto3";
 
 package typedb.protocol;
 
-message ServerManager {
+import "proto/typedb_service/server.proto";
 
-    message All {
-        message Req {}
-        message Res {
-            repeated Server servers = 1;
-        }
+message CanRegister {
+    message Req {
+        uint64 replica_id = 1;
     }
+
+    message Res {}
 }
 
-message Server {
-    string address = 1;
+message ServerStatus {
+    message Req {}
+
+    message Res {
+        Server server = 1;
+    }
 }

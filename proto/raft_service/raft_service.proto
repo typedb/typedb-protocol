@@ -1,0 +1,16 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+syntax = "proto3";
+
+import "proto/raft_service/replication.proto";
+import "proto/raft_service/request.proto";
+
+package typedb.protocol;
+
+// TODO: If the protocol is exposed, maybe it's actually `TypeDBRaft`?
+service Raft {
+  rpc replication (Replication.Req) returns (Replication.Res);
+  rpc request (Request) returns (Request);
+}

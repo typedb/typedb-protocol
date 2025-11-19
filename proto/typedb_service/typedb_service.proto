@@ -4,13 +4,13 @@
 
 syntax = "proto3";
 
-import "proto/authentication.proto";
-import "proto/connection.proto";
-import "proto/database.proto";
-import "proto/server.proto";
-import "proto/user.proto";
-import "proto/transaction.proto";
-import "proto/migration.proto";
+import "proto/typedb_service/authentication.proto";
+import "proto/typedb_service/connection.proto";
+import "proto/typedb_service/database.proto";
+import "proto/typedb_service/server.proto";
+import "proto/typedb_service/user.proto";
+import "proto/typedb_service/transaction.proto";
+import "proto/typedb_service/migration.proto";
 
 package typedb.protocol;
 
@@ -24,6 +24,12 @@ service TypeDB {
 
     // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
+    rpc servers_get (ServerManager.Get.Req) returns (ServerManager.Get.Res);
+    rpc servers_register(ServerManager.Register.Req) returns (ServerManager.Register.Res);
+    rpc servers_deregister(ServerManager.Deregister.Req) returns (ServerManager.Deregister.Res);
+
+    // Server API
+    rpc server_version (Server.Version.Req) returns (Server.Version.Res);
 
     // User Manager API
     rpc users_get (UserManager.Get.Req) returns (UserManager.Get.Res);
@@ -53,5 +59,4 @@ service TypeDB {
     // requests and responses back-and-forth. The first transaction client message must
     // be {Transaction.Open.Req}. Closing the stream closes the transaction.
     rpc transaction (stream Transaction.Client) returns (stream Transaction.Server);
-
 }
