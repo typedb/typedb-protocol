@@ -10,8 +10,9 @@ message Request {
   oneof request {
     Load load = 1;
     DatabaseManager database_manager = 2;
-    DatabaseCommit database_commit = 3;
+    Database database = 3;
     UserManager user_manager = 4;
+    User user = 5;
   }
 
   message Load {}
@@ -19,25 +20,50 @@ message Request {
   message DatabaseManager {
     oneof database_manager {
       All all = 1;
-      Get get = 2;
-      GetUnrestricted get_unrestricted = 3;
-      Create create = 4;
-      CreateUnrestricted create_unrestricted = 5;
-      Delete delete = 6;
+      Contains contains = 2;
+      Get get = 3;
+      GetUnrestricted get_unrestricted = 4;
+      Create create = 5;
+      CreateUnrestricted create_unrestricted = 6;
     }
 
     message All {}
-    message Get { string name = 1; }
-    message GetUnrestricted { string name = 1; }
-    message Create { string name = 1; }
-    message CreateUnrestricted { string name = 1; }
-    message Delete { string name = 1; }
+
+    message Contains {
+      string name = 1;
+    }
+
+    message Get {
+      string name = 1;
+    }
+
+    message GetUnrestricted {
+      string name = 1;
+    }
+    message Create {
+      string name = 1;
+    }
+
+    message CreateUnrestricted {
+      string name = 1;
+    }
   }
 
-  message DatabaseCommit {
-    oneof database_commit {
-      SchemaCommit schema = 1;
-      DataCommit data = 2;
+  message Database {
+    oneof database {
+      Schema schema = 1;
+      TypeSchema type_schema = 2;
+      SchemaCommit schema_commit = 3;
+      DataCommit data_commit = 4;
+      Delete delete = 5;
+    }
+
+    message Schema {
+      string name = 1;
+    }
+
+    message TypeSchema {
+      string name = 1;
     }
 
     message SchemaCommit {
@@ -49,24 +75,51 @@ message Request {
       string name = 1;
       bytes commit_record = 2;
     }
+
+    message Delete {
+      string name = 1;
+    }
   }
 
   message UserManager {
     oneof user_manager {
       All all = 1;
-      Get get = 2;
-      Contains contains = 3;
+      Contains contains = 2;
+      Get get = 3;
       Create create = 4;
-      Update update = 5;
-      Delete delete = 6;
     }
 
-    message All { string accessor = 1; }
-    message Get { string name = 1; string accessor = 2; }
-    message Contains { string name = 1; }
-    message Create { bytes commit_record = 1; }
-    message Update { bytes commit_record = 1; }
-    message Delete { bytes commit_record = 1; }
+    message All {
+      string accessor = 1;
+    }
+
+    message Contains {
+      string name = 1;
+      string accessor = 2;
+    }
+
+    message Get {
+      string name = 1;
+      string accessor = 2;
+    }
+
+    message Create {
+      bytes commit_record = 1;
+    }
+  }
+
+  message User {
+    oneof user {
+      Update update = 1;
+      Delete delete = 2;
+    }
+
+    message Update {
+      bytes commit_record = 1;
+    }
+
+    message Delete {
+      bytes commit_record = 1;
+    }
   }
 }
-

@@ -38,13 +38,13 @@ message ServerManager {
 }
 
 message Server {
-    string address = 1;
+    optional string address = 1;
     optional ReplicaStatus replica_status = 2;
 
     message ReplicaStatus {
         uint64 replica_id = 1;
-        ReplicaType replica_type = 2;
-        uint64 term = 3;
+        optional ReplicaType replica_type = 2;
+        optional uint64 term = 3;
 
         enum ReplicaType {
             Primary = 0;
