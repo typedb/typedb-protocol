@@ -43,10 +43,10 @@ message Server {
 
     message ReplicaStatus {
         uint64 replica_id = 1;
-        optional ReplicaType replica_type = 2;
+        optional ReplicaRole replica_role = 2;
         optional uint64 term = 3;
 
-        enum ReplicaType {
+        enum ReplicaRole {
             Primary = 0;
             Candidate = 1;
             Secondary = 2;
