@@ -69,13 +69,11 @@ message Request {
     message SchemaCommit {
       string name = 1;
       bytes commit_record = 2;
-      bool profile_enabled = 3;
     }
 
     message DataCommit {
       string name = 1;
       bytes commit_record = 2;
-      bool profile_enabled = 3;
     }
 
     message Delete {
