@@ -104,7 +104,9 @@ message Request {
     }
 
     message Create {
-      bytes commit_record = 1;
+      string name = 1;
+      string password_hash = 2;
+      string accessor = 3;
     }
   }
 
@@ -115,11 +117,15 @@ message Request {
     }
 
     message Update {
-      bytes commit_record = 1;
+      string name = 1;
+      optional string name_update = 2;
+      optional string password_hash_update = 3;
+      string accessor = 4;
     }
 
     message Delete {
-      bytes commit_record = 1;
+      string name = 1;
+      string accessor = 2;
     }
   }
 }
