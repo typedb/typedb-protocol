@@ -30,8 +30,6 @@ yarn add typedb-protocol@3.7.0
 
 - **Introduce analyze options & add structure to GRPC row answers (#235)**
 
-
-
 ## Bugs Fixed
 
 
