@@ -11,7 +11,7 @@ build:
   quality:
     filter:
       owner: typedb
-      branch: master
+      branch: master, cluster-support-feature-branch
     dependency-analysis:
       image: typedb-ubuntu-22.04
       command: |
@@ -34,7 +34,7 @@ build:
     deploy-crate-snapshot:
       filter:
         owner: typedb
-        branch: [master]
+        branch: [master, cluster-support-feature-branch]
       dependencies: [build, build-dependency]
       image: typedb-ubuntu-22.04
       command: |
@@ -68,7 +68,7 @@ build:
 release:
   filter:
     owner: typedb
-    branch: [master]
+    branch: [master, cluster-support-feature-branch]
   validation:
     validate-release-notes:
       image: typedb-ubuntu-22.04
