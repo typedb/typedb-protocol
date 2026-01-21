@@ -26,11 +26,20 @@ message Query {
         QueryInput input = 3;
 
         message QueryInput {
-            repeated QueryInputRow row = 1;
+            repeated QueryInputRow rows = 1;
         }
 
         message QueryInputRow {
-            repeated RowEntry entry = 1;
+            repeated QueryInputEntry entry = 1;
+        }
+
+        message QueryInputEntry {
+            oneof entry {
+                Entity entity = 1;
+                Relation relation = 2;
+                Attribute attribute = 3;
+                Value value = 4;
+            }
         }
     }
 
