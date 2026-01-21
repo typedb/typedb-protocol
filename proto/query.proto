@@ -36,10 +36,12 @@ message Query {
         message QueryInputEntry {
             oneof entry {
                 QueryInputEmpty empty = 1;
-                Entity entity = 2;
-                Relation relation = 3;
-                Attribute attribute = 4;
-                Value value = 5;
+                string unparsed_value = 2;
+                // Value value = 3;
+                // Entity entity = 4;
+                // Relation relation = 5;
+                // Attribute attribute = 6;
+
             }
         }
         message QueryInputEmpty {}
