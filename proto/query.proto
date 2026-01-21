@@ -35,12 +35,14 @@ message Query {
 
         message QueryInputEntry {
             oneof entry {
-                Entity entity = 1;
-                Relation relation = 2;
-                Attribute attribute = 3;
-                Value value = 4;
+                QueryInputEmpty empty = 1;
+                Entity entity = 2;
+                Relation relation = 3;
+                Attribute attribute = 4;
+                Value value = 5;
             }
         }
+        message QueryInputEmpty {}
     }
 
     message InitialRes {
