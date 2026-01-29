@@ -38,6 +38,14 @@ local_path_override(
     path = "../dependencies",
 )
 
+# typedb_bazel_distribution is a transitive dependency via typedb_dependencies
+# Must be overridden here since root module overrides take precedence
+bazel_dep(name = "typedb_bazel_distribution", version = "0.0.0")
+local_path_override(
+    module_name = "typedb_bazel_distribution",
+    path = "../bazel-distribution",
+)
+
 # Python toolchain
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 python.toolchain(
@@ -74,10 +82,9 @@ node.toolchain(
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm")
 npm.npm_translate_lock(
     name = "typedb_protocol_npm",
+    # Bzlmod format: list of "name=path" strings instead of dict-of-dicts
     bins = {
-        "protoc-gen-ts": {
-            "protoc-gen-ts-js": "./bin/protoc-gen-ts.js",
-        },
+        "protoc-gen-ts": ["protoc-gen-ts-js=./bin/protoc-gen-ts.js"],
     },
     pnpm_lock = "//grpc/nodejs:pnpm-lock.yaml",
 )

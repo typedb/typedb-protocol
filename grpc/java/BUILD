@@ -4,7 +4,9 @@
 
 package(default_visibility = ["//visibility:public"])
 load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library")
+# For Bzlmod: load from rules_proto_grpc_java module
+# For WORKSPACE: load from @rules_proto_grpc//java:defs.bzl
+load("@rules_proto_grpc_java//:defs.bzl", "java_grpc_library")
 
 java_grpc_library(
     name = "typedb-protocol",
