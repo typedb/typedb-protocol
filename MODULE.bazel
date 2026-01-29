@@ -1,0 +1,107 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+module(
+    name = "typedb_protocol",
+    version = "0.0.0",
+    compatibility_level = 1,
+)
+
+# Core BCR dependencies
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "rules_java", version = "8.6.2")
+bazel_dep(name = "rules_jvm_external", version = "6.6")
+bazel_dep(name = "rules_python", version = "1.0.0")
+bazel_dep(name = "rules_rust", version = "0.56.0")
+bazel_dep(name = "rules_cc", version = "0.0.17")
+bazel_dep(name = "rules_proto", version = "7.1.0")
+bazel_dep(name = "rules_kotlin", version = "2.0.0")
+bazel_dep(name = "rules_pkg", version = "1.0.1")
+
+# Proto/gRPC dependencies
+bazel_dep(name = "protobuf", version = "29.3")
+bazel_dep(name = "grpc", version = "1.69.0")
+bazel_dep(name = "rules_proto_grpc", version = "5.0.1")
+bazel_dep(name = "rules_proto_grpc_java", version = "5.0.1")
+
+# Node.js / TypeScript dependencies
+bazel_dep(name = "rules_nodejs", version = "6.3.2")
+bazel_dep(name = "aspect_rules_js", version = "2.1.2")
+bazel_dep(name = "aspect_rules_ts", version = "3.4.0")
+bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
+
+# typedb_dependencies via local path override (until published to BCR)
+bazel_dep(name = "typedb_dependencies", version = "0.0.0")
+local_path_override(
+    module_name = "typedb_dependencies",
+    path = "../dependencies",
+)
+
+# Python toolchain
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    is_default = True,
+    python_version = "3.11",
+)
+
+# Rust toolchain (inherited from typedb_dependencies, but register here too)
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(
+    edition = "2021",
+    versions = ["1.81.0"],
+)
+use_repo(rust, "rust_toolchains")
+register_toolchains("@rust_toolchains//:all")
+
+# Rust crates from typedb_dependencies
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+crate.from_cargo(
+    name = "crates",
+    cargo_lockfile = "@typedb_dependencies//:library/crates/Cargo.lock",
+    manifests = ["@typedb_dependencies//:library/crates/Cargo.toml"],
+)
+use_repo(crate, "crates")
+
+# Node.js toolchain
+node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
+node.toolchain(
+    name = "nodejs",
+    node_version = "17.9.1",
+)
+
+# NPM dependencies
+npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm")
+npm.npm_translate_lock(
+    name = "typedb_protocol_npm",
+    bins = {
+        "protoc-gen-ts": {
+            "protoc-gen-ts-js": "./bin/protoc-gen-ts.js",
+        },
+    },
+    pnpm_lock = "//grpc/nodejs:pnpm-lock.yaml",
+)
+use_repo(npm, "typedb_protocol_npm")
+
+# Maven dependencies
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        # Protocol-specific artifacts
+        "com.google.guava:guava:30.1-jre",
+        "com.google.protobuf:protobuf-java:3.21.7",
+        "io.grpc:grpc-api:1.49.0",
+        "io.grpc:grpc-core:1.49.0",
+        "io.grpc:grpc-protobuf:1.49.0",
+        "io.grpc:grpc-stub:1.49.0",
+        "javax.annotation:javax.annotation-api:1.3.2",
+    ],
+    repositories = [
+        "https://repo1.maven.org/maven2",
+    ],
+    strict_visibility = True,
+)
+use_repo(maven, "maven")
+
+# Register Kotlin toolchain
+register_toolchains("@rules_kotlin//kotlin/internal:default_toolchain")
