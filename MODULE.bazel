@@ -33,9 +33,10 @@ bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
 
 # typedb ecosystem dependencies
 bazel_dep(name = "typedb_dependencies", version = "0.0.0")
-local_path_override(
+git_override(
     module_name = "typedb_dependencies",
-    path = "../dependencies",
+    remote = "https://github.com/typedb/dependencies",
+    commit = "82c1f7f0be07770617fcccbc94ae13ca16d21131",
 )
 
 bazel_dep(name = "typedb_bazel_distribution", version = "0.0.0")
