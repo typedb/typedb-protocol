@@ -8,40 +8,19 @@ module(
     compatibility_level = 1,
 )
 
-# Core BCR dependencies
+# ===========================================================
+# Common
+# ===========================================================
+
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
-bazel_dep(name = "rules_jvm_external", version = "6.6")
-bazel_dep(name = "rules_rust", version = "0.56.0")
-bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "rules_pkg", version = "1.0.1")
 
-# Proto/gRPC dependencies
-bazel_dep(name = "protobuf", version = "29.3", repo_name = "com_google_protobuf")
-bazel_dep(name = "grpc", version = "1.69.0")
-bazel_dep(name = "rules_proto_grpc", version = "5.0.1")
-bazel_dep(name = "rules_proto_grpc_java", version = "5.0.1")
+# ===========================================================
+# Languages
+# ===========================================================
 
-# Node.js / TypeScript dependencies
-bazel_dep(name = "rules_nodejs", version = "6.3.2")
-bazel_dep(name = "aspect_rules_js", version = "2.1.2")
-bazel_dep(name = "aspect_rules_ts", version = "3.4.0")
-
-# typedb ecosystem dependencies
-bazel_dep(name = "typedb_dependencies", version = "0.0.0")
-git_override(
-    module_name = "typedb_dependencies",
-    remote = "https://github.com/typedb/dependencies",
-    commit = "34afbb54d31851f47fc7272e6fa3893b4d042b0d",
-)
-
-bazel_dep(name = "typedb_bazel_distribution", version = "0.0.0")
-git_override(
-    module_name = "typedb_bazel_distribution",
-    remote = "https://github.com/typedb/bazel-distribution",
-    commit = "9796c9454b766c453456c8c0498dd67569db310e",
-)
-
-# Rust toolchain (inherited from typedb_dependencies, but register here too)
+# Rust
+bazel_dep(name = "rules_rust", version = "0.56.0")
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
     edition = "2021",
@@ -50,12 +29,10 @@ rust.toolchain(
 use_repo(rust, "rust_toolchains")
 register_toolchains("@rust_toolchains//:all")
 
-# Rust crates - import from typedb_dependencies' crate extension
-# This ensures type compatibility across all TypeDB modules
-crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
-use_repo(crate, "crates")
-
-# Node.js toolchain
+# Node.js / TypeScript
+bazel_dep(name = "rules_nodejs", version = "6.3.2")
+bazel_dep(name = "aspect_rules_js", version = "2.1.2")
+bazel_dep(name = "aspect_rules_ts", version = "3.4.0")
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
 node.toolchain(
     name = "nodejs",
@@ -63,11 +40,28 @@ node.toolchain(
 )
 use_repo(node, "nodejs")
 
-# NPM dependencies
+# ===========================================================
+# Protobuf & gRPC dependencies
+# ===========================================================
+
+bazel_dep(name = "rules_proto", version = "7.1.0")
+bazel_dep(name = "protobuf", version = "29.3", repo_name = "com_google_protobuf")
+bazel_dep(name = "grpc", version = "1.69.0")
+bazel_dep(name = "rules_proto_grpc", version = "5.0.1")
+bazel_dep(name = "rules_proto_grpc_java", version = "5.0.1")
+
+# ===========================================================
+# Package managers
+# ===========================================================
+
+# Rust crates
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+use_repo(crate, "crates")
+
+# NPM
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm")
 npm.npm_translate_lock(
     name = "typedb_protocol_npm",
-    # Bzlmod format: list of "name=path" strings instead of dict-of-dicts
     bins = {
         "protoc-gen-ts": ["protoc-gen-ts-js=./bin/protoc-gen-ts.js"],
     },
@@ -75,19 +69,19 @@ npm.npm_translate_lock(
 )
 use_repo(npm, "typedb_protocol_npm")
 
-# TypeScript toolchain - expose @npm_typescript for ts_project transpiler
+# TypeScript
 rules_ts_ext = use_extension("@aspect_rules_ts//ts:extensions.bzl", "ext")
 rules_ts_ext.deps(
     ts_version_from = "//grpc/nodejs:package.json",
 )
 use_repo(rules_ts_ext, "npm_typescript")
 
-# Maven dependencies
+# Maven
+bazel_dep(name = "rules_jvm_external", version = "6.6")
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
     name = "protocol_maven",
     artifacts = [
-        # Protocol-specific artifacts
         "com.google.guava:guava:30.1-jre",
         "com.google.protobuf:protobuf-java:3.21.7",
         "io.grpc:grpc-api:1.50.1",
@@ -103,3 +97,20 @@ maven.install(
 )
 use_repo(maven, "protocol_maven")
 
+# ===========================================================
+# TypeDB repos
+# ===========================================================
+
+bazel_dep(name = "typedb_dependencies", version = "0.0.0")
+git_override(
+    module_name = "typedb_dependencies",
+    remote = "https://github.com/typedb/dependencies",
+    commit = "34afbb54d31851f47fc7272e6fa3893b4d042b0d",
+)
+
+bazel_dep(name = "typedb_bazel_distribution", version = "0.0.0")
+git_override(
+    module_name = "typedb_bazel_distribution",
+    remote = "https://github.com/typedb/bazel-distribution",
+    commit = "9796c9454b766c453456c8c0498dd67569db310e",
+)
