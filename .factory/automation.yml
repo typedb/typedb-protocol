@@ -8,10 +8,6 @@ config:
     dependencies: [build]
 
 build:
-  quality:
-    filter:
-      owner: typedb
-      branch: master
   correctness:
     build:
       image: typedb-ubuntu-22.04
