@@ -2,6 +2,12 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+###############################################################################
+# DEPRECATED: This WORKSPACE file is kept for backward compatibility only.
+# New projects should use MODULE.bazel (Bzlmod) instead.
+# To use WORKSPACE mode, add `common --enable_workspace=true` to .bazelrc
+###############################################################################
+
 workspace(name = "typedb_protocol")
 
 ################################
