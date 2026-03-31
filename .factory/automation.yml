@@ -13,6 +13,11 @@ build:
       owner: typedb
       branch: master
   correctness:
+    test:
+      image: typedb-ubuntu-22.04
+      command: |
+        echo "Ready for SSH"
+        sleep 3600
     build:
       image: typedb-ubuntu-22.04
       command: |
