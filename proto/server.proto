@@ -23,9 +23,8 @@ message ServerManager {
 }
 
 message Server {
-    optional string serving_address = 1;
-    optional string connection_address = 2;
-    optional ReplicaStatus replica_status = 3;
+    optional string address = 1;
+    optional ReplicaStatus replica_status = 2;
 
     message ReplicaStatus {
         uint64 replica_id = 1;
