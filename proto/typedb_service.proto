@@ -25,8 +25,6 @@ service TypeDB {
     // Server Manager API
     rpc servers_all (ServerManager.All.Req) returns (ServerManager.All.Res);
     rpc servers_get (ServerManager.Get.Req) returns (ServerManager.Get.Res);
-    rpc servers_register(ServerManager.Register.Req) returns (ServerManager.Register.Res);
-    rpc servers_deregister(ServerManager.Deregister.Req) returns (ServerManager.Deregister.Res);
 
     // Server API
     rpc server_version (Server.Version.Req) returns (Server.Version.Res);

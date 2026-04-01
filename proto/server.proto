@@ -20,21 +20,6 @@ message ServerManager {
             Server server = 1;
         }
     }
-
-    message Register {
-        message Req {
-          uint64 replica_id = 1;
-          string address = 2;
-        }
-        message Res {}
-    }
-
-    message Deregister {
-        message Req {
-            uint64 replica_id = 1;
-        }
-        message Res {}
-    }
 }
 
 message Server {
