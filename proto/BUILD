@@ -133,7 +133,7 @@ proto_library(
 
 checkstyle_test(
     name = "checkstyle",
-    size = "small",
     include = glob(["*"]),
     license_type = "mpl-header",
+    size = "small",
 )

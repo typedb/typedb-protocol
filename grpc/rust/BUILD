@@ -40,34 +40,34 @@ rust_library(
     tags = [
         "crate-name=typedb-protocol",
     ],
-    visibility = ["//visibility:public"],
     deps = [
         "@crates//:prost",
         "@crates//:tonic",
     ],
+    visibility = ["//visibility:public"],
 )
 
 assemble_crate(
     name = "assemble_crate",
+    target = ":typedb_protocol",
     description = "TypeDB Protocol",
     homepage = "https://github.com/typedb/typedb-protocol",
     license = "MPL-2.0",
     license_file = "//:LICENSE",
     readme_file = "//:README.md",
     repository = "https://github.com/typedb/typedb-protocol",
-    target = ":typedb_protocol",
 )
 
 deploy_crate(
     name = "deploy_crate",
-    release = deployment["crate"]["release"],
-    snapshot = deployment["crate"]["snapshot"],
     target = ":assemble_crate",
+    snapshot = deployment["crate"]["snapshot"],
+    release = deployment["crate"]["release"],
 )
 
 checkstyle_test(
     name = "checkstyle",
-    size = "small",
     include = glob(["*"]),
     license_type = "mpl-header",
+    size = "small",
 )

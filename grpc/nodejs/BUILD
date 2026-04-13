@@ -64,7 +64,6 @@ ts_project(
             "proto",
         ],
     },
-    visibility = ["//visibility:public"],
     deps = [
         ":node_modules/@grpc/grpc-js",
         ":node_modules/@types/google-protobuf",
@@ -72,6 +71,7 @@ ts_project(
         ":node_modules/google-protobuf",
         ":node_modules/typescript",
     ],
+    visibility = ["//visibility:public"],
 )
 
 npm_package(
@@ -93,18 +93,18 @@ assemble_npm(
 
 deploy_npm(
     name = "deploy-npm",
-    release = deployment["npm"]["release"],
-    snapshot = deployment["npm"]["snapshot"],
     target = ":assemble-npm",
+    snapshot = deployment["npm"]["snapshot"],
+    release = deployment["npm"]["release"],
 )
 
 checkstyle_test(
     name = "checkstyle",
-    size = "small",
     include = glob(["*"]),
     exclude = [
         "package.json",
         "pnpm-lock.yaml",
     ],
     license_type = "mpl-header",
+    size = "small",
 )
