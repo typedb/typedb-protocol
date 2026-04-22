@@ -23,8 +23,8 @@ bazel_dep(name = "rules_pkg", version = "1.0.1")
 bazel_dep(name = "rules_rust", version = "0.56.0")
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
-    edition = "2021",
-    versions = ["1.81.0"],
+    edition = "2024",
+    versions = ["1.93.0"],
 )
 use_repo(rust, "rust_toolchains")
 register_toolchains("@rust_toolchains//:all")
@@ -105,7 +105,7 @@ bazel_dep(name = "typedb_dependencies", version = "0.0.0")
 git_override(
     module_name = "typedb_dependencies",
     remote = "https://github.com/typedb/dependencies",
-    commit = "a798dc0869d494bf0c7b033ee226df2efbef2830",
+    commit = "4b4a8c694ab098a52678d66608ce0a9fb13b7cff",
 )
 
 bazel_dep(name = "typedb_bazel_distribution", version = "0.0.0")
