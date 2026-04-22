@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/drivers/
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.7.0
+cargo add typedb-protocol@3.10.0
 ```
 
 #### For Node.js through npm
@@ -15,20 +15,16 @@ cargo add typedb-protocol@3.7.0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.7.0
+npm install typedb-protocol@3.10.0
 ```
 or
 ```sh
-yarn add typedb-protocol@3.7.0
+yarn add typedb-protocol@3.10.0
 ```
 
 
 ## New Features
-- **Introduce version extension**
-  We introduce the "extension" field into the protocol. This introduces a finer notion of "compatibility" and makes the protocol aware of it.
-  A driver-server pair is compatible if they are on the same protocol version, and the server extension version is atleast that of the client.
 
-- **Introduce analyze options & add structure to GRPC row answers (#235)**
 
 ## Bugs Fixed
 
@@ -37,4 +33,11 @@ yarn add typedb-protocol@3.7.0
 
 
 ## Other Improvements
-
+- **Bazel 8 upgrade**
+  
+  Update Bazel version from 6.2 to 8.5.1.
+  
+  The upgrade is done in a backwards-compatible way, such that "upstream" repositories that are yet to be upgraded may depend on this repository. This is done by preserving WORKSPACE and the deps.bzl loader files alongside the new Bazel 8 ones. Once every repository has been upgraded to Bazel 8, these files will be removed.
+  
+  
+    
