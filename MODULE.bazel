@@ -21,13 +21,24 @@ bazel_dep(name = "rules_pkg", version = "1.0.1")
 
 # Rust
 bazel_dep(name = "rules_rust", version = "0.56.0")
+# Backport a bug fix from rules_rust 0.58 (bazelbuild/rules_rust#3251)
+git_override(
+    module_name = "rules_rust",
+    remote = "https://github.com/bazelbuild/rules_rust",
+    tag = "0.56.0",
+    patches = ["@@typedb_dependencies+//patches:rules_rust.patch"],
+)
+
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
-    edition = "2021",
-    versions = ["1.81.0"],
+    edition = "2024",
+    versions = ["1.93.0"],
 )
 use_repo(rust, "rust_toolchains")
 register_toolchains("@rust_toolchains//:all")
+
+rust_host_tools = use_extension("@rules_rust//rust:extensions.bzl", "rust_host_tools")
+rust_host_tools.host_tools(version = "1.93.0")
 
 # Node.js / TypeScript
 bazel_dep(name = "rules_nodejs", version = "6.3.2")
@@ -105,7 +116,7 @@ bazel_dep(name = "typedb_dependencies", version = "0.0.0")
 git_override(
     module_name = "typedb_dependencies",
     remote = "https://github.com/typedb/dependencies",
-    commit = "a798dc0869d494bf0c7b033ee226df2efbef2830",
+    commit = "32a7fde17ad17b775a8ccc0867c87f119749e7ea",
 )
 
 bazel_dep(name = "typedb_bazel_distribution", version = "0.0.0")
