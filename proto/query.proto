@@ -30,17 +30,16 @@ message Query {
         }
 
         message QueryInputRow {
-            repeated QueryInputEntry entry = 1;
+            repeated QueryInputEntry entries = 1;
         }
 
         message QueryInputEntry {
             oneof entry {
-                QueryInputEmpty empty = 1;
-                string unparsed_value = 2;
-                // Value value = 3;
-                // Entity entity = 4;
-                // Relation relation = 5;
-                // Attribute attribute = 6;
+                QueryInputEmpty empty = 1; // Optional None
+                Value value = 2;
+                // Entity entity = 3;
+                // Relation relation = 4;
+                // Attribute attribute = 5;
 
             }
         }
