@@ -53,9 +53,7 @@ exports_files(["README.md"])
 filegroup(
     name = "tools",
     data = [
-        "@typedb_dependencies//library/maven:update",
         "@typedb_dependencies//tool/ide:rust_sync",
-        "@typedb_dependencies//tool/unuseddeps:unused-deps",
         "@typedb_dependencies//tool/release/notes:create",
         "@typedb_dependencies//tool/sync:dependencies",
     ],
