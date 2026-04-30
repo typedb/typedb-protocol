@@ -1,5 +1,8 @@
 Documentation: https://typedb.com/docs/drivers/
 
+**This is an alpha release for CLUSTERED TypeDB 3.x. Do not use this as a stable version of TypeDB.**
+**Instead, reference a non-alpha release of the same major and minor versions.**
+
 ### Distribution
 
 #### For Rust through crates.io
@@ -7,7 +10,11 @@ Documentation: https://typedb.com/docs/drivers/
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
+<<<<<<< HEAD
 cargo add typedb-protocol@3.10.0
+=======
+cargo add typedb-protocol@3.7.0-alpha-0
+>>>>>>> 351ff32 (Update version to 3.0.7-alpha-0 with release notes)
 ```
 
 #### For Node.js through npm
@@ -15,16 +22,29 @@ cargo add typedb-protocol@3.10.0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
+<<<<<<< HEAD
 npm install typedb-protocol@3.10.0
 ```
 or
 ```sh
 yarn add typedb-protocol@3.10.0
+=======
+npm install typedb-protocol@3.7.0-alpha-0
+```
+or
+```sh
+yarn add typedb-protocol@3.7.0-alpha-0
+>>>>>>> 351ff32 (Update version to 3.0.7-alpha-0 with release notes)
 ```
 
 
 ## New Features
+<<<<<<< HEAD
 
+=======
+- **Introduce Raft and clustering protocols for TypeDB Cluster**
+  
+>>>>>>> 351ff32 (Update version to 3.0.7-alpha-0 with release notes)
 
 ## Bugs Fixed
 
@@ -33,6 +53,7 @@ yarn add typedb-protocol@3.10.0
 
 
 ## Other Improvements
+<<<<<<< HEAD
 - **Bazel 8 upgrade**
   
   Update Bazel version from 6.2 to 8.5.1.
@@ -41,3 +62,5 @@ yarn add typedb-protocol@3.10.0
   
   
     
+=======
+>>>>>>> 351ff32 (Update version to 3.0.7-alpha-0 with release notes)

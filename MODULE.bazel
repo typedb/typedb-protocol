@@ -40,16 +40,6 @@ register_toolchains("@rust_toolchains//:all")
 rust_host_tools = use_extension("@rules_rust//rust:extensions.bzl", "rust_host_tools")
 rust_host_tools.host_tools(version = "1.93.0")
 
-# Node.js / TypeScript
-bazel_dep(name = "rules_nodejs", version = "6.3.2")
-bazel_dep(name = "aspect_rules_js", version = "2.1.2")
-bazel_dep(name = "aspect_rules_ts", version = "3.4.0")
-node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
-node.toolchain(
-    name = "nodejs",
-    node_version = "17.9.1",
-)
-use_repo(node, "nodejs")
 
 # ===========================================================
 # Protobuf & gRPC dependencies
@@ -59,7 +49,6 @@ bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "protobuf", version = "29.3", repo_name = "com_google_protobuf")
 bazel_dep(name = "grpc", version = "1.69.0")
 bazel_dep(name = "rules_proto_grpc", version = "5.0.1")
-bazel_dep(name = "rules_proto_grpc_java", version = "5.0.1")
 
 # ===========================================================
 # Package managers
@@ -69,59 +58,20 @@ bazel_dep(name = "rules_proto_grpc_java", version = "5.0.1")
 crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
 use_repo(crate, "crates")
 
-# NPM
-npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm")
-npm.npm_translate_lock(
-    name = "typedb_protocol_npm",
-    bins = {
-        "protoc-gen-ts": ["protoc-gen-ts-js=./bin/protoc-gen-ts.js"],
-    },
-    pnpm_lock = "//grpc/nodejs:pnpm-lock.yaml",
-)
-use_repo(npm, "typedb_protocol_npm")
-
-# TypeScript
-rules_ts_ext = use_extension("@aspect_rules_ts//ts:extensions.bzl", "ext")
-rules_ts_ext.deps(
-    ts_version_from = "//grpc/nodejs:package.json",
-)
-use_repo(rules_ts_ext, "npm_typescript")
-
-# Maven
-bazel_dep(name = "rules_jvm_external", version = "6.6")
-maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
-maven.install(
-    name = "protocol_maven",
-    artifacts = [
-        "com.google.guava:guava:30.1-jre",
-        "com.google.protobuf:protobuf-java:3.21.7",
-        "io.grpc:grpc-api:1.50.1",
-        "io.grpc:grpc-core:1.50.1",
-        "io.grpc:grpc-protobuf:1.50.1",
-        "io.grpc:grpc-stub:1.50.1",
-        "javax.annotation:javax.annotation-api:1.3.2",
-    ],
-    repositories = [
-        "https://repo1.maven.org/maven2",
-    ],
-    strict_visibility = True,
-)
-use_repo(maven, "protocol_maven")
-
 # ===========================================================
 # TypeDB repos
 # ===========================================================
-
-bazel_dep(name = "typedb_dependencies", version = "0.0.0")
-git_override(
-    module_name = "typedb_dependencies",
-    remote = "https://github.com/typedb/dependencies",
-    commit = "32a7fde17ad17b775a8ccc0867c87f119749e7ea",
-)
 
 bazel_dep(name = "typedb_bazel_distribution", version = "0.0.0")
 git_override(
     module_name = "typedb_bazel_distribution",
     remote = "https://github.com/typedb/bazel-distribution",
-    commit = "a6363bf0b6208cabcfbf8865601e9eb03641559f",
+    commit = "10c8e442f0507153125b7e3ab5005da8100a4d23",
+)
+
+bazel_dep(name = "typedb_dependencies", version = "0.0.0")
+git_override(
+    module_name = "typedb_dependencies",
+    remote = "https://github.com/typedb/dependencies",
+    commit = "64085ef204e1820117e79665fdad589858c1c6b2",
 )
