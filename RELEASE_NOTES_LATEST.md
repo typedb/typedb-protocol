@@ -13,19 +13,6 @@ Available from https://crates.io/crates/typedb-protocol
 cargo add typedb-protocol@3.10.0-alpha-0
 ```
 
-#### For Node.js through npm
-
-Available from https://www.npmjs.com/package/typedb-protocol
-
-```sh
-npm install typedb-protocol@3.10.0-alpha-0
-```
-or
-```sh
-yarn add typedb-protocol@3.10.0-alpha-0
-```
-
-
 ## New Features
 ### Introduce clustered servers
 
