@@ -8,40 +8,36 @@ load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
 proto_library(
     name = "typedb-service",
-    srcs = [":typedb-service.proto"],
+    srcs = ["typedb_service.proto"],
     deps = [
-        ":connection-proto",
         ":authentication-proto",
-        ":server-proto",
-        ":user-proto",
+        ":connection-proto",
         ":database-proto",
+        ":migration-proto",
+        ":server-proto",
         ":transaction-proto",
-        ":migration-proto",
+        ":user-proto",
     ],
 )
 
 proto_library(
-    name = "server-proto",
-    srcs = [":server.proto"],
-)
-
-proto_library(
-    name = "database-proto",
-    srcs = [":database.proto"],
+    name = "analyze-proto",
+    srcs = ["analyze.proto"],
     deps = [
-        ":migration-proto",
+        ":analyzed-conjunction-proto",
+        ":concept-proto",
+        ":error-proto",
+        ":options-proto",
     ],
 )
 
 proto_library(
-    name = "migration-proto",
-    srcs = [":migration.proto"],
-    deps = [":concept-proto"],
-)
-
-proto_library(
-    name = "user-proto",
-    srcs = [":user.proto"],
+    name = "analyzed-conjunction-proto",
+    srcs = ["analyzed-conjunction.proto"],
+    deps = [
+        ":answer-proto",
+        ":concept-proto",
+    ],
 )
 
 proto_library(
@@ -66,8 +62,28 @@ proto_library(
     deps = [
         ":authentication-proto",
         ":database-proto",
-        ":version-proto"
+        ":server-proto",
+        "//proto:version-proto",
     ],
+)
+
+proto_library(
+    name = "database-proto",
+    srcs = ["database.proto"],
+    deps = [
+        ":migration-proto",
+    ],
+)
+
+proto_library(
+    name = "error-proto",
+    srcs = ["error.proto"],
+)
+
+proto_library(
+    name = "migration-proto",
+    srcs = ["migration.proto"],
+    deps = [":concept-proto"],
 )
 
 proto_library(
@@ -88,8 +104,8 @@ proto_library(
 )
 
 proto_library(
-    name = "error-proto",
-    srcs = ["error.proto"],
+    name = "server-proto",
+    srcs = ["server.proto"],
 )
 
 proto_library(
@@ -102,50 +118,17 @@ proto_library(
         ":error-proto",
         ":options-proto",
         ":query-proto",
-    ]
-)
-
-proto_library(
-    name = "analyze-proto",
-    srcs = ["analyze.proto"],
-    deps = [
-        ":analyzed-conjunction-proto",
-        ":concept-proto",
-        ":error-proto",
-        ":options-proto",
     ],
 )
 
 proto_library(
-    name = "analyzed-conjunction-proto",
-    srcs = ["analyzed-conjunction.proto"],
-    deps = [
-        ":answer-proto",
-        ":concept-proto",
-    ],
+    name = "user-proto",
+    srcs = ["user.proto"],
 )
 
 proto_library(
     name = "version-proto",
     srcs = ["version.proto"],
-)
-
-# TODO: THIS SHOULD BE MADE TO STOP EXISTING
-# This exists to support the nodejs build- when it becomes a real rule, we should extract the .src_files
-# from the above proto_library rules, but for now this is required to get the source files.
-filegroup(
-    name = "proto-raw-buffers",
-    srcs = [
-        "analyze.proto",
-        "answer.proto",
-        "concept.proto",
-        "connection.proto",
-        "analyzed-conjunction.proto",
-        "options.proto",
-        "query.proto",
-        "transaction.proto",
-        "version.proto",
-    ]
 )
 
 checkstyle_test(

@@ -5,11 +5,11 @@
 fn main() -> std::io::Result<()> {
     let protos = vec![
         "../../proto/analyze.proto",
+        "../../proto/analyzed-conjunction.proto",
         "../../proto/answer.proto",
         "../../proto/authentication.proto",
         "../../proto/concept.proto",
         "../../proto/connection.proto",
-        "../../proto/analyzed-conjunction.proto",
         "../../proto/database.proto",
         "../../proto/error.proto",
         "../../proto/migration.proto",
@@ -17,7 +17,7 @@ fn main() -> std::io::Result<()> {
         "../../proto/query.proto",
         "../../proto/server.proto",
         "../../proto/transaction.proto",
-        "../../proto/typedb-service.proto",
+        "../../proto/typedb_service.proto",
         "../../proto/user.proto",
         "../../proto/version.proto",
     ];

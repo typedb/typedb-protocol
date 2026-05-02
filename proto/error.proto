@@ -7,7 +7,7 @@ syntax = "proto3";
 package typedb.protocol;
 
 // This is an emulation of the google ErrorDetails message. Generally, ErrorDetails are submitted via the GRPC error
-// mechanism, but a manual error sending is required in streams
+// mechanism, but a manual error sending is useful to differentiate error levels in streams
 message Error {
     string error_code = 1;
     string domain = 2;

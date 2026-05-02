@@ -10,39 +10,39 @@ load("@typedb_dependencies//builder/proto_grpc/rust:compile.bzl", "rust_tonic_co
 
 rust_tonic_compile(
     name = "typedb_protocol_src",
-    packages = ["typedb.protocol"],
     srcs = [
-        "//proto:typedb-service",
-        "//proto:server-proto",
-        "//proto:user-proto",
-        "//proto:database-proto",
-        "//proto:migration-proto",
-        "//proto:error-proto",
-        "//proto:answer-proto",
-        "//proto:concept-proto",
-        "//proto:connection-proto",
-        "//proto:authentication-proto",
-        "//proto:options-proto",
-        "//proto:query-proto",
-        "//proto:transaction-proto",
         "//proto:analyze-proto",
         "//proto:analyzed-conjunction-proto",
+        "//proto:answer-proto",
+        "//proto:authentication-proto",
+        "//proto:concept-proto",
+        "//proto:connection-proto",
+        "//proto:database-proto",
+        "//proto:error-proto",
+        "//proto:migration-proto",
+        "//proto:options-proto",
+        "//proto:query-proto",
+        "//proto:server-proto",
+        "//proto:transaction-proto",
+        "//proto:typedb-service",
+        "//proto:user-proto",
         "//proto:version-proto",
-    ]
+    ],
+    packages = ["typedb.protocol"],
 )
 
 rust_library(
     name = "typedb_protocol",
-    crate_root = ":typedb_protocol_src",
     srcs = [
         ":typedb_protocol_src",
     ],
-    deps = [
-        "@crates//:tonic",
-        "@crates//:prost",
-    ],
+    crate_root = ":typedb_protocol_src",
     tags = [
         "crate-name=typedb-protocol",
+    ],
+    deps = [
+        "@crates//:prost",
+        "@crates//:tonic",
     ],
     visibility = ["//visibility:public"],
 )
@@ -52,9 +52,9 @@ assemble_crate(
     target = ":typedb_protocol",
     description = "TypeDB Protocol",
     homepage = "https://github.com/typedb/typedb-protocol",
-    readme_file = "//:README.md",
     license = "MPL-2.0",
     license_file = "//:LICENSE",
+    readme_file = "//:README.md",
     repository = "https://github.com/typedb/typedb-protocol",
 )
 
@@ -62,7 +62,7 @@ deploy_crate(
     name = "deploy_crate",
     target = ":assemble_crate",
     snapshot = deployment["crate"]["snapshot"],
-    release = deployment["crate"]["release"]
+    release = deployment["crate"]["release"],
 )
 
 checkstyle_test(
