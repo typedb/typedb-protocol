@@ -37,10 +37,7 @@ message Query {
             oneof entry {
                 QueryInputEmpty empty = 1; // Optional None
                 Value value = 2;
-                // Entity entity = 3;
-                // Relation relation = 4;
-                // Attribute attribute = 5;
-
+                Thing thing = 3;
             }
         }
         message QueryInputEmpty {}
