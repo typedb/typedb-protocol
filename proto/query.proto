@@ -23,24 +23,24 @@ message Query {
     message Req {
         Options.Query options = 1;
         string query = 2;
-        QueryInput input = 3;
+        GivenRows given = 3;
 
-        message QueryInput {
-            repeated QueryInputRow rows = 1;
+        message GivenRows {
+            repeated GivenRow rows = 1;
         }
 
-        message QueryInputRow {
-            repeated QueryInputEntry entries = 1;
+        message GivenRow {
+            repeated GivenEntry entries = 1;
         }
 
-        message QueryInputEntry {
+        message GivenEntry {
             oneof entry {
-                QueryInputEmpty empty = 1; // Optional None
+                GivenEntryEmpty empty = 1; // Optional None
                 Value value = 2;
                 Thing thing = 3;
             }
         }
-        message QueryInputEmpty {}
+        message GivenEntryEmpty {}
     }
 
     message InitialRes {
