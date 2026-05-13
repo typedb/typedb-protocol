@@ -1,5 +1,9 @@
 Documentation: https://typedb.com/docs/drivers/
 
+### Breaking change!
+This version breaks backward compatibility.
+Drivers built using this version (or newer) will be rejected by servers running older versions.   
+
 ### Distribution
 
 #### For Rust through crates.io
@@ -7,7 +11,7 @@ Documentation: https://typedb.com/docs/drivers/
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.10.0
+cargo add typedb-protocol@3.11.0-rc0
 ```
 
 #### For Node.js through npm
@@ -15,26 +19,34 @@ cargo add typedb-protocol@3.10.0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.10.0
+npm install typedb-protocol@3.11.0-rc0
 ```
 or
 ```sh
-yarn add typedb-protocol@3.10.0
+yarn add typedb-protocol@3.11.0-rc0
 ```
 
 
 ## New Features
-
-
-## Bugs Fixed
-
-
-## Code Refactors
+- **Introduce clustered servers**
+  
+  Introduce cluster support in the TypeDB protocol.
+  
+  In TypeDB 2.x, each database response carried its own replica list (`DatabaseReplicas`). In TypeDB 3.x, servers are the unit of replication, and all databases on that server share the replication context.
+  
+  - Replace per-database replica discovery with server-level discovery. On connection open, return `ServerManager.All.Res` (servers with replica status) instead of `DatabaseManager.All.Res` (databases with replicas).
+  - Add `servers_get` RPC to retrieve the specific server's replica status.
+  - Add `server_version` RPC to retrieve server distribution and version.
+  - Remove `DatabaseReplicas` message. Instead, return `Database` (name only) instead of `DatabaseReplicas` (name + replica info). Replica topology is a server-level concern.
+  - Replica information is now on `Server.ReplicaStatus` (replica ID, role, term).
+  
+  **Breaking**: not compatible with previous versions.
 
 
 ## Other Improvements
-- **Bazel 8 upgrade**
-
-  Update Bazel version from 6.2 to 8.5.1.
-
-  The upgrade is done in a backwards-compatible way, such that "upstream" repositories that are yet to be upgraded may depend on this repository. This is done by preserving WORKSPACE and the deps.bzl loader files alongside the new Bazel 8 ones. Once every repository has been upgraded to Bazel 8, these files will be removed.
+- **Upgrade Rust toolchain and update dependencies**
+  
+  We update Rust toolchain to 1.93.0, as well as dependencies.
+  
+  
+    
