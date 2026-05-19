@@ -2,7 +2,7 @@ Documentation: https://typedb.com/docs/drivers/
 
 ### Breaking change!
 This version breaks backward compatibility.
-Drivers built using this version (or newer) will be rejected by servers running older versions.   
+Drivers built using this version (or newer) will be rejected by servers running older versions.
 
 ### Distribution
 
@@ -11,7 +11,7 @@ Drivers built using this version (or newer) will be rejected by servers running 
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.11.0-rc0
+cargo add typedb-protocol@3.11.0
 ```
 
 #### For Node.js through npm
@@ -19,11 +19,11 @@ cargo add typedb-protocol@3.11.0-rc0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.11.0-rc0
+npm install typedb-protocol@3.11.0
 ```
 or
 ```sh
-yarn add typedb-protocol@3.11.0-rc0
+yarn add typedb-protocol@3.11.0
 ```
 
 
