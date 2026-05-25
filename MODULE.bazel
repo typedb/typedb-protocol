@@ -46,7 +46,7 @@ rust_host_tools.host_tools(version = "1.93.0")
 # ===========================================================
 
 #bazel_dep(name = "rules_proto", version = "7.1.0")
-bazel_dep(name = "protobuf", version = "35.0", repo_name = "com_google_protobuf")
+#bazel_dep(name = "protobuf", version = "35.0", repo_name = "com_google_protobuf")
 #bazel_dep(name = "grpc", version = "1.69.0")
 #bazel_dep(name = "rules_proto_grpc", version = "5.0.1")
 
