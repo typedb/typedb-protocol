@@ -4563,7 +4563,7 @@
     },
     "@@typedb_dependencies+//library/maven:maven_extension.bzl%maven": {
       "general": {
-        "bzlTransitiveDigest": "xYfcV5GCvcArBk+YmbDDOlMr6efbtclgFFOFQZSmCJQ=",
+        "bzlTransitiveDigest": "JHIP2/7ZzcA1OUW/vLhXDPcTOcbTeNSrpDUBlF0P/0E=",
         "usagesDigest": "DN99BxtZyqFjtkyBux+PqWhuuOm4BMqdgkkIC2I19Hw=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
