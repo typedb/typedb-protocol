@@ -5,8 +5,8 @@
 # Enable isolated extension usages to avoid crate universe conflicts with typedb_dependencies
 common --experimental_isolated_extension_usages
 
-# Bazel 8 compatibility: rules_proto_grpc uses deprecated ctx.resolve_tools
-common --noincompatible_disallow_ctx_resolve_tools
+# # Bazel 8 compatibility: rules_proto_grpc uses deprecated ctx.resolve_tools
+# common --noincompatible_disallow_ctx_resolve_tools
 
 try-import ./.bazel-remote-cache.rc
 
