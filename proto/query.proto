@@ -35,12 +35,12 @@ message Query {
 
         message GivenEntry {
             oneof entry {
-                GivenEntryEmpty empty = 1; // Optional None
+                EmptyEntry empty = 1; // Optional None
                 Value value = 2;
                 Thing thing = 3;
             }
+            message EmptyEntry {}
         }
-        message GivenEntryEmpty {}
     }
 
     message InitialRes {
