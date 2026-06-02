@@ -26,7 +26,8 @@ message Query {
         GivenRows given = 3;
 
         message GivenRows {
-            repeated GivenRow rows = 1;
+            repeated string variables = 1;
+            repeated GivenRow rows = 2;
         }
 
         message GivenRow {
