@@ -44,11 +44,7 @@ rust_host_tools.host_tools(version = "1.93.0")
 # ===========================================================
 # Protobuf & gRPC dependencies
 # ===========================================================
-
-bazel_dep(name = "rules_proto", version = "7.1.0")
-bazel_dep(name = "protobuf", version = "29.3", repo_name = "com_google_protobuf")
-bazel_dep(name = "grpc", version = "1.69.0")
-bazel_dep(name = "rules_proto_grpc", version = "5.0.1")
+bazel_dep(name = "protobuf", version = "35.0", repo_name = "com_google_protobuf")
 
 # ===========================================================
 # Package managers
@@ -66,12 +62,12 @@ bazel_dep(name = "typedb_bazel_distribution", version = "0.0.0")
 git_override(
     module_name = "typedb_bazel_distribution",
     remote = "https://github.com/typedb/bazel-distribution",
-    commit = "6c81a5180ed94a11c989e06a4ff8215df6da163e",
+    commit = "c34c0c513e45e69e3f9d97664c7ccb5afd5f1341",
 )
 
 bazel_dep(name = "typedb_dependencies", version = "0.0.0")
 git_override(
     module_name = "typedb_dependencies",
     remote = "https://github.com/typedb/dependencies",
-    commit = "48ef6e41f9f0deadc0d59bb0e9d4a58efd0099af",
+    commit = "cdb696f58b0827c32e241f246b1b56360847679b",
 )
