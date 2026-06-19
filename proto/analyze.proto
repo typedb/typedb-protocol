@@ -29,6 +29,7 @@ message Analyze {
         Pipeline query = 2;
         repeated Function preamble = 3;
         Fetch fetch = 4;
+        AnalyzedGiven given = 5;
 
         message Function {
           Pipeline body = 1;
@@ -57,6 +58,11 @@ message Analyze {
             }
           }
         }
+
+      message AnalyzedGiven {
+        repeated AnalyzedConjunction.Variable variables = 1;
+        map<uint32, AnalyzedConjunction.VariableAnnotations> variable_annotations = 2;
+      }
 
         message Pipeline {
           repeated AnalyzedConjunction conjunctions = 1;
