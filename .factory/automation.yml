@@ -12,6 +12,10 @@ build:
     build:
       image: typedb-ubuntu-22.04
       command: |
+        if [ -n "${CARGO_BAZEL_GENERATOR_URL_LINUX_X86_64:-}" ] && [ -n "${CARGO_BAZEL_GENERATOR_SHA256_LINUX_X86_64:-}" ]; then
+            export CARGO_BAZEL_GENERATOR_URL="$CARGO_BAZEL_GENERATOR_URL_LINUX_X86_64"
+            export CARGO_BAZEL_GENERATOR_SHA256="$CARGO_BAZEL_GENERATOR_SHA256_LINUX_X86_64"
+        fi
         bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
         bazel build //...
         bazel run @typedb_dependencies//tool/checkstyle:test-coverage
@@ -24,6 +28,10 @@ build:
       dependencies: [build]
       image: typedb-ubuntu-22.04
       command: |
+        if [ -n "${CARGO_BAZEL_GENERATOR_URL_LINUX_X86_64:-}" ] && [ -n "${CARGO_BAZEL_GENERATOR_SHA256_LINUX_X86_64:-}" ]; then
+            export CARGO_BAZEL_GENERATOR_URL="$CARGO_BAZEL_GENERATOR_URL_LINUX_X86_64"
+            export CARGO_BAZEL_GENERATOR_SHA256="$CARGO_BAZEL_GENERATOR_SHA256_LINUX_X86_64"
+        fi
         bazel run @typedb_dependencies//tool/bazelinstall:remote_cache_setup.sh
         export DEPLOY_CRATE_TOKEN=$REPO_TYPEDB_CRATES_TOKEN
         bazel run --define version=$(git rev-parse HEAD) //grpc/rust:deploy_crate -- snapshot
@@ -56,6 +64,10 @@ release:
     deploy-github:
       image: typedb-ubuntu-22.04
       command: |
+        if [ -n "${CARGO_BAZEL_GENERATOR_URL_LINUX_X86_64:-}" ] && [ -n "${CARGO_BAZEL_GENERATOR_SHA256_LINUX_X86_64:-}" ]; then
+            export CARGO_BAZEL_GENERATOR_URL="$CARGO_BAZEL_GENERATOR_URL_LINUX_X86_64"
+            export CARGO_BAZEL_GENERATOR_SHA256="$CARGO_BAZEL_GENERATOR_SHA256_LINUX_X86_64"
+        fi
         export PYENV_ROOT="/opt/pyenv"
         pyenv install 3.7.9
         pyenv global 3.7.9
@@ -70,6 +82,10 @@ release:
       image: typedb-ubuntu-22.04
       dependencies: [deploy-github]
       command: |
+        if [ -n "${CARGO_BAZEL_GENERATOR_URL_LINUX_X86_64:-}" ] && [ -n "${CARGO_BAZEL_GENERATOR_SHA256_LINUX_X86_64:-}" ]; then
+            export CARGO_BAZEL_GENERATOR_URL="$CARGO_BAZEL_GENERATOR_URL_LINUX_X86_64"
+            export CARGO_BAZEL_GENERATOR_SHA256="$CARGO_BAZEL_GENERATOR_SHA256_LINUX_X86_64"
+        fi
         export DEPLOY_CRATE_TOKEN=$REPO_CRATES_TOKEN
         bazel run --define version=$(cat VERSION) //grpc/rust:deploy_crate -- release
 
