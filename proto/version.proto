@@ -14,5 +14,5 @@ enum Version {
 
 enum ExtensionVersion {
   UNSPECIFIED_EXTENSION = 0;
-  EXTENSION = 1; // Reserving makes little sense here.
+  EXTENSION = 2; // Reserving makes little sense here.
 }
