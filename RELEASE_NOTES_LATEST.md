@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/drivers/
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.12.0-rc0
+cargo add typedb-protocol@3.12.0
 ```
 
 #### For Node.js through npm
@@ -15,11 +15,11 @@ cargo add typedb-protocol@3.12.0-rc0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.12.0-rc0
+npm install typedb-protocol@3.12.0
 ```
 or
 ```sh
-yarn add typedb-protocol@3.12.0-rc0
+yarn add typedb-protocol@3.12.0
 ```
 
 
