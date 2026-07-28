@@ -55,6 +55,7 @@ message Value {
         Datetime_TZ datetime_tz = 8;
         Duration duration = 9;
         Struct struct = 10;
+        Vector vector = 11;
     }
 
     message Decimal {
@@ -90,6 +91,10 @@ message Value {
 
     message Struct {
         string struct_type_name = 1;
+    }
+
+    message Vector {
+        repeated float values = 1;
     }
 }
 
@@ -131,6 +136,7 @@ message ValueType {
         DateTime_TZ datetime_tz = 8;
         Duration duration = 9;
         Struct struct = 10;
+        Vector vector = 11;
     }
     message Boolean {};
     message Integer {};
@@ -143,5 +149,8 @@ message ValueType {
     message Duration {};
     message Struct {
         string name = 1;
+    };
+    message Vector {
+        uint32 dimension = 1;
     };
 }
