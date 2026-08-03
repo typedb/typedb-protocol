@@ -61,6 +61,9 @@ message AnalyzedConjunction {
       // Special
       Is is = 18;
       IID iid = 19;
+
+      // Vector search
+      VectorSearch vector_search = 20;
     }
 
     message ConstraintSpan {
@@ -104,6 +107,14 @@ message AnalyzedConjunction {
       ConstraintVertex player = 2;
       ConstraintVertex role = 3;
       ConstraintExactness exactness = 4;
+    };
+
+    message VectorSearch {
+      ConstraintVertex attribute = 1;
+      ConstraintVertex attribute_type = 2;
+      ConstraintVertex query = 3;
+      ConstraintVertex threshold = 4;
+      ConstraintVertex similarity = 5;
     };
 
     // Type
