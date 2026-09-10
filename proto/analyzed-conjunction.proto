@@ -61,6 +61,7 @@ message AnalyzedConjunction {
       // Special
       Is is = 18;
       IID iid = 19;
+      DeleteConcepts delete_concepts = 20;
     }
 
     message ConstraintSpan {
@@ -184,6 +185,10 @@ message AnalyzedConjunction {
     message IID {
       ConstraintVertex concept = 1;
       bytes IID = 2;
+    };
+
+    message DeleteConcepts {
+      repeated ConstraintVertex variables = 1;
     };
   }
 
