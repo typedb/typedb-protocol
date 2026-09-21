@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/drivers/
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.12.0
+cargo add typedb-protocol@3.13.4
 ```
 
 #### For Node.js through npm
@@ -15,16 +15,19 @@ cargo add typedb-protocol@3.12.0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.12.0
+npm install typedb-protocol@3.13.4
 ```
 or
 ```sh
-yarn add typedb-protocol@3.12.0
+yarn add typedb-protocol@3.13.4
 ```
 
 
 ## New Features
-
+- **Add DeleteConcepts to analyze constraints**
+  Adds DeleteConcepts to analyze constraints. (`delete $x, $y;`)
+  
+  
 
 ## Bugs Fixed
 
@@ -33,6 +36,5 @@ yarn add typedb-protocol@3.12.0
 
 
 ## Other Improvements
-- **Update protocol for introducing 'given' stage (#251)**
 
     
