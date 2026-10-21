@@ -62,6 +62,7 @@ message AnalyzedConjunction {
       Is is = 18;
       IID iid = 19;
       DeleteConcepts delete_concepts = 20;
+      IsSet is_set = 21;
     }
 
     message ConstraintSpan {
@@ -188,6 +189,10 @@ message AnalyzedConjunction {
     };
 
     message DeleteConcepts {
+      repeated ConstraintVertex variables = 1;
+    };
+
+    message IsSet {
       repeated ConstraintVertex variables = 1;
     };
   }
