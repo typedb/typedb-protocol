@@ -99,7 +99,7 @@ message Migration {
             string label = 2;
             optional uint64 label_scoped_id = 10;
             repeated OwnedAttribute attributes = 3;
-            repeated Role roles = 4;
+            repeated Role roles = 4; // TODO rename to Links
             message Role {
                 string label = 1;
                 repeated Player players = 2;
@@ -131,8 +131,9 @@ message Migration {
 
             message Guarantees {
                 Ordering ordering = 1;
-                bool objects_by_label_scoped_ids = 2;
-                bool owned_attributes_by_value = 3;
+                bool attributes_unique = 2;
+                bool players_by_label_scoped_ids = 3;
+                bool owned_attributes_by_value = 4;
 
                 enum Ordering {
                     ORDERING_UNSPECIFIED = 0;
