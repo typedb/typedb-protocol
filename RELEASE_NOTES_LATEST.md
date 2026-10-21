@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/drivers/
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.13.4
+cargo add typedb-protocol@3.14.0
 ```
 
 #### For Node.js through npm
@@ -15,19 +15,16 @@ cargo add typedb-protocol@3.13.4
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.13.4
+npm install typedb-protocol@3.14.0
 ```
 or
 ```sh
-yarn add typedb-protocol@3.13.4
+yarn add typedb-protocol@3.14.0
 ```
 
 
 ## New Features
-- **Add DeleteConcepts to analyze constraints**
-  Adds DeleteConcepts to analyze constraints. (`delete $x, $y;`)
-  
-  
+
 
 ## Bugs Fixed
 
@@ -36,5 +33,8 @@ yarn add typedb-protocol@3.13.4
 
 
 ## Other Improvements
-
+- **Update dependencies to include ordered toml files**
+  Update dependencies to include ordered toml files
+  
+  
     
