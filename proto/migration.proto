@@ -83,6 +83,7 @@ message Migration {
         message Entity {
             string id = 1;
             string label = 2;
+            optional uint64 label_scoped_id = 10;
             repeated OwnedAttribute attributes = 3;
         }
 
@@ -96,6 +97,7 @@ message Migration {
         message Relation {
             string id = 1;
             string label = 2;
+            optional uint64 label_scoped_id = 10;
             repeated OwnedAttribute attributes = 3;
             repeated Role roles = 4;
             message Role {
@@ -103,17 +105,41 @@ message Migration {
                 repeated Player players = 2;
                 message Player {
                     string id = 1;
+                    PlayerByLabelScopedID player_by_label_scoped_id = 2;
+                    message PlayerByLabelScopedID {
+                        string label = 1;
+                        uint64 label_scoped_id = 2;
+                    }
                 }
             }
         }
 
         message OwnedAttribute {
             string id = 1;
+            AttributeByValue attribute_by_value = 2;
+
+            message AttributeByValue {
+                string label = 1;
+                MigrationValue value = 2;
+            }
         }
 
         message Header {
             string typedb_version = 1;
             string original_database = 2;
+            Guarantees guarantees = 3;
+
+            message Guarantees {
+                Ordering ordering = 1;
+                bool attributes_unique = 2;
+                bool players_by_label_scoped_ids = 3;
+                bool owned_attributes_by_value = 4;
+
+                enum Ordering {
+                    ORDERING_UNSPECIFIED = 0;
+                    ORDERING_ATTRIBUTES_ENTITIES_RELATIONS = 1;
+                }
+            }
         }
 
         message Checksums {

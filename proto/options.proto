@@ -8,7 +8,7 @@ package typedb.protocol;
 
 message Options {
     message Transaction {
-        optional bool parallel = 1;
+        optional bool parallel = 1; // note: unused
         optional uint64 transaction_timeout_millis = 2;
         optional uint64 schema_lock_acquire_timeout_millis = 3;
     }
