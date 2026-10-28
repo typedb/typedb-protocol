@@ -139,6 +139,7 @@ message Migration {
             Value.Datetime_TZ datetime_tz = 10;
             Value.Duration duration = 11;
             Value.Struct struct = 12;
+            Value.Vector vector = 13;
         }
     }
 }
