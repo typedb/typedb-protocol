@@ -83,8 +83,8 @@ message Migration {
         message Entity {
             string globally_unique_id = 1; // Always present for forward and backwards compatibility
             string label = 2;
-            repeated OwnedAttribute attributes = 3;
             optional uint64 label_scoped_id = 4;
+            repeated OwnedAttribute attributes = 3;
         }
 
         message Attribute {
@@ -97,9 +97,9 @@ message Migration {
         message Relation {
             string globally_unique_id = 1; // Always present for forward and backwards compatibility
             string label = 2;
+            optional uint64 label_scoped_id = 5;
             repeated OwnedAttribute attributes = 3;
             repeated Role roles = 4;
-            optional uint64 label_scoped_id = 5;
             message Role {
                 string label = 1;
                 repeated Player players = 2;
