@@ -81,39 +81,66 @@ message Migration {
         }
 
         message Entity {
-            string id = 1;
+            string globally_unique_id = 1; // Always present for forward and backwards compatibility
             string label = 2;
+            optional uint64 label_scoped_id = 4;
             repeated OwnedAttribute attributes = 3;
         }
 
         message Attribute {
-            string id = 1;
+            string globally_unique_id = 1; // Always present for forward and backwards compatibility
             string label = 2;
             repeated OwnedAttribute attributes = 3; // empty in 3.x, used for backwards compatibility
             MigrationValue value = 4;
         }
 
         message Relation {
-            string id = 1;
+            string globally_unique_id = 1; // Always present for forward and backwards compatibility
             string label = 2;
+            optional uint64 label_scoped_id = 5;
             repeated OwnedAttribute attributes = 3;
             repeated Role roles = 4;
             message Role {
                 string label = 1;
                 repeated Player players = 2;
                 message Player {
-                    string id = 1;
+                    string globally_unique_id = 1;
+                    LabelScopedID label_scoped_id = 2;
+                    message LabelScopedID {
+                        string label = 1;
+                        uint64 label_scoped_id = 2;
+                    }
                 }
             }
         }
 
         message OwnedAttribute {
-            string id = 1;
+            string globally_unique_id = 1;
+            optional AttributeReferencedByValue attribute_by_value = 2;
+
+            message AttributeReferencedByValue {
+                string label = 1;
+                MigrationValue value = 2;
+            }
         }
 
         message Header {
             string typedb_version = 1;
             string original_database = 2;
+            Guarantees guarantees = 3;
+
+            message Guarantees {
+                ItemOrder item_order = 1;
+                bool attributes_unique = 2; // true if guarantee attribute Items contain no duplicates (type + value)
+                bool label_scoped_ids_present = 3; // true if label_scoped_ids are guaranteed in Entities, Relations, and Player references
+                // true if owned attributes are guaranteed referenced by value, when they fit 'inline'
+                bool owned_inlined_attributes_referenced_by_value = 4;
+
+                enum ItemOrder {
+                    ORDER_UNSPECIFIED = 0;
+                    ORDER_ATTRIBUTES_ENTITIES_RELATIONS = 1;
+                }
+            }
         }
 
         message Checksums {
