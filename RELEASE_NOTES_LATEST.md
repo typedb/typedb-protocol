@@ -7,7 +7,7 @@ Documentation: https://typedb.com/docs/drivers/
 Available from https://crates.io/crates/typedb-protocol
 
 ```sh
-cargo add typedb-protocol@3.15.0-rc0
+cargo add typedb-protocol@3.15.0
 ```
 
 #### For Node.js through npm
@@ -15,11 +15,11 @@ cargo add typedb-protocol@3.15.0-rc0
 Available from https://www.npmjs.com/package/typedb-protocol
 
 ```sh
-npm install typedb-protocol@3.15.0-rc0
+npm install typedb-protocol@3.15.0
 ```
 or
 ```sh
-yarn add typedb-protocol@3.15.0-rc0
+yarn add typedb-protocol@3.15.0
 ```
 
 
@@ -33,15 +33,19 @@ yarn add typedb-protocol@3.15.0-rc0
   
   These changes are forward and backward compatible, so we don't force a protocol version bump.
   
+
 - **Add IsSet to analyze response**
   Add the `isset` constraint to the analyze response
+  
+  
+## Bugs Fixed
+
+
+## Code Refactors
+
 
 ## Other Improvements
-- **Update version.proto**
-  
-  Update Extension version number to reflect https://github.com/typedb/typedb-protocol/pull/257 
-  
-  
-- **Update version.proto**
 
+- **Update version.proto** 
+  Update Extension version number to reflect https://github.com/typedb/typedb-protocol/pull/257 
     
