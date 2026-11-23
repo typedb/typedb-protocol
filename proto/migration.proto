@@ -47,7 +47,9 @@ message Migration {
             }
 
             message ReqPart {
-                repeated Item items = 1;
+                // each an encoded Item, which is identical on the wire to the repeated Item it replaces,
+                // so the server decodes items where they are imported
+                repeated bytes items = 1;
             }
 
             message Done { }
