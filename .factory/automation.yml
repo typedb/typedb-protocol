@@ -51,7 +51,7 @@ build:
 release:
   filter:
     owner: typedb
-    branch: [master]
+    branch: [master, vector-search]
 
   validation:
     validate-release-notes:

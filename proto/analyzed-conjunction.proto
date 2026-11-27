@@ -63,6 +63,9 @@ message AnalyzedConjunction {
       IID iid = 19;
       DeleteConcepts delete_concepts = 20;
       IsSet is_set = 21;
+
+      // Vector search
+      VectorSearch vector_search = 22;
     }
 
     message ConstraintSpan {
@@ -194,6 +197,15 @@ message AnalyzedConjunction {
 
     message IsSet {
       repeated ConstraintVertex variables = 1;
+    };
+
+    // Vector search
+    message VectorSearch {
+      ConstraintVertex attribute = 1;
+      ConstraintVertex attribute_type = 2;
+      ConstraintVertex query = 3;
+      ConstraintVertex threshold = 4; // always a constant value, never a variable or label
+      ConstraintVertex similarity = 5;
     };
   }
 
